@@ -1,0 +1,2814 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+
+  <head>
+    <meta charset="UTF-8">
+    <script>
+      (function() {
+        var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
+        if (m) document.documentElement.setAttribute('data-theme', m[1] === 'dark' ? 'dark' : 'light');
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WARGANTARA—Guidelines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+      @import url('https://solrainha.github.io/saturnicons/saturnicons.css');
+      @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+      }
+
+      :root {
+        --bg: #ffffff;
+        --surface: #f5f5f5;
+        --surface2: #ebebeb;
+        --border: #e0e0e0;
+        --border2: #cccccc;
+        --ink: #111111;
+        --ink2: #333333;
+        --muted: #888888;
+        --red: #c0251a;
+        --gold: #9a7e2a;
+        --gold2: #b89a3e;
+        --mono: 'Space Mono', monospace;
+        --display: 'Bebas Neue', sans-serif;
+        --serif: 'Noto Serif Display', serif;
+        --nav-h: 56px;
+      }
+
+      [data-theme="dark"] {
+        --bg: #111111;
+        --surface: #1c1c1c;
+        --surface2: #242424;
+        --border: #2a2a2a;
+        --border2: #383838;
+        --ink: #f0ece3;
+        --ink2: #c8c2b4;
+        --muted: #666666;
+        --red: #c0251a;
+        --gold: #b89a3e;
+        --gold2: #d4b050;
+      }
+
+      html {
+        width: 100%
+      }
+
+      body {
+        width: 100%;
+        overflow-x: clip
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--mono);
+        transition: background .3s, color .3s;
+        min-height: 100vh;
+        font-size: 16px;
+        line-height: 1.6
+      }
+
+      /* ---- NAV ---- */
+      nav {
+        background: var(--bg);
+        border-bottom: 2px solid var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.5rem;
+        height: var(--nav-h);
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        transition: background .3s
+      }
+
+      .nav-logo {
+        font-family: var(--display);
+        font-size: 2rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        cursor: pointer;
+        text-decoration: none;
+        transition: color .3s
+      }
+
+      .nav-logo span {
+        color: var(--red)
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 0;
+        list-style: none
+      }
+
+      .nav-links li a {
+        display: block;
+        padding: 0 1rem;
+        height: var(--nav-h);
+        line-height: var(--nav-h);
+        font-size: .78rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--ink);
+        opacity: .6;
+        border-left: 1px solid var(--border);
+        transition: all .15s;
+        cursor: pointer
+      }
+
+      .nav-links li a:hover {
+        opacity: 1;
+        background: var(--surface)
+      }
+
+      .nav-links li a.active {
+        opacity: 1;
+        background: var(--red);
+        color: #fff
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: .75rem
+      }
+
+      .theme-btn {
+        background: none;
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        cursor: pointer;
+        transition: all .2s;
+        height: 32px;
+        width: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        padding: 0
+      }
+
+      .theme-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold)
+      }
+
+      /* ---- BURGER ---- */
+      .burger-btn {
+        display: none;
+        background: none;
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px;
+        transition: border-color .2s
+      }
+
+      .burger-btn span {
+        display: block;
+        width: 18px;
+        height: 1.5px;
+        background: currentColor;
+        transition: all .25s
+      }
+
+      .burger-btn.open span:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg)
+      }
+
+      .burger-btn.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0)
+      }
+
+      .burger-btn.open span:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg)
+      }
+
+      .mobile-drawer {
+        display: none;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--bg);
+        z-index: 190;
+        border-top: 1px solid var(--border);
+        flex-direction: column;
+        overflow-y: auto;
+        text-decoration: none;
+      }
+
+      .mobile-drawer.open {
+        display: flex
+      }
+
+      .mobile-drawer ul {
+        list-style: none;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .mobile-drawer ul li a {
+        display: flex;
+        align-items: center;
+        padding: 1.1rem 1.5rem;
+        font-size: .9rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--ink);
+        opacity: .65;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        transition: all .15s;
+        text-decoration: none;
+        min-height: 48px
+      }
+
+      .mobile-drawer ul li a:hover,
+      .mobile-drawer ul li a.active {
+        opacity: 1;
+        background: var(--red);
+        color: #fff
+      }
+
+      /* ---- PAGE HEADER ---- */
+      .page-header {
+        padding: 3.5rem 3rem 2.5rem;
+        border-bottom: 2px solid var(--red);
+        position: relative;
+        overflow: hidden
+      }
+
+      .page-header-pre {
+        font-size: .7rem;
+        letter-spacing: .28em;
+        color: var(--red);
+        text-transform: uppercase;
+        margin-bottom: .75rem
+      }
+
+      .page-header h1 {
+        font-family: var(--display);
+        font-size: clamp(3.5rem, 7vw, 6rem);
+        line-height: .9;
+        color: var(--ink);
+        transition: color .3s
+      }
+
+      .page-header p {
+        max-width: 560px;
+        font-size: .95rem;
+        line-height: 1.85;
+        opacity: .75;
+        margin-top: 1.2rem
+      }
+
+      .page-header-bg {
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--display);
+        font-size: 10rem;
+        color: var(--red);
+        opacity: .04;
+        pointer-events: none;
+        letter-spacing: -.02em;
+        line-height: 1
+      }
+
+      /* ---- LAYOUT ---- */
+      .gl-layout {
+        display: flex;
+        align-items: flex-start;
+        min-height: 100vh
+      }
+
+      /* ---- SIDEBAR ---- */
+      .gl-sidebar {
+        width: 240px;
+        flex-shrink: 0;
+        border-right: 1px solid var(--border);
+        padding: 2rem 0;
+        position: -webkit-sticky;
+        position: sticky;
+        top: var(--nav-h);
+        align-self: flex-start;
+        background: var(--bg);
+        transition: background .3s;
+        max-height: calc(100vh - var(--nav-h));
+        overflow-y: auto
+      }
+
+      .gl-sidebar-section {
+        margin-bottom: 1.75rem
+      }
+
+      .gl-sidebar-cat {
+        font-size: .62rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        padding: .35rem 1.4rem;
+        margin-top: 1rem;
+        margin-bottom: .35rem;
+        color: var(--gold);
+        opacity: .85;
+        border-top: 1px solid var(--border)
+      }
+
+      .gl-sidebar-cat:first-child {
+        border-top: none;
+        margin-top: 0
+      }
+
+      .gl-nav-item {
+        display: flex;
+        align-items: center;
+        padding: .55rem 1.4rem;
+        font-size: .74rem;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+        opacity: .55;
+        cursor: pointer;
+        border-left: 2px solid transparent;
+        transition: all .15s;
+        color: var(--ink);
+        min-height: 40px
+      }
+
+      .gl-nav-item:hover,
+      .gl-nav-item.active {
+        opacity: 1;
+        border-left-color: var(--red);
+        color: var(--red)
+      }
+
+      /* ---- CONTENT ---- */
+      .gl-content-area {
+        flex: 1;
+        min-height: 100vh
+      }
+
+      .gl-article {
+        display: none;
+        padding: 3.5rem 3rem 4rem;
+        max-width: 760px
+      }
+
+      .gl-article.active {
+        display: block;
+        animation: articleIn .3s ease both;
+        min-height: calc(100vh - var(--nav-h))
+      }
+
+      @keyframes articleIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px)
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0)
+        }
+      }
+
+      .gl-article-num {
+        font-family: var(--display);
+        font-size: 6rem;
+        color: var(--red);
+        opacity: .06;
+        line-height: 1;
+        margin-bottom: -.6rem
+      }
+
+      .gl-article h2 {
+        font-family: var(--display);
+        font-size: clamp(2.2rem, 5vw, 3.2rem);
+        letter-spacing: .04em;
+        margin-bottom: .5rem;
+        color: var(--ink);
+        transition: color .3s
+      }
+
+      .gl-type-badge {
+        display: inline-block;
+        font-size: .65rem;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        padding: .25rem .7rem;
+        margin-bottom: 1.1rem;
+        border: 1px solid;
+        transition: all .3s
+      }
+
+      .gl-type-badge.lore {
+        border-color: rgba(154, 126, 42, .5);
+        color: var(--gold);
+        background: rgba(154, 126, 42, .06)
+      }
+
+      .gl-type-badge.general {
+        border-color: rgba(192, 37, 26, .35);
+        color: var(--red);
+        background: rgba(192, 37, 26, .05)
+      }
+
+      .gl-rule {
+        width: 2rem;
+        height: 2px;
+        background: var(--red);
+        margin: 1.1rem 0 1.75rem
+      }
+
+      /* ---- PROSE ---- */
+      .gl-article p {
+        font-size: .95rem;
+        line-height: 2;
+        opacity: .8;
+        margin-bottom: .85rem;
+        text-align: justify;
+        hyphens: auto
+      }
+
+      .gl-article p:last-child {
+        margin-bottom: 0
+      }
+
+      .gl-section-title {
+        font-size: 1.5rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin: 2rem 0 .75rem;
+        opacity: .9
+      }
+
+      /* ---- LIST ---- */
+      .gl-list {
+        list-style: none;
+        margin: .5rem 0 1.5rem
+      }
+
+      .gl-list li {
+        font-size: .93rem;
+        line-height: 1.9;
+        opacity: .78;
+        padding: .5rem 0;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: flex-start;
+        gap: .65rem
+      }
+
+      .gl-list li:last-child {
+        border-bottom: none
+      }
+
+      .gl-list li::before {
+        content: '//';
+        color: var(--red);
+        flex-shrink: 0;
+        font-weight: 700;
+        font-size: .75rem;
+        padding-top: .2rem
+      }
+
+      .gl-list li>* {
+        min-width: 0
+      }
+
+      /* ---- CALLOUT BOXES ---- */
+      .gl-callout {
+        border-left: 3px solid var(--red);
+        background: rgba(192, 37, 26, .04);
+        padding: 1rem 1.25rem;
+        margin: 1.5rem 0
+      }
+
+      .gl-callout-title {
+        font-size: 1.2rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: var(--red);
+        margin-bottom: .5rem;
+        font-weight: 700
+      }
+
+      .gl-callout p {
+        font-size: .9rem;
+        line-height: 1.9;
+        opacity: .8;
+        margin-bottom: 0;
+        text-align: justify;
+        hyphens: auto
+      }
+
+      .gl-highlight {
+        border: 1px solid rgba(154, 126, 42, .4);
+        background: rgba(154, 126, 42, .04);
+        padding: 1rem 1.25rem;
+        margin: 1.5rem 0
+      }
+
+      .gl-highlight p {
+        font-size: .9rem;
+        line-height: 1.9;
+        opacity: .8;
+        margin-bottom: .5rem;
+        text-align: justify;
+        hyphens: auto
+      }
+
+      .gl-highlight p:last-child {
+        margin-bottom: 0
+      }
+
+      /* ---- NOTE / ITALIC ASIDE ---- */
+      .gl-note {
+        font-size: .88rem;
+        line-height: 1.85;
+        opacity: .65;
+        font-style: italic;
+        margin: 1rem 0;
+        padding-left: .85rem;
+        border-left: 2px solid var(--border2)
+      }
+
+      /* ---- CW/TW EXAMPLES ---- */
+      .gl-example-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .65rem;
+        margin: .85rem 0 .25rem
+      }
+
+      .gl-example-box {
+        padding: .85rem 1rem;
+        border: 1px solid
+      }
+
+      .gl-example-box.correct {
+        border-color: rgba(60, 160, 80, .35);
+        background: rgba(60, 160, 80, .04)
+      }
+
+      .gl-example-box.wrong {
+        border-color: rgba(192, 37, 26, .3);
+        background: rgba(192, 37, 26, .04)
+      }
+
+      .gl-example-label {
+        font-size: .68rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: .55rem
+      }
+
+      .gl-example-label.correct {
+        color: #3ca050
+      }
+
+      .gl-example-label.wrong {
+        color: var(--red)
+      }
+
+      .gl-example-item {
+        font-size: .9rem;
+        padding: .2rem 0;
+        opacity: .85
+      }
+
+      .gl-example-item code {
+        font-family: var(--mono);
+        font-size: .88rem
+      }
+
+      .gl-example-note {
+        font-size: .8rem;
+        line-height: 1.7;
+        opacity: .6;
+        margin-top: .55rem;
+        font-style: italic
+      }
+
+      @media(max-width:480px) {
+        .gl-example-grid {
+          grid-template-columns: 1fr
+        }
+      }
+
+      /* Jenis consent grid always stacks on mobile */
+      @media(max-width:768px) {
+        .gl-example-grid {
+          grid-template-columns: 1fr
+        }
+      }
+
+      /* ---- MEMBER CARDS ---- */
+      .gl-member-card {
+        border: 1px solid var(--border);
+        margin: .75rem 0;
+        overflow: hidden;
+        transition: border-color .2s
+      }
+
+      .gl-member-card:hover {
+        border-color: var(--border2)
+      }
+
+      .gl-member-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: .85rem 1.25rem;
+        cursor: pointer;
+        background: var(--surface);
+        transition: background .15s;
+        min-height: 48px;
+        gap: 1rem
+      }
+
+      .gl-member-header:hover {
+        background: var(--surface2)
+      }
+
+      .gl-member-name {
+        font-family: var(--display);
+        font-size: 1.1rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        line-height: 1;
+        transition: color .2s
+      }
+
+      .gl-member-toggle {
+        color: var(--red);
+        font-size: .9rem;
+        flex-shrink: 0;
+        transition: transform .25s
+      }
+
+      .gl-member-toggle.open {
+        transform: rotate(180deg)
+      }
+
+      .gl-member-body {
+        padding: 1.25rem;
+        border-top: 1px solid var(--border);
+        display: none
+      }
+
+      .gl-member-body.open {
+        display: block;
+        animation: articleIn .2s ease both
+      }
+
+      .gl-member-section {
+        margin-bottom: 1.25rem
+      }
+
+      .gl-member-section:last-child {
+        margin-bottom: 0
+      }
+
+      .gl-member-section-title {
+        font-size: .6rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: .65rem;
+        opacity: .85
+      }
+
+      .gl-member-row {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        flex-wrap: wrap
+      }
+
+      .gl-member-label {
+        font-size: .82rem;
+        opacity: .8
+      }
+
+      .gl-member-note {
+        font-size: .82rem;
+        line-height: 1.8;
+        opacity: .7;
+        margin-top: .4rem;
+        padding: .6rem .75rem;
+        background: var(--surface);
+        border-left: 2px solid var(--border2)
+      }
+
+      .gl-badge {
+        font-size: .6rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .18rem .55rem;
+        border: 1px solid;
+        flex-shrink: 0;
+        white-space: nowrap
+      }
+
+      .gl-badge.allowed {
+        border-color: rgba(60, 160, 80, .45);
+        color: #3ca050;
+        background: rgba(60, 160, 80, .06)
+      }
+
+      .gl-badge.limited {
+        border-color: rgba(180, 140, 30, .5);
+        color: var(--gold2);
+        background: rgba(180, 140, 30, .06)
+      }
+
+      .gl-badge.prohibited {
+        border-color: rgba(192, 37, 26, .4);
+        color: var(--red);
+        background: rgba(192, 37, 26, .06)
+      }
+
+      .gl-member-card.locked {
+        opacity: .7;
+        cursor: default
+      }
+
+      .gl-member-card.locked:hover {
+        border-color: var(--border)
+      }
+
+      .gl-member-card.locked .gl-member-header {
+        cursor: default
+      }
+
+      .gl-member-card.locked .gl-member-header:hover {
+        background: var(--surface)
+      }
+
+      .gl-member-name-redacted {
+        display: inline-block;
+        background: var(--ink);
+        color: transparent;
+        border-radius: 2px;
+ 
+        letter-spacing: .05em
+      }
+
+      .gl-lock-badge {
+        font-size: .55rem;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        padding: .2rem .55rem;
+        border: 1px solid rgba(192, 37, 26, .35);
+        color: var(--red);
+        background: rgba(192, 37, 26, .06);
+        flex-shrink: 0;
+        white-space: nowrap
+      }
+
+      .gl-member-locked-body {
+        padding: 1rem 1.25rem;
+        border-top: 1px solid var(--border);
+        font-size: .78rem;
+        opacity: .45;
+        font-style: italic;
+        letter-spacing: .04em
+      }
+
+      /* ---- FOOTER ---- */
+      .site-footer {
+        background: var(--surface);
+        border-top: 2px solid var(--red);
+        padding: 2.5rem 3rem;
+        margin-top: auto
+      }
+
+      .site-footer-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem
+      }
+
+      .sf-col-title {
+        font-family: var(--display);
+        font-size: 1.1rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        margin-bottom: .75rem;
+        transition: color .3s
+      }
+
+      .sf-col p,
+      .sf-col a {
+        font-size: .84rem;
+        line-height: 1.85;
+        opacity: .65;
+        display: block;
+        color: var(--ink);
+        text-decoration: none;
+        transition: opacity .15s
+      }
+
+      .sf-col a:hover {
+        opacity: 1;
+        color: var(--red)
+      }
+
+      .sf-bottom {
+        border-top: 1px solid var(--border);
+        padding-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap
+      }
+
+      .sf-copy {
+        font-size: .68rem;
+        letter-spacing: .12em;
+        opacity: .25;
+        text-transform: uppercase
+      }
+
+      .sf-logo {
+        font-family: var(--display);
+        font-size: 1.6rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        opacity: .3
+      }
+
+      .sf-logo span {
+        color: var(--red)
+      }
+
+      /* ---- MOBILE ---- */
+      /* ---- MOBILE SIDEBAR: floating burger pill ---- */
+      .gl-sb-spacer {
+        display: none;
+      }
+
+      /* Floating pill trigger button */
+      .gl-mob-trigger {
+        display: none;
+        position: fixed;
+        bottom: 1.25rem;
+        right: 1.25rem;
+        z-index: 200;
+        background: var(--red);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        height: 48px;
+        padding: 0 1.1rem;
+        font-family: var(--mono);
+        font-size: .65rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        align-items: center;
+        gap: .55rem;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, .28);
+        transition: background .15s, box-shadow .15s;
+      }
+
+      .gl-mob-trigger:hover {
+        background: #e02a1e
+      }
+
+      .gl-mob-trigger-icon {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 16px;
+        flex-shrink: 0
+      }
+
+      .gl-mob-trigger-icon span {
+        display: block;
+        height: 1.5px;
+        background: #fff;
+        transition: all .25s
+      }
+
+      .gl-mob-trigger.open .gl-mob-trigger-icon span:nth-child(1) {
+        transform: translateY(5.5px) rotate(45deg)
+      }
+
+      .gl-mob-trigger.open .gl-mob-trigger-icon span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0)
+      }
+
+      .gl-mob-trigger.open .gl-mob-trigger-icon span:nth-child(3) {
+        transform: translateY(-5.5px) rotate(-45deg)
+      }
+
+      /* Floating menu panel */
+      .gl-mob-menu {
+        display: none;
+        /* hidden by default, shown via media query */
+        position: fixed;
+        bottom: 5rem;
+        right: 1.25rem;
+        z-index: 199;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--red);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, .22);
+        min-width: 220px;
+        max-width: calc(100vw - 2.5rem);
+        overflow: hidden;
+        transform-origin: bottom right;
+        transform: scale(.92) translateY(8px);
+        opacity: 0;
+        transition: transform .2s cubic-bezier(.4, 0, .2, 1), opacity .2s, visibility .2s;
+        pointer-events: none;
+        visibility: hidden;
+      }
+
+      .gl-mob-menu.open {
+        pointer-events: auto;
+        visibility: visible;
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+
+      .gl-mob-menu-label {
+        font-size: .55rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding: .55rem 1rem .3rem;
+        opacity: .8;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .gl-mob-menu-item {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        color: var(--ink);
+        font-family: var(--mono);
+        font-size: .72rem;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+        padding: .75rem 1rem;
+        cursor: pointer;
+        border-bottom: 1px solid var(--border);
+        opacity: .6;
+        transition: all .15s;
+        border-left: 2px solid transparent;
+        min-height: 44px;
+      }
+
+      .gl-mob-menu-item:last-child {
+        border-bottom: none
+      }
+
+      .gl-mob-menu-item:hover,
+      .gl-mob-menu-item.active {
+        opacity: 1;
+        border-left-color: var(--red);
+        color: var(--red);
+        background: var(--surface)
+      }
+
+      .gl-mob-menu-item.active {
+        background: rgba(192, 37, 26, .06)
+      }
+
+      @media(max-width:768px) {
+        :root {
+          --nav-h: 52px
+        }
+
+        .nav-links {
+          display: none
+        }
+
+        .nav-right {
+          display: flex
+        }
+
+        .burger-btn {
+          display: flex
+        }
+
+        .page-header {
+          padding: 2rem 1.25rem 1.75rem
+        }
+
+        .page-header h1 {
+          font-size: clamp(2.8rem, 12vw, 4rem)
+        }
+
+        .gl-layout {
+          grid-template-columns: 1fr;
+          display: block
+        }
+
+        .gl-sidebar {
+          display: none
+        }
+
+        .gl-mob-trigger {
+          display: flex
+        }
+
+        .gl-mob-menu {
+          display: block
+        }
+
+        .gl-content-area {
+          padding-bottom: 5rem
+        }
+
+        /* extra bottom padding agar konten tidak ketutup floating button */
+        .gl-article {
+          padding: 2rem 1.25rem 3rem;
+          max-width: 100%
+        }
+
+        .gl-article p {
+          font-size: .92rem;
+          line-height: 1.95
+        }
+
+        .gl-list li {
+          font-size: .9rem
+        }
+
+        .gl-member-header {
+          padding: .75rem 1rem
+        }
+
+        .gl-member-body {
+          padding: 1rem
+        }
+
+        .gl-member-label {
+          font-size: .8rem
+        }
+
+        .gl-member-note {
+          font-size: .8rem;
+          line-height: 1.75
+        }
+
+        .gl-callout {
+          padding: .85rem 1rem
+        }
+
+        .site-footer {
+          padding: 2rem 1.25rem
+        }
+
+        .site-footer-inner {
+          grid-template-columns: 1fr;
+          gap: 1.5rem
+        }
+
+        .sf-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: .75rem
+        }
+      }
+
+      .faq-item {
+        border-bottom: 1px solid var(--border)
+      }
+
+      .faq-q {
+        width: 100%;
+        background: none;
+        border: none;
+        color: var(--ink);
+        font-family: var(--mono);
+        font-size: .93rem;
+        letter-spacing: .06em;
+        text-align: left;
+        padding: .9rem 0;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        opacity: .85;
+        transition: opacity .15s
+      }
+
+      .faq-q:hover {
+        opacity: 1
+      }
+
+      .faq-q::after {
+        content: '+';
+        font-family: var(--display);
+        font-size: 1.4rem;
+        color: var(--red);
+        flex-shrink: 0;
+        line-height: 1;
+        transition: transform .2s
+      }
+
+      .faq-item.open .faq-q {
+        opacity: 1
+      }
+
+      .faq-item.open .faq-q::after {
+        transform: rotate(45deg)
+      }
+
+      .faq-a {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .35s ease
+      }
+
+      .faq-item.open .faq-a {
+        max-height: 600px
+      }
+
+      .faq-a-inner {
+        padding: .15rem 0 1.1rem;
+        font-size: .95rem;
+        line-height: 1.95;
+        opacity: .78
+      }
+
+      .faq-a-inner code {
+        font-family: var(--mono);
+        font-size: .85em;
+        background: var(--surface2);
+        padding: .1em .35em
+      }
+
+      .faq-group-title {
+        font-family: var(--display);
+        font-size: 1.6rem;
+        letter-spacing: .04em;
+        color: var(--ink);
+        margin: 2.5rem 0 .25rem;
+        transition: color .3s
+      }
+
+      /* ---- FAQ TABS ---- */
+      .faq-tabs {
+        display: flex;
+        gap: 0;
+        border-bottom: 2px solid var(--border);
+        margin-bottom: 2rem
+      }
+
+      .faq-tab-btn {
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+        padding: .65rem 1.25rem;
+        font-family: var(--mono);
+        font-size: .78rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--ink);
+        opacity: .45;
+        cursor: pointer;
+        transition: all .2s
+      }
+
+      .faq-tab-btn:hover {
+        opacity: .8
+      }
+
+      .faq-tab-btn.active {
+        opacity: 1;
+        border-bottom-color: var(--red);
+        color: var(--red)
+      }
+
+      .faq-panel {
+        display: none
+      }
+
+      .faq-panel.active {
+        display: block;
+        animation: articleIn .25s ease both
+      }
+
+      .faq-section-label {
+        font-size: .62rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        opacity: .85;
+        padding: .4rem 0;
+        margin: 2rem 0 .5rem;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: .6rem
+      }
+
+      .faq-section-label:first-child {
+        border-top: none;
+        margin-top: 0
+      }
+
+      .faq-section-label::before {
+        content: '//';
+        color: var(--red);
+        font-weight: 700;
+        font-size: .7rem
+      }
+
+      .faq-a-inner a {
+        color: var(--gold);
+        text-decoration: underline;
+        text-decoration-color: rgba(154, 126, 42, .4)
+      }
+
+      .faq-a-inner a:hover {
+        color: var(--gold2)
+      }
+
+      /* ── WARGANTARA SPLASH (shared) ── */
+      .wg-splash {
+        position: fixed;
+        inset: 0;
+        background: #0a0a0a;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        opacity: 1;
+        transition: opacity .6s ease
+      }
+
+      .wg-splash.hiding {
+        opacity: 0;
+        pointer-events: none
+      }
+
+      .wg-splash.hidden {
+        display: none
+      }
+
+      @keyframes glitch-swap {
+        0% {
+          opacity: 1;
+          transform: skewX(0)
+        }
+
+        10% {
+          opacity: 0;
+          transform: skewX(-4deg) translateX(4px)
+        }
+
+        15% {
+          opacity: 1;
+          transform: skewX(3deg) translateX(-3px)
+        }
+
+        20% {
+          opacity: 0;
+          transform: skewX(0)
+        }
+
+        25% {
+          opacity: 1;
+          transform: skewX(-2deg)
+        }
+
+        30% {
+          opacity: 0
+        }
+
+        35%,
+        100% {
+          opacity: 1;
+          transform: skewX(0)
+        }
+      }
+
+      .splash-box.glitching {
+        animation: glitch-swap .35s steps(1) both
+      }
+
+      .splash-box {
+        max-width: 560px;
+        width: 100%;
+        border: 1px solid #2a2a2a;
+        border-top: 2px solid #c0251a;
+        padding: 3rem 2.5rem 2.5rem;
+        position: relative;
+        background: #111111;
+        overflow: hidden
+      }
+
+      .splash-pre {
+        font-family: 'Space Mono', monospace;
+        font-size: .6rem;
+        letter-spacing: .28em;
+        color: #c0251a;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem
+      }
+
+      .splash-quote {
+        font-family: 'Noto Serif Display', serif;
+        font-style: italic;
+        font-size: clamp(1.05rem, 3vw, 1.35rem);
+        line-height: 1.75;
+        color: #f0ece3;
+        margin-bottom: .65rem
+      }
+
+      .splash-attr {
+        font-family: 'Space Mono', monospace;
+        font-size: .62rem;
+        letter-spacing: .1em;
+        color: #555;
+        margin-bottom: 2rem
+      }
+
+      .splash-rule {
+        width: 2rem;
+        height: 1px;
+        background: #2a2a2a;
+        margin-bottom: 2rem
+      }
+
+      .splash-disclaimer {
+        font-family: 'Space Mono', monospace;
+        font-size: .78rem;
+        line-height: 1.9;
+        color: #c8c2b4;
+        opacity: .75;
+        margin-bottom: 2rem
+      }
+
+      .splash-disclaimer strong {
+        color: #b89a3e;
+        font-weight: 400
+      }
+
+      .splash-actions {
+        display: flex;
+        gap: .75rem;
+        align-items: center;
+        flex-wrap: wrap
+      }
+
+      .splash-btn-enter {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .7rem 1.5rem;
+        background: #c0251a;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background .15s;
+        min-height: 40px
+      }
+
+      .splash-btn-enter:hover {
+        background: #e02a1e
+      }
+
+      .splash-btn-deny {
+        font-family: 'Space Mono', monospace;
+        font-size: .68rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: #555;
+        background: none;
+        border: 1px solid #2a2a2a;
+        cursor: pointer;
+        padding: .6rem 1rem;
+        transition: color .15s, border-color .15s;
+        min-height: 40px
+      }
+
+      .splash-btn-deny:hover {
+        color: #f0ece3;
+        border-color: #555
+      }
+
+      .splash-privacy {
+        font-family: 'Space Mono', monospace;
+        font-size: .58rem;
+        letter-spacing: .06em;
+        color: #3a3a3a;
+        margin-top: 1.25rem;
+        line-height: 1.7
+      }
+
+      .splash-corner {
+        position: absolute;
+        bottom: 1rem;
+        right: 1.5rem;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 4.5rem;
+        color: #c0251a;
+        opacity: .04;
+        line-height: 1;
+        pointer-events: none
+      }
+
+      .splash-step {
+        transition: opacity .35s ease;
+      }
+
+      .splash-step.fading {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .splash-theme-step {
+        display: none;
+        opacity: 0;
+        transition: opacity .35s ease;
+      }
+
+      .splash-theme-step.active {
+        display: block;
+      }
+
+      .splash-theme-step.visible {
+        opacity: 1;
+      }
+
+      .splash-theme-choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .75rem;
+        margin-bottom: 1.5rem
+      }
+
+      .splash-theme-btn {
+        font-family: 'Space Mono', monospace;
+        font-size: .7rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        padding: 1.1rem 1rem;
+        border: 1px solid #2a2a2a;
+        background: none;
+        color: #888;
+        cursor: pointer;
+        transition: all .15s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .6rem
+      }
+
+      .splash-theme-btn .t-icon {
+        font-size: 1.4rem;
+        opacity: .5;
+        transition: opacity .15s
+      }
+
+      .splash-theme-btn:hover {
+        border-color: #b89a3e;
+        color: #f0ece3
+      }
+
+      .splash-theme-btn:hover .t-icon {
+        opacity: 1
+      }
+
+      .splash-theme-btn.selected {
+        border-color: #c0251a;
+        color: #f0ece3;
+        background: rgba(192, 37, 26, .08)
+      }
+
+      .splash-theme-btn.selected .t-icon {
+        opacity: 1
+      }
+
+      .splash-theme-confirm {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .7rem 1.5rem;
+        background: #c0251a;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background .15s, opacity .15s;
+        width: 100%;
+        min-height: 40px;
+        opacity: .35;
+        pointer-events: none
+      }
+
+      .splash-theme-confirm.ready {
+        opacity: 1;
+        pointer-events: auto
+      }
+
+      .splash-theme-confirm.ready:hover {
+        background: #e02a1e
+      }
+
+      .deny-countdown {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .1em;
+        color: #3a3a3a;
+        margin-top: 1.5rem;
+        transition: color .3s
+      }
+
+      .deny-countdown.urgent {
+        color: #7a3030
+      }
+
+      @media(max-width:600px) {
+        .splash-box {
+          padding: 2rem 1.5rem
+        }
+      }
+    </style>
+
+    <meta name="description" content="Wargantara adalah grup VTuber Indonesia bertemakan entitas astral dan sandbox lore universe.">
+    <meta property="og:title" content="WARGANTARA">
+    <meta property="og:description" content="Wargantara — grup VTuber Indonesia bertemakan entitas astral. Karena cara terbaik menyimpan rahasia adalah menjadikannya fiksi — dan fiksi ini terbuka untuk semua yang ingin ikut membangunnya.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wgtr1.netlify.app">
+    <meta property="og:image" content="https://wgtr1.netlify.app/assets/og/default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://wgtr1.netlify.app/assets/og/default.png">
+    <script src="/assets/js/head-common.js"></script>
+
+    <script>
+      if (document.cookie.match(/(?:^|;\s*)wg-visited=1/)) {
+        document.write('<style>.wg-splash{display:none!important}</style>');
+      }
+    </script>
+    <script>
+      /* ── Anti-DevTools Protection ── */
+      (function() {
+        "use strict";
+        var _blocked = false;
+
+        function _block() {
+          if (_blocked) return;
+          _blocked = true;
+          document.open();
+          document.write('<style>@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap");*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;display:flex;align-items:center;justify-content:center;height:100vh;overflow:hidden}.wg-devblock{max-width:480px;width:90%;border:1px solid #2a2a2a;border-top:2px solid #c0251a;padding:2.5rem 2rem 2rem;background:#111;position:relative;overflow:hidden;animation:glitch-in .35s steps(1) both}@keyframes glitch-in{0%{opacity:1;transform:skewX(0deg)}10%{opacity:0;transform:skewX(-4deg) translateX(4px)}15%{opacity:1;transform:skewX(3deg) translateX(-3px)}20%{opacity:0;transform:skewX(0deg)}25%{opacity:1;transform:skewX(-2deg)}30%{opacity:0}35%{opacity:1;transform:skewX(0deg)}100%{opacity:1;transform:skewX(0deg)}}.wg-pre{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.28em;color:#c0251a;text-transform:uppercase;margin-bottom:1.5rem}.wg-quote{font-family:"Noto Serif Display",serif;font-style:italic;font-size:clamp(1rem,3vw,1.25rem);line-height:1.75;color:#f0ece3;margin-bottom:.65rem}.wg-attr{font-family:"Space Mono",monospace;font-size:.62rem;letter-spacing:.1em;color:#555;margin-bottom:1.75rem}.wg-rule{width:2rem;height:1px;background:#2a2a2a;margin-bottom:1.75rem}.wg-msg{font-family:"Space Mono",monospace;font-size:.75rem;line-height:1.9;color:#c8c2b4;opacity:.75}.wg-msg strong{color:#b89a3e;font-weight:400}.wg-corner{position:absolute;bottom:.75rem;right:1.25rem;font-family:"Bebas Neue",sans-serif;font-size:4rem;color:#c0251a;opacity:.04;line-height:1;pointer-events:none}</style><div class="wg-devblock"><div class="wg-pre">// Wargantara &middot; Akses Ditolak</div><div class="wg-quote">&ldquo;Beberapa hal memang tidak dimaksudkan untuk dilihat.&rdquo;</div><div class="wg-attr">&mdash; Arsip Wargantara, Dokumen Tak Bernomor</div><div class="wg-rule"></div><div class="wg-msg">Aktivitas <strong>inspect / devtools</strong> terdeteksi.<br>Halaman ini tidak dapat diakses lebih lanjut.</div><div class="wg-corner">WG</div></div>');
+          document.close();
+        }
+        // 1. Disable right-click (kecuali gambar)
+        document.addEventListener("contextmenu", function(e) {
+          if (e.target.tagName === "IMG") return;
+          e.preventDefault();
+        });
+        // 2. Block keyboard shortcuts
+        document.addEventListener("keydown", function(e) {
+          var k = e.key;
+          if (k === "F12") {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          if (e.ctrlKey && e.shiftKey && ["I", "J", "C", "K"].indexOf(k.toUpperCase()) !== -1) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          if (e.ctrlKey && ["U", "S", "A", "P"].indexOf(k.toUpperCase()) !== -1) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+        }, true);
+        // 3. Block drag
+        document.addEventListener("dragstart", function(e) {
+          if (e.target.tagName !== "IMG") e.preventDefault();
+        });
+        // 5. console object trap
+        var _el = document.createElement("div");
+        Object.defineProperty(_el, "id", {
+          get: function() {
+            _block();
+          }
+        });
+        setInterval(function() {
+          console.log(_el);
+          console.clear();
+        }, 1000);
+        // 6. Disable text selection
+        var _style = document.createElement("style");
+        _style.textContent = "img { pointer-events:auto!important; }";
+        document.head.appendChild(_style);
+      })();
+    </script>
+  </head>
+
+  <body>
+
+    <!-- SPLASH SCREEN -->
+    <div class="wg-splash" id="splash-main">
+      <div class="splash-box">
+        <div id="splash-step1" class="splash-step">
+          <div class="splash-pre">// Wargantara &middot; Peringatan Masuk</div>
+          <div class="splash-quote">&ldquo;Cara menyimpan sebuah rahasia terbaik adalah dengan menjadikannya sebuah kisah-kisah fiksi untuk dipercaya.&rdquo;</div>
+          <div class="splash-attr">&mdash; Arsip Wargantara, Dokumen Tak Bernomor</div>
+          <div class="splash-rule"></div>
+          <div class="splash-disclaimer">
+            Seluruh konten dalam website ini adalah karya fiksi. Nama, karakter, kejadian, dan entitas yang ada di dalamnya bersifat fiktif semata.<br><br>
+            <strong>// Dengan memasuki website ini</strong>, kamu menyatakan memahami bahwa semua yang kamu temukan di sini adalah bagian dari sebuah semesta fiksi yang dibangun dengan penuh kesengajaan &mdash; dan tidak ada kaitannya dengan kenyataan di luar batas dunia ini.
+          </div>
+          <div class="splash-actions">
+            <button class="splash-btn-enter" onclick="splashStep2()">// Saya Mengerti &mdash; Lanjut</button>
+            <button class="splash-btn-deny" onclick="splashDeny()">Tidak Setuju</button>
+          </div>
+          <div class="splash-privacy">// Website ini menyimpan preferensi tema secara lokal di browser kamu. Tidak ada data pribadi yang dikumpulkan.</div>
+        </div>
+        <div id="splash-step2" class="splash-theme-step">
+          <div class="splash-pre">// Wargantara &middot; Preferensi Tampilan</div>
+          <div class="splash-quote" style="font-size:clamp(.95rem,2.5vw,1.15rem);margin-bottom:1.5rem">Pilih tampilan yang kamu inginkan.<br><span style="opacity:.4;font-size:.85em">Preferensi ini akan disimpan untuk kunjungan berikutnya.</span></div>
+          <div class="splash-rule"></div>
+          <div class="splash-theme-choices">
+            <button class="splash-theme-btn" id="btn-day" onclick="splashSelectTheme('light')">
+              <span class="t-icon sf sf-sun-1-o"></span>Day Mode
+            </button>
+            <button class="splash-theme-btn" id="btn-night" onclick="splashSelectTheme('dark')">
+              <span class="t-icon sf sf-moon-1-o"></span>Night Mode
+            </button>
+          </div>
+          <button class="splash-theme-confirm" id="splash-confirm" onclick="splashEnter()">// Masuk</button>
+        </div>
+        <div class="deny-countdown" id="deny-countdown" style="display:none">Halaman akan ditutup dalam <span id="deny-secs">5</span> detik...</div>
+        <div class="splash-corner">W</div>
+      </div>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+      <a class="nav-logo" href="index.html">WAR<span>G</span>ANTARA</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a href="lore.html">Lore</a></li>
+        <li><a class="active" href="guidelines.html">Guidelines</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-btn" id="theme-btn-desktop" onclick="toggleTheme()" aria-label="Toggle theme"><span id="theme-icon" class="sf"></span></button>
+        <button class="burger-btn" id="burger" onclick="toggleMobile()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a href="lore.html">Lore</a></li>
+        <li><a class="active" href="guidelines.html">Guidelines</a></li>
+        <li><a href="arcid.html">AR-CID Editor</a></li>
+        <li><a href="credits.html">Credits & Attributions</a></li>
+      </ul>
+      <div style="padding:.75rem 1.5rem;border-top:1px solid var(--border)">
+        <a onclick="toggleTheme();closeMobile()" id="mnav-theme" style="display:flex;align-items:center;gap:.75rem;cursor:pointer;padding:.7rem 0;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);opacity:.75;text-decoration:none">
+          <span id="theme-icon-m" class="sf" style="font-size:1.15rem"></span>
+          <span id="theme-label-m">Night Mode</span>
+        </a>
+      </div>
+    </div>
+    <div class="gl-sb-spacer" id="gl-sb-spacer"></div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="page-header-pre">// Panduan Komunitas & Lore //</div>
+      <h1>GUIDE<br>LINES</h1>
+      <p>Panduan resmi untuk berpartisipasi dalam lore sandbox dan komunitas Wargantara.</p>
+      <div class="page-header-bg">G</div>
+    </div>
+
+    <div class="gl-layout">
+
+      <!-- SIDEBAR -->
+      <div class="gl-sidebar">
+        <div class="gl-sidebar-section">
+          <div class="gl-sidebar-cat">// General Guidelines</div>
+          <div class="gl-nav-item active" onclick="showGl('general',this)">01 — Sikap & Komunitas</div>
+          <div class="gl-nav-item" onclick="showGl('derivative',this)">02 — Derivative Works</div>
+          <div class="gl-nav-item" onclick="showGl('fanworks',this)">03 — Fan Works</div>
+          <div class="gl-nav-item" onclick="showGl('boundaries',this)">04 — Boundaries</div>
+          <div class="gl-nav-item" onclick="showGl('prohibited',this)">05 — Absolute Prohibitions</div>
+          <div class="gl-nav-item" onclick="showGl('faq',this)">06 — FREQUENTLY ASKED QUESTIONS</div>
+        </div>
+      </div>
+
+      <div class="gl-content-area">
+
+        <!-- 01 SIKAP & KOMUNITAS -->
+        <div class="gl-article active" id="gl-general">
+          <div class="gl-article-num">01</div>
+          <h2>SIKAP &amp; KOMUNITAS</h2>
+          <span class="gl-type-badge general">General Guidelines</span>
+          <div class="gl-rule"></div>
+
+          <div class="gl-highlight">
+            <p><strong>Wargafana</strong> adalah nama resmi fandom Wargantara—merujuk kepada seluruh anggota komunitas, penggemar, dan pendukung yang berpartisipasi dalam ekosistem Wargantara. Dalam pedoman ini, istilah <em>Wargafana</em> digunakan untuk merujuk kepada anggota komunitas secara umum, sementara istilah <em>viewer</em> dipertahankan khusus dalam konteks menonton live streaming.</p>
+          </div>
+
+          <p>Seluruh Wargafana memiliki <strong>status setara</strong> tanpa perbedaan hierarki. Setiap individu diharapkan menghormati perbedaan preferensi dalam menikmati konten—baik official maupun non-official—tanpa menjadikannya sumber konflik. Komunitas diharapkan menjaga suasana yang <strong>nyaman, suportif, dan inklusif</strong>.</p>
+
+          <p>Penggunaan bahasa harus tetap menjaga etika dan menghormati pihak lain. <strong>Ujaran kebencian dalam bentuk apapun</strong>—termasuk fitnah, penyebaran rumor, SARA, maupun informasi yang belum terverifikasi—<strong>tidak diperkenankan</strong>.</p>
+
+          <p><strong>Gatekeeping dalam bentuk apapun tidak diperbolehkan.</strong> Seluruh WARGAFANA memiliki hak yang sama untuk berpartisipasi tanpa diskriminasi berdasarkan preferensi, tingkat pengetahuan, atau keterlibatan mereka terhadap konten.</p>
+
+          <p>Apabila ditemukan pelanggaran dalam komunitas, WARGAFANA diharapkan untuk <strong>melaporkannya kepada moderator</strong> atau pihak yang berwenang.</p>
+
+          <div class="gl-section-title">Interaksi</div>
+          <p>Dilarang melakukan <strong>fanwar, perundungan, penghinaan, sindiran yang merendahkan</strong>, maupun debat yang tidak produktif. Praktik <em>backseating</em> atau upaya mengatur cara orang lain menikmati konten juga <strong>tidak diperkenankan</strong>.</p>
+          <p>Perbandingan antar VTuber dengan tujuan <strong>merendahkan atau menciptakan kompetisi tidak sehat</strong> tidak diperbolehkan. Opini pribadi tetap diperkenankan selama disampaikan secara sopan dan tidak provokatif.</p>
+
+          <div class="gl-section-title">Moderasi & Privasi</div>
+          <p>Tindakan reaktif atau <em>"main hakim sendiri"</em> tidak diperbolehkan.</p>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">⚠ Privasi & Doxxing</div>
+            <p><strong>Dilarang keras</strong> membahas, menyebarkan, atau mencoba mengungkap identitas dunia nyata VTuber dalam bentuk apapun—termasuk informasi di luar konteks persona publik seperti <em>"past life"</em> atau kehidupan pribadi. Ketentuan ini berlaku di seluruh platform. Pelanggaran dapat dikenakan sanksi tegas hingga <strong>ban permanen</strong>.</p>
+          </div>
+        </div>
+
+        <!-- 02 DERIVATIVE WORKS -->
+        <div class="gl-article" id="gl-derivative">
+          <div class="gl-article-num">02</div>
+          <h2>DERIVATIVE WORKS</h2>
+          <span class="gl-type-badge general">General Guidelines</span>
+          <div class="gl-rule"></div>
+
+          <p>Konten turunan (<em>derivative works</em>) adalah karya yang lahir dari kreativitas fans dengan menggunakan <strong>konten resmi VTuber sebagai dasar</strong>. Yang dimaksud <strong>IP (Intellectual Property)</strong> mencakup karakter, model, desain visual, nama, persona, suara, konten audio-visual, dan elemen kreatif lain yang diasosiasikan dengan VTuber.</p>
+
+          <p class="gl-note">Penggunaan konten secara apa adanya—tanpa modifikasi atau unsur kreativitas yang signifikan—<em>tidak dianggap sebagai konten turunan</em> dan berada di luar cakupan pedoman ini.</p>
+
+          <div class="gl-section-title">Prinsip Umum</div>
+          <p>Dalam pembuatan konten turunan, Wargafana <strong>wajib</strong> mempertimbangkan kenyamanan dan kepentingan VTuber, mematuhi hukum dan regulasi yang berlaku termasuk ketentuan hak cipta, serta membatasi aktivitas dalam ranah fan content non-korporat kecuali ditentukan lain.</p>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Konten Turunan TIDAK Diperbolehkan Apabila:</div>
+            <ul class="gl-list" style="margin:.5rem 0 0">
+              <li><span>Berpotensi <strong>disalahartikan</strong> sebagai konten resmi atau representasi formal VTuber</span></li>
+              <li><span>Mengandung unsur <strong>diskriminatif, ujaran kebencian, atau SARA</strong></span></li>
+              <li><span><strong>Merusak citra, reputasi, atau integritas</strong> VTuber maupun komunitas</span></li>
+              <li><span><strong>Melanggar hak cipta</strong> atau ketentuan penggunaan aset pihak terkait</span></li>
+              <li><span>Mengedit konten sehingga <strong>mengubah makna atau narasi asli secara menyesatkan</strong></span></li>
+            </ul>
+          </div>
+
+          <div class="gl-section-title">Monetisasi</div>
+          <p>Aktivitas monetisasi (termasuk fan commission) <strong>tetap diperbolehkan</strong> selama dalam ranah fan content. Penjualan fan merchandise diperbolehkan selama <strong>tidak menggunakan aset resmi secara langsung</strong> dan tidak dilakukan dalam skala bisnis komersial (produksi massal, distribusi luas, dsb). Pihak <strong>WARGANTARA berhak meminta penghapusan konten</strong> apabila terjadi pelanggaran, dan WARGAFANA <strong>wajib mematuhi tanpa adanya penundaan</strong>.</p>
+
+          <div class="gl-section-title">Clip & Konten Suara</div>
+          <p>Penggunaan konten audio-visual VTuber dalam bentuk clip, highlight, atau kutipan diperbolehkan dengan ketentuan berikut:</p>
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Batas Durasi Konten</div>
+            <ul class="gl-list" style="margin:.5rem 0 0">
+              <li><span>Konten yang melibatkan <strong>suara VTuber untuk keperluan kreatif</strong>—termasuk <strong>karaoke, cover lagu, voice acting, dan dubbing</strong>—dibatasi maksimal <strong>45 detik</strong> dari material asli VTuber yang digunakan.</span></li>
+              <li><span>Untuk <strong>clip freetalk, highlight, atau momen stream</strong> yang tidak bersifat kreatif/performatif, <strong>tidak ada batasan durasi khusus</strong>—selama tunduk pada prinsip umum derivative works dan tidak digunakan untuk kepentingan komersial tanpa izin.</span></li>
+            </ul>
+            <p style="margin-top:.75rem">Ketentuan 45 detik berlaku untuk konten berbasis <strong>performa vokal</strong> (menyanyikan lagu, mengisi suara karakter, membacakan narasi, dll.) di mana suara VTuber menjadi bagian integral dari karya yang dihasilkan. Clip yang sekadar menampilkan reaksi atau percakapan natural tidak termasuk dalam kategori ini.</p>
+          </div>
+
+          <div class="gl-section-title">Aset VTuber & Thumbnail</div>
+          <p>Aset VTuber adalah salah satu bentuk konten turunan yang mencakup berbagai elemen visual dalam ekosistem konten kreator—termasuk namun tidak terbatas pada <strong>thumbnail, overlay, panel, emote, dan elemen grafis lainnya</strong>. Penggunaan karya artist sebagai aset, khususnya <strong>thumbnail</strong>, mensyaratkan <em>consent</em> yang dinyatakan secara aktif oleh artist bersangkutan.</p>
+
+          <div class="gl-section-title">Sistem Pengajuan & Consent</div>
+          <p>Artist yang bersedia karyanya dijadikan aset VTuber dapat mengajukan persetujuan melalui alur berikut:</p>
+
+          <div class="gl-highlight" style="margin:1rem 0 1.5rem">
+            <p style="font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;opacity:.9">// Alur Pengajuan</p>
+            <div style="display:flex;flex-direction:column;gap:0">
+
+              <div style="display:flex;gap:1rem;align-items:flex-start">
+                <div style="flex-shrink:0;width:1.8rem;height:1.8rem;border:1px solid var(--red);color:var(--red);font-family:var(--display);font-size:1.1rem;display:flex;align-items:center;justify-content:center;line-height:1;margin-top:.1rem">1</div>
+                <div>
+                  <p style="margin-bottom:.25rem"><strong>Artist memposting karya di Twitter/X</strong> dengan menyertakan hashtag fanart talent yang bersangkutan beserta <code>#AssetWarga</code>.</p>
+                  <p style="font-size:.85rem;opacity:.65;margin-bottom:0">Contoh untuk karya yang ditujukan kepada Soren: <code>#SketsaSoren #AssetWarga</code></p>
+                </div>
+              </div>
+
+              <div style="width:1.8rem;display:flex;justify-content:center;padding:.3rem 0;flex-shrink:0">
+                <div style="width:1px;height:1.5rem;background:var(--border2);opacity:.5"></div>
+              </div>
+
+              <div style="display:flex;gap:1rem;align-items:flex-start">
+                <div style="flex-shrink:0;width:1.8rem;height:1.8rem;border:1px solid var(--red);color:var(--red);font-family:var(--display);font-size:1.1rem;display:flex;align-items:center;justify-content:center;line-height:1;margin-top:.1rem">2</div>
+                <div>
+                  <p style="margin-bottom:.25rem"><strong>Talent atau akun resmi Wargantara</strong> mereply tweet tersebut sebagai tanda karya telah dilihat dan diminati untuk digunakan.</p>
+                  <p style="font-size:.85rem;opacity:.65;margin-bottom:0">Reply ini bukan konfirmasi final—consent tetap ditentukan oleh respons artist di langkah berikutnya.</p>
+                </div>
+              </div>
+
+              <div style="width:1.8rem;display:flex;justify-content:center;padding:.3rem 0;flex-shrink:0">
+                <div style="width:1px;height:1.5rem;background:var(--border2);opacity:.5"></div>
+              </div>
+
+              <div style="display:flex;gap:1rem;align-items:flex-start">
+                <div style="flex-shrink:0;width:1.8rem;height:1.8rem;border:1px solid var(--red);color:var(--red);font-family:var(--display);font-size:1.1rem;display:flex;align-items:center;justify-content:center;line-height:1;margin-top:.1rem">3</div>
+                <div>
+                  <p style="margin-bottom:.25rem"><strong>Artist merespons</strong> untuk menyatakan consent—apakah <em>full consent</em> atau <em>semi-consent</em>—beserta ketentuan tambahan jika ada.</p>
+                  <p style="font-size:.85rem;opacity:.65;margin-bottom:0">Consent bersifat <strong>final</strong> setelah respons artist di-<em>like</em> oleh talent atau akun resmi Wargantara.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="gl-section-title">Jenis Consent</div>
+          <p>Terdapat dua jenis consent yang dapat dinyatakan artist. Apabila tidak ada pernyataan tambahan, consent dianggap <strong>penuh</strong> secara default.</p>
+
+          <div class="gl-example-grid" style="margin:.85rem 0">
+            <div class="gl-example-box correct">
+              <div class="gl-example-label correct">Full Consent</div>
+              <div class="gl-example-item">"Boleh ya kak, full consent buat kakak!"</div>
+              <div class="gl-example-item">"Silakan dipakai kak, bebas mau diedit gimana pun!"</div>
+              <div class="gl-example-item">"Monggo kak, semoga bermanfaat!"</div>
+              <p class="gl-example-note">Karya dapat digunakan dan dilakukan seluruh adjustment visual yang diperlukan—termasuk crop, resize, compositing, serta penyesuaian warna dan filter.</p>
+            </div>
+            <div class="gl-example-box" style="border-color:rgba(180,140,30,.35);background:rgba(180,140,30,.04)">
+              <div class="gl-example-label" style="color:var(--gold2)">Semi-Consent</div>
+              <div class="gl-example-item">"Boleh kak, tapi tolong jangan diedit warnanya ya!"</div>
+              <div class="gl-example-item">"Silakan dipakai, tapi jangan dikasih filter ya kak~"</div>
+              <div class="gl-example-item">"Boleh dipake, tapi warna/filternya dibiarkan apa adanya kak!"</div>
+              <p class="gl-example-note">Karya dapat digunakan dan dilakukan adjustment teknis (crop, resize, compositing), namun <strong>tanpa penyesuaian warna atau filter</strong>.</p>
+            </div>
+          </div>
+
+          <p class="gl-note">Demi efektivitas komunikasi, talent atau akun resmi tidak selalu menanyakan status consent terkait adjustment secara eksplisit—respons yang diberikan atas reply <code>#AssetWarga</code> dipahami sekaligus sebagai konfirmasi penggunaan karya.</p>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Cakupan Consent & Credit</div>
+            <p>Dengan memberikan consent—baik full maupun semi—artist menyetujui bahwa karyanya dapat digunakan sebagai <strong>thumbnail</strong> dalam konten VTuber, serta dilakukan <strong>adjustment visual</strong> yang diperlukan sesuai jenis consent yang dinyatakan (penyesuaian kecerahan, kontras, saturasi, <em>cropping</em>, dan <em>compositing</em>).</p>
+            <p style="margin-top:.65rem">Artist berhak menyatakan <strong>non-consent terhadap adjustment visual</strong> meski telah mengizinkan penggunaan karyanya sebagai thumbnail—pernyataan ini wajib disampaikan secara eksplisit pada saat konfirmasi. Apabila tidak ada pernyataan, artist dianggap <strong>menyetujui adjustment visual</strong> seperlunya.</p>
+            <p style="margin-top:.65rem">Seluruh aset yang digunakan akan dicantumkan <strong>credit berupa username aktif</strong> artist pada karya yang bersangkutan.</p>
+          </div>
+        </div>
+
+        <!-- 03 FAN WORKS -->
+        <div class="gl-article" id="gl-fanworks">
+          <div class="gl-article-num">03</div>
+          <h2>FAN WORKS</h2>
+          <span class="gl-type-badge general">General Guidelines</span>
+          <div class="gl-rule"></div>
+
+          <p>Fanworks mencakup <strong>fan art, fiction, edit video, clip, cosplay</strong>, dan bentuk konten kreatif lainnya. Fanworks sendiri merupakan bagian dari <em>derivative works</em>. Kreator diharapkan menjaga representasi <strong>WARGANTARA</strong> tetap <strong>sesuai konteks</strong>, memisahkan karya fan dari konten resmi, dan menggunakan <strong>tags yang relevan</strong> sesuai aturan hashtag yang berlaku.</p>
+
+          <p>Kami tidak memberikan batasan terhadap tema dan genre konten yang dapat diciptakan. Namun, kami menghimbau keras seluruh kreator untuk tetap tunduk dan patuh terhadap peraturan (Guidelines) dari setiap platform yang digunakan, serta memberikan <strong>Content Warning yang tepat</strong>.</p>
+
+          <p><strong>Tidak diperkenankan</strong> menggunakan nama VTuber secara eksplisit dalam judul atau caption publik yang mudah terindeks. Dianjurkan menggunakan <em>alternative tagging</em> (simbol/emoji) untuk publikasi terbuka. Wajib mengikuti <strong>batasan spesifik masing-masing WARGANTARA</strong>.</p>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Konten Sensitif & NSFW</div>
+            <p>Wajib mencantumkan <strong>content warning (CW)</strong> atau <strong>trigger warning (TW)</strong> yang jelas <em>tanpa sensor</em>, sehingga dapat difilter dengan sistem Mute.</p>
+            <div class="gl-example-grid" style="margin-top:.85rem">
+              <div class="gl-example-box correct">
+                <div class="gl-example-label correct">✓ Benar</div>
+                <div class="gl-example-item"><code>TW: BLOOD</code></div>
+                <div class="gl-example-item"><code>CW: GORE</code></div>
+                <div class="gl-example-item"><code>TW: VIOLENCE, ABUSE</code></div>
+                <p class="gl-example-note">Tag terbuka—bisa difilter sistem Mute</p>
+              </div>
+              <div class="gl-example-box wrong">
+                <div class="gl-example-label wrong">✗ Salah</div>
+                <div class="gl-example-item"><code>TW: bl**d</code></div>
+                <div class="gl-example-item"><code>CW: g*re</code></div>
+                <div class="gl-example-item"><code>⚠️ ada konten sensitif</code></div>
+                <p class="gl-example-note">Tag disensor—tidak bisa difilter</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gl-section-title">Shipping & Yume</div>
+          <p><strong>Shipping</strong> merujuk pada interpretasi hubungan romantis antara dua atau lebih VTuber dalam fanworks. <strong>Yume</strong> merujuk pada interpretasi hubungan antara VTuber dengan OC, self-insert, atau representasi penggemar. <strong>Self-insert</strong> adalah bagian dari Yume di mana kreator menempatkan diri dalam narasi yang melibatkan VTuber.</p>
+          <p>Konten shipping dan yume <strong>diperbolehkan</strong> sebagai ekspresi fanworks. Setiap VTuber memiliki batasan masing-masing—Wargafana <strong>wajib menghormati ketentuan spesifik</strong> yang ditetapkan.</p>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Dalam Seluruh Bentuk Shipping:</div>
+            <p><strong>Tidak diperkenankan</strong> menyajikan hubungan sebagai fakta atau representasi resmi (canon), dan <strong>tidak digunakan</strong> untuk memicu konflik antar komunitas atau individu. Batasan Shipping dan Yume dapat dilihat pada bagian <strong>Boundaries Guidelines</strong>.</p>
+          </div>
+        </div>
+
+        <!-- 04 BOUNDARIES -->
+        <div class="gl-article" id="gl-boundaries">
+          <div class="gl-article-num">04</div>
+          <h2>BOUNDARIES GUIDELINES</h2>
+          <span class="gl-type-badge general">General Guidelines</span>
+          <div class="gl-rule"></div>
+
+          <p>Bagian ini mengatur preferensi dan batasan spesifik yang ditetapkan oleh masing-masing VTuber terkait <strong>interpretasi fanworks</strong> (shipping, yume, self-insert) serta <strong>interaksi langsung</strong> di ruang publik maupun live streaming. Seluruh bentuk fanworks dan interaksi <strong>wajib menghormati batasan</strong> yang ditetapkan—Wargafana <strong>tidak diperkenankan memaksakan</strong> bentuk interaksi yang tidak diinginkan.</p>
+
+          <p class="gl-note"><strong>Shipping</strong> = interpretasi hubungan romantis dalam fanworks. <strong>Yume (termasuk Self-insert)</strong> = fanworks yang melibatkan VTuber dengan OC atau representasi penggemar—tidak secara inheren romantis, bisa platonic, emosional, maupun romantis tergantung konteks karya.</p>
+
+          <!-- MEMBER CARDS -->
+          <div style="margin-top:2rem">
+
+            <div class="gl-member-card" id="mc-soren">
+              <div class="gl-member-header" onclick="toggleMember('soren')">
+                <span class="gl-member-name">TAKAHI SOREN</span>
+                <span class="gl-member-toggle" id="mt-soren">▾</span>
+              </div>
+              <div class="gl-member-body" id="mb-soren">
+                <div class="gl-member-section">
+                  <div class="gl-member-section-title">Fanworks</div>
+                  <div class="gl-member-row">
+                    <span class="gl-member-label">Shipping Antar Talents</span>
+                    <span class="gl-badge prohibited">DILARANG KERAS</span>
+                  </div>
+                  <div class="gl-member-row" style="margin-top:.6rem">
+                    <span class="gl-member-label">Variant Soren</span>
+                    <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+                  </div>
+                  <div class="gl-member-note">Karya yang melibatkan <strong>Soren × Variant Soren</strong> (selfcest—identitas lain, AU, alter, dst.) diperbolehkan dalam konteks apapun termasuk romantis—selama diperlakukan sebagai <strong>karya fiksi dan tidak dianggap canon</strong>.</div>
+                  <div class="gl-member-row" style="margin-top:.6rem">
+                    <span class="gl-member-label">Yume &amp; Self-Insert</span>
+                    <span class="gl-badge limited">DIBATASI</span>
+                  </div>
+                  <div class="gl-member-note">Terbatas pada hubungan <strong>platonik</strong> (non-romantis dan non-seksual): pertemanan, kolega, profesional, familial, rivalitas.<br><br>Diperbolehkan bentuk <em>romance-implied</em> yang tidak menjadi fokus utama (contoh: cinta bertepuk sebelah tangan dari pihak lain), selama tidak diposisikan sebagai hubungan romantis utama atau canon.</div>
+                  <div class="gl-member-row" style="margin-top:.6rem">
+                    <span class="gl-member-label">Shipping dengan NPC</span>
+                    <span class="gl-badge limited">DIBATASI</span>
+                  </div>
+                  <div class="gl-member-note">Terbatas pada <strong>NPC official yang memiliki keterikatan atau relasi langsung dengan Soren</strong> dalam lore. (Disarankan untuk konfirmasi terlebih dahulu (boleh langsung <em>direct</em> atau melalui perantara (staff), bisa juga dengan mengecek keterangan secara lore karena tidak semua karakter bisa di-ship begitu saja.)</div>
+                </div>
+                <div class="gl-member-section">
+                  <div class="gl-member-section-title">Interaksi</div>
+                  <div class="gl-member-row">
+                    <span class="gl-member-label">Godaan / Flirting</span>
+                    <span class="gl-badge prohibited">DILARANG</span>
+                  </div>
+                  <div class="gl-member-note">Bercanda atau keceplosan masih dimaklumi, tetapi intensi serius tidak ditanggapi.</div>
+                  <div class="gl-member-row" style="margin-top:.6rem">
+                    <span class="gl-member-label">Komentar Romantis / Sugestif</span>
+                    <span class="gl-badge prohibited">DILARANG</span>
+                  </div>
+                  <div class="gl-member-note">Bercanda atau keceplosan masih dimaklumi, tetapi intensi serius tidak ditanggapi.</div>
+                  <div class="gl-member-row" style="margin-top:.6rem">
+                    <span class="gl-member-label">Panggilan</span>
+                    <span class="gl-badge limited">DIBATASI</span>
+                  </div>
+                  <div class="gl-member-note"><strong>Dilarang</strong> sebutan berkonotasi romantis, intim, atau seksual dalam bentuk gender apapun. Panggilan Ayah, Bapak, Papa, Papi, dan sejenisnya masih diterima selagi konotasi netral dan bukan bermaksud <em>flirting</em>. <strong>Panggilan feminim tidak diterima.</strong></div>
+                  <div class="gl-member-row" style="margin-top:.6rem">
+                    <span class="gl-member-label">Backseating</span>
+                    <span class="gl-badge limited">DIBATASI</span>
+                  </div>
+                  <div class="gl-member-note">Dibatasi <strong>hanya untuk game horror</strong>, dan hanya jika diminta secara langsung.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="gl-member-card locked" id="mc-rui">
+              <div class="gl-member-header">
+                <span class="gl-member-name"><span class="gl-member-name-redacted">RUI</span></span>
+                <span class="gl-lock-badge">// BELUM DEBUT</span>
+              </div>
+              <div class="gl-member-locked-body">Panduan akan tersedia setelah debut.</div>
+            </div>
+            <!--DEBUT:RUI
+        <div class="gl-member-card" id="mc-rui">
+          <div class="gl-member-header" onclick="toggleMember('rui')">
+            <span class="gl-member-name">RUI</span>
+            <span class="gl-member-toggle" id="mt-rui">▾</span>
+          </div>
+          <div class="gl-member-body" id="mb-rui">
+            <div class="gl-member-section">
+              <div class="gl-member-section-title">Fanworks</div>
+              <div class="gl-member-row">
+                <span class="gl-member-label">Shipping Antar Talents</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-note">Dengan catatan pihak lainnya bersedia dan <strong>bukan minor</strong>.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Yume &amp; Self-Insert</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Batasan Relasi</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">Dibatasi untuk panggilan <em>Mama</em> dan <em>Papa</em>.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Shipping dengan NPC</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan dengan <strong>NPC official</strong>, selama karya secara eksplisit menyatakan bahwa karakter yang di-ship adalah NPC—bukan talent.</div>
+            </div>
+            <div class="gl-member-section">
+              <div class="gl-member-section-title">Interaksi</div>
+              <div class="gl-member-row">
+                <span class="gl-member-label">Godaan / Flirting</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Komentar Romantis / Sugestif</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Panggilan</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note"><strong>Dilarang</strong> sebutan berkonotasi romantis, intim, atau seksual. <em>Mama/Papa diperbolehkan sesekali.</em></div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Backseating</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">Dibatasi <strong>hanya untuk game horror</strong>, dan hanya jika diminta secara langsung.</div>
+            </div>
+          </div>
+        </div>
+        DEBUT:RUI-->
+
+            <div class="gl-member-card locked" id="mc-anne">
+              <div class="gl-member-header">
+                <span class="gl-member-name"><span class="gl-member-name-redacted">ANNELIESE DYVA</span></span>
+                <span class="gl-lock-badge">// BELUM DEBUT</span>
+              </div>
+              <div class="gl-member-locked-body">Panduan akan tersedia setelah debut.</div>
+            </div>
+            <!--DEBUT:ANNE
+        <div class="gl-member-card" id="mc-anne">
+          <div class="gl-member-header" onclick="toggleMember('anne')">
+            <span class="gl-member-name">ANNELIESE DYVA</span>
+            <span class="gl-member-toggle" id="mt-anne">▾</span>
+          </div>
+          <div class="gl-member-body" id="mb-anne">
+            <div class="gl-member-section">
+              <div class="gl-member-section-title">Fanworks</div>
+              <div class="gl-member-row">
+                <span class="gl-member-label">Shipping Antar Talents</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-note">Dengan catatan pihak lainnya bersedia dan <strong>bukan minor</strong>.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Yume &amp; Self-Insert</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Batasan Relasi</span>
+                <span class="gl-badge allowed">TIDAK ADA</span>
+              </div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Shipping dengan NPC</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan dengan <strong>NPC official</strong>, selama karya secara eksplisit menyatakan bahwa karakter yang di-ship adalah NPC—bukan talent.</div>
+            </div>
+            <div class="gl-member-section">
+              <div class="gl-member-section-title">Interaksi</div>
+              <div class="gl-member-row">
+                <span class="gl-member-label">Godaan / Flirting</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Panggilan</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Backseating</span>
+                <span class="gl-badge prohibited">DILARANG</span>
+              </div>
+              <div class="gl-member-note">Dilarang kecuali <strong>diminta secara langsung</strong>.</div>
+            </div>
+          </div>
+        </div>
+        DEBUT:ANNE-->
+
+            <div class="gl-member-card locked" id="mc-noah">
+              <div class="gl-member-header">
+                <span class="gl-member-name"><span class="gl-member-name-redacted">NOAH CHANTELUNE</span></span>
+                <span class="gl-lock-badge">// BELUM DEBUT</span>
+              </div>
+              <div class="gl-member-locked-body">Panduan akan tersedia setelah debut.</div>
+            </div>
+            <!--DEBUT:NOAH
+        <div class="gl-member-card" id="mc-noah">
+          <div class="gl-member-header" onclick="toggleMember('noah')">
+            <span class="gl-member-name">NOAH CHANTELUNE</span>
+            <span class="gl-member-toggle" id="mt-noah">▾</span>
+          </div>
+          <div class="gl-member-body" id="mb-noah">
+            <div class="gl-member-section">
+              <div class="gl-member-section-title">Fanworks</div>
+              <div class="gl-member-row">
+                <span class="gl-member-label">Shipping Antar Talents</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-note">Dengan catatan pihak lainnya bersedia dan <strong>bukan minor</strong>. <em>NO NUDITY.</em></div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Yume &amp; Self-Insert</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Batasan Relasi (Yume)</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">
+                Khusus Yume &amp; Self-Insert: terbatas pada hubungan <strong>platonik</strong> (non-romantis dan non-seksual): pertemanan, kolega, profesional, familial, rivalitas.<br><br>
+                Diperbolehkan bentuk <em>romance-implied</em> yang tidak menjadi fokus utama, selama tidak diposisikan sebagai hubungan romantis utama atau canon.
+              </div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Shipping dengan NPC</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan dengan <strong>NPC official</strong>, selama karya secara eksplisit menyatakan bahwa karakter yang di-ship adalah NPC—bukan talent.</div>
+            </div>
+            <div class="gl-member-section">
+              <div class="gl-member-section-title">Interaksi</div>
+              <div class="gl-member-row">
+                <span class="gl-member-label">Godaan / Flirting</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Panggilan</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Backseating</span>
+                <span class="gl-badge prohibited">DILARANG</span>
+              </div>
+              <div class="gl-member-note">Dilarang kecuali <strong>diminta secara langsung</strong>.</div>
+            </div>
+          </div>
+        </div>
+        DEBUT:NOAH-->
+
+            <div class="gl-member-card locked" id="mc-igni">
+              <div class="gl-member-header">
+                <span class="gl-member-name"><span class="gl-member-name-redacted">IGNI VASHTI</span></span>
+                <span class="gl-lock-badge">// BELUM DEBUT</span>
+              </div>
+              <div class="gl-member-locked-body">Panduan akan tersedia setelah debut.</div>
+            </div>
+            <!--DEBUT:IGNI
+        <div class="gl-member-card" id="mc-igni">
+          <div class="gl-member-header" onclick="toggleMember('igni')">
+            <span class="gl-member-name">IGNI VASHTI</span>
+            <span class="gl-member-toggle" id="mt-igni">▾</span>
+          </div>
+          <div class="gl-member-body" id="mb-igni">
+            <div class="gl-member-section">
+              <div class="gl-member-section-title">Fanworks</div>
+              <div class="gl-member-row">
+                <span class="gl-member-label">Shipping Antar Talents</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-note">Dengan catatan pihak lainnya bersedia dan <strong>bukan minor</strong>.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Yume &amp; Self-Insert</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Batasan Relasi</span>
+                <span class="gl-badge allowed">TIDAK ADA</span>
+              </div>
+              <div class="gl-member-note">Tidak ada batasan. <em>Untuk minor hanya boleh platonik.</em></div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Shipping dengan NPC</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan dengan <strong>NPC official</strong>, selama karya secara eksplisit menyatakan bahwa karakter yang di-ship adalah NPC—bukan talent.</div>
+            </div>
+            <div class="gl-member-section">
+              <div class="gl-member-section-title">Interaksi</div>
+              <div class="gl-member-row">
+                <span class="gl-member-label">Godaan / Flirting</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Komentar Romantis / Sugestif</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Panggilan</span>
+                <span class="gl-badge prohibited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note"><strong>Dilarang</strong> sebutan berkonotasi romantis, intim, atau seksual.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Backseating</span>
+                <span class="gl-badge prohibited">DILARANG</span>
+              </div>
+              <div class="gl-member-note">Dilarang kecuali <strong>diminta secara langsung</strong>.</div>
+            </div>
+          </div>
+        </div>
+        DEBUT:IGNI-->
+
+            <div class="gl-member-card locked" id="mc-arda">
+              <div class="gl-member-header">
+                <span class="gl-member-name"><span class="gl-member-name-redacted">ARDAMEVIA</span></span>
+                <span class="gl-lock-badge">// BELUM DEBUT</span>
+              </div>
+              <div class="gl-member-locked-body">Panduan akan tersedia setelah debut.</div>
+            </div>
+            <!--DEBUT:ARDA
+        <div class="gl-member-card" id="mc-arda">
+          <div class="gl-member-header" onclick="toggleMember('arda')">
+            <span class="gl-member-name">ARDAMEVIA</span>
+            <span class="gl-member-toggle" id="mt-arda">▾</span>
+          </div>
+          <div class="gl-member-body" id="mb-arda">
+            <div class="gl-member-section">
+              <div class="gl-member-section-title">Fanworks</div>
+              <div class="gl-member-row">
+                <span class="gl-member-label">Shipping Antar Talents</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-note">Dengan catatan pihak lainnya bersedia dan <strong>bukan minor</strong>.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Yume &amp; Self-Insert</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Batasan Relasi</span>
+                <span class="gl-badge allowed">TIDAK ADA</span>
+              </div>
+              <div class="gl-member-note">Tidak ada batasan. <em>Untuk minor hanya boleh platonik.</em></div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Shipping dengan NPC</span>
+                <span class="gl-badge allowed">DIPERBOLEHKAN</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan dengan <strong>NPC official</strong>, selama karya secara eksplisit menyatakan bahwa karakter yang di-ship adalah NPC—bukan talent.</div>
+            </div>
+            <div class="gl-member-section">
+              <div class="gl-member-section-title">Interaksi</div>
+              <div class="gl-member-row">
+                <span class="gl-member-label">Godaan / Flirting</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Komentar Romantis / Sugestif</span>
+                <span class="gl-badge limited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Panggilan</span>
+                <span class="gl-badge prohibited">DIBATASI</span>
+              </div>
+              <div class="gl-member-note"><strong>Dilarang</strong> sebutan berkonotasi romantis, intim, atau seksual. <strong>Dilarang</strong> petname seperti <em>Baby, Doll</em>, dan sejenisnya.</div>
+              <div class="gl-member-row" style="margin-top:.6rem">
+                <span class="gl-member-label">Backseating</span>
+                <span class="gl-badge prohibited">DILARANG</span>
+              </div>
+              <div class="gl-member-note">Dilarang kecuali <strong>diminta secara langsung</strong>.</div>
+            </div>
+          </div>
+        </div>
+        DEBUT:ARDA-->
+
+          </div><!-- /member cards -->
+        </div>
+
+        <!-- 05 ABSOLUTE PROHIBITIONS -->
+        <div class="gl-article" id="gl-prohibited">
+          <div class="gl-article-num">05</div>
+          <h2>ABSOLUTE PROHIBITIONS</h2>
+          <span class="gl-type-badge general">General Guidelines</span>
+          <div class="gl-rule"></div>
+          <p>Bentuk perilaku, konten, dan aktivitas yang <strong>dilarang secara absolut</strong> dalam seluruh ruang komunitas Wargantara, tanpa pengecualian.</p>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Pelanggaran Privasi</div>
+            <ul class="gl-list" style="margin:.5rem 0 0">
+              <li><span><strong>Doxxing</strong> atau penyebaran informasi pribadi tanpa izin</span></li>
+              <li><span>Pengumpulan atau distribusi <strong>data pribadi VTuber</strong></span></li>
+              <li><span>Upaya <strong>pelacakan identitas</strong> di luar konteks publik yang sah</span></li>
+            </ul>
+            <p style="margin-top:.75rem;font-size:.9rem;opacity:.8">Seluruh komunikasi dalam aktivitas VTuber dipahami sebagai bagian dari <strong>persona atau karakter</strong>, kecuali dinyatakan sebaliknya. <strong>Tidak diperkenankan</strong> melakukan interpretasi atau investigasi di luar konteks persona yang ditampilkan.</p>
+          </div>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Penyalahgunaan Identitas & Representasi</div>
+            <ul class="gl-list" style="margin:.5rem 0 0">
+              <li><span>Mengklaim diri sebagai VTuber atau <strong>perwakilan resmi Wargantara</strong></span></li>
+              <li><span>Menggunakan nama atau identitas VTuber untuk <strong>penipuan atau misrepresentasi</strong></span></li>
+              <li><span>Menyebarkan informasi palsu tentang <strong>keterlibatan resmi VTuber</strong> tanpa konfirmasi</span></li>
+            </ul>
+          </div>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Ujaran Kebencian & Pelecehan</div>
+            <ul class="gl-list" style="margin:.5rem 0 0">
+              <li><span><strong>Ujaran kebencian</strong> terhadap individu atau kelompok dalam bentuk apapun</span></li>
+              <li><span><strong>Pelecehan, perundungan, atau serangan personal</strong> terhadap VTuber, viewer, atau pihak terkait</span></li>
+              <li><span><strong>Kampanye negatif</strong> yang bertujuan merusak reputasi secara sistematis</span></li>
+            </ul>
+            <p style="margin-top:.75rem;font-size:.9rem;opacity:.8">Ekspresi ketidaksetujuan atau kritik terhadap suatu karya masih diperbolehkan selama <strong>tidak mengarah pada serangan personal atau ajakan kebencian</strong>.</p>
+          </div>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Pelanggaran Hak & Distribusi Ilegal</div>
+            <ul class="gl-list" style="margin:.5rem 0 0">
+              <li><span>Mengklaim <strong>kepemilikan atas konten resmi VTuber</strong></span></li>
+              <li><span>Distribusi ulang konten resmi atau fanworks pihak lain <strong>tanpa izin</strong></span></li>
+              <li><span>Penggunaan aset resmi untuk <strong>kepentingan komersial</strong> tanpa persetujuan</span></li>
+            </ul>
+          </div>
+
+          <div class="gl-callout" style="border-left-width:4px">
+            <div class="gl-callout-title">// Ketentuan Final</div>
+            <p>Segala bentuk pelanggaran dapat dikenakan <strong>tindakan moderasi tanpa pemberitahuan sebelumnya</strong>, termasuk penghapusan konten, pembatasan akses, atau larangan partisipasi dalam komunitas.</p>
+          </div>
+        </div>
+
+        <div class="gl-article" id="gl-faq">
+          <div class="gl-article-num">06</div>
+          <h2>FAQ</h2>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.1rem">
+            <span class="gl-type-badge general">Panduan Komunitas</span>
+            <span class="gl-type-badge lore">Lore</span>
+          </div>
+          <div class="gl-rule"></div>
+          <p>Pertanyaan-pertanyaan yang sering muncul—dikumpulkan supaya tidak perlu dijawab satu per satu terus. Kalau pertanyaanmu belum terjawab di sini, cek halaman <em>Boundaries</em> atau <em>Lore Archive → Panduan OC</em> dulu sebelum menghubungi tim.</p>
+
+          <!-- TAB BUTTONS -->
+          <div class="faq-tabs" style="margin-top:2rem">
+            <button class="faq-tab-btn active" onclick="switchFaqTab('general', this)">// General</button>
+            <button class="faq-tab-btn" onclick="switchFaqTab('lore', this)">// Lore &amp; OC</button>
+          </div>
+
+          <!-- PANEL: GENERAL -->
+          <div class="faq-panel active" id="faqpanel-general">
+
+            <div class="faq-section-label">Tentang Wargantara</div>
+
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Sebenernya sistem VTuber Wargantara tuh gimana?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Wargantara adalah <strong>lore sandbox</strong> dan <strong>collaborative fiction universe</strong>—sebuah dunia fiksi bersama yang dibangun secara kolektif oleh talent dan komunitas. Talent Wargantara tidak pernah mengumumkan diri mereka sebagai makhluk astral, bahkan tidak ada yang mempercayai omongan mereka kecuali mereka yang benar-benar mengenali dunia astral itu sendiri.<br><br>Silakan baca website kami untuk lebih lanjutnya, ya!</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Wajib gak punya OC untuk ikut komunitas ini?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Nggak. Semua penikmat lepas maupun WARGAFANA sudah otomatis menjadi bagian dari cerita kami.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Ini ARG (Alternate Reality Game)?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Tidak juga. ARG biasanya punya struktur puzzle, narasi tersembunyi yang perlu dipecahkan, dan tujuan akhir yang bisa "diselesaikan". Ini adalah <strong>collaborative fiction universe</strong>—dunia yang dibangun bersama, bukan permainan yang perlu dimenangkan. (Tahu Creepypasta, Backroom, SCP, dan sejenisnya? Nah, kayak begitu.)</div>
+              </div>
+            </div>
+
+            <div class="faq-section-label">Umum</div>
+
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Apa itu Wargantara?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Wargantara adalah sebutan untuk makhluk astral yang memilih tinggal di dunia manusia secara permanen atau semi-permanen. Ini bukan ras—ini kondisi. Siapapun dari kategori makhluk gaib bisa menjadi Wargantara, asalkan crossingnya dilakukan secara sadar, keberadaannya bersifat menetap, dan sudah terdaftar di Astral Realm Authority.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Apakah lore ini berbasis agama tertentu?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Tidak. Lore Wargantara mengambil inspirasi dari berbagai tradisi—termasuk konsep-konsep dari teks keagamaan dan folklore dunia—tapi tidak mewakili atau mengklaim kebenaran dari tradisi manapun secara spesifik.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Apakah ada lore yang masih bisa berubah?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Ya. Beberapa bagian masih dalam pengembangan dan bisa direvisi. Bagian yang sudah berstatus <em>Canon</em> relatif stabil, tapi penambahan detail tetap bisa terjadi. Kalau ada perubahan besar yang mempengaruhi OC yang sudah ada, akan ada pengumuman terlebih dahulu.</div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">VTuber-nya cerita soal (insert info pribadi)—itu gak termasuk doxxing? Gimana cara bedain kapan VTuber lagi in-character dan kapan mereka bicara sebagai diri sendiri (orang di belakang avatarnya)?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Semua yang disampaikan oleh talent Wargantara sudah dirancang sebagai bagian dari kehidupan mereka sebagai karakter—sebagai makhluk yang kalian temukan eksis di dunia maya ini. Informasi apapun yang keluar dari mereka dipahami sebagai bagian dari persona itu, bukan sebagai bocoran tentang orang di balik layar.<br><br>Semua informasi penggerak karakter VTuber (pilot, voice actor, atau sebutan lainnya) akan disampaikan terlebih dahulu dengan disclaimer. Maka dari itu, dimohon untuk tidak asal kutip begitu saja sebagai self-doxxing jika tidak ada disclaimer atau apapun sebelum disampaikannya informasi.</div>
+              </div>
+            </div>
+
+            <div class="gl-callout" style="margin-top:2.5rem">
+              <div class="gl-callout-title">// Pertanyaan Soal OC & Lore?</div>
+              <p style="margin:0;font-size:.9rem;opacity:.8">Pertanyaan seputar OC, sistem AR-CID, SC Level, dan mekanisme lore ada di tab <strong>Lore &amp; OC</strong> di atas. Cek juga <em>Lore Archive → Panduan OC</em> untuk referensi lengkapnya.</p>
+            </div>
+          </div>
+
+          <!-- PANEL: LORE -->
+          <div class="faq-panel" id="faqpanel-lore">
+
+            <div class="faq-section-label">OC &amp; Karakter</div>
+
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Ras apa saja yang boleh dipakai untuk OC?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Semua kategori ras terbuka—dari manusia biasa, jin, arwah, makhluk mitologi, sampai entitas primordial. Yang tidak boleh adalah klaim identitas canon (tokoh-tokoh yang secara nyata sudah ada di dunia manusia, seperti tokoh politik, tokoh spiritual realm dan sebagainya): tidak boleh main sebagai figur yang sudah punya nama dan cerita sendiri di luar universe ini.<br><br>Untuk detail lengkapnya, cek <em>Sandbox Guide → Ras &amp; Karakter</em>.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Boleh bikin OC manusia?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Boleh. Manusia biasa, sensitif, medium/peka, sampai berdarah campuran semuanya tersedia. Karakter manusia tidak bisa menjadi Wargantara—tapi bisa berinteraksi dengan entitas astral, punya hubungan dengan makhluk dari sisi gaib, atau memiliki ketajaman indera yang membuatnya lebih dari sekadar orang biasa.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Boleh gak OC saya jadi Wargantara?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Tidak. Status Wargantara—makhluk astral yang hadir di dunia manusia secara penuh dan permanen—hanya untuk talent Wargantara. Secara lore, status ini tidak bisa diraih sembarangan dan reserved untuk mereka yang sudah verified di sistem.<br><br>OC fan sangat boleh menjadi makhluk astral yang melakukan <strong>semi-permanent crossing</strong>—hadir di dunia manusia dengan batasan waktu dan manifestasi. Bukan Wargantara, tapi tetap punya ruang cerita yang sangat kaya. Detail ada di <em>Panduan OC → Status Keberadaan</em> dan/atau <em>Batas Antara → The Cost</em>.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">The Cost itu harus seberapa besar?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Tidak ada ukuran pasti—tapi harus terasa nyata dalam cerita. The Cost punya dua dimensi:<br><br><strong>Waktu</strong> — semakin lama di dunia manusia, semakin besar drain-nya.<br><strong>Manifestasi</strong> — semakin nyata kehadiran karaktermu (semakin banyak yang bisa melihat, mendengar, atau berinteraksi), semakin mahal harganya.<br><br>Tradeoff itulah yang membuat pilihan untuk tetap hadir jadi bermakna. Untuk mekanisme lengkapnya, baca <em>Batas Antara → The Cost</em>.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">SC Level berapa yang bisa saya ambil?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner"><strong>L1 dan L2</strong> bebas diambil tanpa syarat.<br><strong>L3</strong> boleh, tapi butuh latar belakang lore yang masuk akal—bukan sekadar karena ingin karakter yang terasa "kuat".<br><strong>L4 ke atas</strong> adalah slot terbatas yang kodenya dikunci di sistem AR-CID—bahkan kalau dipaksakan pun tidak bisa diisi tanpa autentikasi resmi dari tim.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Bisakah OC saya punya koneksi ke figur canon?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Boleh, tapi harus samar. Keterkaitan seperti halfblood, keturunan jauh, atau eks-bawahan diizinkan—asalkan koneksinya tidak membawa klaim atas kekuatan atau otoritas figur aslinya. Nama-nama canon disarankan untuk disensor atau tidak digunakan sama sekali jika dirasa lebih baik begitu.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Boleh bikin karakter antihero macam fallen angel?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Boleh. Kejatuhan seorang malaikat bisa terjadi dengan berbagai cara—mengikuti figur tertentu, dipecat karena suatu pelanggaran, atau jatuh karena serangkaian keputusan yang menjauhkan mereka dari fungsi aslinya. Semua itu ruang yang valid untuk cerita OC.<br><br>Yang tidak boleh adalah menjadikan karaktermu sebagai <em>pelaku utama</em> dari peristiwa yang sudah tertulis secara canon di luar universe ini.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Boleh gak punya arc cerita yang berskala besar?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Boleh—dengan catatan. Konflik antar kerajaan, krisis di satu kawasan astral, peristiwa yang mempengaruhi satu komunitas—semua itu valid dan bisa jadi arc yang kuat.<br><br>Yang perlu dihindari adalah skala yang terlalu general untuk satu karakter OC: kiamat besar seluruh dunia, kejadian yang secara lore harusnya melibatkan semua pihak, atau plot yang menuntut karakter lain bereaksi seolah dunia mereka bergantung padanya. Kalau arc-mu butuh seluruh universe untuk tunduk, kemungkinan besar perlu diskalakan ulang.</div>
+              </div>
+            </div>
+
+            <div class="faq-section-label">AR-CID &amp; Sistem</div>
+
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Apakah AR-CID bisa dimiliki oleh karakter manusia?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Bisa. Karakter manusia yang cukup dalam keterlibatannya dengan dunia astral—terutama yang punya akses ke sistem ARA atau berinteraksi rutin dengan entitas terdaftar—bisa memiliki AR-CID. Kolom Race pada dokumen mereka diisi <code>Human</code>.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Apa itu AIN dan apakah bisa diganti?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">AIN (<em>Astral Identification Number</em>) adalah kode unik dengan format <code>AR-XXXX-XXXX-XXXX</code> yang di-generate otomatis saat pendaftaran. Ini satu-satunya komponen AR-CID yang tidak bisa diubah sama sekali—bahkan jika kartu fisiknya hilang, AIN tetap ada dalam sistem.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">SC Code dan SC Level itu sama?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Tidak. Keduanya berbeda:<br><br><strong>SC Level</strong> — mengukur akses dan clearance. Seberapa jauh entitas diizinkan masuk ke dalam struktur ARA.<br><strong>SC Code</strong> — mengukur status pengawasan aktif saat ini. Seberapa besar "perhatian" yang diarahkan ke entitas tersebut.<br><br>Keduanya ditetapkan oleh ARA dan bisa berubah kapan saja tanpa pemberitahuan sebelumnya.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Gimana cara dapet gelar L4? L5 kayaknya gamungkin, apalagi L0.</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Betul sekali! Status L5 dan L0 memang bukan sesuatu yang bisa "didapat".<br><br><strong>L5</strong> reserved untuk karakter-karakter yang memang bekerja di balik layar ARA secara langsung. Beberapa NPC bisa jadi mendapatkan gelar ini karena memang keterlibatan mereka di balik layar.<br><br><strong>L0</strong> bukan gelar yang diberikan, tapi kondisi yang ada karena entitas tersebut secara literal berada di luar kapasitas sistem ARA untuk mengategorikannya. Tidak ada proses pendaftaran untuk itu. (Tokoh-tokoh Canon ASTRAL yang ada di dunia nyata sangat berkemungkinan mendapat status ini.)<br><br><strong>L4</strong> berbeda. Slot-nya terbatas dan kodenya dikunci di sistem AR-CID, tapi bukan berarti tidak mungkin sama sekali—hanya tidak bisa diklaim sendiri. Satu-satunya jalur adalah melalui autentikasi resmi dari tim, yang biasanya terjadi dalam konteks keterlibatan aktif dalam lore atau cerita yang sudah berjalan. Kalau karaktermu organik berkembang ke arah sana dan ada alasan lore yang kuat, bisa diajukan dan didiskusikan. Tapi ini bukan sesuatu yang bisa di-grind atau di-request begitu saja.</div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">Apakah OC bisa eksis tanpa AR-CID?</button>
+              <div class="faq-a">
+                <div class="faq-a-inner">Secara lore, bisa—tapi ada konsekuensinya. Entitas tanpa AR-CID tidak ada dalam catatan ARA: tidak ada perlindungan resmi, tidak ada jalur bantuan, dan crossing tanpa registrasi secara teknis ilegal. Ini bisa jadi elemen cerita yang menarik, tapi perlu dipikirkan implikasinya dalam konteks interaksi dengan sistem yang ada.</div>
+              </div>
+            </div>
+
+            <div class="gl-callout" style="margin-top:2.5rem;border-left-color:var(--gold);background:rgba(154,126,42,.04)">
+              <div class="gl-callout-title" style="color:var(--gold)">// Referensi Lore Lengkap</div>
+              <p style="margin:0;font-size:.9rem;opacity:.8">Untuk informasi lebih detail soal mekanisme OC, AR-CID, SC Level, The Cost, dan sistem lore lainnya—cek <em>Lore Archive → Panduan OC</em>. Kemungkinan besar jawabannya sudah ada di sana.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div><!-- /gl-content-area -->
+    </div><!-- /gl-layout -->
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="sf-col">
+          <div class="sf-col-title">WARGANTARA</div>
+          <p>Para entitas yang hidup di ambang—tidak sepenuhnya milik dunia manusia, tidak juga milik dunia astral.</p>
+        </div>
+        <div class="sf-col">
+          <div class="sf-col-title">NAVIGASI</div>
+          <a href="index.html">Home</a>
+          <a href="members.html">Members</a>
+          <a href="lore.html">Lore Archive</a>
+          <a href="guidelines.html">Guidelines</a>
+          <a href="arcid.html">AR-CID Editor</a>
+          <a href="credits.html">Credits & Attributions</a>
+        </div>
+        <div class="sf-col">
+          <div class="sf-col-title">KOMUNITAS</div>
+          <p>Sandbox lore terbuka untuk semua fan. Buat OC, tulis cerita, dan jadilah bagian dari dua dunia ini.</p>
+          <p style="margin-top:.5rem">Status Lore: <span style="color:var(--gold);opacity:1">Open Sandbox</span></p>
+        </div>
+      </div>
+      <div class="sf-bottom">
+        <span class="sf-logo">WAR<span>G</span>ANTARA</span>
+        <span class="sf-copy">© Wargantara VTuber Group · Est. ???? · All lore is fiction</span>
+        <span class="sf-copy">Lintas Batas</span>
+      </div>
+    </footer>
+
+    <script>
+      function toggleMember(id) {
+        const body = document.getElementById('mb-' + id);
+        const toggle = document.getElementById('mt-' + id);
+        const isOpen = body.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+      }
+      var GL_HASH = {
+        'general': 'komunitas',
+        'derivative': 'derivative',
+        'fanworks': 'fanworks',
+        'boundaries': 'boundaries',
+        'prohibited': 'prohibited',
+        'faq': 'faq',
+      };
+      var GL_HASH_REV = {};
+      Object.keys(GL_HASH).forEach(function(k) {
+        GL_HASH_REV[GL_HASH[k]] = k;
+      });
+
+      function showGl(id, el, noHash, noScroll) {
+        document.querySelectorAll('.gl-article').forEach(x => {
+          x.classList.remove('active')
+        });
+        document.querySelectorAll('.gl-nav-item').forEach(x => {
+          x.classList.remove('active')
+        });
+        const art = document.getElementById('gl-' + id);
+        if (art) {
+          art.classList.add('active');
+        }
+        if (el) el.classList.add('active');
+        if (!noHash && GL_HASH[id]) history.replaceState(null, '', '#' + GL_HASH[id]);
+        /* Sync mobile floating menu items */
+        document.querySelectorAll('.gl-mob-menu-item').forEach(x => {
+          x.classList.toggle('active', x.dataset.gl === id);
+        });
+        /* Update label di trigger button */
+        var activeItem = document.querySelector('.gl-mob-menu-item[data-gl="' + id + '"]');
+        var labelEl = document.getElementById('gl-mob-label');
+        if (labelEl && activeItem) {
+          var txt = activeItem.textContent.trim();
+          /* Ambil nomor (misal "01") + kata pertama setelah " — " */
+          var match = txt.match(/^(\d+)\s*[—\-]\s*(.+)/);
+          if (match) {
+            var words = match[2].trim().split(/\s+/);
+            labelEl.textContent = match[1] + ' — ' + words[0];
+          } else {
+            labelEl.textContent = txt.length > 16 ? txt.substring(0, 14).trimEnd() + '…' : txt;
+          }
+        }
+        /* Scroll ke atas halaman setiap switch tab (mobile & desktop) */
+        if (!noScroll) {
+          requestAnimationFrame(function() {
+            var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 56;
+            var pageHeader = document.querySelector('.page-header');
+            var top = pageHeader ? (pageHeader.offsetTop) : 0;
+            window.scrollTo({
+              top: top,
+              behavior: 'smooth'
+            });
+          });
+        }
+      }
+      (function() {
+        const hash = location.hash.replace('#', '');
+        const id = GL_HASH_REV[hash] || 'general';
+        const el = document.querySelector('[onclick*="\'' + id + '\'"]');
+        showGl(id, el, true, true);
+      })();
+
+      function switchFaqTab(id, btn) {
+        document.querySelectorAll('.faq-tab-btn').forEach(x => x.classList.remove('active'));
+        document.querySelectorAll('.faq-panel').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        const panel = document.getElementById('faqpanel-' + id);
+        if (panel) panel.classList.add('active');
+        // close any open faq items when switching tabs
+        document.querySelectorAll('.faq-item.open').forEach(x => x.classList.remove('open'));
+      }
+
+      function toggleFaq(btn) {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(x => x.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      }
+
+      function toggleMobile() {
+        const d = document.getElementById('mobile-drawer');
+        const b = document.getElementById('burger');
+        const open = d.classList.toggle('open');
+        b.classList.toggle('open', open);
+      }
+
+      function closeMobile() {
+        document.getElementById('mobile-drawer').classList.remove('open');
+        document.getElementById('burger').classList.remove('open');
+      }
+      var isDark = (function() {
+        var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
+        return m ? m[1] === 'dark' : false;
+      })();
+
+      function applyTheme() {
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        var di = document.getElementById('theme-icon');
+        if (di) {
+          di.classList.remove('sf-sun-1-o', 'sf-moon-1-o');
+          di.classList.add(isDark ? 'sf-sun-1-o' : 'sf-moon-1-o');
+        }
+        var mi = document.getElementById('theme-icon-m');
+        if (mi) {
+          mi.classList.remove('sf-sun-1-o', 'sf-moon-1-o');
+          mi.classList.add(isDark ? 'sf-sun-1-o' : 'sf-moon-1-o');
+        }
+        var ml = document.getElementById('theme-label-m');
+        if (ml) {
+          ml.textContent = isDark ? 'Day Mode' : 'Night Mode';
+        }
+      }
+
+      function toggleTheme() {
+        isDark = !isDark;
+        var exp = new Date();
+        exp.setFullYear(exp.getFullYear() + 1);
+        document.cookie = 'wg-theme=' + (isDark ? 'dark' : 'light') + '; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        applyTheme();
+      }
+      applyTheme();
+      // re-apply icon saat tab aktif kembali (icon font kadang blank setelah tab switch)
+      document.addEventListener("visibilitychange", function() {
+        if (!document.hidden) applyTheme();
+      });
+      // ── SPLASH ──
+      (function() {
+        if (document.cookie.match(/(?:^|;\s*)wg-visited=1/)) {
+          var s = document.getElementById('splash-main');
+          if (s) s.classList.add('hidden');
+        }
+      })();
+      var _pendingTheme = null,
+        _denyTimer = null;
+
+      function splashStep2() {
+        var s1 = document.getElementById('splash-step1');
+        var s2 = document.getElementById('splash-step2');
+        s1.classList.add('fading');
+        setTimeout(function() {
+          s1.style.display = 'none';
+          s2.classList.add('active');
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              s2.classList.add('visible');
+            });
+          });
+        }, 350);
+      }
+
+      function splashSelectTheme(theme) {
+        _pendingTheme = theme;
+        document.getElementById('btn-day').classList.toggle('selected', theme === 'light');
+        document.getElementById('btn-night').classList.toggle('selected', theme === 'dark');
+        document.getElementById('splash-confirm').classList.add('ready');
+        isDark = (theme === 'dark');
+        applyTheme();
+      }
+
+      function splashEnter() {
+        if (!_pendingTheme) return;
+        var exp = new Date();
+        exp.setFullYear(exp.getFullYear() + 1);
+        document.cookie = 'wg-theme=' + _pendingTheme + '; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        document.cookie = 'wg-visited=1; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        isDark = (_pendingTheme === 'dark');
+        applyTheme();
+        var s = document.getElementById('splash-main');
+        s.classList.add('hiding');
+        setTimeout(function() {
+          s.classList.add('hidden');
+        }, 620);
+      }
+
+      function splashDeny() {
+        var box = document.querySelector('#splash-main .splash-box');
+        box.classList.add('glitching');
+        setTimeout(function() {
+          box.innerHTML = '<div class="splash-pre">// Wargantara &middot; Akses Ditolak</div>' +
+            '<div class="splash-quote" style="font-size:clamp(1.3rem,3.5vw,1.75rem)">&ldquo;... I see.&rdquo;</div>' +
+            '<div class="splash-attr" style="margin-bottom:2rem">&mdash;</div>' +
+            '<div class="splash-disclaimer" style="opacity:.6">Tidak ada yang bisa kami lakukan untuk melanjutkan.<br><br>Dunia ini bukan untukmu &mdash; dan itu tidak apa-apa.</div>' +
+            '<div class="deny-countdown" id="deny-countdown">Halaman akan ditutup dalam <span id="deny-secs">5</span> detik...</div>' +
+            '<div class="splash-corner">W</div>';
+          box.classList.remove('glitching');
+          var secs = 5,
+            el = document.getElementById('deny-secs'),
+            wrap = document.getElementById('deny-countdown');
+          _denyTimer = setInterval(function() {
+            secs--;
+            if (el) el.textContent = secs;
+            if (secs <= 2 && wrap) wrap.classList.add('urgent');
+            if (secs <= 0) {
+              clearInterval(_denyTimer);
+              try {
+                window.open('', '_self').close();
+              } catch (e) {}
+              window.close();
+              setTimeout(function() {
+                document.body.innerHTML = '';
+              }, 300);
+            }
+          }, 1000);
+        }, 180);
+      }
+
+      function toggleMobMenu() {
+        var menu = document.getElementById('gl-mob-menu');
+        var btn = document.getElementById('gl-mob-trigger');
+        var isOpen = menu.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+      }
+
+      function closeMobMenu() {
+        document.getElementById('gl-mob-menu').classList.remove('open');
+        document.getElementById('gl-mob-trigger').classList.remove('open');
+      }
+      /* Close mob menu on outside tap */
+      document.addEventListener('click', function(e) {
+        var menu = document.getElementById('gl-mob-menu');
+        var btn = document.getElementById('gl-mob-trigger');
+        if (menu && menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+          closeMobMenu();
+        }
+      });
+    </script>
+
+    <!-- MOBILE FLOATING NAV -->
+    <div class="gl-mob-menu" id="gl-mob-menu">
+      <div class="gl-mob-menu-label">// Guidelines</div>
+      <button class="gl-mob-menu-item active" data-gl="general" onclick="showGl('general',this);closeMobMenu()">01 — Sikap &amp; Komunitas</button>
+      <button class="gl-mob-menu-item" data-gl="derivative" onclick="showGl('derivative',this);closeMobMenu()">02 — Derivative Works</button>
+      <button class="gl-mob-menu-item" data-gl="fanworks" onclick="showGl('fanworks',this);closeMobMenu()">03 — Fan Works</button>
+      <button class="gl-mob-menu-item" data-gl="boundaries" onclick="showGl('boundaries',this);closeMobMenu()">04 — Boundaries</button>
+      <button class="gl-mob-menu-item" data-gl="prohibited" onclick="showGl('prohibited',this);closeMobMenu()">05 — Absolute Prohibitions</button>
+      <button class="gl-mob-menu-item" data-gl="faq" onclick="showGl('faq',this);closeMobMenu()">06 — FAQ</button>
+    </div>
+    <button class="gl-mob-trigger" id="gl-mob-trigger" onclick="toggleMobMenu()" aria-label="Navigation">
+      <div class="gl-mob-trigger-icon"><span></span><span></span><span></span></div>
+      <span id="gl-mob-label">MENU</span>
+    </button>
+  </body>
+
+</html>

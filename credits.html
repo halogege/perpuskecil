@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+
+  <head>
+    <meta charset="UTF-8">
+    <script>
+      (function() {
+        var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
+        if (m) document.documentElement.setAttribute('data-theme', m[1] === 'dark' ? 'dark' : 'light');
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WARGANTARA—Credits</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+      @import url('https://solrainha.github.io/saturnicons/saturnicons.css');
+      @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+      }
+
+      :root {
+        --bg: #ffffff;
+        --surface: #f5f5f5;
+        --surface2: #ebebeb;
+        --border: #e0e0e0;
+        --border2: #cccccc;
+        --ink: #111111;
+        --ink2: #333333;
+        --muted: #888888;
+        --red: #c0251a;
+        --red2: #e02a1e;
+        --red-dim: rgba(192, 37, 26, .07);
+        --gold: #9a7e2a;
+        --gold2: #b89a3e;
+        --gold-dim: rgba(154, 126, 42, .08);
+        --mono: 'Space Mono', monospace;
+        --display: 'Bebas Neue', sans-serif;
+        --serif: 'Noto Serif Display', serif;
+        --nav-h: 56px;
+      }
+
+      [data-theme="dark"] {
+        --bg: #111111;
+        --surface: #1c1c1c;
+        --surface2: #242424;
+        --border: #2a2a2a;
+        --border2: #383838;
+        --ink: #f0ece3;
+        --ink2: #c8c2b4;
+        --muted: #666666;
+        --red: #c0251a;
+        --red-dim: rgba(192, 37, 26, .12);
+        --gold: #b89a3e;
+        --gold2: #d4b050;
+        --gold-dim: rgba(184, 154, 62, .1);
+      }
+
+      html {
+        width: 100%
+      }
+
+      body {
+        width: 100%;
+        overflow-x: clip
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--mono);
+        transition: background .3s, color .3s;
+        min-height: 100vh;
+        font-size: 16px;
+        line-height: 1.6
+      }
+
+      /* ---- NAV ---- */
+      nav {
+        background: var(--bg);
+        border-bottom: 2px solid var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.5rem;
+        height: var(--nav-h);
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        transition: background .3s
+      }
+
+      .nav-logo {
+        font-family: var(--display);
+        font-size: 2rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        cursor: pointer;
+        text-decoration: none;
+        transition: color .3s
+      }
+
+      .nav-logo span {
+        color: var(--red)
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 0;
+        list-style: none
+      }
+
+      .nav-links li a {
+        display: block;
+        padding: 0 1rem;
+        height: var(--nav-h);
+        line-height: var(--nav-h);
+        font-size: .78rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--ink);
+        opacity: .6;
+        border-left: 1px solid var(--border);
+        transition: all .15s;
+        cursor: pointer
+      }
+
+      .nav-links li a:hover {
+        opacity: 1;
+        background: var(--surface)
+      }
+
+      .nav-links li a.active {
+        opacity: 1;
+        background: var(--red);
+        color: #fff
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: .75rem
+      }
+
+      .theme-btn {
+        background: none;
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        cursor: pointer;
+        transition: all .2s;
+        height: 32px;
+        width: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        padding: 0
+      }
+
+      .theme-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold)
+      }
+
+      .burger-btn {
+        display: none;
+        background: none;
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px;
+        transition: border-color .2s
+      }
+
+      .burger-btn span {
+        display: block;
+        width: 18px;
+        height: 1.5px;
+        background: currentColor;
+        transition: all .25s
+      }
+
+      .burger-btn.open span:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg)
+      }
+
+      .burger-btn.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0)
+      }
+
+      .burger-btn.open span:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg)
+      }
+
+      .mobile-drawer {
+        display: none;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--bg);
+        z-index: 190;
+        border-top: 1px solid var(--border);
+        flex-direction: column;
+        overflow-y: auto
+      }
+
+      .mobile-drawer.open {
+        display: flex
+      }
+
+      .mobile-drawer ul {
+        list-style: none;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .mobile-drawer ul li a {
+        display: flex;
+        align-items: center;
+        padding: 1.1rem 1.5rem;
+        font-size: .9rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--ink);
+        opacity: .65;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        transition: all .15s;
+        text-decoration: none;
+        min-height: 48px
+      }
+
+      .mobile-drawer ul li a:hover,
+      .mobile-drawer ul li a.active {
+        opacity: 1;
+        background: var(--red);
+        color: #fff
+      }
+
+      /* ---- PAGE HEADER ---- */
+      .page-header {
+        padding: 3.5rem 3rem 2.5rem;
+        border-bottom: 2px solid var(--red);
+        position: relative;
+        overflow: hidden
+      }
+
+      .page-header-pre {
+        font-size: .7rem;
+        letter-spacing: .28em;
+        color: var(--red);
+        text-transform: uppercase;
+        margin-bottom: .75rem
+      }
+
+      .page-header h1 {
+        font-family: var(--display);
+        font-size: clamp(3.5rem, 7vw, 6rem);
+        line-height: .9;
+        color: var(--ink);
+        transition: color .3s
+      }
+
+      .page-header p {
+        max-width: 560px;
+        font-size: .95rem;
+        line-height: 1.85;
+        opacity: .75;
+        margin-top: 1.2rem;
+        text-align: justify;
+        hyphens: auto
+      }
+
+      .page-header-bg {
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--display);
+        font-size: 10rem;
+        color: var(--red);
+        opacity: .04;
+        pointer-events: none;
+        letter-spacing: -.02em;
+        line-height: 1
+      }
+
+      /* ---- LAYOUT ---- */
+      .cr-layout {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        min-height: calc(100vh - var(--nav-h))
+      }
+
+      /* ---- SIDEBAR ---- */
+      .cr-sidebar {
+        border-right: 1px solid var(--border);
+        padding: 2rem 0;
+        position: sticky;
+        top: var(--nav-h);
+        height: calc(100vh - var(--nav-h));
+        overflow-y: auto;
+        background: var(--bg);
+        transition: background .3s
+      }
+
+      .cr-sidebar-head {
+        font-size: .62rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        opacity: .45;
+        padding: 0 1.4rem;
+        margin-bottom: .5rem;
+        margin-top: 1.5rem
+      }
+
+      .cr-sidebar-head:first-child {
+        margin-top: 0
+      }
+
+      .cr-nav-item {
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+        padding: .55rem 1.4rem;
+        font-size: .74rem;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+        opacity: .55;
+        cursor: pointer;
+        border-left: 2px solid transparent;
+        transition: all .15s;
+        color: var(--ink);
+        min-height: 40px;
+        background: none;
+        border-top: none;
+        border-right: none;
+        border-bottom: none;
+        font-family: var(--mono);
+        width: 100%;
+        text-align: left
+      }
+
+      .cr-nav-item:hover {
+        opacity: .85;
+        border-left-color: var(--border2)
+      }
+
+      .cr-nav-item.active {
+        opacity: 1;
+        border-left-color: var(--red);
+        color: var(--red)
+      }
+
+      .cr-nav-item .cr-nav-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+        flex-shrink: 0;
+        opacity: .5
+      }
+
+      .cr-nav-item.active .cr-nav-dot {
+        opacity: 1
+      }
+
+      .cr-nav-divider {
+        height: 1px;
+        background: var(--border);
+        margin: .75rem 1.4rem
+      }
+
+      /* ---- CONTENT ---- */
+      .cr-content-area {
+        min-height: calc(100vh - var(--nav-h))
+      }
+
+      .cr-panel {
+        display: none;
+        padding: 3.5rem 3rem 4rem;
+        max-width: 820px
+      }
+
+      .cr-panel.active {
+        display: block;
+        animation: panelIn .25s ease both
+      }
+
+      @keyframes panelIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px)
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0)
+        }
+      }
+
+      .cr-eyebrow {
+        font-size: .64rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: var(--red);
+        margin-bottom: .5rem;
+        opacity: .85
+      }
+
+      .cr-title {
+        font-family: var(--display);
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        letter-spacing: .04em;
+        line-height: .9;
+        color: var(--ink);
+        margin-bottom: 1.75rem;
+        transition: color .3s
+      }
+
+      .cr-rule {
+        width: 2rem;
+        height: 2px;
+        background: var(--red);
+        margin-bottom: 2rem
+      }
+
+      /* ---- CREDIT GROUPS ---- */
+      .cr-group {
+        margin-bottom: 3rem
+      }
+
+      .cr-group-title {
+        font-size: .6rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1rem;
+        opacity: .9;
+        padding-bottom: .5rem;
+        border-bottom: 1px solid var(--border)
+      }
+
+      /* ---- CREDIT ROWS ---- */
+      .cr-row:last-child {
+        border-bottom: none
+      }
+
+      .cr-role {
+        font-size: .62rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        opacity: .45;
+        padding-top: .05rem
+      }
+
+      .cr-name {
+        font-size: .92rem;
+        letter-spacing: .03em;
+        color: var(--ink)
+      }
+
+      .cr-name a {
+        color: inherit;
+        text-decoration: none;
+        transition: color .15s
+      }
+
+      .cr-name a:hover {
+        color: var(--gold)
+      }
+
+      .cr-name a::after {
+        content: ' ↗';
+        font-size: .65rem;
+        opacity: .4
+      }
+
+      .cr-tag {
+        font-size: .55rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .18rem .55rem;
+        border: 1px solid var(--border2);
+        color: var(--muted);
+        white-space: nowrap;
+        flex-shrink: 0
+      }
+
+      .cr-tag.gold {
+        border-color: rgba(154, 126, 42, .45);
+        color: var(--gold);
+        background: var(--gold-dim)
+      }
+
+      .cr-tag.red {
+        border-color: rgba(192, 37, 26, .4);
+        color: var(--red);
+        background: var(--red-dim)
+      }
+
+      /* ---- REDACTED ROW ---- */
+      .cr-name-redacted {
+        display: inline-block;
+        background: var(--ink);
+        color: transparent;
+        border-radius: 2px;
+        letter-spacing: .05em;
+        font-size: .92rem;
+        user-select: none;
+        -webkit-user-select: none
+      }
+
+      /* ---- AVATAR ---- */
+      .cr-row {
+        display: grid;
+        grid-template-columns: 180px 1fr auto;
+        gap: 1rem;
+        align-items: center;
+        padding: .7rem 0;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .cr-row-inner {
+        display: flex;
+        align-items: center;
+        gap: .65rem
+      }
+
+      .cr-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 1px solid var(--border2);
+        background: var(--surface2);
+        pointer-events: none;
+        -webkit-user-drag: none;
+ 
+        display: block
+      }
+
+      .cr-avatar-placeholder {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        border: 1px solid var(--border2);
+        background: var(--surface2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: .75rem;
+        color: var(--muted);
+        overflow: hidden;
+        line-height: 1
+      }
+
+      img {
+        pointer-events: none;
+        -webkit-user-drag: none;
+ 
+      }
+
+      /* ---- SPECIAL THANKS ---- */
+      .cr-special-thanks {
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--red);
+        padding: 1.2rem 1.4rem;
+        margin-bottom: 2rem;
+        background: var(--red-dim)
+      }
+
+      .cr-special-thanks-label {
+        font-size: .55rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--red);
+        margin-bottom: .5rem;
+        opacity: .9
+      }
+
+      .cr-special-thanks-name {
+        font-family: var(--display);
+        font-size: 1.6rem;
+        letter-spacing: .05em;
+        color: var(--ink);
+        margin-bottom: .35rem;
+        transition: color .3s
+      }
+
+      .cr-special-thanks-desc {
+        font-size: .84rem;
+        line-height: 1.85;
+        opacity: .75
+      }
+
+      /* ---- STAFF GRID ---- */
+      .cr-staff-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: .75rem;
+        margin-top: .5rem
+      }
+
+      .cr-staff-card {
+        border: 1px solid var(--border);
+        padding: 1.25rem 1rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: .55rem;
+        transition: border-color .2s, background .2s;
+        cursor: default
+      }
+
+      .cr-staff-card:hover {
+        border-color: var(--border2);
+        background: var(--surface)
+      }
+
+      .cr-staff-card a {
+        text-decoration: none;
+        color: inherit;
+        transition: color .15s
+      }
+
+      .cr-staff-card a:hover {
+        color: var(--gold)
+      }
+
+      .cr-staff-avatar {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--border2);
+        background: var(--surface2);
+        pointer-events: none;
+        -webkit-user-drag: none;
+ 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-shrink: 0;
+        font-size: 2.5rem;
+        color: var(--muted);
+        line-height: 1
+      }
+
+      .cr-staff-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        -webkit-user-drag: none;
+ 
+        display: block
+      }
+
+      .cr-staff-name {
+        font-size: .82rem;
+        letter-spacing: .04em;
+        color: var(--ink);
+        font-weight: 700;
+        margin-top: .1rem
+      }
+
+      .cr-staff-role {
+        font-size: .56rem;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        opacity: .85
+      }
+
+      .cr-staff-desc {
+        font-size: .7rem;
+        line-height: 1.75;
+        opacity: .55;
+        margin-top: .1rem
+      }
+
+      /* ---- MEMBER HEADER ---- */
+      .cr-member-header {
+        display: flex;
+        align-items: flex-end;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .cr-member-num {
+        font-family: var(--display);
+        font-size: 5rem;
+        color: var(--red);
+        opacity: .08;
+        line-height: 1;
+        flex-shrink: 0
+      }
+
+      .cr-member-info {}
+
+      .cr-member-codename {
+        font-size: .6rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        opacity: .85;
+        margin-bottom: .25rem
+      }
+
+      .cr-member-name {
+        font-family: var(--display);
+        font-size: 2.5rem;
+        letter-spacing: .04em;
+        line-height: .9;
+        color: var(--ink);
+        transition: color .3s
+      }
+
+      /* ---- INFOBOX ---- */
+      .cr-infobox {
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--gold);
+        padding: 1.1rem 1.4rem;
+        margin-bottom: 2rem;
+        background: var(--surface);
+        font-size: .88rem;
+        line-height: 1.85;
+        opacity: .8
+      }
+
+      .cr-infobox strong {
+        color: var(--gold);
+        font-weight: 400
+      }
+
+      /* ---- INSPIRED ---- */
+      .cr-inspired-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: .65rem;
+        margin-top: .5rem
+      }
+
+      .cr-inspired-item {
+        border: 1px solid var(--border);
+        padding: .85rem 1rem;
+        transition: border-color .2s
+      }
+
+      .cr-inspired-item:hover {
+        border-color: var(--border2)
+      }
+
+      .cr-inspired-cat {
+        font-size: .55rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: var(--gold);
+        opacity: .8;
+        margin-bottom: .3rem
+      }
+
+      .cr-inspired-name {
+        font-size: .88rem;
+        letter-spacing: .03em;
+        color: var(--ink)
+      }
+
+      /* ---- FOOTER ---- */
+      .site-footer {
+        background: var(--surface);
+        border-top: 2px solid var(--red);
+        padding: 2.5rem 3rem;
+        margin-top: auto
+      }
+
+      .site-footer-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem
+      }
+
+      .sf-col-title {
+        font-family: var(--display);
+        font-size: 1.1rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        margin-bottom: .75rem;
+        transition: color .3s
+      }
+
+      .sf-col p,
+      .sf-col a {
+        font-size: .84rem;
+        line-height: 1.85;
+        opacity: .65;
+        display: block;
+        color: var(--ink);
+        text-decoration: none;
+        transition: opacity .15s
+      }
+
+      .sf-col a:hover {
+        opacity: 1;
+        color: var(--red)
+      }
+
+      .sf-bottom {
+        border-top: 1px solid var(--border);
+        padding-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap
+      }
+
+      .sf-copy {
+        font-size: .68rem;
+        letter-spacing: .12em;
+        opacity: .25;
+        text-transform: uppercase
+      }
+
+      .sf-logo {
+        font-family: var(--display);
+        font-size: 1.6rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        opacity: .3
+      }
+
+      .sf-logo span {
+        color: var(--red)
+      }
+
+      /* ---- MOBILE ---- */
+      @media(max-width:768px) {
+        .nav-links {
+          display: none
+        }
+
+        .nav-right {
+          display: flex
+        }
+
+        .burger-btn {
+          display: flex
+        }
+
+        .cr-layout {
+          grid-template-columns: 1fr;
+          display: block
+        }
+
+        .cr-sidebar {
+          position: static;
+          height: auto;
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+          padding: .75rem 0;
+          display: flex;
+          flex-wrap: wrap;
+          overflow-x: auto;
+          overflow-y: visible
+        }
+
+        .cr-sidebar-head {
+          display: none
+        }
+
+        .cr-nav-divider {
+          display: none
+        }
+
+        .cr-nav-item {
+          border-left: none;
+          border-bottom: 2px solid transparent;
+          padding: .5rem .9rem;
+          font-size: .68rem;
+          min-height: 36px;
+          width: auto;
+          flex-shrink: 0
+        }
+
+        .cr-nav-item:hover {
+          border-left: none;
+          border-bottom-color: var(--border2)
+        }
+
+        .cr-nav-item.active {
+          border-left: none;
+          border-bottom-color: var(--red)
+        }
+
+        .cr-panel {
+          padding: 2rem 1.25rem 3rem;
+          max-width: 100%
+        }
+
+        .cr-row {
+          grid-template-columns: 1fr;
+          gap: .25rem;
+          align-items: start
+        }
+
+        .cr-role {
+          font-size: .58rem
+        }
+
+        .cr-inspired-grid {
+          grid-template-columns: 1fr
+        }
+
+        .cr-staff-grid {
+          grid-template-columns: 1fr
+        }
+
+        .cr-member-header {
+          gap: 1rem
+        }
+
+        .cr-member-num {
+          font-size: 3.5rem
+        }
+
+        .page-header {
+          padding: 2.5rem 1.25rem 2rem
+        }
+
+        .site-footer {
+          padding: 2rem 1.25rem
+        }
+
+        .site-footer-inner {
+          grid-template-columns: 1fr;
+          gap: 1.5rem
+        }
+      }
+
+      /* ── WARGANTARA SPLASH (shared) ── */
+      .wg-splash {
+        position: fixed;
+        inset: 0;
+        background: #0a0a0a;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        opacity: 1;
+        transition: opacity .6s ease
+      }
+
+      .wg-splash.hiding {
+        opacity: 0;
+        pointer-events: none
+      }
+
+      .wg-splash.hidden {
+        display: none
+      }
+
+      @keyframes glitch-swap {
+        0% {
+          opacity: 1;
+          transform: skewX(0)
+        }
+
+        10% {
+          opacity: 0;
+          transform: skewX(-4deg) translateX(4px)
+        }
+
+        15% {
+          opacity: 1;
+          transform: skewX(3deg) translateX(-3px)
+        }
+
+        20% {
+          opacity: 0;
+          transform: skewX(0)
+        }
+
+        25% {
+          opacity: 1;
+          transform: skewX(-2deg)
+        }
+
+        30% {
+          opacity: 0
+        }
+
+        35%,
+        100% {
+          opacity: 1;
+          transform: skewX(0)
+        }
+      }
+
+      .splash-box.glitching {
+        animation: glitch-swap .35s steps(1) both
+      }
+
+      .splash-box {
+        max-width: 560px;
+        width: 100%;
+        border: 1px solid #2a2a2a;
+        border-top: 2px solid #c0251a;
+        padding: 3rem 2.5rem 2.5rem;
+        position: relative;
+        background: #111111;
+        overflow: hidden
+      }
+
+      .splash-pre {
+        font-family: 'Space Mono', monospace;
+        font-size: .6rem;
+        letter-spacing: .28em;
+        color: #c0251a;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem
+      }
+
+      .splash-quote {
+        font-family: 'Noto Serif Display', serif;
+        font-style: italic;
+        font-size: clamp(1.05rem, 3vw, 1.35rem);
+        line-height: 1.75;
+        color: #f0ece3;
+        margin-bottom: .65rem
+      }
+
+      .splash-attr {
+        font-family: 'Space Mono', monospace;
+        font-size: .62rem;
+        letter-spacing: .1em;
+        color: #555;
+        margin-bottom: 2rem
+      }
+
+      .splash-rule {
+        width: 2rem;
+        height: 1px;
+        background: #2a2a2a;
+        margin-bottom: 2rem
+      }
+
+      .splash-disclaimer {
+        font-family: 'Space Mono', monospace;
+        font-size: .78rem;
+        line-height: 1.9;
+        color: #c8c2b4;
+        opacity: .75;
+        margin-bottom: 2rem
+      }
+
+      .splash-disclaimer strong {
+        color: #b89a3e;
+        font-weight: 400
+      }
+
+      .splash-actions {
+        display: flex;
+        gap: .75rem;
+        align-items: center;
+        flex-wrap: wrap
+      }
+
+      .splash-btn-enter {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .7rem 1.5rem;
+        background: #c0251a;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background .15s;
+        min-height: 40px
+      }
+
+      .splash-btn-enter:hover {
+        background: #e02a1e
+      }
+
+      .splash-btn-deny {
+        font-family: 'Space Mono', monospace;
+        font-size: .68rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: #555;
+        background: none;
+        border: 1px solid #2a2a2a;
+        cursor: pointer;
+        padding: .6rem 1rem;
+        transition: color .15s, border-color .15s;
+        min-height: 40px
+      }
+
+      .splash-btn-deny:hover {
+        color: #f0ece3;
+        border-color: #555
+      }
+
+      .splash-privacy {
+        font-family: 'Space Mono', monospace;
+        font-size: .58rem;
+        letter-spacing: .06em;
+        color: #3a3a3a;
+        margin-top: 1.25rem;
+        line-height: 1.7
+      }
+
+      .splash-corner {
+        position: absolute;
+        bottom: 1rem;
+        right: 1.5rem;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 4.5rem;
+        color: #c0251a;
+        opacity: .04;
+        line-height: 1;
+        pointer-events: none
+      }
+
+      .splash-step {
+        transition: opacity .35s ease;
+      }
+
+      .splash-step.fading {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .splash-theme-step {
+        display: none;
+        opacity: 0;
+        transition: opacity .35s ease;
+      }
+
+      .splash-theme-step.active {
+        display: block;
+      }
+
+      .splash-theme-step.visible {
+        opacity: 1;
+      }
+
+      .splash-theme-choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .75rem;
+        margin-bottom: 1.5rem
+      }
+
+      .splash-theme-btn {
+        font-family: 'Space Mono', monospace;
+        font-size: .7rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        padding: 1.1rem 1rem;
+        border: 1px solid #2a2a2a;
+        background: none;
+        color: #888;
+        cursor: pointer;
+        transition: all .15s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .6rem
+      }
+
+      .splash-theme-btn .t-icon {
+        font-size: 1.4rem;
+        opacity: .5;
+        transition: opacity .15s
+      }
+
+      .splash-theme-btn:hover {
+        border-color: #b89a3e;
+        color: #f0ece3
+      }
+
+      .splash-theme-btn:hover .t-icon {
+        opacity: 1
+      }
+
+      .splash-theme-btn.selected {
+        border-color: #c0251a;
+        color: #f0ece3;
+        background: rgba(192, 37, 26, .08)
+      }
+
+      .splash-theme-btn.selected .t-icon {
+        opacity: 1
+      }
+
+      .splash-theme-confirm {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .7rem 1.5rem;
+        background: #c0251a;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background .15s, opacity .15s;
+        width: 100%;
+        min-height: 40px;
+        opacity: .35;
+        pointer-events: none
+      }
+
+      .splash-theme-confirm.ready {
+        opacity: 1;
+        pointer-events: auto
+      }
+
+      .splash-theme-confirm.ready:hover {
+        background: #e02a1e
+      }
+
+      .deny-countdown {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .1em;
+        color: #3a3a3a;
+        margin-top: 1.5rem;
+        transition: color .3s
+      }
+
+      .deny-countdown.urgent {
+        color: #7a3030
+      }
+
+      @media(max-width:600px) {
+        .splash-box {
+          padding: 2rem 1.5rem
+        }
+      }
+    </style>
+
+    <meta name="description" content="Wargantara adalah grup VTuber Indonesia bertemakan entitas astral dan sandbox lore universe.">
+    <meta property="og:title" content="WARGANTARA">
+    <meta property="og:description" content="Wargantara—grup VTuber Indonesia bertemakan entitas astral. Karena cara terbaik menyimpan rahasia adalah menjadikannya fiksi—dan fiksi ini terbuka untuk semua yang ingin ikut membangunnya.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wgtr1.netlify.app">
+    <meta property="og:image" content="https://wgtr1.netlify.app/assets/og/default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://wgtr1.netlify.app/assets/og/default.png">
+
+    <script src="/assets/js/head-common.js"></script>
+
+    <script>
+      if (document.cookie.match(/(?:^|;\s*)wg-visited=1/)) {
+        document.write('<style>.wg-splash{display:none!important}</style>');
+      }
+    </script>
+    <script>
+      /* ── Anti-DevTools Protection ── */
+      (function() {
+        "use strict";
+        var _blocked = false;
+
+        function _block() {
+          if (_blocked) return;
+          _blocked = true;
+          document.open();
+          document.write('<style>@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap");*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;display:flex;align-items:center;justify-content:center;height:100vh;overflow:hidden}.wg-devblock{max-width:480px;width:90%;border:1px solid #2a2a2a;border-top:2px solid #c0251a;padding:2.5rem 2rem 2rem;background:#111;position:relative;overflow:hidden;animation:glitch-in .35s steps(1) both}@keyframes glitch-in{0%{opacity:1;transform:skewX(0deg)}10%{opacity:0;transform:skewX(-4deg) translateX(4px)}15%{opacity:1;transform:skewX(3deg) translateX(-3px)}20%{opacity:0;transform:skewX(0deg)}25%{opacity:1;transform:skewX(-2deg)}30%{opacity:0}35%{opacity:1;transform:skewX(0deg)}100%{opacity:1;transform:skewX(0deg)}}.wg-pre{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.28em;color:#c0251a;text-transform:uppercase;margin-bottom:1.5rem}.wg-quote{font-family:"Noto Serif Display",serif;font-style:italic;font-size:clamp(1rem,3vw,1.25rem);line-height:1.75;color:#f0ece3;margin-bottom:.65rem}.wg-attr{font-family:"Space Mono",monospace;font-size:.62rem;letter-spacing:.1em;color:#555;margin-bottom:1.75rem}.wg-rule{width:2rem;height:1px;background:#2a2a2a;margin-bottom:1.75rem}.wg-msg{font-family:"Space Mono",monospace;font-size:.75rem;line-height:1.9;color:#c8c2b4;opacity:.75}.wg-msg strong{color:#b89a3e;font-weight:400}.wg-corner{position:absolute;bottom:.75rem;right:1.25rem;font-family:"Bebas Neue",sans-serif;font-size:4rem;color:#c0251a;opacity:.04;line-height:1;pointer-events:none}</style><div class="wg-devblock"><div class="wg-pre">// Wargantara &middot; Akses Ditolak</div><div class="wg-quote">&ldquo;Beberapa hal memang tidak dimaksudkan untuk dilihat.&rdquo;</div><div class="wg-attr">&mdash; Arsip Wargantara, Dokumen Tak Bernomor</div><div class="wg-rule"></div><div class="wg-msg">Aktivitas <strong>inspect / devtools</strong> terdeteksi.<br>Halaman ini tidak dapat diakses lebih lanjut.</div><div class="wg-corner">WG</div></div>');
+          document.close();
+        }
+        // 1. Disable right-click (kecuali gambar)
+        document.addEventListener("contextmenu", function(e) {
+          if (e.target.tagName === "IMG") return;
+          e.preventDefault();
+        });
+        // 2. Block keyboard shortcuts
+        document.addEventListener("keydown", function(e) {
+          var k = e.key;
+          if (k === "F12") {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          if (e.ctrlKey && e.shiftKey && ["I", "J", "C", "K"].indexOf(k.toUpperCase()) !== -1) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          if (e.ctrlKey && ["U", "S", "A", "P"].indexOf(k.toUpperCase()) !== -1) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+        }, true);
+        // 3. Block drag
+        document.addEventListener("dragstart", function(e) {
+          if (e.target.tagName !== "IMG") e.preventDefault();
+        });
+
+        // 5. console object trap
+        var _el = document.createElement("div");
+        Object.defineProperty(_el, "id", {
+          get: function() {
+            _block();
+          }
+        });
+        setInterval(function() {
+          console.log(_el);
+          console.clear();
+        }, 1000);
+        // 6. Disable text selection
+        var _style = document.createElement("style");
+        _style.textContent = "img { pointer-events:auto!important; }";
+        document.head.appendChild(_style);
+      })();
+    </script>
+  </head>
+
+  <body>
+
+    <!-- SPLASH SCREEN -->
+    <div class="wg-splash" id="splash-main">
+      <div class="splash-box">
+        <div id="splash-step1" class="splash-step">
+          <div class="splash-pre">// Wargantara &middot; Peringatan Masuk</div>
+          <div class="splash-quote">&ldquo;Cara menyimpan sebuah rahasia terbaik adalah dengan menjadikannya sebuah kisah-kisah fiksi untuk dipercaya.&rdquo;</div>
+          <div class="splash-attr">&mdash; Arsip Wargantara, Dokumen Tak Bernomor</div>
+          <div class="splash-rule"></div>
+          <div class="splash-disclaimer">
+            Seluruh konten dalam website ini adalah karya fiksi. Nama, karakter, kejadian, dan entitas yang ada di dalamnya bersifat fiktif semata.<br><br>
+            <strong>// Dengan memasuki website ini</strong>, kamu menyatakan memahami bahwa semua yang kamu temukan di sini adalah bagian dari sebuah semesta fiksi yang dibangun dengan penuh kesengajaan &mdash; dan tidak ada kaitannya dengan kenyataan di luar batas dunia ini.
+          </div>
+          <div class="splash-actions">
+            <button class="splash-btn-enter" onclick="splashStep2()">// Saya Mengerti &mdash; Lanjut</button>
+            <button class="splash-btn-deny" onclick="splashDeny()">Tidak Setuju</button>
+          </div>
+          <div class="splash-privacy">// Website ini menyimpan preferensi tema secara lokal di browser kamu. Tidak ada data pribadi yang dikumpulkan.</div>
+        </div>
+        <div id="splash-step2" class="splash-theme-step">
+          <div class="splash-pre">// Wargantara &middot; Preferensi Tampilan</div>
+          <div class="splash-quote" style="font-size:clamp(.95rem,2.5vw,1.15rem);margin-bottom:1.5rem">Pilih tampilan yang kamu inginkan.<br><span style="opacity:.4;font-size:.85em">Preferensi ini akan disimpan untuk kunjungan berikutnya.</span></div>
+          <div class="splash-rule"></div>
+          <div class="splash-theme-choices">
+            <button class="splash-theme-btn" id="btn-day" onclick="splashSelectTheme('light')">
+              <span class="t-icon sf sf-sun-1-o"></span>Day Mode
+            </button>
+            <button class="splash-theme-btn" id="btn-night" onclick="splashSelectTheme('dark')">
+              <span class="t-icon sf sf-moon-1-o"></span>Night Mode
+            </button>
+          </div>
+          <button class="splash-theme-confirm" id="splash-confirm" onclick="splashEnter()">// Masuk</button>
+        </div>
+        <div class="deny-countdown" id="deny-countdown" style="display:none">Halaman akan ditutup dalam <span id="deny-secs">5</span> detik...</div>
+        <div class="splash-corner">W</div>
+      </div>
+    </div>
+
+    <nav>
+      <a class="nav-logo" href="index.html">WAR<span>G</span>ANTARA</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a href="lore.html">Lore</a></li>
+        <li><a href="guidelines.html">Guidelines</a></li>
+        <li><a class="active" href="credits.html" class="active">Credits</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"><span id="theme-icon" class="sf"></span></button>
+        <button class="burger-btn" id="burger" onclick="toggleMobile()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="mobile-drawer" id="mobile-drawer">
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/members.html">Members</a></li>
+        <li><a href="/lore.html">Lore</a></li>
+        <li><a href="/guidelines.html">Guidelines</a></li>
+        <li><a href="/arcid.html">AR-CID Editor</a></li>
+        <li><a class="active" href="/credits.html">Credits & Attributions</a></li>
+      </ul>
+      <div style="padding:.75rem 1.5rem;border-top:1px solid var(--border)">
+        <a onclick="toggleTheme();closeMobile()" id="mnav-theme" style="display:flex;align-items:center;gap:.75rem;cursor:pointer;padding:.7rem 0;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);opacity:.75;text-decoration:none">
+          <span id="theme-icon-m" class="sf" style="font-size:1.15rem"></span>
+          <span id="theme-label-m">Night Mode</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="page-header">
+      <div class="page-header-pre">// Acknowledgements</div>
+      <h1>CREDITS &amp;<br>ATTRIBUTION</h1>
+      <p>Wargantara adalah proyek kolaboratif. Halaman ini mendokumentasikan semua pihak yang berkontribusi dalam membangun dunia ini—dari desain visual hingga narasi lore.</p>
+      <div class="page-header-bg">©</div>
+    </div>
+
+    <div class="cr-layout">
+
+      <!-- SIDEBAR -->
+      <aside class="cr-sidebar">
+        <div class="cr-sidebar-head">General</div>
+        <button class="cr-nav-item active" onclick="showPanel('general',this)">
+          <span class="cr-nav-dot"></span>General Credits
+        </button>
+
+        <div class="cr-nav-divider"></div>
+        <div class="cr-sidebar-head">Per Member</div>
+        <button class="cr-nav-item" onclick="showPanel('soren',this)">
+          <span class="cr-nav-dot"></span>Takahi Soren
+        </button>
+        <button class="cr-nav-item" onclick="showPanel('rui',this)">
+          <span class="cr-nav-dot"></span><span style="opacity:.35">[member2#]</span>
+        </button>
+        <button class="cr-nav-item" onclick="showPanel('anneliese',this)">
+          <span class="cr-nav-dot"></span><span style="opacity:.35">[member3#]</span>
+        </button>
+        <button class="cr-nav-item" onclick="showPanel('noah',this)">
+          <span class="cr-nav-dot"></span><span style="opacity:.35">[member4#]</span>
+        </button>
+        <button class="cr-nav-item" onclick="showPanel('igni',this)">
+          <span class="cr-nav-dot"></span><span style="opacity:.35">[member5#]</span>
+        </button>
+        <button class="cr-nav-item" onclick="showPanel('arda',this)">
+          <span class="cr-nav-dot"></span><span style="opacity:.35">[member6#]</span>
+        </button>
+      </aside>
+
+      <div class="cr-content-area">
+
+        <!-- ===== GENERAL CREDITS ===== -->
+        <div class="cr-panel active" id="panel-general">
+          <div class="cr-eyebrow">// 000—General</div>
+          <div class="cr-title">GENERAL<br>CREDITS</div>
+          <div class="cr-rule"></div>
+
+          <div class="cr-infobox">
+            Halaman ini mencatat semua kontribusi yang membangun Wargantara secara keseluruhan—kepemilikan IP, pengembangan website, penulisan konten, hingga inspirasi yang membentuk dunia ini.<br><br>
+            <strong>// Tentang Kami</strong>—Wargantara adalah komunitas indie dan UMKM lokal yang bergerak secara mandiri. Semua yang ada di sini dibangun dari nol oleh orang-orang yang terlalu cinta sama proyeknya sendiri.
+          </div>
+
+          <!-- ATTRIBUTION TERTINGGI -->
+          <div class="cr-special-thanks" style="border-left-color: var(--gold); background: var(--gold-dim); margin-bottom: 2.5rem;">
+            <div class="cr-special-thanks-label" style="color: var(--gold);">// Kepemilikan Sejati</div>
+            <div class="cr-special-thanks-name">Tuhan Maha Segalanya</div>
+            <div class="cr-special-thanks-desc">Ini semua milik Allah. Dunia ini, lore-nya, orangnya, idenya—semuanya. Kami hanya meminjam IP-nya aja.</div>
+          </div>
+
+          <!-- WARGANTARA STAFF -->
+          <div class="cr-group">
+            <div class="cr-group-title">// Wargantara Staff</div>
+            <div class="cr-staff-grid">
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <!-- nama: Takahi Soren | sosmed: ganti href="" -->
+                <div class="cr-staff-name">smokingFIH#0911</div>
+                <div class="cr-staff-role">Ketua Divisi Semuanya</div>
+                <div class="cr-staff-desc">Infonya saat ini merangkap QC web dev, lore writer, worldbuilder, organizer, dan tukang nyapu. Orang pun bingung ini makhluk bisa tidur apa nggak sebenarnya.</div>
+              </div>
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <!-- nama: Mindut | outsider -->
+                <div class="cr-staff-name">Mindut</div>
+                <div class="cr-staff-role">HRD &amp; Finance</div>
+                <div class="cr-staff-desc">Memastikan uang masuk lebih besar dari uang keluar, serta gimana cara kerja talentsnya lancar tuh cuma dia yang tau. Segala sesuatu minimal ada SWOT-nya, emang HR terbaik dah.</div>
+              </div>
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <!-- nama: Anneliese | sosmed: ganti href=""—BELUM DEBUT, sensor dulu -->
+                <div class="cr-staff-name">Drunkedonoshi</div>
+                <div class="cr-staff-role">PIC Design</div>
+                <div class="cr-staff-desc">Si mabok desain dengan 1010 Jobdesc yang dikerjakan secara bersamaan. Alasannya simpel aja, bosan. Paling gatal kalo liat desain gak "cantik"—kalo jelek langsung lempar regu sebelah.</div>
+              </div>
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <!-- nama: Noah Chantelune | sosmed: ganti href=""—BELUM DEBUT, sensor dulu -->
+                <div class="cr-staff-name">Kevin bin chestnut</div>
+                <div class="cr-staff-role">PIC Front-end & Back-end</div>
+                <div class="cr-staff-desc">Frontend, backend, back-pain. No game no koprol. Kalau website-nya jalan, itu berkat dia. Kalau error, juga masih berkat dia tapi versi lain. Entah yang mana orangnya.</div>
+              </div>
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <!-- nama: Igni Vashti | sosmed: ganti href=""—BELUM DEBUT, sensor dulu -->
+                <div class="cr-staff-name">LARIK</div>
+                <div class="cr-staff-role">PIC Creative</div>
+                <div class="cr-staff-desc">Staff Loremaster yang suka ngamuk kalo nemu plot hole. Tenunan bait yang beliau jalin, fakta atau fiksi? Kembali pada keyakinan masing-masing.</div>
+              </div>
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <!-- nama: Ardamevia | sosmed: ganti href=""—BELUM DEBUT, sensor dulu -->
+                <div class="cr-staff-name">mamechan</div>
+                <div class="cr-staff-role">PIC Wording & Medsos</div>
+                <div class="cr-staff-desc">Tipikal orang yang dikira Cetjipiti soalnya ketikannya super duper mirip Ei-Ai gegara pakai emdash itu. Tapi sumpah, yang satu ini manusia beneran, kok. Ciyus dah.</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- LORE SANCTUM -->
+          <div class="cr-group">
+            <div class="cr-group-title">// Lore Sanctum</div>
+
+            <!-- Raziel—solo 1 kolom -->
+            <div class="cr-staff-grid" style="grid-template-columns: 1fr; margin-bottom: .75rem;">
+
+              <div class="cr-staff-card" data-avatar-key="raziel-redacted">
+                <div class="cr-staff-avatar">✦</div>
+                <!-- Raziel—Angel of Mystery, disensor -->
+                <div class="cr-staff-name"><span class="cr-name-redacted">██████</span></div>
+                <div class="cr-staff-role">Lore Authority · [REDACTED]</div>
+                <div class="cr-staff-desc">Penanggung jawab tertinggi atas seluruh lore Wargantara. Semua izin kecil-kecil sampai besar-besar juga dia yang jagain, pokoknya. Bahkan rahasia kamu pun dia yang pegang. (Nahlo) Dijamin bukan stalker karena dia sebenarnya adalah——(suara dibungkam negara)</div>
+              </div>
+
+            </div>
+
+            <!-- Muzakiel + Finnian—2 kolom -->
+            <div class="cr-staff-grid">
+
+              <div class="cr-staff-card" data-avatar-key="muzakiel-redacted">
+                <div class="cr-staff-avatar">✦</div>
+                <!-- Muzakiel—disensor -->
+                <div class="cr-staff-name"><span class="cr-name-redacted">██████████</span></div>
+                <div class="cr-staff-role">Lore Gatekeeper · PIC · [REDACTED]</div>
+                <div class="cr-staff-desc">Arsitek utama dan juga tukang jaga gawang bangundunia Wargantara dari balik tabir. Atasan langsung Finnian—dan alasan mengapa posisi itu kini sedang kosong. Keberadaannya saat ini tidak dapat dikonfirmasi. Kalau lore-nya bikin merinding, salahkan dia. <em>Sudah malam atau sudah tahu ...?</em></div>
+              </div>
+
+              <div class="cr-staff-card" data-avatar-key="finnian">
+                <div class="cr-staff-avatar">✦</div>
+                <!-- penanggung jawab—PJS sementara bosnya lagi [REDACTED] -->
+                <div class="cr-staff-name">Finnian</div>
+                <div class="cr-staff-role">Lore Gatekeeper · PJS</div>
+                <div class="cr-staff-desc">Penanggung jawab sementara yang mengisi posisi karena bosnya sedang [REDACTED]. Merangkap resepsionis, Lore Gatekeeper, dan tukang ngepel perpus—tiga jabatan yang gajinya sama: tidak ada. Dia yang menentukan apa yang boleh kamu tahu. Dia juga yang ngepel lantai kalau kamu numpahin sesuatu.</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- VISUAL UMUM -->
+          <div class="cr-group">
+            <div class="cr-group-title">// Visual & Ilustrasi Umum</div>
+            <div class="cr-staff-grid">
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <!-- nama: Jimina | sosmed: ganti href="" -->
+                <div class="cr-staff-name"><a href="" target="_blank">Jimina</a></div>
+                <div class="cr-staff-role">Ilustrasi—Index, Marquee, UI</div>
+                <div class="cr-staff-desc">Kalian lihat keseragaman foto KTP yang ada di index, marquee, members, sampai jadi KTP-nya talents? NAH! Ini dia orangnya!</div>
+              </div>
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <!-- nama: Primaroxas | sosmed: ganti href="" -->
+                <div class="cr-staff-name"><a href="" target="_blank">Primaroxas</a></div>
+                <div class="cr-staff-role">Logo Design</div>
+                <div class="cr-staff-desc">Kreator logo Wargantara. Orang kece yang kalau bikin logonya juga kece. Please komis ke dia, guys. Nggak akan nyesel.</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- TOOLS & RESOURCES -->
+          <div class="cr-group">
+            <div class="cr-group-title">// Tools & Resources</div>
+
+            <div class="cr-row">
+              <div class="cr-role">Icon Library</div>
+              <div class="cr-name">
+                <div class="cr-row-inner">
+                  <div class="cr-avatar-placeholder">✦</div>
+                  <a href="https://solrainha.github.io/saturnicons/" target="_blank">Saturnicons</a>
+                </div>
+              </div>
+              <span class="cr-tag">Open Use</span>
+            </div>
+            <div class="cr-row">
+              <div class="cr-role">Hosting</div>
+              <div class="cr-name">
+                <div class="cr-row-inner">
+                  <div class="cr-avatar-placeholder">✦</div>
+                  Netlify
+                </div>
+              </div>
+              <span class="cr-tag">Platform</span>
+            </div>
+          </div>
+
+          <!-- SPECIAL THANKS -->
+          <div class="cr-group">
+            <div class="cr-group-title">// Special Thanks</div>
+            <div class="cr-special-thanks">
+              <div class="cr-special-thanks-label">// Inspired By · Konsep Lore</div>
+              <div class="cr-special-thanks-name">Kekal Fana RPF</div>
+              <div class="cr-special-thanks-desc">
+                Terima kasih kepada Kekal Fana RPF yang telah membangun konsep dan dunia yang menjadi inspirasi besar bagi lahirnya Wargantara—tempat di mana <span class="cr-name-redacted">██████████</span> pertama kali menemukan jalannya. Tanpa pondasi yang kalian buat, dunia ini tidak akan pernah ada. :')
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /panel-general -->
+
+        <!-- ===== SOREN ===== -->
+        <div class="cr-panel" id="panel-soren">
+          <div class="cr-eyebrow">// Member—01</div>
+          <div class="cr-title">TAKAHI<br>SOREN</div>
+          <div class="cr-rule"></div>
+
+          <div class="cr-member-header">
+            <div class="cr-member-num">01</div>
+            <div class="cr-member-info">
+              <div class="cr-member-codename">// Seraph · High End Order Division</div>
+              <div class="cr-member-name">TAKAHI SOREN</div>
+            </div>
+          </div>
+
+          <div class="cr-group">
+            <div class="cr-group-title">// Desain & Visual</div>
+            <div class="cr-staff-grid">
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <div class="cr-staff-name"><a href="https://x.com/shercy_c">Shercy</a></div>
+                <div class="cr-staff-role">PNGTuber Remix</div>
+                <span class="cr-tag">Artwork</span>
+              </div>
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <div class="cr-staff-name"><a href="https://x.com/flotkyk">Florence Takoyaki</a></div>
+                <div class="cr-staff-role">Character Design</div>
+                <span class="cr-tag gold">Design</span>
+              </div>
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <div class="cr-staff-name"><a href="https://x.com/thePrimaRoxas">Primaroxas</a></div>
+                <div class="cr-staff-role">Logo</div>
+                <span class="cr-tag gold">Artwork</span>
+              </div>
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <div class="cr-staff-name"><a href="https://x.com/NavyChips">NavyChips</a></div>
+                <div class="cr-staff-role">Pattern</div>
+                <span class="cr-tag gold">Artwork</span>
+              </div>
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <div class="cr-staff-name">Jimina</div>
+                <div class="cr-staff-role">AR-CID</div>
+                <span class="cr-tag gold">Artwork</span>
+              </div>
+
+              <div class="cr-staff-card">
+                <div class="cr-staff-avatar">✦</div>
+                <div class="cr-staff-name"><a href="https://x.com/PERSONIFIKASl">PERSONIFIKASI</a></div>
+                <div class="cr-staff-role">Character Sheet Template</div>
+                <span class="cr-tag">Template</span>
+              </div>
+            </div>
+          </div>
+
+     <div class="cr-group">
+        <div class="cr-group-title">// Stream Assets</div>
+        <div class="cr-staff-grid">
+          <div class="cr-staff-card">
+            <div class="cr-staff-avatar">✦</div>
+            <div class="cr-staff-name"><a href="https://x.com/booozyart" target="_blank">booozy</a></div>
+            <div class="cr-staff-role">Character Animation</div>
+            <span class="cr-tag">Assets</span>
+          </div>
+
+          <div class="cr-staff-card">
+            <div class="cr-staff-avatar">✦</div>
+            <div class="cr-staff-name"><a href="https://unicorncreates.itch.io/sky-backgrounds" target="_blank">UnicornCreates</a></div>
+            <div class="cr-staff-role">Background (Loading Screen)</div>
+           <span class="cr-tag">Assets</span>
+          </div>
+
+          <div class="cr-staff-card">
+            <div class="cr-staff-avatar">✦</div>
+            <div class="cr-staff-name"><a href="https://dova-s.jp/bgm/detail/23289" target="_blank">Sakuttipanda</a></div>
+            <div class="cr-staff-role">BGM</div>
+            <span class="cr-tag">Music</span>
+          </div>
+
+          <div class="cr-staff-card">
+            <div class="cr-staff-avatar">✦</div>
+            <div class="cr-staff-name"><a href="https://dova-s.jp/bgm/detail/23067" target="_blank">のる</a></div>
+            <div class="cr-staff-role">BGM</div>
+            <span class="cr-tag">Music</span>
+          </div>
+        </div>
+
+      </div>
+
+
+          <!-- template untuk tambahan nanti -->
+          <!--
+      <div class="cr-group">
+        <div class="cr-group-title">// Model & Rigging</div>
+        <div class="cr-staff-grid">
+          <div class="cr-staff-card">
+            <div class="cr-staff-avatar">✦</div>
+            <div class="cr-staff-name"><a href="" target="_blank">???</a></div>
+            <div class="cr-staff-role">Live2D Model</div>
+            <span class="cr-tag gold">Model</span>
+          </div>
+          <div class="cr-staff-card">
+            <div class="cr-staff-avatar">✦</div>
+            <div class="cr-staff-name"><a href="" target="_blank">???</a></div>
+            <div class="cr-staff-role">Rigger</div>
+            <span class="cr-tag">Rigging</span>
+          </div>
+        </div>
+      </div>
+      -->
+
+        </div><!-- /panel-soren -->
+
+        <!-- ===== MEMBER 2-6 PLACEHOLDER ===== -->
+        <div class="cr-panel" id="panel-anneliese">
+          <div class="cr-eyebrow">// Member—03</div>
+          <div class="cr-title">IDENTITY<br>REDACTED</div>
+          <div class="cr-rule"></div>
+          <div class="cr-infobox">
+            <strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.
+          </div>
+        </div>
+        <div class="cr-panel" id="panel-igni">
+          <div class="cr-eyebrow">// Member—05</div>
+          <div class="cr-title">IDENTITY<br>REDACTED</div>
+          <div class="cr-rule"></div>
+          <div class="cr-infobox">
+            <strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.
+          </div>
+        </div>
+        <div class="cr-panel" id="panel-rui">
+          <div class="cr-eyebrow">// Member—02</div>
+          <div class="cr-title">IDENTITY<br>REDACTED</div>
+          <div class="cr-rule"></div>
+          <div class="cr-infobox">
+            <strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.
+          </div>
+        </div>
+        <div class="cr-panel" id="panel-arda">
+          <div class="cr-eyebrow">// Member—06</div>
+          <div class="cr-title">IDENTITY<br>REDACTED</div>
+          <div class="cr-rule"></div>
+          <div class="cr-infobox">
+            <strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.
+          </div>
+        </div>
+        <div class="cr-panel" id="panel-noah">
+          <div class="cr-eyebrow">// Member—04</div>
+          <div class="cr-title">IDENTITY<br>REDACTED</div>
+          <div class="cr-rule"></div>
+          <div class="cr-infobox">
+            <strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.
+          </div>
+        </div>
+
+      </div><!-- /cr-content-area -->
+    </div><!-- /cr-layout -->
+
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="sf-col">
+          <div class="sf-col-title">WARGANTARA</div>
+          <p>Para entitas yang hidup di ambang—tidak sepenuhnya milik dunia manusia, tidak juga milik dunia astral.</p>
+        </div>
+        <div class="sf-col">
+          <div class="sf-col-title">NAVIGASI</div>
+          <a href="index.html">Home</a>
+          <a href="members.html">Members</a>
+          <a href="lore.html">Lore Archive</a>
+          <a href="guidelines.html">Guidelines</a>
+          <a href="arcid.html">AR-CID Editor</a>
+          <a href="credits.html">Credits & Attributions</a>
+        </div>
+        <div class="sf-col">
+          <div class="sf-col-title">KOMUNITAS</div>
+          <p>Sandbox lore terbuka untuk semua fan. Buat OC, tulis cerita, dan jadilah bagian dari dua dunia ini.</p>
+          <p style="margin-top:.5rem">Status Lore: <span style="color:var(--gold);opacity:1">Open Sandbox</span></p>
+        </div>
+      </div>
+      <div class="sf-bottom">
+        <span class="sf-logo">WAR<span>G</span>ANTARA</span>
+        <span class="sf-copy">© Wargantara VTuber Group · Est. ???? · All lore is fiction</span>
+        <span class="sf-copy">Lintas Batas</span>
+      </div>
+    </footer>
+
+    <script>
+      /* ---- HASH ALIAS MAP ----
+         Panel ID asli → hash yang tampil di URL.
+         Kalau member belum debut, pakai alias sensor (#02 dst).
+         Pas debut: hapus entri alias-nya (atau ganti value = key),
+         hash otomatis balik ke nama asli.
+      ---------------------------------------- */
+      var HASH_ALIAS = {
+        'rui':      '02',
+        'anneliese':'03',
+        'noah':     '04',
+        'igni':     '05',
+        'arda':     '06'
+        // kalau sudah debut, hapus baris yang bersangkutan
+      };
+      // Balik: alias → panel ID (untuk initFromHash)
+      var HASH_ALIAS_REV = {};
+      Object.keys(HASH_ALIAS).forEach(function(k){ HASH_ALIAS_REV[HASH_ALIAS[k]] = k; });
+
+      /* ---- PANEL SWITCHING ---- */
+      function showPanel(id, btn) {
+        document.querySelectorAll('.cr-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.cr-nav-item').forEach(b => b.classList.remove('active'));
+        var panel = document.getElementById('panel-' + id);
+        if (panel) panel.classList.add('active');
+        if (btn) btn.classList.add('active');
+        window.scrollTo({
+          top: document.querySelector('.cr-layout').offsetTop - 60,
+          behavior: 'smooth'
+        });
+        // pakai alias kalau ada, otherwise nama asli
+        var hashVal = HASH_ALIAS[id] || id;
+        history.replaceState(null, '', '#' + hashVal);
+      }
+
+      function initFromHash() {
+        var hash = window.location.hash.replace('#', '');
+        // resolve alias ke panel ID asli kalau perlu
+        var id = HASH_ALIAS_REV[hash] || hash;
+        var validPanels = ['general', 'soren', 'rui', 'anneliese', 'noah', 'igni', 'arda'];
+        if (id && validPanels.indexOf(id) !== -1) {
+          var panel = document.getElementById('panel-' + id);
+          if (panel) {
+            document.querySelectorAll('.cr-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.cr-nav-item').forEach(b => b.classList.remove('active'));
+            panel.classList.add('active');
+            // aktifkan tombol sidebar yang sesuai
+            document.querySelectorAll('.cr-nav-item').forEach(function(btn) {
+              if (btn.getAttribute('onclick') && btn.getAttribute('onclick').indexOf("'" + id + "'") !== -1) {
+                btn.classList.add('active');
+              }
+            });
+          }
+        }
+      }
+      var isDark = (function() {
+        var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
+        return m ? m[1] === 'dark' : false;
+      })();
+
+      function applyTheme() {
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        var di = document.getElementById('theme-icon');
+        if (di) {
+          di.classList.remove('sf-sun-1-o', 'sf-moon-1-o');
+          di.classList.add(isDark ? 'sf-sun-1-o' : 'sf-moon-1-o');
+        }
+        var mi = document.getElementById('theme-icon-m');
+        if (mi) {
+          mi.classList.remove('sf-sun-1-o', 'sf-moon-1-o');
+          mi.classList.add(isDark ? 'sf-sun-1-o' : 'sf-moon-1-o');
+        }
+        var ml = document.getElementById('theme-label-m');
+        if (ml) {
+          ml.textContent = isDark ? 'Day Mode' : 'Night Mode';
+        }
+      }
+
+      function toggleTheme() {
+        isDark = !isDark;
+        var exp = new Date();
+        exp.setFullYear(exp.getFullYear() + 1);
+        document.cookie = 'wg-theme=' + (isDark ? 'dark' : 'light') + '; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        applyTheme();
+      }
+      applyTheme();
+      // re-apply icon saat tab aktif kembali (icon font kadang blank setelah tab switch)
+      document.addEventListener("visibilitychange", function() {
+        if (!document.hidden) applyTheme();
+      });
+      // ── SPLASH ──
+      (function() {
+        if (document.cookie.match(/(?:^|;\s*)wg-visited=1/)) {
+          var s = document.getElementById('splash-main');
+          if (s) s.classList.add('hidden');
+        }
+      })();
+      var _pendingTheme = null,
+        _denyTimer = null;
+
+      function splashStep2() {
+        var s1 = document.getElementById('splash-step1');
+        var s2 = document.getElementById('splash-step2');
+        s1.classList.add('fading');
+        setTimeout(function() {
+          s1.style.display = 'none';
+          s2.classList.add('active');
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              s2.classList.add('visible');
+            });
+          });
+        }, 350);
+      }
+
+      function splashSelectTheme(theme) {
+        _pendingTheme = theme;
+        document.getElementById('btn-day').classList.toggle('selected', theme === 'light');
+        document.getElementById('btn-night').classList.toggle('selected', theme === 'dark');
+        document.getElementById('splash-confirm').classList.add('ready');
+        isDark = (theme === 'dark');
+        applyTheme();
+      }
+
+      function splashEnter() {
+        if (!_pendingTheme) return;
+        var exp = new Date();
+        exp.setFullYear(exp.getFullYear() + 1);
+        document.cookie = 'wg-theme=' + _pendingTheme + '; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        document.cookie = 'wg-visited=1; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        isDark = (_pendingTheme === 'dark');
+        applyTheme();
+        var s = document.getElementById('splash-main');
+        s.classList.add('hiding');
+        setTimeout(function() {
+          s.classList.add('hidden');
+        }, 620);
+      }
+
+      function splashDeny() {
+        var box = document.querySelector('#splash-main .splash-box');
+        box.classList.add('glitching');
+        setTimeout(function() {
+          box.innerHTML = '<div class="splash-pre">// Wargantara &middot; Akses Ditolak</div>' +
+            '<div class="splash-quote" style="font-size:clamp(1.3rem,3.5vw,1.75rem)">&ldquo;... I see.&rdquo;</div>' +
+            '<div class="splash-attr" style="margin-bottom:2rem">&mdash;</div>' +
+            '<div class="splash-disclaimer" style="opacity:.6">Tidak ada yang bisa kami lakukan untuk melanjutkan.<br><br>Dunia ini bukan untukmu &mdash; dan itu tidak apa-apa.</div>' +
+            '<div class="deny-countdown" id="deny-countdown">Halaman akan ditutup dalam <span id="deny-secs">5</span> detik...</div>' +
+            '<div class="splash-corner">W</div>';
+          box.classList.remove('glitching');
+          var secs = 5,
+            el = document.getElementById('deny-secs'),
+            wrap = document.getElementById('deny-countdown');
+          _denyTimer = setInterval(function() {
+            secs--;
+            if (el) el.textContent = secs;
+            if (secs <= 2 && wrap) wrap.classList.add('urgent');
+            if (secs <= 0) {
+              clearInterval(_denyTimer);
+              try {
+                window.open('', '_self').close();
+              } catch (e) {}
+              window.close();
+              setTimeout(function() {
+                document.body.innerHTML = '';
+              }, 300);
+            }
+          }, 1000);
+        }, 180);
+      }
+      /* ---- MOBILE ---- */
+      function toggleMobile() {
+        var d = document.getElementById('mobile-drawer');
+        var b = document.getElementById('burger');
+        if (d && b) {
+          d.classList.toggle('open');
+          b.classList.toggle('open');
+        }
+      }
+
+      function closeMobile() {
+        var d = document.getElementById('mobile-drawer');
+        var b = document.getElementById('burger');
+        if (d) d.classList.remove('open');
+        if (b) b.classList.remove('open');
+      }
+      /* ---- AVATAR PHOTO MAP ---- */
+      // Tambah nama di sini kalau udah ada fotonya di /assets/credits/
+      // Format: 'Nama Persis di HTML' : 'namafile' (tanpa ekstensi)
+      // Script otomatis coba .jpg → .png → .webp
+      var AVATAR_MAP = {
+        'smokingFIH#0911': 'smokingFIH',
+        'Mindut': 'mindut',
+        'Drunkedonoshi': 'drunkedonoshi',
+        'Kevin bin chestnut': 'mamahiro',
+        'LARIK': 'LARIK',
+        'mamechan': 'mamechan',
+        'Primaroxas': 'primaroxas',
+        'Jimina': 'jimina',
+        'Shercy': 'shercy',
+        'Florence Takoyaki': 'florencetakoyaki',
+        'NavyChips': 'navychips',
+        'PERSONIFIKASI': 'personifikasi',
+        'のる': 'のる',
+        'Sakuttipanda': 'sakuttipanda',
+        'UnicornCreates': 'unicorncreates',
+        'booozy': 'booozy',
+        'muzakiel-redacted': 'muzakiel',
+        'raziel-redacted': 'raziel',
+        'finnian': 'finnian'
+        // tambah entri baru di sini nanti
+      };
+      var AVATAR_BASE = 'assets/credits/';
+      var AVATAR_EXTS = ['jpg', 'png', 'webp'];
+
+      function tryLoadAvatar(imgEl, placeholderEl, name, extIndex) {
+        if (extIndex >= AVATAR_EXTS.length) {
+          // semua ekstensi gagal → kembalikan placeholder ✦
+          if (imgEl.parentNode) imgEl.parentNode.replaceChild(placeholderEl, imgEl);
+          return;
+        }
+        imgEl.onerror = function() {
+          tryLoadAvatar(imgEl, placeholderEl, name, extIndex + 1);
+        };
+        imgEl.src = AVATAR_BASE + encodeURIComponent(AVATAR_MAP[name]) + '.' + AVATAR_EXTS[extIndex];
+      }
+
+      function injectAvatars() {
+        document.querySelectorAll('.cr-staff-card').forEach(function(card) {
+          var nameEl = card.querySelector('.cr-staff-name');
+          if (!nameEl) return;
+          // Cek data-avatar-key dulu (untuk card yang namanya disensor)
+          var key = card.getAttribute('data-avatar-key');
+          if (!key) {
+            var name = (nameEl.querySelector('a') || nameEl).textContent.trim();
+            if (!AVATAR_MAP[name]) return;
+            key = name;
+          }
+          if (!AVATAR_MAP[key]) return;
+          var avatarEl = card.querySelector('.cr-staff-avatar');
+          if (!avatarEl) return;
+          // simpan clone placeholder asli buat fallback kalau foto gagal
+          var placeholder = avatarEl.cloneNode(true);
+          var img = document.createElement('img');
+          img.alt = key;
+          img.className = 'cr-staff-avatar';
+          img.style.cssText = avatarEl.style.cssText;
+          avatarEl.parentNode.replaceChild(img, avatarEl);
+          tryLoadAvatar(img, placeholder, key, 0);
+        });
+      }
+      document.addEventListener('DOMContentLoaded', injectAvatars);
+      document.addEventListener('DOMContentLoaded', initFromHash);
+      /* ---- IMAGE PROTECTION ---- */
+      document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG' || e.target.tagName === 'SVG' || e.target.closest('.cr-avatar-placeholder') || e.target.closest('.cr-staff-avatar')) {
+          e.preventDefault();
+          return false;
+        }
+      });
+      document.addEventListener('dragstart', function(e) {
+        if (e.target.tagName === 'IMG') {
+          e.preventDefault();
+          return false;
+        }
+      });
+    </script>
+  </body>
+
+</html>

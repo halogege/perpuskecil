@@ -1,0 +1,2669 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+
+  <head>
+    <meta charset="UTF-8">
+    <script>
+      (function() {
+        var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
+        if (m) document.documentElement.setAttribute('data-theme', m[1] === 'dark' ? 'dark' : 'light');
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WARGANTARA—Lore Archive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+      @import url('https://solrainha.github.io/saturnicons/saturnicons.css');
+      @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+      }
+
+      :root {
+        --bg: #ffffff;
+        --surface: #f5f5f5;
+        --surface2: #ebebeb;
+        --border: #e0e0e0;
+        --border2: #cccccc;
+        --ink: #111111;
+        --ink2: #333333;
+        --muted: #888888;
+        --red: #c0251a;
+        --gold: #9a7e2a;
+        --gold2: #b89a3e;
+        --mono: 'Space Mono', monospace;
+        --display: 'Bebas Neue', sans-serif;
+        --serif: 'Noto Serif Display', serif;
+        --nav-h: 56px;
+      }
+
+      [data-theme="dark"] {
+        --bg: #111111;
+        --surface: #1c1c1c;
+        --surface2: #242424;
+        --border: #2a2a2a;
+        --border2: #383838;
+        --ink: #f0ece3;
+        --ink2: #c8c2b4;
+        --muted: #666666;
+        --red: #c0251a;
+        --gold: #b89a3e;
+        --gold2: #d4b050;
+      }
+
+      html,
+      body {
+        width: 100%;
+        overflow-x: clip
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--mono);
+        transition: background .3s, color .3s;
+        min-height: 100vh;
+        font-size: 16px;
+        line-height: 1.6
+      }
+
+      /* ---- NAV ---- */
+      nav {
+        background: var(--bg);
+        border-bottom: 2px solid var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.5rem;
+        height: var(--nav-h);
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        transition: background .3s
+      }
+
+      .nav-logo {
+        font-family: var(--display);
+        font-size: 2rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        cursor: pointer;
+        text-decoration: none;
+        transition: color .3s
+      }
+
+      .nav-logo span {
+        color: var(--red)
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 0;
+        list-style: none
+      }
+
+      .nav-links li a {
+        display: block;
+        padding: 0 1rem;
+        height: var(--nav-h);
+        line-height: var(--nav-h);
+        font-size: .78rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--ink);
+        opacity: .6;
+        border-left: 1px solid var(--border);
+        transition: all .15s;
+        cursor: pointer
+      }
+
+      .nav-links li a:hover {
+        opacity: 1;
+        background: var(--surface)
+      }
+
+      .nav-links li a.active {
+        opacity: 1;
+        background: var(--red);
+        color: #fff
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: .75rem
+      }
+
+      .theme-btn {
+        background: none;
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        cursor: pointer;
+        transition: all .2s;
+        height: 32px;
+        width: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        padding: 0
+      }
+
+      .theme-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold)
+      }
+
+      /* ---- BURGER ---- */
+      .burger-btn {
+        display: none;
+        background: none;
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px;
+        transition: border-color .2s
+      }
+
+      .burger-btn span {
+        display: block;
+        width: 18px;
+        height: 1.5px;
+        background: currentColor;
+        transition: all .25s
+      }
+
+      .burger-btn.open span:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg)
+      }
+
+      .burger-btn.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0)
+      }
+
+      .burger-btn.open span:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg)
+      }
+
+      .mobile-drawer {
+        display: none;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--bg);
+        z-index: 190;
+        border-top: 1px solid var(--border);
+        flex-direction: column;
+        overflow-y: auto
+      }
+
+      .mobile-drawer.open {
+        display: flex
+      }
+
+      .mobile-drawer ul {
+        list-style: none;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .mobile-drawer ul li a {
+        display: flex;
+        align-items: center;
+        padding: 1.1rem 1.5rem;
+        font-size: .9rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--ink);
+        opacity: .65;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        transition: all .15s;
+        text-decoration: none;
+        min-height: 48px
+      }
+
+      .mobile-drawer ul li a:hover,
+      .mobile-drawer ul li a.active {
+        opacity: 1;
+        background: var(--red);
+        color: #fff
+      }
+
+      .mobile-drawer-bottom {
+        padding: 1rem 1.5rem
+      }
+
+      /* ---- PAGE HEADER ---- */
+      .page-header {
+        padding: 3.5rem 3rem 2.5rem;
+        border-bottom: 2px solid var(--red);
+        position: relative;
+        overflow: hidden
+      }
+
+      .page-header-pre {
+        font-size: .7rem;
+        letter-spacing: .28em;
+        color: var(--red);
+        text-transform: uppercase;
+        margin-bottom: .75rem
+      }
+
+      .page-header h1 {
+        font-family: var(--display);
+        font-size: clamp(3.5rem, 7vw, 6rem);
+        line-height: .9;
+        color: var(--ink);
+        transition: color .3s
+      }
+
+      .page-header p {
+        max-width: 560px;
+        font-size: .95rem;
+        line-height: 1.85;
+        opacity: .75;
+        margin-top: 1.2rem
+      }
+
+      .page-header-bg {
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--display);
+        font-size: 10rem;
+        color: var(--red);
+        opacity: .04;
+        pointer-events: none;
+        letter-spacing: -.02em;
+        line-height: 1
+      }
+
+      /* ---- LAYOUT ---- */
+      .lore-layout {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        min-height: calc(100vh - var(--nav-h));
+        align-items: start
+      }
+
+      /* ---- SIDEBAR ---- */
+      .lore-sidebar {
+        border-right: 1px solid var(--border);
+        padding: 1.5rem 0;
+        position: sticky;
+        top: var(--nav-h);
+        height: calc(100vh - var(--nav-h));
+        overflow-y: auto;
+        background: var(--bg);
+        transition: background .3s
+      }
+
+      .lore-sidebar-section {
+        margin-bottom: 1.1rem
+      }
+
+      .lore-sidebar-head {
+        font-size: .62rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        opacity: .45;
+        padding: 0 1.4rem;
+        margin-bottom: .3rem
+      }
+
+      .lore-nav-item {
+        display: flex;
+        align-items: center;
+        padding: .38rem 1.4rem;
+        font-size: .74rem;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+        opacity: .55;
+        cursor: pointer;
+        border-left: 2px solid transparent;
+        transition: all .15s;
+        color: var(--ink);
+        min-height: 32px
+      }
+
+      .lore-nav-item:hover,
+      .lore-nav-item.active {
+        opacity: 1;
+        border-left-color: var(--red);
+        color: var(--red)
+      }
+
+      /* ---- CONTENT ---- */
+      .lore-content-area {
+        min-height: calc(100vh - var(--nav-h))
+      }
+
+      .lore-article {
+        display: none;
+        padding: 3.5rem 3rem 4rem;
+        max-width: 760px;
+        animation: articleIn .3s ease both
+      }
+
+      .lore-article.active {
+        display: block
+      }
+
+      @keyframes articleIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px)
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0)
+        }
+      }
+
+      .lore-art-category {
+        font-size: .7rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: .6rem;
+        opacity: .9
+      }
+
+      .lore-art-title {
+        font-family: var(--display);
+        font-size: clamp(3rem, 6vw, 4.5rem);
+        letter-spacing: .04em;
+        line-height: .9;
+        color: var(--ink);
+        margin-bottom: .65rem;
+        transition: color .3s
+      }
+
+      .lore-art-meta {
+        font-size: .66rem;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+        opacity: .45;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .lore-art-body p {
+        font-size: .95rem;
+        line-height: 1.95;
+        opacity: .78;
+        margin-bottom: 1.2rem;
+        text-align: justify;
+        hyphens: auto
+      }
+
+      .lore-art-body h3 {
+        font-family: var(--display);
+        font-size: 2rem;
+        letter-spacing: .04em;
+        color: var(--ink);
+        margin: 2.25rem 0 .75rem;
+        transition: color .3s
+      }
+
+      .lore-art-body h4 {
+        font-size: .84rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin: 1.5rem 0 .5rem;
+        opacity: .9
+      }
+
+      .lore-art-body ul {
+        list-style: none;
+        margin: .5rem 0 1.25rem
+      }
+
+      .lore-art-body ul li {
+        font-size: .95rem;
+        line-height: 1.95;
+        opacity: .78;
+        padding: .4rem 0;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: .65rem
+      }
+
+      .lore-art-body ul li::before {
+        content: '—';
+        color: var(--red);
+        flex-shrink: 0
+      }
+
+      .lore-infobox {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--gold);
+        padding: 1.25rem 1.5rem;
+        margin: 1.5rem 0
+      }
+
+      .lore-infobox h4 {
+        font-size: .65rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: .55rem
+      }
+
+      .lore-infobox p {
+        font-size: .95rem;
+        line-height: 1.95;
+        opacity: .78;
+        text-align: justify;
+        hyphens: auto
+      }
+
+      .lore-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0 1.5rem;
+        font-size: .88rem
+      }
+
+      .lore-table th {
+        font-size: .66rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        opacity: .55;
+        text-align: left;
+        padding: .55rem .75rem;
+        border-bottom: 2px solid var(--border)
+      }
+
+      .lore-table td {
+        padding: .55rem .75rem;
+        border-bottom: 1px solid var(--border);
+        opacity: .8;
+        line-height: 1.75;
+        font-size: .95rem
+      }
+
+      .lore-table tr:hover td {
+        background: var(--surface);
+        opacity: 1
+      }
+
+      .redacted {
+        display: inline-block;
+        background: var(--ink);
+        color: transparent;
+        border-radius: 1px;
+        user-select: none;
+        -webkit-user-select: none;
+        cursor: default;
+        padding: 0 .15em;
+        min-width: 4em
+      }
+
+      .redacted::selection {
+        background: transparent
+      }
+
+      .lore-tag {
+        display: inline-block;
+        font-size: .6rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .18rem .48rem;
+        margin: .12rem;
+        border: 1px solid var(--border2);
+        color: var(--muted)
+      }
+
+      .lore-tag.red {
+        border-color: rgba(192, 37, 26, .4);
+        color: var(--red);
+        background: rgba(192, 37, 26, .05)
+      }
+
+      .lore-tag.gold {
+        border-color: rgba(154, 126, 42, .45);
+        color: var(--gold);
+        background: rgba(154, 126, 42, .06)
+      }
+
+      /* ---- ARA LOGO PLACEHOLDER ---- */
+      .ara-logo-wrap {
+        margin: 0 0 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .5rem
+      }
+
+      .ara-logo {
+        max-width: 180px;
+        height: auto;
+        display: block;
+        /* light mode: logo outline hitam — tampil normal */
+        filter: none;
+        transition: filter .3s
+      }
+
+      [data-theme="dark"] .ara-logo {
+        /* dark mode: outline putih — invert agar logo tetap visible */
+        filter: invert(1)
+      }
+
+      .ara-logo-caption {
+        font-size: .62rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: var(--muted);
+        opacity: .6
+      }
+
+      /* ---- TERITORI GRID ---- */
+      .lore-teritori-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: .75rem;
+        margin: 1rem 0 1.5rem
+      }
+
+      .lore-teritori-card {
+        border: 1px solid var(--border);
+        padding: 1rem 1.1rem;
+        transition: border-color .2s
+      }
+
+      .lore-teritori-card:hover {
+        border-color: var(--border2)
+      }
+
+      .lore-teritori-label {
+        font-size: .62rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: .4rem;
+        opacity: .9
+      }
+
+      .lore-teritori-title {
+        font-family: var(--display);
+        font-size: 1.15rem;
+        letter-spacing: .05em;
+        color: var(--ink);
+        margin-bottom: .5rem;
+        line-height: 1;
+        transition: color .3s
+      }
+
+      .lore-teritori-desc {
+        font-size: .88rem;
+        line-height: 1.85;
+        opacity: .72
+      }
+
+      /* ---- FOOTER ---- */
+      .site-footer {
+        background: var(--surface);
+        border-top: 2px solid var(--red);
+        padding: 2.5rem 3rem;
+        margin-top: auto
+      }
+
+      .site-footer-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem
+      }
+
+      .sf-col-title {
+        font-family: var(--display);
+        font-size: 1.1rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        margin-bottom: .75rem;
+        transition: color .3s
+      }
+
+      .sf-col p,
+      .sf-col a {
+        font-size: .84rem;
+        line-height: 1.85;
+        opacity: .65;
+        display: block;
+        color: var(--ink);
+        text-decoration: none;
+        transition: opacity .15s
+      }
+
+      .sf-col a:hover {
+        opacity: 1;
+        color: var(--red)
+      }
+
+      .sf-bottom {
+        border-top: 1px solid var(--border);
+        padding-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap
+      }
+
+      .sf-copy {
+        font-size: .68rem;
+        letter-spacing: .12em;
+        opacity: .25;
+        text-transform: uppercase
+      }
+
+      .sf-logo {
+        font-family: var(--display);
+        font-size: 1.6rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        opacity: .3
+      }
+
+      .sf-logo span {
+        color: var(--red)
+      }
+
+      /* ---- MOBILE ---- */
+      @media(max-width:768px) {
+        :root {
+          --nav-h: 52px
+        }
+
+        .nav-links {
+          display: none
+        }
+
+        .nav-right {
+          display: flex
+        }
+
+        .burger-btn {
+          display: flex
+        }
+
+        .page-header {
+          padding: 2rem 1.25rem 1.75rem
+        }
+
+        .page-header h1 {
+          font-size: clamp(2.8rem, 12vw, 4rem)
+        }
+
+        .lore-layout {
+          grid-template-columns: 1fr;
+          display: block
+        }
+
+        .lore-sidebar {
+          display: none
+        }
+
+        .lore-sidebar-section {
+          margin-bottom: .5rem
+        }
+
+        .lore-sidebar-head {
+          width: 100%;
+          padding: .5rem 1rem .1rem;
+          margin-bottom: .2rem
+        }
+
+        .lore-nav-item {
+          padding: .5rem 1rem;
+          font-size: .72rem;
+          min-height: 40px;
+          display: flex;
+          align-items: center
+        }
+
+        .lore-article {
+          padding: 2rem 1.25rem 3rem;
+          max-width: 100%
+        }
+
+        .lore-art-body p {
+          font-size: .92rem;
+          line-height: 1.9
+        }
+
+        .lore-infobox p {
+          font-size: .95rem
+        }
+
+        .lore-table {
+          font-size: .8rem
+        }
+
+        .lore-teritori-grid {
+          grid-template-columns: 1fr
+        }
+
+        .site-footer {
+          padding: 2rem 1.25rem
+        }
+
+        .site-footer-inner {
+          grid-template-columns: 1fr;
+          gap: 1.5rem
+        }
+
+        .sf-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: .75rem
+        }
+      }
+
+      /* ── WARGANTARA SPLASH (shared) ── */
+      .wg-splash {
+        position: fixed;
+        inset: 0;
+        background: #0a0a0a;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        opacity: 1;
+        transition: opacity .6s ease
+      }
+
+      .wg-splash.hiding {
+        opacity: 0;
+        pointer-events: none
+      }
+
+      .wg-splash.hidden {
+        display: none
+      }
+
+      @keyframes glitch-swap {
+        0% {
+          opacity: 1;
+          transform: skewX(0)
+        }
+
+        10% {
+          opacity: 0;
+          transform: skewX(-4deg) translateX(4px)
+        }
+
+        15% {
+          opacity: 1;
+          transform: skewX(3deg) translateX(-3px)
+        }
+
+        20% {
+          opacity: 0;
+          transform: skewX(0)
+        }
+
+        25% {
+          opacity: 1;
+          transform: skewX(-2deg)
+        }
+
+        30% {
+          opacity: 0
+        }
+
+        35%,
+        100% {
+          opacity: 1;
+          transform: skewX(0)
+        }
+      }
+
+      .splash-box.glitching {
+        animation: glitch-swap .35s steps(1) both
+      }
+
+      .splash-box {
+        max-width: 560px;
+        width: 100%;
+        border: 1px solid #2a2a2a;
+        border-top: 2px solid #c0251a;
+        padding: 3rem 2.5rem 2.5rem;
+        position: relative;
+        background: #111111;
+        overflow: hidden
+      }
+
+      .splash-pre {
+        font-family: 'Space Mono', monospace;
+        font-size: .6rem;
+        letter-spacing: .28em;
+        color: #c0251a;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem
+      }
+
+      .splash-quote {
+        font-family: 'Noto Serif Display', serif;
+        font-style: italic;
+        font-size: clamp(1.05rem, 3vw, 1.35rem);
+        line-height: 1.75;
+        color: #f0ece3;
+        margin-bottom: .65rem
+      }
+
+      .splash-attr {
+        font-family: 'Space Mono', monospace;
+        font-size: .62rem;
+        letter-spacing: .1em;
+        color: #555;
+        margin-bottom: 2rem
+      }
+
+      .splash-rule {
+        width: 2rem;
+        height: 1px;
+        background: #2a2a2a;
+        margin-bottom: 2rem
+      }
+
+      .splash-disclaimer {
+        font-family: 'Space Mono', monospace;
+        font-size: .78rem;
+        line-height: 1.9;
+        color: #c8c2b4;
+        opacity: .75;
+        margin-bottom: 2rem
+      }
+
+      .splash-disclaimer strong {
+        color: #b89a3e;
+        font-weight: 400
+      }
+
+      .splash-actions {
+        display: flex;
+        gap: .75rem;
+        align-items: center;
+        flex-wrap: wrap
+      }
+
+      .splash-btn-enter {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .7rem 1.5rem;
+        background: #c0251a;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background .15s;
+        min-height: 40px
+      }
+
+      .splash-btn-enter:hover {
+        background: #e02a1e
+      }
+
+      .splash-btn-deny {
+        font-family: 'Space Mono', monospace;
+        font-size: .68rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: #555;
+        background: none;
+        border: 1px solid #2a2a2a;
+        cursor: pointer;
+        padding: .6rem 1rem;
+        transition: color .15s, border-color .15s;
+        min-height: 40px
+      }
+
+      .splash-btn-deny:hover {
+        color: #f0ece3;
+        border-color: #555
+      }
+
+      .splash-privacy {
+        font-family: 'Space Mono', monospace;
+        font-size: .58rem;
+        letter-spacing: .06em;
+        color: #3a3a3a;
+        margin-top: 1.25rem;
+        line-height: 1.7
+      }
+
+      .splash-corner {
+        position: absolute;
+        bottom: 1rem;
+        right: 1.5rem;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 4.5rem;
+        color: #c0251a;
+        opacity: .04;
+        line-height: 1;
+        pointer-events: none
+      }
+
+      .splash-step {
+        transition: opacity .35s ease;
+      }
+
+      .splash-step.fading {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .splash-theme-step {
+        display: none;
+        opacity: 0;
+        transition: opacity .35s ease;
+      }
+
+      .splash-theme-step.active {
+        display: block;
+      }
+
+      .splash-theme-step.visible {
+        opacity: 1;
+      }
+
+      .splash-theme-choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .75rem;
+        margin-bottom: 1.5rem
+      }
+
+      .splash-theme-btn {
+        font-family: 'Space Mono', monospace;
+        font-size: .7rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        padding: 1.1rem 1rem;
+        border: 1px solid #2a2a2a;
+        background: none;
+        color: #888;
+        cursor: pointer;
+        transition: all .15s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .6rem
+      }
+
+      .splash-theme-btn .t-icon {
+        font-size: 1.4rem;
+        opacity: .5;
+        transition: opacity .15s
+      }
+
+      .splash-theme-btn:hover {
+        border-color: #b89a3e;
+        color: #f0ece3
+      }
+
+      .splash-theme-btn:hover .t-icon {
+        opacity: 1
+      }
+
+      .splash-theme-btn.selected {
+        border-color: #c0251a;
+        color: #f0ece3;
+        background: rgba(192, 37, 26, .08)
+      }
+
+      .splash-theme-btn.selected .t-icon {
+        opacity: 1
+      }
+
+      .splash-theme-confirm {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .7rem 1.5rem;
+        background: #c0251a;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background .15s, opacity .15s;
+        width: 100%;
+        min-height: 40px;
+        opacity: .35;
+        pointer-events: none
+      }
+
+      .splash-theme-confirm.ready {
+        opacity: 1;
+        pointer-events: auto
+      }
+
+      .splash-theme-confirm.ready:hover {
+        background: #e02a1e
+      }
+
+      .deny-countdown {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .1em;
+        color: #3a3a3a;
+        margin-top: 1.5rem;
+        transition: color .3s
+      }
+
+      .deny-countdown.urgent {
+        color: #7a3030
+      }
+
+      @media(max-width:600px) {
+        .splash-box {
+          padding: 2rem 1.5rem
+        }
+      }
+
+      /* ---- FLOATING MOBILE NAV ---- */
+      .lore-mob-trigger {
+        display: none;
+        position: fixed;
+        bottom: 1.25rem;
+        right: 1.25rem;
+        z-index: 200;
+        background: var(--red);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        height: 48px;
+        padding: 0 1.1rem;
+        font-family: var(--mono);
+        font-size: .65rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        align-items: center;
+        gap: .55rem;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, .28);
+        transition: background .15s, box-shadow .15s;
+      }
+
+      .lore-mob-trigger:hover {
+        background: #e02a1e
+      }
+
+      .lore-mob-trigger-icon {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 16px;
+        flex-shrink: 0
+      }
+
+      .lore-mob-trigger-icon span {
+        display: block;
+        height: 1.5px;
+        background: #fff;
+        transition: all .25s
+      }
+
+      .lore-mob-trigger.open .lore-mob-trigger-icon span:nth-child(1) {
+        transform: translateY(5.5px) rotate(45deg)
+      }
+
+      .lore-mob-trigger.open .lore-mob-trigger-icon span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0)
+      }
+
+      .lore-mob-trigger.open .lore-mob-trigger-icon span:nth-child(3) {
+        transform: translateY(-5.5px) rotate(-45deg)
+      }
+
+      .lore-mob-menu {
+        display: none;
+        position: fixed;
+        bottom: 5rem;
+        right: 1.25rem;
+        z-index: 199;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--red);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, .22);
+        min-width: 220px;
+        max-width: calc(100vw - 2.5rem);
+        overflow: hidden;
+        transform-origin: bottom right;
+        transform: scale(.92) translateY(8px);
+        opacity: 0;
+        transition: transform .2s cubic-bezier(.4, 0, .2, 1), opacity .2s, visibility .2s;
+        pointer-events: none;
+        visibility: hidden;
+      }
+
+      .lore-mob-menu.open {
+        pointer-events: auto;
+        visibility: visible;
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+
+      .lore-mob-menu-label {
+        font-size: .55rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding: .55rem 1rem .3rem;
+        opacity: .8;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .lore-mob-menu-section {
+        font-size: .52rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding: .45rem 1rem .2rem;
+        opacity: .65;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface);
+      }
+
+      .lore-mob-menu-item {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        color: var(--ink);
+        font-family: var(--mono);
+        font-size: .72rem;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+        padding: .75rem 1rem;
+        cursor: pointer;
+        border-bottom: 1px solid var(--border);
+        opacity: .6;
+        transition: all .15s;
+        border-left: 2px solid transparent;
+        min-height: 44px;
+      }
+
+      .lore-mob-menu-item:last-child {
+        border-bottom: none
+      }
+
+      .lore-mob-menu-item:hover,
+      .lore-mob-menu-item.active {
+        opacity: 1;
+        border-left-color: var(--red);
+        color: var(--red);
+        background: var(--surface)
+      }
+
+      .lore-mob-menu-item.active {
+        background: rgba(192, 37, 26, .06)
+      }
+
+      @media(max-width:768px) {
+        .lore-mob-trigger {
+          display: flex
+        }
+
+        .lore-mob-menu {
+          display: block
+        }
+
+        .lore-content-area {
+          padding-bottom: 5rem
+        }
+      }
+    </style>
+
+    <meta name="description" content="Wargantara adalah grup VTuber Indonesia bertemakan entitas astral dan sandbox lore universe.">
+    <meta property="og:title" content="WARGANTARA">
+    <meta property="og:description" content="Wargantara — grup VTuber Indonesia bertemakan entitas astral. Karena cara terbaik menyimpan rahasia adalah menjadikannya fiksi — dan fiksi ini terbuka untuk semua yang ingin ikut membangunnya.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wgtr1.netlify.app">
+    <meta property="og:image" content="https://wgtr1.netlify.app/assets/og/default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://wgtr1.netlify.app/assets/og/default.png">
+
+    <script src="/assets/js/head-common.js"></script>
+
+    <script>
+      if (document.cookie.match(/(?:^|;\s*)wg-visited=1/)) {
+        document.write('<style>.wg-splash{display:none!important}</style>');
+      }
+    </script>
+    <script>
+      /* ── Anti-DevTools Protection ── */
+      (function() {
+        "use strict";
+        var _blocked = false;
+
+        function _block() {
+          if (_blocked) return;
+          _blocked = true;
+          document.open();
+          document.write('<style>@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap");*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;display:flex;align-items:center;justify-content:center;height:100vh;overflow:hidden}.wg-devblock{max-width:480px;width:90%;border:1px solid #2a2a2a;border-top:2px solid #c0251a;padding:2.5rem 2rem 2rem;background:#111;position:relative;overflow:hidden;animation:glitch-in .35s steps(1) both}@keyframes glitch-in{0%{opacity:1;transform:skewX(0deg)}10%{opacity:0;transform:skewX(-4deg) translateX(4px)}15%{opacity:1;transform:skewX(3deg) translateX(-3px)}20%{opacity:0;transform:skewX(0deg)}25%{opacity:1;transform:skewX(-2deg)}30%{opacity:0}35%{opacity:1;transform:skewX(0deg)}100%{opacity:1;transform:skewX(0deg)}}.wg-pre{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.28em;color:#c0251a;text-transform:uppercase;margin-bottom:1.5rem}.wg-quote{font-family:"Noto Serif Display",serif;font-style:italic;font-size:clamp(1rem,3vw,1.25rem);line-height:1.75;color:#f0ece3;margin-bottom:.65rem}.wg-attr{font-family:"Space Mono",monospace;font-size:.62rem;letter-spacing:.1em;color:#555;margin-bottom:1.75rem}.wg-rule{width:2rem;height:1px;background:#2a2a2a;margin-bottom:1.75rem}.wg-msg{font-family:"Space Mono",monospace;font-size:.75rem;line-height:1.9;color:#c8c2b4;opacity:.75}.wg-msg strong{color:#b89a3e;font-weight:400}.wg-corner{position:absolute;bottom:.75rem;right:1.25rem;font-family:"Bebas Neue",sans-serif;font-size:4rem;color:#c0251a;opacity:.04;line-height:1;pointer-events:none}</style><div class="wg-devblock"><div class="wg-pre">// Wargantara &middot; Akses Ditolak</div><div class="wg-quote">&ldquo;Beberapa hal memang tidak dimaksudkan untuk dilihat.&rdquo;</div><div class="wg-attr">&mdash; Arsip Wargantara, Dokumen Tak Bernomor</div><div class="wg-rule"></div><div class="wg-msg">Aktivitas <strong>inspect / devtools</strong> terdeteksi.<br>Halaman ini tidak dapat diakses lebih lanjut.</div><div class="wg-corner">WG</div></div>');
+          document.close();
+        }
+        // 1. Disable right-click (kecuali gambar)
+        document.addEventListener("contextmenu", function(e) {
+          if (e.target.tagName === "IMG") return;
+          e.preventDefault();
+        });
+        // 2. Block keyboard shortcuts
+        document.addEventListener("keydown", function(e) {
+          var k = e.key;
+          if (k === "F12") {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          if (e.ctrlKey && e.shiftKey && ["I", "J", "C", "K"].indexOf(k.toUpperCase()) !== -1) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          if (e.ctrlKey && ["U", "S", "A", "P"].indexOf(k.toUpperCase()) !== -1) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+        }, true);
+        // 3. Block drag
+        document.addEventListener("dragstart", function(e) {
+          if (e.target.tagName !== "IMG") e.preventDefault();
+        });
+        // 5. console object trap
+        var _el = document.createElement("div");
+        Object.defineProperty(_el, "id", {
+          get: function() {
+            _block();
+          }
+        });
+        setInterval(function() {
+          console.log(_el);
+          console.clear();
+        }, 1000);
+        // 6. Disable text selection
+        var _style = document.createElement("style");
+        _style.textContent = "img { pointer-events:auto!important; }";
+        document.head.appendChild(_style);
+      })();
+    </script>
+  </head>
+
+  <body>
+
+    <!-- SPLASH SCREEN -->
+    <div class="wg-splash" id="splash-main">
+      <div class="splash-box">
+        <div id="splash-step1" class="splash-step">
+          <div class="splash-pre">// Wargantara &middot; Peringatan Masuk</div>
+          <div class="splash-quote">&ldquo;Cara menyimpan sebuah rahasia terbaik adalah dengan menjadikannya sebuah kisah-kisah fiksi untuk dipercaya.&rdquo;</div>
+          <div class="splash-attr">&mdash; Arsip Wargantara, Dokumen Tak Bernomor</div>
+          <div class="splash-rule"></div>
+          <div class="splash-disclaimer">
+            Seluruh konten dalam website ini adalah karya fiksi. Nama, karakter, kejadian, dan entitas yang ada di dalamnya bersifat fiktif semata.<br><br>
+            <strong>// Dengan memasuki website ini</strong>, kamu menyatakan memahami bahwa semua yang kamu temukan di sini adalah bagian dari sebuah semesta fiksi yang dibangun dengan penuh kesengajaan &mdash; dan tidak ada kaitannya dengan kenyataan di luar batas dunia ini.
+          </div>
+          <div class="splash-actions">
+            <button class="splash-btn-enter" onclick="splashStep2()">// Saya Mengerti &mdash; Lanjut</button>
+            <button class="splash-btn-deny" onclick="splashDeny()">Tidak Setuju</button>
+          </div>
+          <div class="splash-privacy">// Website ini menyimpan preferensi tema secara lokal di browser kamu. Tidak ada data pribadi yang dikumpulkan.</div>
+        </div>
+        <div id="splash-step2" class="splash-theme-step">
+          <div class="splash-pre">// Wargantara &middot; Preferensi Tampilan</div>
+          <div class="splash-quote" style="font-size:clamp(.95rem,2.5vw,1.15rem);margin-bottom:1.5rem">Pilih tampilan yang kamu inginkan.<br><span style="opacity:.4;font-size:.85em">Preferensi ini akan disimpan untuk kunjungan berikutnya.</span></div>
+          <div class="splash-rule"></div>
+          <div class="splash-theme-choices">
+            <button class="splash-theme-btn" id="btn-day" onclick="splashSelectTheme('light')">
+              <span class="t-icon sf sf-sun-1-o"></span>Day Mode
+            </button>
+            <button class="splash-theme-btn" id="btn-night" onclick="splashSelectTheme('dark')">
+              <span class="t-icon sf sf-moon-1-o"></span>Night Mode
+            </button>
+          </div>
+          <button class="splash-theme-confirm" id="splash-confirm" onclick="splashEnter()">// Masuk</button>
+        </div>
+        <div class="deny-countdown" id="deny-countdown" style="display:none">Halaman akan ditutup dalam <span id="deny-secs">5</span> detik...</div>
+        <div class="splash-corner">W</div>
+      </div>
+    </div>
+
+    <div class="pt-label" id="pt-label"></div>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+      <a class="nav-logo" href="index.html">WAR<span>G</span>ANTARA</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a class="active" href="lore.html">Lore</a></li>
+        <li><a href="guidelines.html">Guidelines</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-btn" id="theme-btn-desktop" onclick="toggleTheme()" aria-label="Toggle theme"><span id="theme-icon" class="sf"></span></button>
+        <button class="burger-btn" id="burger" onclick="toggleMobile()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a class="active" href="lore.html">Lore</a></li>
+        <li><a href="guidelines.html">Guidelines</a></li>
+        <li><a href="arcid.html">AR-CID Editor</a></li>
+        <li><a href="credits.html">Credits & Attributions</a></li>
+      </ul>
+      <div style="padding:.75rem 1.5rem;border-top:1px solid var(--border)">
+        <a onclick="toggleTheme();closeMobile()" id="mnav-theme" style="display:flex;align-items:center;gap:.75rem;cursor:pointer;padding:.7rem 0;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);opacity:.75;text-decoration:none">
+          <span id="theme-icon-m" class="sf" style="font-size:1.15rem"></span>
+          <span id="theme-label-m">Night Mode</span>
+        </a>
+      </div>
+    </div>
+    <div class="lore-sb-spacer" id="lore-sb-spacer"></div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="page-header-pre">// Arsip Lore Resmi //</div>
+      <h1>LORE<br>ARCHIVE</h1>
+      <p>Pondasi dunia Wargantara—dua dunia, satu garis, dan para entitas yang berani menyeberanginya.</p>
+      <div class="page-header-bg">L</div>
+    </div>
+
+    <!-- LORE LAYOUT -->
+    <div class="lore-layout">
+
+      <!-- SIDEBAR -->
+      <div class="lore-sidebar">
+        <div class="lore-sidebar-section">
+          <div class="lore-sidebar-head">Dunia</div>
+          <a class="lore-nav-item active" onclick="showLore('intro',this)">Pengantar</a>
+          <a class="lore-nav-item" onclick="showLore('dunia-manusia',this)">Dunia Manusia</a>
+          <a class="lore-nav-item" onclick="showLore('dunia-astral',this)">Dunia Astral</a>
+          <a class="lore-nav-item" onclick="showLore('batas-antara',this)">Batas Antara</a>
+        </div>
+        <div class="lore-sidebar-section">
+          <div class="lore-sidebar-head">Entitas & Sistem</div>
+          <a class="lore-nav-item" onclick="showLore('ras-umum',this)">Ras & Karakter</a>
+          <a class="lore-nav-item" onclick="showLore('ara',this)">Astral Realm Authority</a>
+          <a class="lore-nav-item" onclick="showLore('ar-cid',this)">AR-CID System</a>
+          <a class="lore-nav-item" onclick="showLore('leveling',this)">Leveling & SC</a>
+        </div>
+        <div class="lore-sidebar-section">
+          <div class="lore-sidebar-head">Sandbox Guide</div>
+          <a class="lore-nav-item" onclick="showLore('sandbox-intro',this)">Pengantar Sandbox</a>
+          <a class="lore-nav-item" onclick="showLore('sandbox-ras',this)">Panduan OC</a>
+          <a class="lore-nav-item" onclick="showLore('glossarium',this)">Glossarium</a>
+        </div>
+      </div>
+
+      <!-- CONTENT AREA -->
+      <div class="lore-content-area">
+
+        <div class="lore-article active" id="lore-intro">
+          <div class="lore-art-category">// Backstory—001</div>
+          <div class="lore-art-title">PENGANTAR<br>WARGANTARA</div>
+          <div class="lore-art-meta">Kategori: Lore Inti · Status: Canon · Terakhir diperbarui: ????</div>
+          <div class="lore-art-body">
+            <p>Ada yang menyebut mereka nekat. Ada yang menyebut mereka bodoh. Sebagian kecil—mereka yang sudah cukup lama hidup di antara dua dunia—mungkin akan menyebutnya sebagai sesuatu yang tak terhindarkan.</p>
+            <p><strong>Wargantara</strong> adalah sebutan bagi makhluk astral yang memilih untuk hidup di dunia manusia secara permanen atau semi-permanen. Definisi lengkap, asal-usul istilah, serta kondisi dan konsekuensi menjadi Wargantara tercantum di bagian <a href="#" onclick="showLore('ras-umum', document.querySelector('[onclick*=ras-umum]'));return false;" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">Ras Umum</a>.</p>
+
+            <h3>Asal Mula</h3>
+            <p>Makhluk astral—atau dalam bahasa Arab disebut <em>gaib</em>, yang berarti <em>tersembunyi</em>—adalah entitas yang keberadaannya mendahului manusia. Banyak di antara mereka tercipta jauh sebelum Adam dan Hawa disebut dalam catatan penciptaan. Mereka hidup dalam lapisan realitas yang berbeda, tunduk pada hukum yang berbeda, dan pada dasarnya tidak dirancang untuk bersinggungan dengan dunia manusia secara langsung—kecuali mereka yang memang dikirim untuk tujuan tertentu, seperti para malaikat yang mengemban misi dari Sang Pencipta.</p>
+            <p>Namun keberadaan manusia—makhluk yang digadang-gadang sebagai ciptaan paling sempurna—menciptakan sesuatu yang tidak pernah benar-benar bisa diabaikan: <strong>rasa penasaran</strong>. Dan dari rasa penasaran itu lahir keinginan. Dan dari keinginan itu lahir keberanian—atau, bergantung pada sudut pandang, keputusasaan.</p>
+            <p>Oknum-oknum pertama yang mencoba menampakkan diri di dunia manusia melakukannya tanpa jaminan apapun. Tidak ada panduan, tidak ada kontrak, tidak ada sistem yang menjamin keselamatan mereka. Yang ada hanya risiko: terkikisnya eksistensi, terkurasnya energi, atau dalam kasus yang paling ekstrem—kehilangan diri sepenuhnya demi sesuatu yang bahkan tidak menjanjikan imbalan apapun. Mereka tetap melakukannya.</p>
+
+            <h3>Mengapa Crossing?</h3>
+            <p>Tidak ada satu jawaban yang berlaku untuk semua. Sebagian datang karena <strong>iri</strong>—melihat manusia dengan segala keterbatasannya, namun tetap mendapat tempat di dunia yang terasa lebih <em>nyata</em>, lebih <em>hidup</em>. Sebagian datang karena <strong>penasaran</strong>—ingin tahu rasanya memiliki nama yang bisa dipanggil, wajah yang bisa diingat, kehadiran yang bisa dirasakan. Sebagian lagi datang karena alasan yang jauh lebih personal—alasan yang bahkan mereka sendiri tidak selalu mau mengakuinya.</p>
+
+            <h3>Wargantara Hari Ini</h3>
+            <p>Ribuan tahun telah berlalu sejak crossing pertama yang tercatat. Dunia astral telah berkembang—peraturan telah dibentuk, kontrak telah ditetapkan, dan sistem seperti <strong>Astral Realm Authority</strong> kini berdiri sebagai badan yang mengawasi pergerakan entitas antara dua dunia.</p>
+            <p>Wargantara tetaplah kaum minoritas. Jumlah mereka diperkirakan tidak lebih dari satu persen dari total populasi yang ada di dunia manusia—dan bahkan angka itu mungkin terlalu optimis. Kemungkinan untuk berpapasan dengan satu dari mereka tanpa menyadarinya sangat tinggi, mengingat tidak semua manusia memiliki ketajaman indera yang cukup untuk mendeteksi keberadaan makhluk dari sisi gaib.</p>
+            <p>Namun mereka yang hidup di era ini jauh lebih siap. Teknologi dunia astral yang berkembang signifikan membuat adaptasi menjadi lebih mudah, dan kehadiran mereka di dunia manusia semakin sulit dibedakan. Wargantara hari ini ada di mana-mana: di belakang meja rapat sebagai CEO, di balik mikrofon sebagai penyiar, di tengah keramaian sebagai orang biasa yang tidak ingin terlalu diperhatikan. Dan yang paling umum dari semuanya—di balik layar, dengan jutaan mata menatap, sebagai <strong>content creator</strong>.</p>
+            <p>Mereka ada. Mereka tinggal. Dan sebagian besar dari kita tidak pernah menyadarinya.</p>
+
+            <div class="lore-infobox">
+              <h4>Catatan Arsiparis</h4>
+              <p>Dokumen ini disusun sebagai titik masuk bagi siapapun yang baru mengenal catatan ini. Beberapa detail telah disesuaikan untuk konsumsi umum. Untuk informasi yang tidak tercantum di sini—mungkin memang tidak seharusnya tercantum.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lore-article" id="lore-dunia-manusia">
+          <div class="lore-art-category">// Dunia—002</div>
+          <div class="lore-art-title">DUNIA<br>MANUSIA</div>
+          <div class="lore-art-meta">Kategori: World-Building · Status: Canon · Terakhir diperbarui: ????</div>
+          <div class="lore-art-body">
+            <p>Dunia manusia tidak istimewa—setidaknya, begitulah yang sering dikatakan oleh mereka yang belum pernah benar-benar tinggal di dalamnya. Dari lapisan realitas yang berbeda, ia tampak terlalu berisik, terlalu sementara, terlalu penuh keterbatasan. Gravitasi yang mengikat. Waktu yang berjalan hanya ke satu arah. Tubuh yang aus sebelum sempat melakukan semua yang ingin dilakukan.</p>
+            <p>Dan tetap saja, ribuan dari mereka memilih untuk datang ke sini—karena ada sesuatu di dunia manusia yang tidak bisa ditiru oleh lapisan realitas manapun.</p>
+
+            <h3>Hukum yang Mengikat</h3>
+            <p>Dunia manusia berjalan di atas pondasi yang tidak bisa ditawar: sebab dan akibat. Ruang dan waktu bergerak linear. Materi tidak bisa berada di dua tempat sekaligus. Energi tidak muncul dari kehampaan. Bagi entitas astral yang terbiasa dengan lapisan realitas yang lebih <em>fleksibel</em>, adaptasi terhadap hukum-hukum ini adalah salah satu tantangan terbesar dari proses crossing—sekaligus daya tariknya. Ada sesuatu yang terasa <em>nyata</em> di dunia yang punya batas. Rasa sakit yang benar-benar sakit. Kebahagiaan yang bermakna karena ada kontrasnya.</p>
+            <p>Dunia manusia adalah satu-satunya tempat di mana waktu benar-benar <em>bergerak</em>—musim berganti, wajah menua, kota-kota tumbuh dan runtuh. Bagi entitas yang terbiasa dengan stagnansi dunia astral, ritme perubahan ini bisa terasa seperti sesuatu yang hidup. Mengancam, sekaligus menggoda.</p>
+
+            <h3>Tentang Manusia Sendiri</h3>
+            <p>Makhluk yang satu ini menarik perhatian bukan karena kemampuan mereka—melainkan karena ketidaksesuaian antara keterbatasan mereka dan apa yang tetap mereka coba capai. Umur pendek. Tubuh yang rapuh. Ingatan yang tidak sempurna. Dan meski begitu, mereka membangun peradaban, menulis sejarah, jatuh cinta, kehilangan, dan memulai lagi dari nol.</p>
+            <p>Dari sudut pandang dunia astral, manusia adalah paradoks berjalan. Mereka digadang-gadang sebagai ciptaan paling sempurna—tapi terlihat jauh dari sempurna di hampir setiap aspek teknis. Makhluk astral yang lebih tua sering mendebat hal ini. Mereka yang lebih bijak biasanya memilih diam, karena sudah cukup lama mengamati untuk tahu bahwa "sempurna" mungkin bukan kata yang dimaksudkan dalam pengertian yang sama.</p>
+            <p>Yang jelas: tidak ada makhluk lain yang punya <em>amanah</em> yang sama. Tidak ada yang diberi tanggung jawab setara. Dan tidak ada yang, dengan segala keterbatasannya, tetap dianggap cukup layak untuk menyandang beban itu.</p>
+
+            <h3>Teknologi & Keseharian</h3>
+            <p>Peradaban manusia berkembang dengan kecepatan yang bahkan mengejutkan makhluk-makhluk yang sudah ada jauh lebih lama dari mereka. Dari yang awalnya hanya api dan batu, dalam rentang waktu yang—dari perspektif astral—tidak lebih dari sekejap mata, kini menjadi jaringan global, kecerdasan buatan, dan kota-kota yang tidak pernah benar-benar tidur. Percepatan ini tidak lepas dari perhatian dunia astral. Sebagian mengagumi. Sebagian khawatir. Sebagian lagi memandangnya dengan rasa iri yang tidak mau diakui secara terbuka.</p>
+            <p>Yang paling menarik perhatian entitas astral bukan teknologinya sendiri, melainkan cara manusia menggunakannya: untuk terhubung, untuk dikenal, untuk meninggalkan jejak di dunia yang tidak menjamin mereka akan diingat. Internet, media sosial, konten—semua itu adalah cara manusia berteriak ke semesta bahwa mereka <em>ada</em>. Dan bagi makhluk yang sudah eksis selama ribuan tahun tanpa pernah perlu membuktikannya, ada sesuatu yang sangat manusiawi—dan sangat menggerakkan—dari kebutuhan itu.</p>
+            <p>Entitas astral yang sudah lama menetap di dunia manusia pada akhirnya ikut terserap dalam ritme ini. Mereka punya jadwal, punya tagihan, punya algoritma yang perlu diikuti. Beberapa di antaranya sudah sangat mahir menavigasi sistem-sistem ini. Beberapa lagi masih bingung kenapa konten mereka tidak mendapat traksi padahal sudah posting jam tiga pagi.</p>
+
+            <h3>Yang Tidak Dilihat Manusia</h3>
+            <p>Dunia manusia tidak pernah benar-benar tertutup dari sisi astral. Ada titik-titik di mana lapisan antara dua dunia menipis—karena usia lokasi, peristiwa yang pernah terjadi di sana, atau alasan yang bahkan ARA belum sepenuhnya berhasil dokumentasikan. Manusia yang tinggal di dekatnya kadang merasakannya tanpa memahaminya: ketidaknyamanan yang tidak jelas sumbernya, mimpi yang terlalu koheren, perasaan diawasi di ruangan kosong. Mereka yang bisa melihat lebih dari itu biasanya memilih untuk tidak membicarakannya.</p>
+
+            <h3>Wargantara di Antara Manusia</h3>
+            <p>Wargantara hidup dalam kondisi <em>eksistensi ganda</em>—hadir secara fisik di dunia manusia, tapi akar keberadaan mereka tetap terhubung ke sisi astral. Adaptasi mereka bervariasi: ada yang sudah hafal luar kepala cara berbicara dan bercanda yang terasa natural, ada yang masih bereaksi dengan cara yang sedikit tidak pas terhadap hal yang harusnya biasa. Manusia biasanya tidak memperhatikan. <em>Mungkin orang ini introvert,</em> begitu yang terlintas—tidak tahu betapa presisinya asumsi itu, hanya untuk alasan yang berbeda.</p>
+            <p>Sebagian besar memilih untuk tidak mengungkap identitas mereka—bukan karena takut, tapi karena penjelasannya terlalu panjang untuk hari Selasa biasa di tengah makan siang. Lebih mudah untuk cukup ada.</p>
+
+            <div class="lore-infobox">
+              <h4>Catatan Arsiparis</h4>
+              <p>Lokasi-lokasi spesifik di mana lapisan antara dua dunia menipis tidak dicantumkan di sini. Bukan karena tidak ada—tapi karena beberapa informasi lebih aman tetap tidak tertulis. Siapapun yang membutuhkan daftar itu kemungkinan sudah tahu cara menemukannya sendiri. Siapapun yang belum tahu kemungkinan belum siap untuk mengetahuinya.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lore-article" id="lore-dunia-astral">
+          <div class="lore-art-category">// Dunia—003</div>
+          <div class="lore-art-title">DUNIA<br>ASTRAL</div>
+          <div class="lore-art-meta">Kategori: World-Building · Status: Canon · Terakhir diperbarui: ????</div>
+          <div class="lore-art-body">
+            <p>Lingkungan astral—alam gaib, alam spiritual, atau apapun yang mau disebutkan—adalah bagian dari dimensi yang digaibkan oleh Pencipta. Dimensi ini menyalin banyak bentuk yang ada di alam semesta dengan berbagai pengubahan: bukan salinan persis, bukan juga sesuatu yang sepenuhnya asing.</p>
+            <p>Dalam kesehariannya, kehidupan makhluk astral tidak terlalu jauh berbeda dari manusia. Hanya saja ada beberapa hal yang benar-benar membedakan mereka—mulai dari bagaimana teritori bekerja, teknologi yang mereka gunakan, hingga cara mereka memandang dunia di sekitarnya.</p>
+
+            <h3>Teritori</h3>
+            <p>Secara struktur geologi, dunia astral mengikuti tata letak bumi—tapi isi permukaannya bisa sangat berbeda. Gedung pencakar langit digantikan prasasti tua dan reruntuhan kerajaan. Hutan-hutan yang sepi dihuni oleh ras-ras yang tidak mau diganggu. Dan di beberapa tempat, waktu terasa berjalan dengan cara yang berbeda.</p>
+            <p>Teritori di dunia astral terbagi dalam beberapa pola:</p>
+            <div class="lore-teritori-grid">
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Pola 01</div>
+                <div class="lore-teritori-title">Kerajaan-Kerajaan</div>
+                <div class="lore-teritori-desc">Kawasan yang dikuasai satu kerajaan dengan satu kebudayaan dominan, mencerminkan era kejayaan mereka masing-masing. Jangan heran menemukan kawasan super primitif bersebelahan dengan kawasan yang jauh lebih modern. Mereka menjunjung tinggi budaya mereka sendiri dan cenderung tidak suka diganggu.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Pola 02</div>
+                <div class="lore-teritori-title">Perkumpulan Ras</div>
+                <div class="lore-teritori-desc">Kawasan yang terbentuk atas pengelompokan ras tertentu: para peri identik dengan hutan, merman dan mermaid menguasai beberapa petak kilometer lautan hingga ke pantai-pantainya, dan seterusnya. Ini pola paling umum ditemukan di kawasan yang strukturnya menyerupai dunia manusia.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Pola 03</div>
+                <div class="lore-teritori-title">Kelompok Bebas</div>
+                <div class="lore-teritori-desc">Kawasan tanpa teritori besar, tapi berlaku sistem kelompok-kelompok kecil yang masing-masing diketuai satu atau dua makhluk. Biasanya golongan makhluk halus yang suka menghampiri dunia manusia dan bersekongkol untuk menetap di tempat-tempat tertentu di sana.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Pola 04</div>
+                <div class="lore-teritori-title">Luar Bumi</div>
+                <div class="lore-teritori-desc">Beberapa entitas memilih untuk tidak menetap di bumi sama sekali. Mereka membentuk peraturan sendiri dan tinggal di planet-planet atau benda langit lain: Sirius A, Merkurius, Venus, Bulan, Matahari. Ingat—ini dunia astral. Apapun yang terasa logis belum tentu berlaku di sini.</div>
+              </div>
+            </div>
+            <p>Kebanyakan dari mereka memilih hidup masing-masing karena sudah terlalu lama. Tapi bukan berarti tidak ada gesekan—konflik antar kerajaan, antar planet, antar ras, masih terjadi. Kadang karena alasan yang serius. Kadang hanya karena bosan.</p>
+
+            <h3>Teknologi</h3>
+            <p>Teknologi mereka bisa sangat maju—ponsel, alat teleportasi, kendaraan yang menempuh jarak antar kota dalam hitungan menit. Banyak makhluk astral yang hidup seperti manusia biasa, bahkan memiliki akun media sosial dengan identitas yang menyamar. Tapi bisa juga sebaliknya: kawasan yang sangat terbelakang karena budaya yang dianut menolak modernisasi sepenuhnya. Semuanya kembali ke di mana mereka menetap dan berkembang.</p>
+
+            <h3>Perwujudan</h3>
+            <p>Wujud mereka bervariasi dari yang paling sederhana hingga yang paling sulit dibayangkan—bola arwah, makhluk monstrous, hewan-hewan mitologi, sosok yang begitu abstrak sampai terasa lebih seperti konsep daripada makhluk. Semua yang manusia anggap dongeng, semua yang hanya dikenal lewat cerita-cerita lama, memang benar-benar ada. Rekam jejak mereka sengaja ditinggalkan untuk ditemukan, ditelaah, dan dijadikan bahan cerita—meski versi yang sampai ke manusia tidak selalu akurat.</p>
+
+            <h3>Kegiatan & Keseharian</h3>
+            <p>Seperti manusia, mereka ditugaskan untuk menyembah Tuhan—dan seperti manusia pula, ada yang taat dan ada yang membangkang. Di luar itu, kehidupan mereka tidak terlalu berbeda: bekerja, menikah, bersekolah, punya anak, bertengkar dengan tetangga. Cukup familiar, kalau dipikir-pikir.</p>
+
+            <h3>IQ & EQ</h3>
+            <p>Kepintaran mereka bisa sangat ekstrem ke dua arah—ada yang luar biasa cerdas, ada yang sebaliknya. Banyak yang bersekolah, bahkan berkelana dari satu tempat ke tempat lain untuk menimba ilmu. Tapi untuk EQ, tidak semuanya bisa diajak bicara dengan nyaman. Emosi mereka lebih menonjol, dan mereka tidak berpikir dengan cara yang serumit manusia karena memang diciptakan lebih sederhana.</p>
+            <p>Pengecualian ada pada arwah yang pernah hidup sebagai manusia—mereka yang dekat dengan dunia manusia dan mempelajari gerak-geriknya bisa terlihat sangat natural, hampir tidak bisa dibedakan. Hanya satu yang tidak bisa mereka miliki: badan fisik.</p>
+
+            <div class="lore-infobox">
+              <h4>Catatan Arsiparis</h4>
+              <p>Untuk musim: tidak terlalu berpengaruh di dunia astral. Semuanya cenderung stagnan—tidak ada perubahan iklim berarti. Stabilitas yang terdengar nyaman, sampai kamu menyadari betapa panjangnya waktu yang harus diisi tanpa variasi apapun.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lore-article" id="lore-batas-antara">
+          <div class="lore-art-category">// Dunia—004</div>
+          <div class="lore-art-title">BATAS<br>ANTARA</div>
+          <div class="lore-art-meta">Kategori: World-Building · Status: Canon · Terakhir diperbarui: ????</div>
+          <div class="lore-art-body">
+            <p>Ada yang menyebutnya veil. Ada yang menyebutnya hijab. Ada yang tidak menyebutnya dengan nama apapun karena sudah lama berhenti mencoba memahaminya secara konseptual—dan memilih untuk hanya tahu cara menyeberanginya.</p>
+            <p>Batas Antara adalah lapisan pemisah antara dunia manusia dan dunia astral. Bukan tembok. Bukan garis. Lebih tepat disebut sebagai kondisi—sebuah keadaan di mana dua lapisan realitas yang secara fundamental berbeda bisa eksis berdampingan tanpa saling menghancurkan. Ia tidak terlihat. Tidak bisa disentuh. Tapi efeknya terasa oleh siapapun yang cukup sensitif, atau cukup dekat, atau cukup nekat untuk mendekati tepinya.</p>
+
+            <h3>Dua Cara Melihat Hal yang Sama</h3>
+            <p>Yang menarik tentang Batas Antara adalah bahwa ia sudah diamati dari dua arah yang berbeda—oleh sains dan oleh tradisi keagamaan—dan keduanya sampai pada kesimpulan yang lebih serupa dari yang biasanya diakui oleh masing-masing pihak.</p>
+
+            <div class="lore-infobox">
+              <h4>Perspektif Sains</h4>
+              <p>Fisika modern mengakui bahwa realitas yang bisa kita observasi hanyalah sebagian kecil dari keseluruhan yang ada. Sekitar 27% alam semesta terdiri dari <em>dark matter</em>—materi yang tidak berinteraksi dengan cahaya, tidak bisa dideteksi secara langsung, namun keberadaannya terbukti dari efek gravitasionalnya terhadap materi biasa. Sekitar 68% lagi adalah <em>dark energy</em> yang lebih misterius lagi. Sisanya—hanya 5%—adalah segala sesuatu yang pernah kita lihat, sentuh, dan ukur.</p>
+              <p>Artinya: 95% dari alam semesta adalah sesuatu yang tidak kita ketahui cara berinteraksinya. Teori string dan fisika kuantum membuka kemungkinan adanya dimensi-dimensi tambahan yang terlipat di dalam struktur ruang-waktu—dimensi yang secara matematis konsisten, tapi tidak bisa diakses oleh materi dan energi biasa. Lapisan-lapisan ini bisa saja eksis bersamaan dengan dunia yang kita tinggali, di koordinat yang sama, hanya berada di frekuensi yang berbeda.</p>
+            </div>
+
+            <div class="lore-infobox">
+              <h4>Perspektif Tradisi</h4>
+              <p>Hampir semua tradisi keagamaan besar mengenal konsep pemisah antara dunia yang terlihat dan yang tidak terlihat—meski masing-masing menamakannya berbeda. Ada yang menyebutnya <em>barzakh</em>: ambang, pemisah, sesuatu yang berada di antara dua keadaan yang tidak seharusnya bercampur. Ada yang menggambarkannya sebagai tirai, sebagai langit-langit yang memisahkan lapisan-lapisan ciptaan, sebagai batas antara yang sakral dan yang fana.</p>
+              <p>Yang konsisten di hampir semua deskripsi ini adalah satu hal: batas itu ada bukan karena kebetulan, tapi karena memang dirancang demikian. Makhluk dari substansi yang berbeda—yang diciptakan dari elemen yang berbeda, yang tunduk pada hukum yang berbeda—tidak bisa sepenuhnya berbagi satu lapisan realitas tanpa ada sesuatu yang memisahkan mereka. Bukan sebagai hukuman. Tapi sebagai arsitektur dasar dari cara segalanya dibuat.</p>
+              <p>Perbedaan substansi itu bukan sekadar metafor. Ia menjelaskan mengapa interaksi antara dua sisi tidak terjadi secara natural—dan mengapa, ketika terjadi, selalu ada harga yang harus dibayar oleh salah satu atau kedua belah pihak.</p>
+            </div>
+
+            <p>Keduanya tidak salah—hanya mendeskripsikan struktur yang sama dari sudut yang berbeda.</p>
+
+            <h3>Sifat Batas Antara</h3>
+            <p>Batas Antara bukan sesuatu yang statis. Ia berfluktuasi—menipis di tempat-tempat tertentu, menebal di tempat lain, bergeser secara musiman atau dalam respons terhadap konsentrasi energi yang signifikan. Beberapa titik di dunia manusia secara alami lebih tipis dari yang lain: tempat-tempat tua, tempat-tempat yang sudah lama menyaksikan kehidupan dan kematian dan peristiwa yang meninggalkan bekas di lapisan di bawah permukaan.</p>
+            <p>Dari sisi astral, Batas Antara terasa seperti tekanan—resistansi yang makin terasa semakin mendekati sisi dunia manusia. Dari sisi manusia, ia tidak terasa seperti apapun. Tapi ada di sana, dan selalu ada di sana, jauh sebelum makhluk apapun mencoba menyeberanginya.</p>
+
+            <h3>Proses Crossing</h3>
+            <p>Crossing adalah tindakan menyeberangi Batas Antara secara sadar—permanen atau semi-permanen. Ini bukan sekadar perpindahan lokasi, melainkan perubahan kondisi eksistensi: entitas astral harus membentuk representasi fisik yang cukup kohesif untuk berfungsi di bawah hukum dunia manusia. Beberapa melakukannya dengan lancar karena sudah berlatih atau punya kemampuan alami yang membantu transisi. Yang lain butuh waktu, bantuan pihak ketiga, atau belajar dari cara yang paling tidak menyenangkan.</p>
+
+            <h3>The Cost</h3>
+            <p>Tidak ada yang gratis di crossing. Setiap kali entitas astral hadir di dunia manusia, ada harga yang harus dibayar—bukan sebagai hukuman, tapi sebagai cara kerja keseimbangan antara dua lapisan realitas yang berbeda.</p>
+            <p>The Cost punya dua dimensi: <strong>waktu</strong> (semakin lama di dunia manusia, semakin besar drain-nya) dan <strong>manifestasi</strong> (semakin nyata kehadiran mereka—semakin banyak yang bisa melihat, mendengar, atau berinteraksi—semakin mahal harganya). Mau lebih visible, bayar lebih mahal dan/atau waktunya jadi lebih singkat. Mau hemat, harus lebih tersembunyi.</p>
+            <p>Untuk crossing permanen, ada toll awal saat crossing pertama: sebagian energi dasar yang membentuk keberadaan mereka tertinggal di sisi lain. Bisa berupa hilangnya akses ke kemampuan tertentu, koneksi ke dunia astral yang melemah, potongan ingatan, atau fragmentasi identitas. Harga itu sudah ditetapkan jauh sebelum ada yang mencoba membayarnya.</p>
+
+            <div class="lore-infobox">
+              <h4>Catatan Arsiparis</h4>
+              <p>Pertanyaan tentang apakah Batas Antara bisa dihancurkan sepenuhnya sudah ada sejak lama. Jawabannya, sejauh yang bisa dikonfirmasi, adalah tidak—karena ia bukan konstruksi yang dibuat, melainkan kondisi yang lahir dari perbedaan mendasar antara dua jenis keberadaan. Kamu tidak bisa menghapus perbedaan. Kamu hanya bisa belajar cara hidup di tepinya.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lore-article" id="lore-ras-umum">
+          <div class="lore-art-category">// Entitas—005</div>
+          <div class="lore-art-title">RAS &amp;<br>PEKERJAAN</div>
+          <div class="lore-art-meta">Kategori: Lore Entitas · Status: Canon · Terakhir diperbarui: ????</div>
+          <div class="lore-art-body">
+            <p>Dua dunia, dua jenis penghuni—tapi garis di antara mereka tidak selalu sejelas yang terlihat. Yang membedakan bukan hanya asal atau substansi, tapi seberapa jauh masing-masing bisa melampaui batas yang sudah ditetapkan untuk mereka.</p>
+
+            <h3>Manusia</h3>
+            <p>Secara teknis, manusia adalah satu-satunya makhluk yang memang dirancang untuk hidup di lapisan realitas ini secara penuh—berbeda dari hewan dan tumbuhan yang ada di dalamnya, manusia punya kapasitas kesadaran dan kehendak yang membuat mereka unik di dunia ini. Tapi "manusia" bukan kategori yang sempit. Di dalamnya ada spektrum yang lebih luas dari yang terlihat di permukaan.</p>
+            <p>Sebagian besar manusia tidak menyadari keberadaan dunia astral sama sekali. Bukan karena tidak ada—tapi karena indra mereka tidak dikalibrasi untuk mendeteksinya, dan kehidupan sehari-hari tidak memberikan alasan untuk mempertanyakannya. Mereka hidup, bekerja, berhubungan satu sama lain, dan mati tanpa pernah bersinggungan langsung dengan sisi lain. Ini bukan kekurangan. Ini memang desainnya.</p>
+            <p>Tapi ada sebagian kecil yang berbeda.</p>
+            <div class="lore-teritori-grid">
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Tipe 01</div>
+                <div class="lore-teritori-title">Manusia Biasa</div>
+                <div class="lore-teritori-desc">Mayoritas. Tidak punya akses ke sisi astral, tidak mendeteksi keberadaan makhluk gaib kecuali dalam kondisi yang sangat ekstrem. Sering kali justru mereka yang paling aman—karena yang tidak terlihat tidak akan mengganggu mereka secara langsung.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Tipe 02</div>
+                <div class="lore-teritori-title">Sensitif</div>
+                <div class="lore-teritori-desc">Manusia dengan ketajaman persepsi di atas rata-rata. Bisa menangkap sinyal dari sisi astral: perasaan, kehadiran, kadang bayangan, kadang suara. Tidak semuanya menyadari bahwa ini bukan imajinasi. Tidak semuanya ingin tahu lebih jauh.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Tipe 03</div>
+                <div class="lore-teritori-title">Medium / Peka</div>
+                <div class="lore-teritori-desc">Tingkat lebih lanjut dari sensitif. Interaksi mereka dengan sisi astral lebih konsisten dan lebih sadar. Beberapa bisa berkomunikasi secara terbatas. Keberadaan mereka diketahui di kedua sisi—dan tidak semuanya merasa nyaman dengan perhatian itu.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Tipe 04</div>
+                <div class="lore-teritori-title">Berdarah Campuran</div>
+                <div class="lore-teritori-desc">Manusia dengan leluhur atau ikatan langsung ke dunia astral. Kondisi ini langka, sering tidak disadari, dan biasanya baru termanifestasi dalam kondisi tertentu. Status mereka di kedua dunia ambigu—tidak sepenuhnya diakui di satu sisi, tidak sepenuhnya diterima di sisi lain.</div>
+              </div>
+            </div>
+
+            <h3>Makhluk Gaib</h3>
+            <p>Penghuni dunia astral jauh lebih beragam dari yang bisa dirangkum dalam satu daftar. Ini bukan klasifikasi lengkap—ini hanya gambaran umum dari kategori-kategori yang paling sering bersinggungan dengan dunia manusia, baik karena pilihan mereka sendiri, maupun karena tugas.</p>
+            <div class="lore-teritori-grid">
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Kategori 01</div>
+                <div class="lore-teritori-title">Malaikat</div>
+                <div class="lore-teritori-desc">Diciptakan dari cahaya, tunduk penuh pada kehendak Pencipta. Tidak punya otonomi untuk membangkang, dan tidak punya keinginan untuk melakukannya. Kehadiran mereka di dunia manusia selalu punya tujuan. Paling sulit didekati—bukan karena berbahaya, tapi karena frekuensi keberadaan mereka terlalu jauh dari jangkauan entitas lain.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Kategori 02</div>
+                <div class="lore-teritori-title">Jin</div>
+                <div class="lore-teritori-desc">Diciptakan dari api tanpa asap, diberi kehendak bebas seperti manusia. Spektrum mereka luas: ada yang taat, ada yang tidak, ada yang tidak peduli dengan kategori itu. Kelompok terbesar yang secara aktif berinteraksi dengan dunia manusia—sebagian karena penasaran, sebagian karena kepentingan, sebagian karena sudah terlanjur terlibat dan tidak tahu cara keluar.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Kategori 03</div>
+                <div class="lore-teritori-title">Arwah</div>
+                <div class="lore-teritori-desc">Bekas manusia. Jiwa yang pernah hidup di dunia manusia dan belum atau tidak berpindah ke lapisan berikutnya. Membawa ingatan, kebiasaan, dan kadang trauma dari kehidupan sebelumnya. Yang sudah cukup lama di antara dua dunia bisa hampir tidak bisa dibedakan dari manusia—kecuali satu hal: mereka tidak bisa punya tubuh fisik.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Kategori 04</div>
+                <div class="lore-teritori-title">Entitas Primordial</div>
+                <div class="lore-teritori-desc">Makhluk-makhluk tua yang keberadaannya mendahului kategorisasi apapun. Ada sebelum sistem, sebelum nama, sebelum ada yang repot-repot mencatat. Tidak semuanya masih aktif atau masih kohesif sebagai individu. Yang masih ada cenderung tidak terlalu terlibat—dan ketika mereka terlibat, itu biasanya bukan pertanda baik untuk semua pihak.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Kategori 05</div>
+                <div class="lore-teritori-title">Makhluk Mitologi</div>
+                <div class="lore-teritori-desc">Naga, peri, mermaid, feniks, dan ratusan kategori lain yang pernah muncul dalam folklore manusia di seluruh dunia. Semua itu nyata. Rekam jejak mereka sengaja ditinggalkan—meski versi yang sampai ke catatan manusia tidak selalu akurat. Hidup dalam komunitas masing-masing dengan budaya dan hierarki sendiri.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Kategori 06</div>
+                <div class="lore-teritori-title">Outer Being</div>
+                <div class="lore-teritori-desc">Entitas yang berasal dari lapisan dimensi di luar yang akrab dikenal manusia—atau bahkan di luar yang dikenal sebagian besar makhluk astral sekalipun. Dunia gaib berlapis, dan tidak semua lapisan itu ramah terhadap pemahaman yang konvensional. Outer Being hidup di lapisan-lapisan yang lebih dalam, lebih jauh, atau lebih asing dari itu. Wujud mereka bisa sangat abstrak—sulit diproses bahkan oleh entitas astral biasa—atau justru terlihat hampir seperti manusia, tapi ada sesuatu yang tidak tepat, sesuatu yang susah diidentifikasi tapi langsung terasa. Sistem yang mereka anut pun bisa berbeda total: hierarki, logika, bahkan konsep waktu yang tidak selalu paralel dengan yang berlaku di sini. Kalau makhluk astral lain terasa jauh, Outer Being terasa seperti datang dari arah yang berbeda sepenuhnya.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Kategori 07</div>
+                <div class="lore-teritori-title">Hybrid</div>
+                <div class="lore-teritori-desc">Entitas yang terbentuk dari dua atau lebih ras yang berbeda—bukan perpaduan estetika, tapi perpaduan substansi. Bisa lahir dari persilangan lintas ras, hasil ritual atau kondisi penciptaan yang tidak biasa, atau transformasi yang tidak sepenuhnya selesai. Sifat dan kapabilitas mereka tidak selalu bisa diprediksi dari komponen asalnya—kadang mewarisi kekuatan dari keduanya, kadang justru mewarisi kelemahan dari keduanya, kadang menghasilkan sesuatu yang tidak ada di salah satu ras pembentuknya. Status mereka di dunia astral seringkali ambigu: tidak sepenuhnya diakui oleh satu komunitas, tidak sepenuhnya ditolak oleh yang lain.</div>
+              </div>
+            </div>
+
+            <h3>Wargantara</h3>
+            <p><strong>Wargantara</strong> adalah sebutan bagi makhluk astral yang hidup di dunia manusia secara permanen atau semi-permanen. Ini bukan ras—ini kondisi. Siapapun dari kategori makhluk gaib di atas bisa menjadi Wargantara, asalkan memenuhi kondisi yang berlaku.</p>
+            <p>Ada dua jalur masuk ke status ini. Mayoritas melalui jalur sukarela—mereka yang datang atas kehendak sendiri, dengan alasan masing-masing yang tidak selalu perlu dijelaskan ke siapapun. Tapi ada juga jalur kedua: hukuman atau penebusan yang dijatuhkan oleh otoritas astral. Crossing ke dunia manusia, dalam konteks ini, bukan pilihan—melainkan konsekuensi. Sesuatu yang ditetapkan dari luar, bukan dari dalam.</p>
+
+            <h4>Status & Konsekuensi</h4>
+            <p>Menjadi Wargantara bukan hanya soal di mana seseorang tinggal. Ada kondisi-kondisi yang harus terpenuhi—baik yang disadari maupun yang tidak—sebelum seseorang bisa benar-benar disebut dengan nama itu.</p>
+            <p><strong>Jalur Sukarela:</strong></p>
+            <ul>
+              <li>Crossing dilakukan secara sadar dan atas kehendak sendiri.</li>
+              <li>Keberadaan di dunia manusia bersifat menetap atau semi-permanen—mereka yang hanya berkunjung, yang datang dan pergi tanpa niat tinggal, tidak masuk dalam kategori ini.</li>
+              <li>Entitas harus terdaftar di sistem Astral Realm Authority. Crossing tanpa registrasi secara teknis ilegal—dan konsekuensinya bervariasi tergantung siapa yang menemukan dan seberapa banyak masalah yang ingin mereka buat hari itu.</li>
+            </ul>
+            <p><strong>Jalur Hukuman / Penebusan:</strong></p>
+            <ul>
+              <li>Crossing ditetapkan oleh otoritas astral sebagai bentuk sanksi atau penebusan—bukan atas inisiatif entitas yang bersangkutan.</li>
+              <li>Keberadaan di dunia manusia bersifat menetap sesuai durasi yang ditetapkan—tidak ada pilihan untuk kembali sebelum kondisi terpenuhi.</li>
+              <li>Registrasi ke ARA dilakukan sebagai bagian dari prosedur penjatuhan sanksi, bukan atas pengajuan sendiri.</li>
+            </ul>
+
+            <h4>Hak & Kewajiban</h4>
+            <p>Wargantara yang terdaftar secara resmi mendapat perlindungan dari Astral Realm Authority di kedua sisi—artinya ada badan yang secara teoritis bertanggung jawab atas keselamatan mereka, dan ada jalur resmi untuk mengajukan komplain jika sesuatu berjalan salah. Seberapa efektif perlindungan itu dalam praktiknya adalah pertanyaan lain.</p>
+            <p>Di sisi kewajiban, mereka terikat oleh kontrak yang ditandatangani saat registrasi: tidak mengungkap keberadaan dunia astral secara sembarangan kepada manusia yang tidak punya kapasitas untuk menerimanya, tidak menggunakan kemampuan astral untuk mengganggu keseimbangan dunia manusia secara signifikan, dan melaporkan diri jika kondisi keberadaan mereka berubah drastis. Aturan-aturan ini ada di atas kertas. Kepatuhan terhadapnya adalah urusan masing-masing individu.</p>
+            <p>Untuk jalur hukuman: kontrak tidak ditandatangani—ia dijatuhkan. Tidak ada yang bertanya persetujuannya.</p>
+
+            <div class="lore-infobox">
+              <h4>Catatan Arsiparis</h4>
+              <p>Daftar ini tidak lengkap dan tidak dimaksudkan untuk lengkap. Dunia astral terlalu luas untuk dirangkum. Yang tercantum di sini adalah yang paling relevan untuk dipahami dalam konteks interaksi antara dua dunia—sisanya, kamu akan temukan sendiri kalau sudah cukup lama berada di sini.</p>
+            </div>
+
+            <h3>Pekerjaan</h3>
+            <p>Tidak ada batasan pekerjaan—Wargantara maupun entitas astral yang hadir di dunia manusia bisa menjalani hampir semua profesi. Di dunia manusia, yang paling umum adalah seniman dan kreator konten, tenaga medis, akademisi, pelaku bisnis, aparat hukum, sampai pekerja lepas tanpa afiliasi. Di dunia astral, peran yang umum ada: penjaga dan pelindung wilayah, pedagang dan perantara, arsiparis, pemuka dan administrator, praktisi ritual, serta kurir lintas dunia. Pekerjaan yang tercantum di AR-CID hanya jabatan resmi terdaftar—apa yang benar-benar dilakukan sehari-hari bisa sangat berbeda.</p>
+          </div>
+        </div>
+
+        <!-- SANDBOX: PENGANTAR -->
+        <div class="lore-article" id="lore-sandbox-intro">
+          <div class="lore-art-category">// Sandbox Guide—007</div>
+          <div class="lore-art-title">PENGANTAR<br>SANDBOX</div>
+          <div class="lore-art-meta">Kategori: Sandbox Guide · Status: Canon · Terakhir diperbarui: ????</div>
+          <div class="lore-art-body">
+            <p>Wargantara adalah <strong>collaborative universe berkonsep lore sandbox</strong>—dunia bersama yang dibangun secara kolektif dan terbuka untuk siapapun. Panduan ini ada untuk menjaga konsistensi lore agar tidak ada karakter yang merusak apa yang sudah dibangun bersama.</p>
+
+            <h3>Wargafana & Universe Ini</h3>
+            <p>Semua Wargafana sudah secara otomatis menjadi bagian dari universe ini sebagai <strong>manusia</strong>—penghuni dunia manusia yang mungkin menyadari atau tidak menyadari keberadaan makhluk astral di sekitar mereka. Tidak perlu AR-CID, tidak perlu OC, tidak perlu melakukan apapun. Kamu sudah ada di sini.</p>
+            <p>Membuat OC adalah <strong>pilihan bebas</strong> bagi yang ingin terlibat lebih dalam di sisi sandbox-nya. OC berdiri sendiri sebagai karakter terpisah—bukan representasi diri kamu sebagai Wargafana.</p>
+
+            <h3>Rules Umum Sandbox</h3>
+            <ul class="lore-art-body" style="list-style:none;margin:.5rem 0 1.25rem">
+              <li style="font-size:.9rem;line-height:1.9;opacity:.75;padding:.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:.65rem"><span>OC tidak boleh diklaim sebagai bagian resmi lore tanpa persetujuan tim</span></li>
+              <li style="font-size:.9rem;line-height:1.9;opacity:.75;padding:.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:.65rem"><span>OC tidak boleh membatalkan atau menimpa elemen lore yang sudah berstatus canon</span></li>
+              <li style="font-size:.9rem;line-height:1.9;opacity:.75;padding:.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:.65rem"><span>Interaksi OC dengan talent dalam karya harus bersifat fiksi—bukan representasi kenyataan</span></li>
+              <li style="font-size:.9rem;line-height:1.9;opacity:.75;padding:.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:.65rem"><span>OC tidak bisa berstatus <strong>Wargantara</strong>—reserved untuk talent. Lihat <em>Ras & Karakter</em> untuk detail status keberadaan</span></li>
+              <li style="font-size:.9rem;line-height:1.9;opacity:.75;padding:.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:.65rem"><span>Headcanon boleh dibagikan, tapi harus ditandai jelas—jangan presentasikan sebagai fakta lore. Gunakan label seperti <em>"headcanon"</em> atau <em>"interpretasi pribadi"</em></span></li>
+              <li style="font-size:.9rem;line-height:1.9;opacity:.75;padding:.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:.65rem"><span>Crossover OC antar sesama fan diperbolehkan selama tidak melanggar lore canon. Fanfic yang melibatkan talent dalam setting lore harus ditandai sebagai fiksi</span></li>
+              <li style="font-size:.9rem;line-height:1.9;opacity:.75;padding:.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:.65rem"><span>Kalau ada perubahan besar pada canon yang mempengaruhi OC yang sudah ada, akan ada pengumuman terlebih dahulu</span></li>
+              <li style="font-size:.9rem;line-height:1.9;opacity:.75;padding:.4rem 0;display:flex;gap:.65rem"><span>Kalau ada elemen yang masih ragu, tanyakan ke tim sebelum lanjut—jauh lebih mudah dari revisi besar di tengah jalan</span></li>
+            </ul>
+
+            <h3>Skala Arc Cerita</h3>
+            <p>Arc berskala besar sangat boleh—konflik antar kerajaan, krisis di satu kawasan astral, peristiwa yang mempengaruhi satu komunitas semuanya valid. Yang perlu dihindari adalah skala yang terlalu general untuk satu OC: kiamat seluruh semesta, kejadian yang secara lore harusnya melibatkan semua pihak, atau plot yang menuntut karakter lain bereaksi seolah dunia mereka bergantung padanya. Kalau ingin elemen OC-mu dipertimbangkan masuk canon, bisa diajukan ke tim—ini perlu diskusi dan persetujuan, bukan sesuatu yang otomatis.</p>
+
+            <div class="lore-infobox">
+              <h4>Catatan Arsiparis</h4>
+              <p>Kebebasan konsep karakternya cukup luas—inspirasi dari entitas SCP, eldritch horror, mitologi niche, atau apapun yang tidak umum sekalipun bisa masuk, selama kohesif dengan dunia yang sudah ada. Yang penting bukan dari mana inspirasinya, tapi bagaimana karakter itu bisa hidup di dalam universe ini tanpa merusak yang lain.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SANDBOX: RAS & KARAKTER -->
+        <div class="lore-article" id="lore-sandbox-ras">
+          <div class="lore-art-category">// Sandbox Guide—008</div>
+          <div class="lore-art-title">PANDUAN<br>OC</div>
+          <div class="lore-art-meta">Kategori: Sandbox Guide · Status: Canon · Terakhir diperbarui: ????</div>
+          <div class="lore-art-body">
+
+            <h3>Konsep & Batasan</h3>
+            <p>Konsep karakternya bebas seluas-luasnya—fallen angel, makhluk eldritch, entitas SCP-inspired, mitologi niche, atau apapun yang tidak umum sekalipun semuanya valid, selama kohesif dengan dunia yang ada. Yang penting bukan dari mana inspirasinya, tapi bagaimana karakter itu bisa hidup di dalam universe ini tanpa merusak yang lain.</p>
+            <p>Yang tidak boleh: <strong>klaim identitas canon</strong>—membawa nama, identitas, atau peran figur yang sudah punya cerita sendiri di luar universe ini (nama-nama deities, nama-nama malaikat, nama-nama iblis, dll). Keterkaitan samar tetap boleh—halfblood, keturunan jauh, eks-bawahan—asalkan tidak membawa klaim atas kekuatan atau otoritas figur aslinya. Titel boleh, otoritasnya tidak.</p>
+
+            <h3>OC Manusia</h3>
+            <p>Manusia biasa, sensitif, medium/peka, sampai berdarah campuran semuanya tersedia. Karakter manusia tidak bisa menjadi Wargantara—tapi bisa berinteraksi dengan entitas astral, punya hubungan dengan makhluk dari sisi gaib, atau memiliki ketajaman indera di atas rata-rata.</p>
+
+            <h3>OC Makhluk Astral</h3>
+            <p>Penghuni dunia astral tersedia luas untuk OC. Tidak ada satu ras yang lebih valid dari yang lain—yang penting karaktermu punya tempat yang kohesif di dalam universe ini. Pilihan rasnya mencakup semua yang sudah terdokumentasi di <em>Ras &amp; Karakter</em>, dan tidak terbatas pada itu saja.</p>
+
+            <div class="lore-teritori-grid">
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Opsi 01</div>
+                <div class="lore-teritori-title">Jin</div>
+                <div class="lore-teritori-desc">Ras dengan spektrum paling luas—taat, tidak taat, atau tidak peduli dengan kategori itu. Fleksibel untuk hampir semua konsep karakter. Bisa hadir di dunia manusia dengan berbagai alasan tanpa memerlukan justifikasi yang terlalu rumit.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Opsi 02</div>
+                <div class="lore-teritori-title">Arwah</div>
+                <div class="lore-teritori-desc">Jiwa yang pernah hidup sebagai manusia dan belum atau tidak berpindah ke lapisan berikutnya. Membawa ingatan dan kebiasaan dari kehidupan sebelumnya. Tidak bisa punya tubuh fisik—tapi bisa sangat natural dalam interaksi kalau sudah cukup lama berdekatan dengan dunia manusia.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Opsi 03</div>
+                <div class="lore-teritori-title">Makhluk Mitologi</div>
+                <div class="lore-teritori-desc">Naga, peri, mermaid, feniks, dan ratusan kategori lain dari folklore di seluruh dunia—semuanya nyata di universe ini. Hidup dalam komunitas dengan budaya dan hierarki sendiri. Konsep yang tidak umum atau berasal dari mitologi niche tetap valid selama masuk akal dalam konteks dunia yang sudah ada.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Opsi 04</div>
+                <div class="lore-teritori-title">Outer Being</div>
+                <div class="lore-teritori-desc">Entitas dari lapisan dimensi yang lebih dalam atau lebih asing—bisa sangat abstrak, bisa juga hampir terlihat seperti manusia tapi ada sesuatu yang tidak tepat. Sistem, logika, bahkan konsep waktu yang mereka anut bisa berbeda total. Konsep ini valid tapi perlu justifikasi lore yang solid—terutama kalau karaktermu aktif berinteraksi di sisi manusia.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Opsi 05</div>
+                <div class="lore-teritori-title">Entitas Primordial</div>
+                <div class="lore-teritori-desc">Makhluk-makhluk tua yang ada sebelum sistem dan nama. Tersedia, tapi butuh kehati-hatian lebih—entitas primordial yang masih kohesif dan aktif adalah pengecualian, bukan norma. Pastikan ada alasan lore yang jelas mengapa karaktermu masih hadir dan masih bisa diajak berinteraksi secara normal.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Opsi 06</div>
+                <div class="lore-teritori-title">Hybrid</div>
+                <div class="lore-teritori-desc">Perpaduan substansi dari dua ras atau lebih—bukan sekadar estetika. Sifat dan kapabilitas tidak selalu bisa diprediksi dari komponen asalnya. Status di dunia astral seringkali ambigu: tidak sepenuhnya diakui satu komunitas, tidak sepenuhnya ditolak yang lain. Semua kombinasi valid selama ada kohesi internal yang masuk akal.</div>
+              </div>
+              <div class="lore-teritori-card">
+                <div class="lore-teritori-label">Opsi 07</div>
+                <div class="lore-teritori-title">Ras Lain</div>
+                <div class="lore-teritori-desc">Ras yang tidak masuk salah satu kategori di atas. Universe ini tidak menutup kemungkinan itu—dunia astral terlalu luas untuk dirangkum dalam daftar. Selama ada kohesi internal dan tidak bertabrakan dengan elemen canon yang sudah ada, ini valid.</div>
+              </div>
+            </div>
+
+            <h4>Catatan Khusus: Malaikat</h4>
+            <p>Malaikat tidak tersedia sebagai konsep OC umum—tapi bukan berarti tertutup sepenuhnya. Karena malaikat diciptakan tanpa kehendak bebas dan tunduk penuh pada perintah Pencipta, sulit membangun narasi personal yang kohesif dari sana untuk keperluan OC biasa.</p>
+            <p>Pengecualian ada untuk konsep yang sifatnya lebih seperti <strong>kependudukan</strong>—entitas malaikat yang karena alasan tertentu berada dalam sistem ARA secara resmi, dengan SC Level yang kemungkinan masuk ke kisaran <strong>L4 atau L5</strong>. Ini bukan sesuatu yang bisa ditentukan sendiri: level tersebut butuh autentikasi dan <strong>izin ARA</strong>, yang dalam praktiknya berarti kamu perlu mendiskusikannya dengan tim admin terlebih dahulu sebelum melanjutkan konsep tersebut.</p>
+            <p>Keterkaitan samar di luar itu tetap boleh—karakter yang terinspirasi estetika malaikat dengan ras berbeda, halfblood, atau eks-entitas yang pernah berafiliasi dengan struktur malaikat semuanya tidak memerlukan izin khusus.</p>
+
+            <h4>Catatan Umum OC Astral</h4>
+            <p>OC astral yang tidak melakukan crossing tetap punya ruang cerita yang sama luasnya—konflik, relasi, dan arc cerita di sisi astral semuanya valid. Crossing bukan syarat untuk OC astral yang menarik. Untuk OC astral yang melakukan crossing ke sisi manusia, lihat bagian <em>Status Keberadaan</em> di bawah.</p>
+
+            <h3>Status Keberadaan</h3>
+            <div class="lore-infobox" style="border-left-color:var(--red)">
+              <h4>Wargantara — Reserved untuk Talent &amp; Official NPC</h4>
+              <p>Wargantara adalah makhluk astral yang hadir di dunia manusia secara <strong>penuh dan permanen</strong>—sudah crossing secara sadar, tercatat di ARA, keberadaannya menetap tanpa batasan waktu. Status ini <strong>hanya untuk talent Wargantara dan NPC resmi</strong>. OC fan tidak bisa mengklaim ini.</p>
+            </div>
+
+            <p>OC fan sangat boleh menjadi makhluk astral yang melakukan <strong>semi-permanent crossing</strong>—hadir di dunia manusia dengan batasan. Bukan Wargantara, tapi tetap punya ruang cerita yang kaya. Bentuk kehadiran yang valid untuk OC:</p>
+            <ul class="lore-art-body" style="list-style:none;margin:.5rem 0 1.25rem">
+              <li style="font-size:.9rem;line-height:1.9;opacity:.75;padding:.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:.65rem"><span>Hadir sebagai <strong>penampakan samar</strong>—hanya bisa dirasakan mereka yang sensitif, cost rendah, interaksi sangat terbatas</span></li>
+              <li style="font-size:.9rem;line-height:1.9;opacity:.75;padding:.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:.65rem"><span>Hadir secara <strong>parsial</strong>—bisa dilihat sebagian orang, interaksi terbatas, cost lebih besar</span></li>
+              <li style="font-size:.9rem;line-height:1.9;opacity:.75;padding:.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:.65rem"><span>Hadir secara <strong>penuh tapi sementara</strong>—bisa dilihat, didengar, dan disentuh semua orang, cost tertinggi, durasi paling singkat</span></li>
+              <li style="font-size:.9rem;line-height:1.9;opacity:.75;padding:.4rem 0;display:flex;gap:.65rem"><span>Terikat kondisi tertentu—waktu, tempat, fase bulan, kontrak, atau hal lain yang menentukan kapan dan seberapa nyata mereka bisa hadir</span></li>
+            </ul>
+
+            <p>The Cost kehadiran mereka punya dua dimensi: <strong>waktu</strong> (semakin lama, semakin besar drain-nya) dan <strong>manifestasi</strong> (semakin nyata—semakin banyak yang bisa melihat, mendengar, atau berinteraksi—semakin mahal). Untuk mekanisme lengkapnya, baca <em>Batas Antara → The Cost</em>.</p>
+
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Kehadiran</th>
+                  <th>Tersedia untuk OC?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Wargantara</td>
+                  <td>Permanen, 24/7, tanpa batas waktu</td>
+                  <td><span class="lore-tag red">Talent &amp; Official NPC Only</span></td>
+                </tr>
+                <tr>
+                  <td>Semi-Permanent Crossing</td>
+                  <td>Terbatas waktu & manifestasi, selalu ada cost</td>
+                  <td><span class="lore-tag gold">Boleh</span></td>
+                </tr>
+                <tr>
+                  <td>Manusia</td>
+                  <td>Penghuni dunia manusia secara penuh</td>
+                  <td><span class="lore-tag gold">Boleh</span></td>
+                </tr>
+                <tr>
+                  <td>Murni Astral (tanpa crossing)</td>
+                  <td>Hanya di sisi astral</td>
+                  <td><span class="lore-tag gold">Boleh</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Membangun OC</h3>
+            <p>SC Level dan SC Code ditentukan sendiri—selama mengikuti batasan yang berlaku. OC astral yang melakukan crossing wajib punya dua elemen: <strong>Crossing Reason</strong> (mengapa karaktermu menyeberang—tidak ada jawaban yang salah) dan <strong>The Cost</strong> (apa yang dibayar, dengan dua dimensi: waktu dan manifestasi).</p>
+
+            <h3>SC Level</h3>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Level</th>
+                  <th>Nama</th>
+                  <th>Tersedia untuk OC</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>L1</td>
+                  <td>Public Record</td>
+                  <td><span class="lore-tag gold">Bebas</span></td>
+                </tr>
+                <tr>
+                  <td>L2</td>
+                  <td>Limited Access</td>
+                  <td><span class="lore-tag gold">Bebas</span></td>
+                </tr>
+                <tr>
+                  <td>L3</td>
+                  <td>Restricted</td>
+                  <td><span class="lore-tag">Perlu Justifikasi Lore</span></td>
+                </tr>
+                <tr>
+                  <td>L4</td>
+                  <td>High Clearance ⚠</td>
+                  <td><span class="lore-tag red">Autentikasi Resmi ARA</span></td>
+                </tr>
+                <tr>
+                  <td>L5</td>
+                  <td>Classified ⚠</td>
+                  <td><span class="lore-tag red">Autentikasi Resmi ARA</span></td>
+                </tr>
+                <tr>
+                  <td>L0</td>
+                  <td>Beyond Registry ✕</td>
+                  <td><span class="lore-tag red">Tidak Tersedia</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>SC Code</h3>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Status</th>
+                  <th>Tersedia untuk OC</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>SC-01</td>
+                  <td>No Surveillance</td>
+                  <td><span class="lore-tag gold">Ya</span></td>
+                </tr>
+                <tr>
+                  <td>SC-02</td>
+                  <td>Passive Monitor</td>
+                  <td><span class="lore-tag gold">Ya</span></td>
+                </tr>
+                <tr>
+                  <td>SC-03</td>
+                  <td>Active Monitor</td>
+                  <td><span class="lore-tag gold">Ya</span></td>
+                </tr>
+                <tr>
+                  <td>SC-04</td>
+                  <td>Restricted Movement ⚠</td>
+                  <td><span class="lore-tag red">Autentikasi Resmi ARA</span></td>
+                </tr>
+                <tr>
+                  <td>SC-05</td>
+                  <td>Containment ⚠</td>
+                  <td><span class="lore-tag red">Tidak Tersedia</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="lore-infobox">
+              <h4>Catatan Arsiparis</h4>
+              <p>Kalau ada yang masih bingung soal apakah konsep OC-mu masuk dalam batas yang diizinkan atau tidak—tanya dulu sebelum lanjut. Jauh lebih mudah mendiskusikannya di awal daripada harus revisi besar-besaran di tengah jalan.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lore-article" id="lore-ara">
+          <div class="lore-art-category">// Entitas & Sistem—011</div>
+          <div class="lore-art-title">ASTRAL<br>REALM<br>AUTHORITY</div>
+          <div class="lore-art-meta">Kategori: Sistem · Status: Canon · Terakhir diperbarui: ????</div>
+          <div class="lore-art-body">
+
+            <div class="ara-logo-wrap">
+              <img src="assets/og/ara-logo.png" alt="Astral Realm Authority" class="ara-logo" oncontextmenu="return false" />
+              <div class="ara-logo-caption">// Astral Realm Authority — Lambang Resmi</div>
+            </div>
+
+            <p><strong>Astral Realm Authority</strong>—atau cukup <strong>ARA</strong>—adalah sistem pencatatan dan pengawasan yang, secara prinsip, mencakup semua makhluk yang ada. Bukan hanya yang astral, bukan hanya yang manusia. Semua. ARA tidak membedakan berdasarkan asal atau sifat—yang ada di dalam catatannya adalah siapapun yang eksis, karena keberadaan itu sendiri yang jadi dasarnya.</p>
+            <p>Sudah ada sejak sebelum kebanyakan makhluk yang terdaftar di dalamnya lahir. Berapa generasi sistem ini sudah berganti wajah, tidak ada yang benar-benar tahu—atau mau mengakuinya secara resmi.</p>
+
+            <h3>Prinsip Dasar</h3>
+            <p>ARA tidak berdiri di atas logika "siapa yang boleh masuk." Mereka berdiri di atas satu premis yang jauh lebih sederhana: kalau kau ada, kau tercatat. Manusia, jin, malaikat, arwah, entitas primordial—semua masuk dalam sistem yang sama, dengan format dokumen yang sama. Tidak ada jalur khusus berdasarkan ras, tidak ada hierarki yang menentukan siapa yang lebih berhak dapat nomor registrasi.</p>
+            <p>Yang membedakan bukan siapa kamu, tapi apa yang kamu lakukan dan seberapa jauh kamu bersinggungan dengan dua dunia sekaligus. Dari situ SC Level dan SC Code ditetapkan—dan dari situ juga perlindungan, atau konsekuensinya, berlaku.</p>
+
+            <div class="lore-infobox">
+              <h4>Catatan Arsiparis</h4>
+              <p>Ada perdebatan panjang soal apakah malaikat benar-benar "terdaftar" dalam arti yang sama dengan entitas lain—mengingat pergerakan mereka tidak pernah melewati jalur registrasi biasa. Jawaban resmi ARA soal ini tidak pernah keluar. Kemungkinan besar tidak akan.</p>
+            </div>
+
+            <h3>Apa yang ARA Lakukan</h3>
+            <p>Dokumen resmi mereka menyebutnya sebagai <em>"pemeliharaan keseimbangan antara lapisan realitas yang berdampingan."</em> Dalam praktik sehari-hari, itu artinya: menerbitkan AR-CID, menetapkan dan merevisi SC Level serta SC Code, memantau pergerakan crossing, dan menangani insiden yang dianggap cukup serius untuk ditangani langsung.</p>
+            <p>ARA juga jadi perantara resmi kalau ada sengketa lintas dunia—tapi jangan terlalu berharap prosesnya cepat. Birokrasi mereka sudah ada lebih lama dari peradaban manusia, dan kecepatannya kira-kira sebanding.</p>
+
+            <h3>Struktur</h3>
+            <p>Yang dipublikasikan tidak banyak. Yang umum diketahui: ada divisi registrasi yang mengurus pendaftaran dan AR-CID, ada divisi evaluasi yang menetapkan SC Level, ada divisi pengawasan yang mengelola SC Code dan menangani insiden. Di atasnya ada lapisan eksekutif yang komposisinya tidak sepenuhnya terbuka—entitas L5 beroperasi di sekitar sana.</p>
+            <p>Keputusan dari tingkat evaluasi ke atas bersifat final. Banding secara teknis bisa diajukan. Tingkat keberhasilannya tidak pernah dipublikasikan.</p>
+
+            <h3>Kantor & Titik Akses</h3>
+            <p>Seluruh infrastruktur ARA berbasis di dunia astral. Tidak ada kantor fisik di sisi manusia—tidak ada gedung, tidak ada alamat, tidak ada pintu yang bisa diketuk oleh sembarang orang yang kebetulan tahu namanya. Akses dari dunia manusia hanya bisa dilakukan melalui titik-titik komunikasi tertentu: celah-celah di mana lapisan antara dua dunia cukup tipis untuk sinyal astral bisa menembus ke sisi lain. Ini bukan kantor yang bisa didatangi. Ini lebih dekat ke terminal—satu arah, terbatas, dan hanya berfungsi kalau kamu sudah tahu cara menggunakannya.</p>
+            <p>Logikanya sendiri cukup jelas kalau dipikir-pikir: kalau ingin menemui ARA secara fisik, kamu harus sudah bisa masuk ke dunia astral terlebih dahulu. Yang berarti manusia biasa—yang tidak punya akses ke sisi lain—memang tidak punya jalur ke sana. Bukan karena ARA memblokir mereka secara aktif. Tapi karena pintunya memang tidak ada di sisi ini.</p>
+            <p>Proses administratif bisa dilakukan langsung di sisi astral, atau melalui titik komunikasi kalau tidak mau atau tidak bisa hadir fisik. Saluran komunikasi lebih nyaman. Responnya lebih lambat.</p>
+
+            <div class="lore-infobox">
+              <h4>Catatan Arsiparis</h4>
+              <p>Perlu dicatat—dan ini mungkin terdengar seperti pengakuan yang tidak lazim untuk sebuah arsip—bahwa "ARA," "AR-CID," "SC Level," "SC Code," dan seluruh terminologi yang digunakan di dokumen ini adalah adaptasi bahasa. Nama-nama dan label-label ini dibuat untuk memudahkan penulisan dan pemahaman di sisi ini: cara manusia—dan entitas yang sudah terlalu lama bergaul dengan manusia—memberi nama pada sesuatu supaya bisa dibicarakan dengan lebih efisien.</p>
+              <p>Sistem yang sebenarnya tidak menyebut dirinya "ARA." Ia tidak punya nama yang bisa diucapkan dalam bahasa apapun yang lazim digunakan di sini. Yang ada hanya fungsinya—pencatatan, pengawasan, keseimbangan—dan cara kerjanya yang sudah berlangsung jauh sebelum ada yang repot-repot memberinya akronim. Terminologi ini memudahkan penulisan. Jangan sampai kemudahannya membuat kamu lupa bahwa yang sedang digambarkan jauh lebih tua, jauh lebih besar, dan jauh lebih tidak peduli dengan istilah-istilah yang kita tempelkan padanya.</p>
+            </div>
+
+            <h3>Posisi ARA terhadap Entitas</h3>
+            <p>ARA bukan lembaga yang ramah, tapi bukan juga yang perlu ditakuti lebih dari yang semestinya. Mereka tidak punya agenda personal—mereka menegakkan sistem karena sistemnya ada, bukan karena ada kepentingan tersembunyi di balik setiap keputusan. Yang sering jadi masalah bukan niatnya, tapi caranya: ARA tidak diwajibkan menjelaskan apapun kepada siapapun, dan mereka cukup konsisten menjalankan itu.</p>
+            <p>Wargantara yang terdaftar resmi punya jalur untuk mengajukan komplain atau minta bantuan kalau sesuatu berjalan salah. Jalurnya ada. Apakah responsnya memuaskan—itu urusan masing-masing yang pernah mencoba.</p>
+
+            <div class="lore-infobox" style="border-left-color:var(--red)">
+              <h4>Tidak Terdaftar</h4>
+              <p>Bergerak tanpa registrasi ARA bukan hal yang mustahil. Banyak yang melakukannya, dan sebagian tidak pernah ketahuan. Yang berubah hanya satu: kalau sesuatu berjalan salah, tidak ada yang berkewajiban membantu. Dan kalau ARA yang menemukan duluan—konsekuensinya tergantung siapa yang menangani dan seberapa panjang hari mereka sebelumnya.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="lore-article" id="lore-ar-cid">
+          <div class="lore-art-category">// Entitas & Sistem—009</div>
+          <div class="lore-art-title">AR-CID<br>SYSTEM</div>
+          <div class="lore-art-meta">Kategori: Sistem · Status: Canon · Terakhir diperbarui: ????</div>
+          <div class="lore-art-body">
+            <p>AR-CID—<em>Astral Realm Citizen Identification</em>—adalah dokumen identitas resmi yang dikeluarkan oleh Astral Realm Authority untuk setiap entitas yang terdaftar. Bukan sekadar kartu. Ini adalah bukti bahwa keberadaanmu diakui oleh sistem—bahwa kamu ada, tercatat, dan punya tempat di dalam struktur yang mengatur dua dunia.</p>
+            <p>Entitas tanpa AR-CID secara teknis tidak ada dalam catatan ARA. Ini bukan berarti mereka tidak bisa bergerak—tapi berarti tidak ada yang bertanggung jawab atas mereka jika sesuatu berjalan salah, dan tidak ada jalur resmi yang bisa mereka gunakan jika butuh bantuan. Bagi sebagian entitas, ini bukan masalah. Bagi yang lain, ini alasan yang cukup untuk mendaftar.</p>
+
+            <h3>Komponen AR-CID</h3>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Komponen</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Display Name</td>
+                  <td>Nama yang digunakan di dunia manusia. Boleh berbeda jauh dari nama asli, dan biasanya memang demikian.</td>
+                </tr>
+                <tr>
+                  <td>Legal Name</td>
+                  <td>Nama resmi dalam catatan ARA. Pada beberapa ras, ini bukan nama yang diucapkan dengan suara.</td>
+                </tr>
+                <tr>
+                  <td>Date of Origin</td>
+                  <td>Tanggal lahir, tanggal penciptaan, atau tanggal pertama kali keberadaan entitas tercatat. Untuk entitas yang sangat tua, kolom ini kadang hanya berisi perkiraan abad.</td>
+                </tr>
+                <tr>
+                  <td>Gender</td>
+                  <td>Sistem gender di dunia astral tidak identik dengan sistem manusia. ARA menggunakan kategorinya sendiri, dan entitas bebas mendaftarkan apa yang paling mendekati kondisi mereka.</td>
+                </tr>
+                <tr>
+                  <td>Race</td>
+                  <td>Ras utama dan sub-ras jika ada. Beberapa entitas dengan latar campuran mendaftarkan lebih dari satu.</td>
+                </tr>
+                <tr>
+                  <td>Occupation</td>
+                  <td>Jabatan resmi yang terdaftar, maksimal dua baris. Tidak harus mencerminkan semua yang dilakukan entitas tersebut sehari-hari.</td>
+                </tr>
+                <tr>
+                  <td>AIN</td>
+                  <td>Astral Identification Number. Nomor unik dengan format <code>AR-XXXX-XXXX-XXXX</code>. Satu-satunya komponen yang tidak bisa diubah setelah diterbitkan.</td>
+                </tr>
+                <tr>
+                  <td>SC Level</td>
+                  <td>Security Clearance Level yang ditetapkan ARA, dari L1 hingga L5.</td>
+                </tr>
+                <tr>
+                  <td>SC Code</td>
+                  <td>Status pengawasan aktif yang berlaku untuk entitas tersebut saat ini.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Astral Identification Number (AIN)</h3>
+            <p>AIN adalah kode unik 12 karakter yang dibagi dalam tiga segmen, masing-masing terdiri dari kombinasi angka dan huruf kapital yang di-generate secara acak oleh sistem ARA saat pendaftaran pertama kali dilakukan. Tidak ada logika yang bisa dibaca dari kodenya—tidak ada yang bisa menebak informasi tentang entitas hanya dari melihat AIN mereka, dan memang itu yang diinginkan.</p>
+            <p>Format lengkapnya adalah <code>AR-XXXX-XXXX-XXXX</code>, di mana "AR" adalah prefiks tetap yang menandakan dokumen ini diterbitkan oleh Astral Realm Authority. AIN tidak bisa diubah, tidak bisa dipindahtangankan, dan tidak kedaluwarsa. Jika kartu fisiknya hilang, AIN tetap ada dalam sistem—dan proses penerbitan ulang hanya butuh verifikasi identitas di kantor ARA terdekat.</p>
+
+            <div class="lore-infobox">
+              <h4>Contoh AIN</h4>
+              <p><code>AR-25XD-64NA-065T</code>—milik Takahi Soren (<span class="redacted" aria-label="[REDACTED]">Muzakiel</span>). Seperti semua AIN, segmen-segmennya tidak mengandung informasi yang bisa didekode. Keunikannya hanya terletak pada fakta bahwa tidak ada dua entitas yang memiliki kode yang sama.</p>
+            </div>
+
+            <h3>Pembaruan & Revisi</h3>
+            <p>Sebagian besar komponen AR-CID bisa diperbarui melalui pengajuan resmi ke ARA—nama, pekerjaan, bahkan ras dalam kasus tertentu. Yang tidak bisa diubah hanyalah AIN dan tanggal penerbitannya. Perubahan SC Level dan SC Code tidak diajukan oleh entitas sendiri—keduanya ditetapkan dan direvisi unilateral oleh ARA berdasarkan evaluasi internal mereka.</p>
+          </div>
+        </div>
+
+        <div class="lore-article" id="lore-leveling">
+          <div class="lore-art-category">// Entitas & Sistem—010</div>
+          <div class="lore-art-title">LEVELING<br>& SC</div>
+          <div class="lore-art-meta">Kategori: Sistem · Status: Canon · Terakhir diperbarui: ????</div>
+          <div class="lore-art-body">
+            <p>Dua sistem yang berbeda, tapi sering disalahartikan sebagai satu hal yang sama: <strong>SC Level</strong> mengukur akses dan clearance—seberapa jauh entitas diizinkan masuk ke dalam struktur ARA. <strong>SC Code</strong> mengukur status pengawasan—seberapa besar perhatian yang sedang diarahkan ke entitas tersebut. Keduanya ditetapkan oleh ARA, dan keduanya bisa berubah tanpa pemberitahuan sebelumnya jika ARA merasa ada alasan yang cukup.</p>
+            <p>Tidak ada yang "naik level" dengan sendirinya seiring waktu. Tidak ada sistem pengalaman, tidak ada progress bar. ARA mengevaluasi entitas berdasarkan sejarah, kapabilitas, dan dalam beberapa kasus, hal-hal yang tidak sepenuhnya bisa dijelaskan secara transparan. Hasilnya adalah angka yang tercantum di AR-CID—dan angka itu berlaku sampai ARA memutuskan sebaliknya.</p>
+
+            <h3>SC Level—Security Clearance</h3>
+            <p>SC Level menentukan seberapa jauh akses resmi yang dimiliki entitas dalam sistem ARA—informasi apa yang bisa diakses, fasilitas mana yang bisa digunakan, dan posisi apa yang bisa dipegang.</p>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Level</th>
+                  <th>Nama</th>
+                  <th>Akses & Implikasi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>L1</td>
+                  <td>Public Record</td>
+                  <td>Entitas terdaftar dengan akses publik standar. Informasi dasar tercatat dan bisa diverifikasi. Pergerakan bebas, tidak ada restriksi khusus.</td>
+                </tr>
+                <tr>
+                  <td>L2</td>
+                  <td>Limited Access</td>
+                  <td>Akses ke beberapa fasilitas dan database internal ARA yang tidak tersedia untuk umum. Biasanya dimiliki entitas yang bekerja dengan atau di sekitar struktur resmi.</td>
+                </tr>
+                <tr>
+                  <td>L3</td>
+                  <td>Restricted</td>
+                  <td>Akses ke informasi dan area yang dikategorikan sensitif. Entitas di level ini sudah dalam radar ARA secara aktif—bukan sebagai ancaman, tapi sebagai aset yang perlu dipantau. Butuh justifikasi lore yang solid.</td>
+                </tr>
+                <tr>
+                  <td>L4</td>
+                  <td>High Clearance ⚠</td>
+                  <td>Terkait langsung dengan operasional inti ARA. Slot terbatas—jumlah entitas yang bisa memegang level ini dibatasi secara sistem. Kode L4 dikunci di AR-CID dan hanya bisa ditetapkan melalui autentikasi resmi. Tidak bisa diisi lewat jalur biasa.</td>
+                </tr>
+                <tr>
+                  <td>L5</td>
+                  <td>Classified ⚠</td>
+                  <td>Level pengawas. Setara dengan posisi seperti <span class="redacted" aria-label="[REDACTED]">Muzakiel</span>—mereka yang secara struktural berada di puncak hierarki ARA dan memiliki visibilitas penuh ke seluruh sistem. Kode terkunci di sistem, hanya bisa ditetapkan melalui autentikasi resmi. Reserved untuk talent.</td>
+                </tr>
+                <tr>
+                  <td>L0</td>
+                  <td>Beyond Registry ✕</td>
+                  <td>Di luar sistem sepenuhnya. Entitas L0 tidak terdaftar bukan karena tidak diketahui, tapi karena melampaui kapasitas ARA untuk mengategorikan atau mengontrol mereka. Termasuk figur-figur yang secara canon memiliki otoritas di atas struktur ARA itu sendiri. Secara resmi tidak ada untuk OC—kalau muncul dalam cerita, sifatnya hanya sebatas referensi narasi.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>SC Code—Surveillance Class</h3>
+            <p>SC Code adalah status pengawasan aktif yang berlaku untuk entitas saat ini. Berbeda dari SC Level yang relatif stabil, SC Code bisa berubah lebih cepat—naik jika ARA mendeteksi sesuatu yang memerlukan perhatian lebih, turun jika situasi dinilai sudah terkendali.</p>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Status</th>
+                  <th>Artinya dalam Praktik</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>SC-01</td>
+                  <td>No Surveillance</td>
+                  <td>Tidak ada pemantauan aktif. Entitas dianggap tidak menimbulkan risiko dan tidak memerlukan perhatian khusus dari ARA. Kondisi paling umum untuk entitas L1–L2.</td>
+                </tr>
+                <tr>
+                  <td>SC-02</td>
+                  <td>Passive Monitor</td>
+                  <td>Ada catatan aktif di sistem, tapi tidak ada tindakan langsung. ARA memantau dari jauh—data dikumpulkan, tapi tidak ada agen yang secara aktif mengikuti pergerakan entitas.</td>
+                </tr>
+                <tr>
+                  <td>SC-03</td>
+                  <td>Active Monitor</td>
+                  <td>Pemantauan aktif. Pergerakan dicatat secara real-time, dan ada pihak di dalam ARA yang memperhatikan. Entitas dengan SC-03 tidak selalu tahu mereka sedang dipantau—tapi yang sudah cukup lama di sistem biasanya bisa merasakannya.</td>
+                </tr>
+                <tr>
+                  <td>SC-04</td>
+                  <td>Restricted Movement ⚠</td>
+                  <td>Pergerakan dibatasi secara resmi oleh ARA. Entitas dengan status ini tidak bisa berpindah antara dua dunia tanpa izin eksplisit, dan dalam beberapa kasus tidak bisa meninggalkan area tertentu sama sekali. Secara praktis, ini setara dengan dipenjara—bukan dalam sel fisik, tapi dalam batasan yang ditetapkan sistem dan ditegakkan oleh ARA. Status ini hanya bisa ditetapkan melalui autentikasi resmi ARA, bukan sesuatu yang bisa diklaim sendiri.</td>
+                </tr>
+                <tr>
+                  <td>SC-05</td>
+                  <td>Containment ⚠</td>
+                  <td>Status penahanan penuh. Secara resmi tidak ada dalam konteks OC—ini bukan sesuatu yang bisa dibangun sebagai identitas karakter yang berfungsi normal. Kalau muncul dalam cerita, kehadirannya sebatas elemen narasi, bukan status yang aktif dijalani.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="lore-infobox">
+              <h4>Untuk Pembuat Karakter</h4>
+              <p>L1–L2 bebas diambil. L3 boleh dengan justifikasi lore yang masuk akal. L4 dan L5 butuh autentikasi resmi ARA—diskusikan dengan tim admin sebelum lanjut. L0, SC-05 tidak tersedia secara resmi; paling jauh hanya bisa muncul sebagai elemen cerita, bukan status aktif karakter. SC-04 juga butuh autentikasi resmi ARA—ini bukan status yang bisa diklaim sendiri karena implikasinya berat: pergerakan karakter benar-benar dibatasi sistem.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- GLOSSARIUM -->
+        <div class="lore-article" id="lore-glossarium">
+          <div class="lore-art-category">// Referensi—000</div>
+          <div class="lore-art-title">GLOSSA<br>RIUM</div>
+          <div class="lore-art-meta">Kategori: Referensi · Status: Canon · Terakhir diperbarui: ????</div>
+          <div class="lore-art-body">
+            <p>Kumpulan istilah yang sering muncul dalam lore Wargantara. Disusun sebagai referensi cepat—bukan pengganti membaca artikel lengkapnya, tapi cukup untuk navigasi percakapan sehari-hari di universe ini.</p>
+
+            <h3>A</h3>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Istilah</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>AIN</strong></td>
+                  <td><em>Astral Identification Number.</em> Nomor unik format <code>AR-XXXX-XXXX-XXXX</code> yang diterbitkan ARA saat entitas pertama kali terdaftar. Tidak bisa diubah atau dipindahtangankan.</td>
+                </tr>
+                <tr>
+                  <td><strong>AR-CID</strong></td>
+                  <td><em>Astral Realm Citizen Identification.</em> Dokumen identitas resmi yang dikeluarkan ARA untuk setiap entitas terdaftar. Memuat nama, AIN, SC Level, SC Code, dan informasi dasar lainnya.</td>
+                </tr>
+                <tr>
+                  <td><strong>ARA</strong></td>
+                  <td><em>Astral Realm Authority.</em> Badan pencatatan dan pengawasan yang mengatur pergerakan dan keberadaan entitas di antara dua dunia. Sudah ada lebih lama dari kebanyakan entitas yang ada di dalam catatannya.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>B</h3>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Istilah</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Batas Antara</strong></td>
+                  <td>Lapisan pemisah antara dunia manusia dan dunia astral. Bukan tembok fisik, melainkan kondisi yang memungkinkan dua lapisan realitas berbeda eksis berdampingan. Ketebalannya tidak seragam—ada titik-titik di mana ia menipis secara alami.</td>
+                </tr>
+                <tr>
+                  <td><strong>Barzakh</strong></td>
+                  <td>Istilah dari tradisi keagamaan untuk konsep pemisah antara dua keadaan yang tidak seharusnya bercampur. Digunakan sebagai salah satu referensi untuk memahami Batas Antara.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>C</h3>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Istilah</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Crossing</strong></td>
+                  <td>Tindakan menyeberangi Batas Antara secara sadar—permanen maupun semi-permanen. Bukan sekadar perpindahan lokasi, melainkan perubahan kondisi eksistensi. Selalu ada harga yang harus dibayar.</td>
+                </tr>
+                <tr>
+                  <td><strong>Crossing Reason</strong></td>
+                  <td>Alasan mengapa suatu entitas memilih untuk menyeberang ke dunia manusia. Wajib ada dalam latar belakang setiap OC astral yang melakukan crossing.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>G</h3>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Istilah</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Gaib</strong></td>
+                  <td>Kata Arab yang berarti <em>tersembunyi</em>. Dalam lore ini digunakan untuk merujuk pada makhluk astral secara umum, sekaligus menggambarkan sifat keberadaan mereka yang tidak terdeteksi oleh kebanyakan manusia.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>O</h3>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Istilah</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>OC</strong></td>
+                  <td><em>Original Character.</em> Karakter buatan fan yang berpartisipasi di sandbox universe Wargantara. Berdiri sendiri, terpisah dari identitas pembuatnya. Tidak bisa berstatus Wargantara—itu reserved untuk talent.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>S</h3>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Istilah</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>SC Code</strong></td>
+                  <td><em>Surveillance Code.</em> Kode yang menunjukkan status pengawasan aktif suatu entitas oleh ARA saat ini. Berbeda dari SC Level—ini bukan soal akses, tapi seberapa besar perhatian ARA sedang diarahkan ke entitas tersebut. Skala SC-01 hingga SC-05.</td>
+                </tr>
+                <tr>
+                  <td><strong>SC Level</strong></td>
+                  <td><em>Security Clearance Level.</em> Tingkat izin akses resmi suatu entitas dalam sistem ARA. Menentukan informasi apa yang bisa diakses dan posisi apa yang bisa dipegang. Skala L1 hingga L5.</td>
+                </tr>
+                <tr>
+                  <td><strong>Semi-Permanent Crossing</strong></td>
+                  <td>Kehadiran di dunia manusia dengan batasan waktu dan/atau manifestasi—selalu ada cost yang dibayar. Status ini tersedia untuk OC fan astral.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>T</h3>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Istilah</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>The Cost</strong></td>
+                  <td>Harga yang harus dibayar setiap kali entitas astral hadir di dunia manusia. Punya dua dimensi: <strong>waktu</strong> (semakin lama, semakin besar drain) dan <strong>manifestasi</strong> (semakin nyata kehadiran, semakin mahal harganya).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>W</h3>
+            <table class="lore-table">
+              <thead>
+                <tr>
+                  <th>Istilah</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Wargafana</strong></td>
+                  <td>Sebutan untuk fans/komunitas Wargantara. Dalam konteks lore, semua Wargafana secara otomatis sudah eksis di universe ini sebagai manusia—penghuni dunia manusia yang ada di sekitar para entitas astral.</td>
+                </tr>
+                <tr>
+                  <td><strong>Wargantara</strong></td>
+                  <td>Sebutan untuk makhluk astral yang memilih hidup di dunia manusia secara permanen atau semi-permanen. Ini bukan ras—ini kondisi. Status ini reserved untuk talent; OC fan tidak bisa mengklaimnya.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="lore-infobox">
+              <h4>Catatan Arsiparis</h4>
+              <p>Daftar ini tidak komprehensif dan akan diperbarui seiring lore berkembang. Untuk detail lengkap setiap istilah, navigasi ke artikel yang relevan melalui sidebar. Kalau ada istilah yang sering muncul tapi tidak ada di sini—kemungkinan memang belum waktunya untuk tercantum.</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /lore-content-area -->
+    </div><!-- /lore-layout -->
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="sf-col">
+          <div class="sf-col-title">WARGANTARA</div>
+          <p>Para entitas yang hidup di ambang—tidak sepenuhnya milik dunia manusia, tidak juga milik dunia astral.</p>
+        </div>
+        <div class="sf-col">
+          <div class="sf-col-title">NAVIGASI</div>
+          <a href="index.html">Home</a>
+          <a href="members.html">Members</a>
+          <a href="lore.html">Lore Archive</a>
+          <a href="guidelines.html">Guidelines</a>
+          <a href="arcid.html">AR-CID Editor</a>
+          <a href="credits.html">Credits & Attributions</a>
+        </div>
+        <div class="sf-col">
+          <div class="sf-col-title">KOMUNITAS</div>
+          <p>Sandbox lore terbuka untuk semua fan. Buat OC, tulis cerita, dan jadilah bagian dari dua dunia ini.</p>
+          <p style="margin-top:.5rem">Status Lore: <span style="color:var(--gold);opacity:1">Open Sandbox</span></p>
+        </div>
+      </div>
+      <div class="sf-bottom">
+        <span class="sf-logo">WAR<span>G</span>ANTARA</span>
+        <span class="sf-copy">© Wargantara VTuber Group · Est. ???? · All lore is fiction</span>
+        <span class="sf-copy">Lintas Batas</span>
+      </div>
+    </footer>
+
+    <script>
+      function toggleFaq(btn) {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(x => x.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      }
+      var LORE_HASH = {
+        'intro': 'pengantar',
+        'dunia-manusia': 'dunia-manusia',
+        'dunia-astral': 'dunia-astral',
+        'batas-antara': 'batas-antara',
+        'ras-umum': 'ras',
+        'ara': 'ara',
+        'ar-cid': 'arcid',
+        'leveling': 'leveling',
+        'sandbox-intro': 'sandbox',
+        'sandbox-ras': 'panduan-oc',
+        'glossarium': 'glossarium',
+        'faq': 'faq',
+      };
+      var LORE_HASH_REV = {};
+      Object.keys(LORE_HASH).forEach(function(k) {
+        LORE_HASH_REV[LORE_HASH[k]] = k;
+      });
+
+      function showLore(id, el, noHash, noScroll) {
+        document.querySelectorAll('.lore-article').forEach(x => {
+          x.classList.remove('active')
+        });
+        document.querySelectorAll('.lore-nav-item').forEach(x => {
+          x.classList.remove('active')
+        });
+        const art = document.getElementById('lore-' + id);
+        if (art) {
+          art.classList.add('active');
+          art.style.animation = 'none';
+          art.offsetHeight;
+          art.style.animation = '';
+        }
+        if (el) el.classList.add('active');
+        if (!noHash && LORE_HASH[id]) history.replaceState(null, '', '#' + LORE_HASH[id]);
+        /* Scroll to top setiap switch tab */
+        if (!noScroll) {
+          window.scrollTo(0, 0);
+        }
+      }
+      (function() {
+        const hash = location.hash.replace('#', '');
+        const id = LORE_HASH_REV[hash] || 'intro';
+        const el = document.querySelector('[onclick*="\'' + id + '\'"]');
+        showLore(id, el, true, true);
+      })();
+
+      function toggleMobile() {
+        const d = document.getElementById('mobile-drawer');
+        const b = document.getElementById('burger');
+        const open = d.classList.toggle('open');
+        b.classList.toggle('open', open);
+      }
+      // THEME—saturn icons (sf = base class always present, icon class toggled)
+      var isDark = (function() {
+        var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
+        return m ? m[1] === 'dark' : false;
+      })();
+
+      function applyTheme() {
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        var di = document.getElementById('theme-icon');
+        if (di) {
+          di.classList.remove('sf-sun-1-o', 'sf-moon-1-o');
+          di.classList.add(isDark ? 'sf-sun-1-o' : 'sf-moon-1-o');
+        }
+        var mi = document.getElementById('theme-icon-m');
+        if (mi) {
+          mi.classList.remove('sf-sun-1-o', 'sf-moon-1-o');
+          mi.classList.add(isDark ? 'sf-sun-1-o' : 'sf-moon-1-o');
+        }
+        var ml = document.getElementById('theme-label-m');
+        if (ml) {
+          ml.textContent = isDark ? 'Day Mode' : 'Night Mode';
+        }
+      }
+
+      function toggleTheme() {
+        isDark = !isDark;
+        var exp = new Date();
+        exp.setFullYear(exp.getFullYear() + 1);
+        document.cookie = 'wg-theme=' + (isDark ? 'dark' : 'light') + '; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        applyTheme();
+      }
+      applyTheme();
+      // re-apply icon saat tab aktif kembali (icon font kadang blank setelah tab switch)
+      document.addEventListener("visibilitychange", function() {
+        if (!document.hidden) applyTheme();
+      });
+      // ── SPLASH ──
+      (function() {
+        if (document.cookie.match(/(?:^|;\s*)wg-visited=1/)) {
+          var s = document.getElementById('splash-main');
+          if (s) s.classList.add('hidden');
+        }
+      })();
+      var _pendingTheme = null,
+        _denyTimer = null;
+
+      function splashStep2() {
+        var s1 = document.getElementById('splash-step1');
+        var s2 = document.getElementById('splash-step2');
+        s1.classList.add('fading');
+        setTimeout(function() {
+          s1.style.display = 'none';
+          s2.classList.add('active');
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              s2.classList.add('visible');
+            });
+          });
+        }, 350);
+      }
+
+      function splashSelectTheme(theme) {
+        _pendingTheme = theme;
+        document.getElementById('btn-day').classList.toggle('selected', theme === 'light');
+        document.getElementById('btn-night').classList.toggle('selected', theme === 'dark');
+        document.getElementById('splash-confirm').classList.add('ready');
+        isDark = (theme === 'dark');
+        applyTheme();
+      }
+
+      function splashEnter() {
+        if (!_pendingTheme) return;
+        var exp = new Date();
+        exp.setFullYear(exp.getFullYear() + 1);
+        document.cookie = 'wg-theme=' + _pendingTheme + '; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        document.cookie = 'wg-visited=1; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        isDark = (_pendingTheme === 'dark');
+        applyTheme();
+        var s = document.getElementById('splash-main');
+        s.classList.add('hiding');
+        setTimeout(function() {
+          s.classList.add('hidden');
+        }, 620);
+      }
+
+      function splashDeny() {
+        var box = document.querySelector('#splash-main .splash-box');
+        box.classList.add('glitching');
+        setTimeout(function() {
+          box.innerHTML = '<div class="splash-pre">// Wargantara &middot; Akses Ditolak</div>' +
+            '<div class="splash-quote" style="font-size:clamp(1.3rem,3.5vw,1.75rem)">&ldquo;... I see.&rdquo;</div>' +
+            '<div class="splash-attr" style="margin-bottom:2rem">&mdash;</div>' +
+            '<div class="splash-disclaimer" style="opacity:.6">Tidak ada yang bisa kami lakukan untuk melanjutkan.<br><br>Dunia ini bukan untukmu &mdash; dan itu tidak apa-apa.</div>' +
+            '<div class="deny-countdown" id="deny-countdown">Halaman akan ditutup dalam <span id="deny-secs">5</span> detik...</div>' +
+            '<div class="splash-corner">W</div>';
+          box.classList.remove('glitching');
+          var secs = 5,
+            el = document.getElementById('deny-secs'),
+            wrap = document.getElementById('deny-countdown');
+          _denyTimer = setInterval(function() {
+            secs--;
+            if (el) el.textContent = secs;
+            if (secs <= 2 && wrap) wrap.classList.add('urgent');
+            if (secs <= 0) {
+              clearInterval(_denyTimer);
+              try {
+                window.open('', '_self').close();
+              } catch (e) {}
+              window.close();
+              setTimeout(function() {
+                document.body.innerHTML = '';
+              }, 300);
+            }
+          }, 1000);
+        }, 180);
+      }
+      /* ---- MOBILE SIDEBAR: static -> fixed bottom after page-header ---- */
+      (function() {
+        var sidebar = document.querySelector('.lore-sidebar');
+        var spacer = document.getElementById('lore-sb-spacer');
+        var trigger = document.querySelector('.page-header');
+        if (!sidebar || !trigger) return;
+
+        function update() {
+          if (window.innerWidth > 768) {
+            sidebar.classList.remove('lore-sidebar--bottom', 'lore-sidebar--visible');
+            if (spacer) {
+              spacer.classList.remove('active');
+              spacer.style.height = '';
+            }
+            return;
+          }
+          var triggerBottom = trigger.offsetTop + trigger.offsetHeight;
+          if (window.scrollY > triggerBottom) {
+            if (!sidebar.classList.contains('lore-sidebar--bottom')) {
+              if (spacer) {
+                spacer.style.height = sidebar.offsetHeight + 'px';
+                spacer.classList.add('active');
+              }
+              sidebar.classList.add('lore-sidebar--bottom');
+              sidebar.getBoundingClientRect();
+              setTimeout(function() {
+                sidebar.classList.add('lore-sidebar--visible');
+              }, 20);
+            }
+          } else {
+            sidebar.classList.remove('lore-sidebar--visible');
+            setTimeout(function() {
+              if (!sidebar.classList.contains('lore-sidebar--visible')) {
+                sidebar.classList.remove('lore-sidebar--bottom');
+                if (spacer) {
+                  spacer.classList.remove('active');
+                  spacer.style.height = '';
+                }
+              }
+            }, 360);
+          }
+        }
+        window.addEventListener('scroll', update, {
+          passive: true
+        });
+        window.addEventListener('resize', update);
+        document.addEventListener('DOMContentLoaded', update);
+      })();
+
+      function toggleLobMenu() {
+        var menu = document.getElementById('lore-mob-menu');
+        var btn = document.getElementById('lore-mob-trigger');
+        var isOpen = menu.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+      }
+
+      function closeLobMenu() {
+        document.getElementById('lore-mob-menu').classList.remove('open');
+        document.getElementById('lore-mob-trigger').classList.remove('open');
+      }
+      /* Close on outside tap */
+      document.addEventListener('click', function(e) {
+        var menu = document.getElementById('lore-mob-menu');
+        var btn = document.getElementById('lore-mob-trigger');
+        if (menu && menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+          closeLobMenu();
+        }
+      });
+      /* Wrap showLore to sync floating menu active state & label */
+      var _origShowLore = showLore;
+      showLore = function(id, el, noHash, noScroll) {
+        _origShowLore(id, el, noHash, noScroll);
+        document.querySelectorAll('.lore-mob-menu-item').forEach(function(x) {
+          x.classList.toggle('active', x.dataset.lore === id);
+        });
+        var activeItem = document.querySelector('.lore-mob-menu-item[data-lore="' + id + '"]');
+        var labelEl = document.getElementById('lore-mob-label');
+        if (labelEl && activeItem) {
+          var txt = activeItem.textContent.trim();
+          labelEl.textContent = txt.length > 16 ? txt.substring(0, 14).trimEnd() + '\u2026' : txt;
+        }
+      };
+      /* Init label on load */
+      (function() {
+        var hash = location.hash.replace('#', '');
+        var initId = LORE_HASH_REV[hash] || 'intro';
+        document.querySelectorAll('.lore-mob-menu-item').forEach(function(x) {
+          x.classList.toggle('active', x.dataset.lore === initId);
+        });
+        var activeItem = document.querySelector('.lore-mob-menu-item[data-lore="' + initId + '"]');
+        var labelEl = document.getElementById('lore-mob-label');
+        if (labelEl && activeItem) {
+          var txt = activeItem.textContent.trim();
+          labelEl.textContent = txt.length > 16 ? txt.substring(0, 14).trimEnd() + '\u2026' : txt;
+        }
+      })();
+    </script>
+
+    <!-- MOBILE FLOATING NAV -->
+    <div class="lore-mob-menu" id="lore-mob-menu">
+      <div class="lore-mob-menu-label">// Lore Archive</div>
+      <div class="lore-mob-menu-section">Dunia</div>
+      <button class="lore-mob-menu-item active" data-lore="intro" onclick="showLore('intro',document.querySelector('[onclick*=\'intro\']'));closeLobMenu()">Pengantar</button>
+      <button class="lore-mob-menu-item" data-lore="dunia-manusia" onclick="showLore('dunia-manusia',document.querySelector('[onclick*=\'dunia-manusia\']'));closeLobMenu()">Dunia Manusia</button>
+      <button class="lore-mob-menu-item" data-lore="dunia-astral" onclick="showLore('dunia-astral',document.querySelector('[onclick*=\'dunia-astral\']'));closeLobMenu()">Dunia Astral</button>
+      <button class="lore-mob-menu-item" data-lore="batas-antara" onclick="showLore('batas-antara',document.querySelector('[onclick*=\'batas-antara\']'));closeLobMenu()">Batas Antara</button>
+      <div class="lore-mob-menu-section">Sistem</div>
+      <button class="lore-mob-menu-item" data-lore="ras-umum" onclick="showLore('ras-umum',document.querySelector('[onclick*=\'ras-umum\']'));closeLobMenu()">Ras &amp; Karakter</button>
+      <button class="lore-mob-menu-item" data-lore="ara" onclick="showLore('ara',document.querySelector('[onclick*=\'ara\']'));closeLobMenu()">Astral Realm Authority</button>
+      <button class="lore-mob-menu-item" data-lore="ar-cid" onclick="showLore('ar-cid',document.querySelector('[onclick*=\'ar-cid\']'));closeLobMenu()">AR-CID System</button>
+      <button class="lore-mob-menu-item" data-lore="leveling" onclick="showLore('leveling',document.querySelector('[onclick*=\'leveling\']'));closeLobMenu()">Leveling &amp; SC</button>
+      <div class="lore-mob-menu-section">Sandbox</div>
+      <button class="lore-mob-menu-item" data-lore="sandbox-intro" onclick="showLore('sandbox-intro',document.querySelector('[onclick*=\'sandbox-intro\']'));closeLobMenu()">Pengantar Sandbox</button>
+      <button class="lore-mob-menu-item" data-lore="sandbox-ras" onclick="showLore('sandbox-ras',document.querySelector('[onclick*=\'sandbox-ras\']'));closeLobMenu()">Panduan OC</button>
+      <button class="lore-mob-menu-item" data-lore="glossarium" onclick="showLore('glossarium',document.querySelector('[onclick*=\'glossarium\']'));closeLobMenu()">Glossarium</button>
+    </div>
+    <button class="lore-mob-trigger" id="lore-mob-trigger" onclick="toggleLobMenu()" aria-label="Navigasi Lore">
+      <div class="lore-mob-trigger-icon"><span></span><span></span><span></span></div>
+      <span id="lore-mob-label">MENU</span>
+    </button>
+
+  </body>
+
+</html>
