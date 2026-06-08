@@ -1565,7 +1565,7 @@
 
     <meta name="description" content="Wargantara adalah grup VTuber Indonesia bertemakan entitas astral dan sandbox lore universe.">
     <meta property="og:title" content="WARGANTARA">
-    <meta property="og:description" content="Wargantara — grup VTuber Indonesia bertemakan entitas astral. Karena cara terbaik menyimpan rahasia adalah menjadikannya fiksi — dan fiksi ini terbuka untuk semua yang ingin ikut membangunnya.">
+    <meta property="og:description" content="Wargantara—grup VTuber Indonesia bertemakan entitas astral. Karena cara terbaik menyimpan rahasia adalah menjadikannya fiksi—dan fiksi ini terbuka untuk semua yang ingin ikut membangunnya.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wgtr1.netlify.app">
     <meta property="og:image" content="https://wgtr1.netlify.app/assets/og/default.png">
@@ -1682,7 +1682,7 @@
 
     <!-- ── CROP MODAL ── -->
     <div id="crop-modal">
-      <div style="color:#aaa;font-size:12px;letter-spacing:1px;font-family:'Space Mono',monospace;">CROP PASFOTO — LOCKED
+      <div style="color:#aaa;font-size:12px;letter-spacing:1px;font-family:'Space Mono',monospace;">CROP PASFOTO—LOCKED
         4:5 RATIO | drag kotak · seret sudut untuk resize</div>
       <div id="crop-stage">
         <img id="crop-img" draggable="false">
@@ -1709,11 +1709,11 @@
     <div id="pw-modal">
       <div class="pw-box">
         <div class="pw-header">⚠ RESTRICTED ACCESS</div>
-        <div class="pw-level" id="pw-level-label">LEVEL 5 — CLASSIFIED</div>
+        <div class="pw-level" id="pw-level-label">LEVEL 5—CLASSIFIED</div>
         <div class="pw-desc" id="pw-desc">Akses ke level ini membutuhkan otorisasi khusus dari Astral Realm Authority.
         </div>
         <input type="password" id="pw-input" placeholder="ENTER AUTHORIZATION CODE" autocomplete="off">
-        <div class="pw-err" id="pw-err">⛔ OTORISASI DITOLAK — kode tidak valid</div>
+        <div class="pw-err" id="pw-err">⛔ OTORISASI DITOLAK—kode tidak valid</div>
         <div class="pw-btns">
           <button class="pw-btn" id="pw-cancel" onclick="cancelPW()">Batal</button>
           <button class="pw-btn" id="pw-confirm" onclick="confirmPW()">Konfirmasi</button>
@@ -1729,7 +1729,7 @@
         <div class="err-msg">
           Entitas yang dimaksud tidak sepenuhnya berada<br>
           dalam sistem pencatatan normal.<br><br>
-          <span style="color:red;">AKSES DITOLAK — BEYOND REGISTRY</span>
+          <span style="color:red;">AKSES DITOLAK—BEYOND REGISTRY</span>
         </div>
         <div class="err-close" onclick="closeErr()">[DISMISS]</div>
       </div>
@@ -1823,7 +1823,7 @@
           <label data-tip="" id="lbl-dispname">DISPLAY NAME</label>
           <div class="tip-box">
             <div class="tip-title">FULL NAME</div>
-            <div class="tip-body">Nama tampilan karakter — nama yang tampil di kartu, format sesuai kebangsaan karakter.</div>
+            <div class="tip-body">Nama tampilan karakter—nama yang tampil di kartu, format sesuai kebangsaan karakter.</div>
           </div>
           <input type="text" id="f-dispname" maxlength="30" placeholder="N/A">
           <div class="charcount" id="c-dispname">0/30</div>
@@ -1838,7 +1838,7 @@
           <div class="charcount" id="c-legalname">0/24</div>
           <div class="redact-row">
             <input type="checkbox" id="f-redacted" onchange="toggleRedacted()">
-            <label for="f-redacted">REDACTED — sensor di preview</label>
+            <label for="f-redacted">REDACTED—sensor di preview</label>
           </div>
         </div>
 
@@ -1901,7 +1901,7 @@
           </div>
         </div>
 
-        <!-- Pronouns — Human mode only -->
+        <!-- Pronouns—Human mode only -->
         <div class="field-group" id="pronouns-group" style="display:none;">
           <label data-tip="">PRONOUNS</label>
           <div class="tip-box">
@@ -1963,7 +1963,7 @@
         <div class="divider"></div>
         <div class="section-label" id="lbl-section-system">System Data</div>
         <div class="field-group">
-          <label data-tip="" id="lbl-ain">AIN — auto-generated</label>
+          <label data-tip="" id="lbl-ain">AIN—auto-generated</label>
           <div class="tip-box">
             <div class="tip-title">Astral Identification Number</div>
             <div class="tip-body">Nomor identifikasi unik dari sistem ARA. Di-generate otomatis.</div>
@@ -2025,7 +2025,7 @@
           </div>
         </div>
 
-        <div id="sec-ktp-hint" style="display:none;font-size:.62rem;color:var(--muted);letter-spacing:.1em;margin-top:-4px;">⚙ AUTO — ditentukan oleh ARA secara otomatis.</div>
+        <div id="sec-ktp-hint" style="display:none;font-size:.62rem;color:var(--muted);letter-spacing:.1em;margin-top:-4px;">⚙ AUTO—ditentukan oleh ARA secara otomatis.</div>
         <div class="divider"></div>
         <div class="section-label">Photo</div>
         <div id="drop-zone" onclick="document.getElementById('photo-upload').click()">
@@ -2046,18 +2046,18 @@
 
       <!-- PREVIEW -->
       <div class="preview-panel">
-        <div class="preview-label">// LIVE PREVIEW — AR-CID · ASTRAL REALM AUTHORITY //</div>
+        <div class="preview-label">// LIVE PREVIEW—AR-CID · ASTRAL REALM AUTHORITY //</div>
 
         <!-- Funfact: Inhuman mode -->
         <div class="preview-funfact" id="funfact-inhuman" style="display:none;">
-          <strong>// Catatan Lore — Entitas Astral</strong>
-          Dunia astral tidak mengenal konsep pronouns, ekspresi gender, maupun identitas gender sebagaimana dipahami manusia. Entitas astral hanya memiliki pemahaman gender yang sederhana: <em>Female</em>, <em>Male</em>, <em>Nonbinary</em> (jarang), dan <em>Unidentified</em> — digunakan ketika golongan entitas tersebut sama sekali tidak memiliki konsep gender yang matang.
+          <strong>// Catatan Lore—Entitas Astral</strong>
+          Dunia astral tidak mengenal konsep pronouns, ekspresi gender, maupun identitas gender sebagaimana dipahami manusia. Entitas astral hanya memiliki pemahaman gender yang sederhana: <em>Female</em>, <em>Male</em>, <em>Nonbinary</em> (jarang), dan <em>Unidentified</em>—digunakan ketika golongan entitas tersebut sama sekali tidak memiliki konsep gender yang matang.
         </div>
 
         <!-- Funfact: Human mode -->
         <div class="preview-funfact" id="funfact-human" style="display:none;">
-          <strong>// Catatan Lore — Entitas Human</strong>
-          Berbeda dengan entitas astral, manusia dalam semesta Wargantara memiliki pemahaman gender yang lebih kompleks. Kolom <em>Pronouns</em> hanya tersedia untuk karakter manusia — tersedia preset umum (He/Him, She/Her, They/Them, dll.) maupun opsi <em>Custom</em> untuk mengisi neopronouns atau kata ganti lainnya secara bebas.
+          <strong>// Catatan Lore—Entitas Human</strong>
+          Berbeda dengan entitas astral, manusia dalam semesta Wargantara memiliki pemahaman gender yang lebih kompleks. Kolom <em>Pronouns</em> hanya tersedia untuk karakter manusia—tersedia preset umum (He/Him, She/Her, They/Them, dll.) maupun opsi <em>Custom</em> untuk mengisi neopronouns atau kata ganti lainnya secara bebas.
         </div>
 
         <div id="scale-wrap">
@@ -2156,7 +2156,7 @@
 
     <script>
       /* ══════════════════════════
-       ENTITY TYPE — declare early so all functions can access it
+       ENTITY TYPE—declare early so all functions can access it
     ══════════════════════════ */
       var _entityType = 'inhuman'; // default; also re-declared below in ENTITY TYPE SYSTEM block
       /* ══════════════════════════
@@ -2307,9 +2307,9 @@
       let _prevLevel = 'L1',
         _prevSC = 'SC-02';
       const LEVEL_LABELS = {
-        'L4': ['L4 — HIGH CLEARANCE', 'Akses terbatas. Diperlukan otorisasi khusus dari divisi berwenang ARA.'],
-        'L5': ['L5 — CLASSIFIED', 'Level tertinggi dalam registry. Data hampir seluruhnya dikontrol ketat.'],
-        'AIN': ['⚙ ADMIN — AIN EDIT', 'Pengeditan manual AIN memerlukan otorisasi Administratif.'],
+        'L4': ['L4—HIGH CLEARANCE', 'Akses terbatas. Diperlukan otorisasi khusus dari divisi berwenang ARA.'],
+        'L5': ['L5—CLASSIFIED', 'Level tertinggi dalam registry. Data hampir seluruhnya dikontrol ketat.'],
+        'AIN': ['⚙ ADMIN—AIN EDIT', 'Pengeditan manual AIN memerlukan otorisasi Administratif.'],
       };
 
       function openPW(type, value, prevValue) {
@@ -3008,7 +3008,7 @@
           labelGender: 'GENDER',
           labelRace: 'RACE',
           labelOcc: 'OCCUPATION (maks 2 baris)',
-          labelAin: 'AIN — auto-generated',
+          labelAin: 'AIN—auto-generated',
           ainFull: 'ASTRAL IDENTIFICATION NUMBER (AIN)',
           sectionIdentity: 'Identity',
           sectionPersonal: 'Personal Info',
@@ -3051,7 +3051,7 @@
           labelGender: 'GENDER',
           labelRace: 'RACE',
           labelOcc: 'OCCUPATION (maks 2 baris)',
-          labelAin: 'AIN — auto-generated',
+          labelAin: 'AIN—auto-generated',
           ainFull: 'ASTRAL IDENTIFICATION NUMBER (AIN)',
           sectionIdentity: 'Identity',
           sectionPersonal: 'Personal Info',
@@ -3114,7 +3114,7 @@
         const tipGender = document.getElementById('tip-body-gender');
         if (tipGender) {
           if (type === 'inhuman') {
-            tipGender.textContent = 'Entitas astral umumnya tidak memiliki konsep gender yang kompleks — mereka tidak mengenal pronouns, ekspresi gender, atau identitas gender sebagaimana dipahami oleh manusia. Klasifikasi ini hanya sebatas penanda biologis atau persepsi eksternal semata.';
+            tipGender.textContent = 'Entitas astral umumnya tidak memiliki konsep gender yang kompleks—mereka tidak mengenal pronouns, ekspresi gender, atau identitas gender sebagaimana dipahami oleh manusia. Klasifikasi ini hanya sebatas penanda biologis atau persepsi eksternal semata.';
           } else {
             tipGender.textContent = 'Identitas gender karakter sesuai klasifikasi Astral Realm Authority.';
           }
@@ -3202,7 +3202,7 @@
           raceSel.style.display = 'none';
           document.getElementById('o-race').textContent = raceText.value.toUpperCase() || '\u00A0';
         }
-        // Toggle occupation input — both modes use textarea now
+        // Toggle occupation input—both modes use textarea now
         const occTA = document.getElementById('f-occ');
         const occSel = document.getElementById('f-occ-ktp');
         occTA.style.display = '';

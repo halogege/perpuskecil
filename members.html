@@ -156,7 +156,7 @@
         color: var(--gold)
       }
 
-      /* BURGER — mobile */
+      /* BURGER—mobile */
       .burger-btn {
         display: none;
         background: none;
@@ -1516,7 +1516,7 @@
 
     <meta name="description" content="Wargantara adalah grup VTuber Indonesia bertemakan entitas astral dan sandbox lore universe.">
     <meta property="og:title" content="WARGANTARA">
-    <meta property="og:description" content="Wargantara — grup VTuber Indonesia bertemakan entitas astral. Karena cara terbaik menyimpan rahasia adalah menjadikannya fiksi — dan fiksi ini terbuka untuk semua yang ingin ikut membangunnya.">
+    <meta property="og:description" content="Wargantara—grup VTuber Indonesia bertemakan entitas astral. Karena cara terbaik menyimpan rahasia adalah menjadikannya fiksi—dan fiksi ini terbuka untuk semua yang ingin ikut membangunnya.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wgtr1.netlify.app">
     <meta property="og:image" content="https://wgtr1.netlify.app/assets/og/default.png">
@@ -1681,9 +1681,9 @@
 
     <!-- PAGE HEADER -->
     <div class="page-header">
-      <div class="page-header-pre">// Astral Realm Authority — Citizen Registry //</div>
+      <div class="page-header-pre">// Astral Realm Authority—Citizen Registry //</div>
       <h1>MEMBER<br>DATABASE</h1>
-      <p>Registered Entities — Lintas Batas</p>
+      <p>Registered Entities—Lintas Batas</p>
       <div class="page-header-meta">
         <div class="page-header-stat">
           <div class="page-header-stat-val" id="stat-total">???</div>
@@ -1853,7 +1853,7 @@
               <span class="glitch-data-val corrupt" id="glitch-access">UNAUTHORIZED · SC L0</span>
             </div>
           </div>
-          <button class="glitch-close" onclick="closeGlitch()">// Tutup — Kembali ke Registry //</button>
+          <button class="glitch-close" onclick="closeGlitch()">// Tutup—Kembali ke Registry //</button>
         </div>
       </div>
     </div>
@@ -1874,10 +1874,10 @@
 
     <script>
       // ============================
-      // DATA — edit sesuai kebutuhan
+      // DATA—edit sesuai kebutuhan
       // ============================
       // ============================
-      // REVEAL SWITCHES — ubah true/false di sini untuk buka/tutup profil
+      // REVEAL SWITCHES—ubah true/false di sini untuk buka/tutup profil
       // ============================
       const REVEALED = {
         '01': true, // TAKAHI SOREN
@@ -2076,7 +2076,7 @@
       // ============================
       function renderCard(m) {
         const sc = scClass(m.scLevel);
-        // Cek REVEALED switch — kalau false, selalu glitch popup meski profileUrl ada
+        // Cek REVEALED switch—kalau false, selalu glitch popup meski profileUrl ada
         const revealed = !!REVEALED[m.id];
         const hasProfile = revealed && !!m.profileUrl;
         const clickFn = hasProfile ?
@@ -2173,14 +2173,14 @@
         // update stats
         const active = MEMBERS.filter(m => m.isActive).length;
         const pending = MEMBERS.filter(m => !m.isActive).length;
-        // stat-total is scrambled — don't set it here
+        // stat-total is scrambled—don't set it here
         document.getElementById('stat-active').textContent = active;
         document.getElementById('stat-pending').textContent = pending;
       }
       // ============================
       // THEME
       // ============================
-      // THEME — saturn icons (sf = base class always present, icon class toggled)
+      // THEME—saturn icons (sf = base class always present, icon class toggled)
       var isDark = (function() {
         var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
         return m ? m[1] === 'dark' : false;
@@ -2308,7 +2308,7 @@
       // INIT
       // ============================
       renderGrid();
-      // COUNT UP — races to 999 then settles at ???
+      // COUNT UP—races to 999 then settles at ???
       (function() {
         const el = document.getElementById('stat-total');
         if (!el) return;

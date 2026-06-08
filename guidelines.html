@@ -1563,7 +1563,7 @@
 
     <meta name="description" content="Wargantara adalah grup VTuber Indonesia bertemakan entitas astral dan sandbox lore universe.">
     <meta property="og:title" content="WARGANTARA">
-    <meta property="og:description" content="Wargantara — grup VTuber Indonesia bertemakan entitas astral. Karena cara terbaik menyimpan rahasia adalah menjadikannya fiksi — dan fiksi ini terbuka untuk semua yang ingin ikut membangunnya.">
+    <meta property="og:description" content="Wargantara—grup VTuber Indonesia bertemakan entitas astral. Karena cara terbaik menyimpan rahasia adalah menjadikannya fiksi—dan fiksi ini terbuka untuk semua yang ingin ikut membangunnya.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wgtr1.netlify.app">
     <meta property="og:image" content="https://wgtr1.netlify.app/assets/og/default.png">
@@ -1727,12 +1727,12 @@
       <div class="gl-sidebar">
         <div class="gl-sidebar-section">
           <div class="gl-sidebar-cat">// General Guidelines</div>
-          <div class="gl-nav-item active" onclick="showGl('general',this)">01 — Sikap & Komunitas</div>
-          <div class="gl-nav-item" onclick="showGl('derivative',this)">02 — Derivative Works</div>
-          <div class="gl-nav-item" onclick="showGl('fanworks',this)">03 — Fan Works</div>
-          <div class="gl-nav-item" onclick="showGl('boundaries',this)">04 — Boundaries</div>
-          <div class="gl-nav-item" onclick="showGl('prohibited',this)">05 — Absolute Prohibitions</div>
-          <div class="gl-nav-item" onclick="showGl('faq',this)">06 — FREQUENTLY ASKED QUESTIONS</div>
+          <div class="gl-nav-item active" onclick="showGl('general',this)">01—Sikap & Komunitas</div>
+          <div class="gl-nav-item" onclick="showGl('derivative',this)">02—Derivative Works</div>
+          <div class="gl-nav-item" onclick="showGl('fanworks',this)">03—Fan Works</div>
+          <div class="gl-nav-item" onclick="showGl('boundaries',this)">04—Boundaries</div>
+          <div class="gl-nav-item" onclick="showGl('prohibited',this)">05—Absolute Prohibitions</div>
+          <div class="gl-nav-item" onclick="showGl('faq',this)">06—FREQUENTLY ASKED QUESTIONS</div>
         </div>
       </div>
 
@@ -2458,7 +2458,7 @@
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">The Cost itu harus seberapa besar?</button>
               <div class="faq-a">
-                <div class="faq-a-inner">Tidak ada ukuran pasti—tapi harus terasa nyata dalam cerita. The Cost punya dua dimensi:<br><br><strong>Waktu</strong> — semakin lama di dunia manusia, semakin besar drain-nya.<br><strong>Manifestasi</strong> — semakin nyata kehadiran karaktermu (semakin banyak yang bisa melihat, mendengar, atau berinteraksi), semakin mahal harganya.<br><br>Tradeoff itulah yang membuat pilihan untuk tetap hadir jadi bermakna. Untuk mekanisme lengkapnya, baca <em>Batas Antara → The Cost</em>.</div>
+                <div class="faq-a-inner">Tidak ada ukuran pasti—tapi harus terasa nyata dalam cerita. The Cost punya dua dimensi:<br><br><strong>Waktu</strong>—semakin lama di dunia manusia, semakin besar drain-nya.<br><strong>Manifestasi</strong>—semakin nyata kehadiran karaktermu (semakin banyak yang bisa melihat, mendengar, atau berinteraksi), semakin mahal harganya.<br><br>Tradeoff itulah yang membuat pilihan untuk tetap hadir jadi bermakna. Untuk mekanisme lengkapnya, baca <em>Batas Antara → The Cost</em>.</div>
               </div>
             </div>
             <div class="faq-item">
@@ -2503,7 +2503,7 @@
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">SC Code dan SC Level itu sama?</button>
               <div class="faq-a">
-                <div class="faq-a-inner">Tidak. Keduanya berbeda:<br><br><strong>SC Level</strong> — mengukur akses dan clearance. Seberapa jauh entitas diizinkan masuk ke dalam struktur ARA.<br><strong>SC Code</strong> — mengukur status pengawasan aktif saat ini. Seberapa besar "perhatian" yang diarahkan ke entitas tersebut.<br><br>Keduanya ditetapkan oleh ARA dan bisa berubah kapan saja tanpa pemberitahuan sebelumnya.</div>
+                <div class="faq-a-inner">Tidak. Keduanya berbeda:<br><br><strong>SC Level</strong>—mengukur akses dan clearance. Seberapa jauh entitas diizinkan masuk ke dalam struktur ARA.<br><strong>SC Code</strong>—mengukur status pengawasan aktif saat ini. Seberapa besar "perhatian" yang diarahkan ke entitas tersebut.<br><br>Keduanya ditetapkan oleh ARA dan bisa berubah kapan saja tanpa pemberitahuan sebelumnya.</div>
               </div>
             </div>
             <div class="faq-item">
@@ -2601,11 +2601,11 @@
         var labelEl = document.getElementById('gl-mob-label');
         if (labelEl && activeItem) {
           var txt = activeItem.textContent.trim();
-          /* Ambil nomor (misal "01") + kata pertama setelah " — " */
+          /* Ambil nomor (misal "01") + kata pertama setelah "—" */
           var match = txt.match(/^(\d+)\s*[—\-]\s*(.+)/);
           if (match) {
             var words = match[2].trim().split(/\s+/);
-            labelEl.textContent = match[1] + ' — ' + words[0];
+            labelEl.textContent = match[1] + '—' + words[0];
           } else {
             labelEl.textContent = txt.length > 16 ? txt.substring(0, 14).trimEnd() + '…' : txt;
           }
@@ -2798,12 +2798,12 @@
     <!-- MOBILE FLOATING NAV -->
     <div class="gl-mob-menu" id="gl-mob-menu">
       <div class="gl-mob-menu-label">// Guidelines</div>
-      <button class="gl-mob-menu-item active" data-gl="general" onclick="showGl('general',this);closeMobMenu()">01 — Sikap &amp; Komunitas</button>
-      <button class="gl-mob-menu-item" data-gl="derivative" onclick="showGl('derivative',this);closeMobMenu()">02 — Derivative Works</button>
-      <button class="gl-mob-menu-item" data-gl="fanworks" onclick="showGl('fanworks',this);closeMobMenu()">03 — Fan Works</button>
-      <button class="gl-mob-menu-item" data-gl="boundaries" onclick="showGl('boundaries',this);closeMobMenu()">04 — Boundaries</button>
-      <button class="gl-mob-menu-item" data-gl="prohibited" onclick="showGl('prohibited',this);closeMobMenu()">05 — Absolute Prohibitions</button>
-      <button class="gl-mob-menu-item" data-gl="faq" onclick="showGl('faq',this);closeMobMenu()">06 — FAQ</button>
+      <button class="gl-mob-menu-item active" data-gl="general" onclick="showGl('general',this);closeMobMenu()">01—Sikap &amp; Komunitas</button>
+      <button class="gl-mob-menu-item" data-gl="derivative" onclick="showGl('derivative',this);closeMobMenu()">02—Derivative Works</button>
+      <button class="gl-mob-menu-item" data-gl="fanworks" onclick="showGl('fanworks',this);closeMobMenu()">03—Fan Works</button>
+      <button class="gl-mob-menu-item" data-gl="boundaries" onclick="showGl('boundaries',this);closeMobMenu()">04—Boundaries</button>
+      <button class="gl-mob-menu-item" data-gl="prohibited" onclick="showGl('prohibited',this);closeMobMenu()">05—Absolute Prohibitions</button>
+      <button class="gl-mob-menu-item" data-gl="faq" onclick="showGl('faq',this);closeMobMenu()">06—FAQ</button>
     </div>
     <button class="gl-mob-trigger" id="gl-mob-trigger" onclick="toggleMobMenu()" aria-label="Navigation">
       <div class="gl-mob-trigger-icon"><span></span><span></span><span></span></div>
