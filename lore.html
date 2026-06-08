@@ -2590,38 +2590,42 @@
 
       function tabNavGo(id, tab) {
         var tabnav = document.getElementById('lore-tabnav');
-        var drop = document.getElementById('ltab-drop-' + tab);
-        var tabEl = document.getElementById('ltab-' + tab);
 
-        // Step 1: scroll ke tabnav seketika biar layout stabil dulu
-        window.scrollTo({ top: tabnav.offsetTop - 56, behavior: 'instant' });
-
-        // Step 2: ganti konten
+        // Ganti konten
         showLore(id, document.querySelector('[onclick*="' + id + '"]'));
 
-        // Step 3: tutup dropdown setelah jeda singkat
-        _tabNavClosing = true;
-        setTimeout(function() {
-          drop.classList.remove('open');
-          tabEl.classList.remove('active');
-          setTimeout(function() { _tabNavClosing = false; }, 100);
-        }, 180);
+        // Scroll ke tabnav — kalau belum sticky, scroll akan mentok dan auto-close listener yang nutup dropdown
+        // Kalau sudah sticky (scrollY sudah di atas tabnav), langsung nutup aja
+        var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 52;
+        if (window.scrollY >= tabnav.offsetTop - navH) {
+          // Sudah sticky, dropdown nutup langsung
+          ['world','system','sandbox'].forEach(function(t) {
+            document.getElementById('ltab-drop-' + t).classList.remove('open');
+            document.getElementById('ltab-' + t).classList.remove('active');
+          });
+        } else {
+          // Belum sticky, scroll smooth ke atas — listener scroll yang akan nutup dropdown saat mentok
+          _tabNavClosing = true;
+          window.scrollTo({ top: tabnav.offsetTop - navH, behavior: 'smooth' });
+          setTimeout(function() { _tabNavClosing = false; }, 600);
+        }
       }
 
-      /* Auto-close dropdown on scroll - skip kalau sedang dalam proses tab nav */
+      /* Auto-close dropdown saat tabnav sudah mentok sticky di atas */
       (function() {
-        var _scrollTimer = null;
         window.addEventListener('scroll', function() {
           if (_tabNavClosing) return;
           var anyOpen = document.querySelector('.lore-tabnav-dropdown.open');
           if (!anyOpen) return;
-          clearTimeout(_scrollTimer);
-          _scrollTimer = setTimeout(function() {
+          var tabnav = document.getElementById('lore-tabnav');
+          var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 52;
+          // tabnav sudah sticky = posisi scroll sudah melewati offsetTop-nya
+          if (window.scrollY >= tabnav.offsetTop - navH) {
             ['world','system','sandbox'].forEach(function(t) {
               document.getElementById('ltab-drop-' + t).classList.remove('open');
               document.getElementById('ltab-' + t).classList.remove('active');
             });
-          }, 150);
+          }
         }, { passive: true });
       })();
 
