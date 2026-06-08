@@ -2589,21 +2589,26 @@
       var _tabNavClosing = false;
 
       function tabNavGo(id, tab) {
-        // navigate lore
+        var tabnav = document.getElementById('lore-tabnav');
+        var drop = document.getElementById('ltab-drop-' + tab);
+        var tabEl = document.getElementById('ltab-' + tab);
+
+        // Step 1: scroll ke tabnav seketika biar layout stabil dulu
+        window.scrollTo({ top: tabnav.offsetTop - 56, behavior: 'instant' });
+
+        // Step 2: ganti konten
         showLore(id, document.querySelector('[onclick*="' + id + '"]'));
-        // scroll to top of content first
-        window.scrollTo({ top: document.getElementById('lore-tabnav').offsetTop - 56, behavior: 'smooth' });
-        // close dropdown AFTER scroll finishes
+
+        // Step 3: tutup dropdown setelah jeda singkat
         _tabNavClosing = true;
         setTimeout(function() {
-          var drop = document.getElementById('ltab-drop-' + tab);
           drop.classList.remove('open');
-          document.getElementById('ltab-' + tab).classList.remove('active');
-          _tabNavClosing = false;
-        }, 420);
+          tabEl.classList.remove('active');
+          setTimeout(function() { _tabNavClosing = false; }, 100);
+        }, 180);
       }
 
-      /* Auto-close dropdown on scroll — skip if we just triggered a tab nav */
+      /* Auto-close dropdown on scroll - skip kalau sedang dalam proses tab nav */
       (function() {
         var _scrollTimer = null;
         window.addEventListener('scroll', function() {
@@ -2616,7 +2621,7 @@
               document.getElementById('ltab-drop-' + t).classList.remove('open');
               document.getElementById('ltab-' + t).classList.remove('active');
             });
-          }, 80);
+          }, 150);
         }, { passive: true });
       })();
 
