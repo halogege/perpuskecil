@@ -314,7 +314,15 @@
       }
 
       .lore-sidebar-section {
-        margin-bottom: 1.1rem
+        margin-bottom: .5rem;
+        padding-bottom: .5rem;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .lore-sidebar-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0
       }
 
       .lore-sidebar-head {
@@ -500,6 +508,15 @@
         opacity: .8;
         line-height: 1.75;
         font-size: .95rem
+      }
+
+      .lore-table td.label {
+        font-size: .66rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        opacity: .45;
+        white-space: nowrap;
+        width: 1%
       }
 
       .lore-table tr:hover td {
@@ -757,7 +774,52 @@
         }
 
         .lore-table {
-          font-size: .8rem
+          font-size: 1rem
+        }
+
+        .lore-table thead {
+          display: none
+        }
+
+        .lore-table tr {
+          display: block;
+          padding: 1rem 0;
+          border-bottom: 1px solid var(--border)
+        }
+
+        .lore-table tbody tr:last-child {
+          border-bottom: none
+        }
+
+        .lore-table td {
+          display: block;
+          border-bottom: none;
+          padding: 0;
+          opacity: 1
+        }
+
+        .lore-table td:first-child {
+          font-size: .95rem;
+          letter-spacing: .06em;
+          text-transform: uppercase;
+          color: var(--gold);
+          opacity: .9;
+          margin-bottom: .4rem;
+          white-space: normal;
+          font-weight: 700
+        }
+
+        .lore-table td.label {
+          font-size: .95rem;
+          letter-spacing: .06em;
+          white-space: normal;
+          font-weight: 700
+        }
+
+        .lore-table td:not(:first-child) {
+          font-size: .92rem;
+          line-height: 1.85;
+          opacity: .82
         }
 
         .lore-teritori-grid {
@@ -1448,7 +1510,7 @@
       <div class="lore-content-area">
 
         <div class="lore-article active" id="lore-intro">
-          <div class="lore-art-category">// Backstory—001</div>
+          <div class="lore-art-category">// WS-001</div>
           <div class="lore-art-title">PENGANTAR<br>WARGANTARA</div>
           <div class="lore-art-meta">Kategori: Lore Inti · Status: Canon · Terakhir diperbarui: ????</div>
           <div class="lore-art-body">
@@ -1477,7 +1539,7 @@
         </div>
 
         <div class="lore-article" id="lore-dunia-manusia">
-          <div class="lore-art-category">// Dunia—002</div>
+          <div class="lore-art-category">// WS-002</div>
           <div class="lore-art-title">DUNIA<br>MANUSIA</div>
           <div class="lore-art-meta">Kategori: World-Building · Status: Canon · Terakhir diperbarui: ????</div>
           <div class="lore-art-body">
@@ -1513,7 +1575,7 @@
         </div>
 
         <div class="lore-article" id="lore-dunia-astral">
-          <div class="lore-art-category">// Dunia—003</div>
+          <div class="lore-art-category">// WS-003</div>
           <div class="lore-art-title">DUNIA<br>ASTRAL</div>
           <div class="lore-art-meta">Kategori: World-Building · Status: Canon · Terakhir diperbarui: ????</div>
           <div class="lore-art-body">
@@ -1568,7 +1630,7 @@
         </div>
 
         <div class="lore-article" id="lore-batas-antara">
-          <div class="lore-art-category">// Dunia—004</div>
+          <div class="lore-art-category">// WS-004</div>
           <div class="lore-art-title">BATAS<br>ANTARA</div>
           <div class="lore-art-meta">Kategori: World-Building · Status: Canon · Terakhir diperbarui: ????</div>
           <div class="lore-art-body">
@@ -1613,7 +1675,7 @@
         </div>
 
         <div class="lore-article" id="lore-ras-umum">
-          <div class="lore-art-category">// Entitas—005</div>
+          <div class="lore-art-category">// LS-001</div>
           <div class="lore-art-title">RAS &amp;<br>PEKERJAAN</div>
           <div class="lore-art-meta">Kategori: Lore Entitas · Status: Canon · Terakhir diperbarui: ????</div>
           <div class="lore-art-body">
@@ -1722,7 +1784,7 @@
 
         <!-- SANDBOX: PENGANTAR -->
         <div class="lore-article" id="lore-sandbox-intro">
-          <div class="lore-art-category">// Sandbox Guide—007</div>
+          <div class="lore-art-category">// SG-001</div>
           <div class="lore-art-title">PENGANTAR<br>SANDBOX</div>
           <div class="lore-art-meta">Kategori: Sandbox Guide · Status: Canon · Terakhir diperbarui: ????</div>
           <div class="lore-art-body">
@@ -1756,7 +1818,7 @@
 
         <!-- SANDBOX: RAS & KARAKTER -->
         <div class="lore-article" id="lore-sandbox-ras">
-          <div class="lore-art-category">// Sandbox Guide—008</div>
+          <div class="lore-art-category">// SG-002</div>
           <div class="lore-art-title">PANDUAN<br>OC</div>
           <div class="lore-art-meta">Kategori: Sandbox Guide · Status: Canon · Terakhir diperbarui: ????</div>
           <div class="lore-art-body">
@@ -1957,7 +2019,7 @@
         </div>
 
         <div class="lore-article" id="lore-ara">
-          <div class="lore-art-category">// Entitas & Sistem—011</div>
+          <div class="lore-art-category">// LS-002</div>
           <div class="lore-art-title">ASTRAL<br>REALM<br>AUTHORITY</div>
           <div class="lore-art-meta">Kategori: Sistem · Status: Canon · Terakhir diperbarui: ????</div>
           <div class="lore-art-body">
@@ -2011,7 +2073,7 @@
         </div>
 
         <div class="lore-article" id="lore-ar-cid">
-          <div class="lore-art-category">// Entitas & Sistem—009</div>
+          <div class="lore-art-category">// LS-003</div>
           <div class="lore-art-title">AR-CID<br>SYSTEM</div>
           <div class="lore-art-meta">Kategori: Sistem · Status: Canon · Terakhir diperbarui: ????</div>
           <div class="lore-art-body">
@@ -2081,7 +2143,7 @@
         </div>
 
         <div class="lore-article" id="lore-leveling">
-          <div class="lore-art-category">// Entitas & Sistem—010</div>
+          <div class="lore-art-category">// LS-004</div>
           <div class="lore-art-title">LEVELING<br>& SC</div>
           <div class="lore-art-meta">Kategori: Sistem · Status: Canon · Terakhir diperbarui: ????</div>
           <div class="lore-art-body">
@@ -2180,7 +2242,7 @@
 
         <!-- WANTARA -->
         <div class="lore-article" id="lore-wantara">
-          <div class="lore-art-category">// Media & Komunikasi—011</div>
+          <div class="lore-art-category">// LS-005</div>
           <div class="lore-art-title">WANTARA</div>
           <div class="lore-art-meta">Kategori: Lore System · Status: Canon · Terakhir diperbarui: ????</div>
           <div class="lore-art-body">
@@ -2202,13 +2264,13 @@
             <h3>Informasi Umum</h3>
             <table class="lore-table">
               <tbody>
-                <tr><td style="opacity:.5;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">Nama Resmi</td><td>WANTARA, Warta Antara</td></tr>
-                <tr><td style="opacity:.5;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">Jenis</td><td>Surat kabar lintas dimensi</td></tr>
-                <tr><td style="opacity:.5;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">Jangkauan</td><td>Dunia Manusia &amp; Dunia Astral</td></tr>
-                <tr><td style="opacity:.5;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">Usia Berdiri</td><td>Tidak diketahui pasti—konon sangat tua</td></tr>
-                <tr><td style="opacity:.5;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">Pendiri</td><td>Tidak diketahui</td></tr>
-                <tr><td style="opacity:.5;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">Lokasi Kantor</td><td>Dunia Manusia—alamat tidak diketahui publik, overlap dengan Dunia Astral</td></tr>
-                <tr><td style="opacity:.5;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">Status</td><td>Aktif beroperasi</td></tr>
+                <tr><td class="label">Nama Resmi</td><td>WANTARA, Warta Antara</td></tr>
+                <tr><td class="label">Jenis</td><td>Surat kabar lintas dimensi</td></tr>
+                <tr><td class="label">Jangkauan</td><td>Dunia Manusia &amp; Dunia Astral</td></tr>
+                <tr><td class="label">Usia Berdiri</td><td>Tidak diketahui pasti—konon sangat tua</td></tr>
+                <tr><td class="label">Pendiri</td><td>Tidak diketahui</td></tr>
+                <tr><td class="label">Lokasi Kantor</td><td>Dunia Manusia—alamat tidak diketahui publik, overlap dengan Dunia Astral</td></tr>
+                <tr><td class="label">Status</td><td>Aktif beroperasi</td></tr>
               </tbody>
             </table>
 
@@ -2254,169 +2316,230 @@
 
         <!-- GLOSSARIUM -->
         <div class="lore-article" id="lore-glossarium">
-          <div class="lore-art-category">// Referensi—000</div>
+          <div class="lore-art-category">// SG-003</div>
           <div class="lore-art-title">GLOSSA<br>RIUM</div>
           <div class="lore-art-meta">Kategori: Referensi · Status: Canon · Terakhir diperbarui: ????</div>
           <div class="lore-art-body">
             <p>Kumpulan istilah yang sering muncul dalam lore Wargantara. Disusun sebagai referensi cepat—bukan pengganti membaca artikel lengkapnya, tapi cukup untuk navigasi percakapan sehari-hari di universe ini.</p>
 
-            <h3>A</h3>
-            <table class="lore-table">
-              <thead>
-                <tr>
-                  <th>Istilah</th>
-                  <th>Keterangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>AIN</strong></td>
-                  <td><em>Astral Identification Number.</em> Nomor unik format <code>AR-XXXX-XXXX-XXXX</code> yang diterbitkan ARA saat entitas pertama kali terdaftar. Tidak bisa diubah atau dipindahtangankan.</td>
-                </tr>
-                <tr>
-                  <td><strong>AR-CID</strong></td>
-                  <td><em>Astral Realm Citizen Identification.</em> Dokumen identitas resmi yang dikeluarkan ARA untuk setiap entitas terdaftar. Memuat nama, AIN, SC Level, SC Code, dan informasi dasar lainnya.</td>
-                </tr>
-                <tr>
-                  <td><strong>ARA</strong></td>
-                  <td><em>Astral Realm Authority.</em> Badan pencatatan dan pengawasan yang mengatur pergerakan dan keberadaan entitas di antara dua dunia. Sudah ada lebih lama dari kebanyakan entitas yang ada di dalam catatannya.</td>
-                </tr>
-              </tbody>
-            </table>
+            <!-- SEARCH -->
+            <div style="margin:1.5rem 0 2rem">
+              <div style="position:relative">
+                <input id="gloss-search" type="text" placeholder="Cari istilah..." autocomplete="off" style="width:100%;background:var(--surface);border:1px solid var(--border2);color:var(--ink);font-family:var(--mono);font-size:.82rem;letter-spacing:.05em;padding:.65rem 2.5rem .65rem 1rem;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border2)'" oninput="glossSearch(this.value)">
+                <span style="position:absolute;right:.85rem;top:50%;transform:translateY(-50%);opacity:.35;font-size:.75rem;pointer-events:none">⌕</span>
+              </div>
+              <div id="gloss-empty" style="display:none;padding:1.5rem 0;font-size:.82rem;opacity:.45;letter-spacing:.08em">— Tidak ada istilah yang cocok —</div>
+            </div>
 
-            <h3>B</h3>
-            <table class="lore-table">
-              <thead>
-                <tr>
-                  <th>Istilah</th>
-                  <th>Keterangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Batas Antara</strong></td>
-                  <td>Lapisan pemisah antara dunia manusia dan dunia astral. Bukan tembok fisik, melainkan kondisi yang memungkinkan dua lapisan realitas berbeda eksis berdampingan. Ketebalannya tidak seragam—ada titik-titik di mana ia menipis secara alami.</td>
-                </tr>
-                <tr>
-                  <td><strong>Barzakh</strong></td>
-                  <td>Istilah dari tradisi keagamaan untuk konsep pemisah antara dua keadaan yang tidak seharusnya bercampur. Digunakan sebagai salah satu referensi untuk memahami Batas Antara.</td>
-                </tr>
-              </tbody>
-            </table>
+            <!-- ENTRIES -->
+            <div id="gloss-entries">
 
-            <h3>C</h3>
-            <table class="lore-table">
-              <thead>
-                <tr>
-                  <th>Istilah</th>
-                  <th>Keterangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Crossing</strong></td>
-                  <td>Tindakan menyeberangi Batas Antara secara sadar—permanen maupun semi-permanen. Bukan sekadar perpindahan lokasi, melainkan perubahan kondisi eksistensi. Selalu ada harga yang harus dibayar.</td>
-                </tr>
-                <tr>
-                  <td><strong>Crossing Reason</strong></td>
-                  <td>Alasan mengapa suatu entitas memilih untuk menyeberang ke dunia manusia. Wajib ada dalam latar belakang setiap OC astral yang melakukan crossing.</td>
-                </tr>
-              </tbody>
-            </table>
+              <div class="gloss-letter" data-letter="A"><h3>A</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="ain astral identification number">
+                    <td><strong>AIN</strong></td>
+                    <td><em>Astral Identification Number.</em> Nomor unik format <code>AR-XXXX-XXXX-XXXX</code> yang diterbitkan ARA saat entitas pertama kali terdaftar. Tidak bisa diubah atau dipindahtangankan.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="ar-cid astral realm citizen identification dokumen identitas">
+                    <td><strong>AR-CID</strong></td>
+                    <td><em>Astral Realm Citizen Identification.</em> Dokumen identitas resmi yang dikeluarkan ARA untuk setiap entitas terdaftar. Memuat nama, AIN, SC Level, SC Code, dan informasi dasar lainnya.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="ara astral realm authority badan pengawasan">
+                    <td><strong>ARA</strong></td>
+                    <td><em>Astral Realm Authority.</em> Badan pencatatan dan pengawasan yang mengatur pergerakan dan keberadaan entitas di antara dua dunia. Sudah ada lebih lama dari kebanyakan entitas yang ada di dalam catatannya.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="arwah jiwa roh bekas manusia">
+                    <td><strong>Arwah</strong></td>
+                    <td>Jiwa yang pernah hidup sebagai manusia dan belum atau tidak berpindah ke lapisan berikutnya. Membawa ingatan dan kebiasaan dari kehidupan sebelumnya. Tidak bisa memiliki tubuh fisik.</td>
+                  </tr>
+                </tbody>
+              </table>
 
-            <h3>G</h3>
-            <table class="lore-table">
-              <thead>
-                <tr>
-                  <th>Istilah</th>
-                  <th>Keterangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Gaib</strong></td>
-                  <td>Kata Arab yang berarti <em>tersembunyi</em>. Dalam lore ini digunakan untuk merujuk pada makhluk astral secara umum, sekaligus menggambarkan sifat keberadaan mereka yang tidak terdeteksi oleh kebanyakan manusia.</td>
-                </tr>
-              </tbody>
-            </table>
+              <div class="gloss-letter" data-letter="B"><h3>B</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="batas antara veil hijab pemisah">
+                    <td><strong>Batas Antara</strong></td>
+                    <td>Lapisan pemisah antara dunia manusia dan dunia astral. Bukan tembok fisik, melainkan kondisi yang memungkinkan dua lapisan realitas berbeda eksis berdampingan. Ketebalannya tidak seragam—ada titik-titik di mana ia menipis secara alami.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="barzakh pemisah tradisi keagamaan ambang">
+                    <td><strong>Barzakh</strong></td>
+                    <td>Istilah dari tradisi keagamaan untuk konsep pemisah antara dua keadaan yang tidak seharusnya bercampur. Digunakan sebagai salah satu referensi untuk memahami Batas Antara.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="berdarah campuran half-blood hybrid manusia">
+                    <td><strong>Berdarah Campuran</strong></td>
+                    <td>Manusia dengan leluhur atau ikatan langsung ke dunia astral. Kondisi langka, sering tidak disadari. Status mereka di kedua dunia ambigu—tidak sepenuhnya diakui di satu sisi, tidak sepenuhnya diterima di sisi lain.</td>
+                  </tr>
+                </tbody>
+              </table>
 
-            <h3>O</h3>
-            <table class="lore-table">
-              <thead>
-                <tr>
-                  <th>Istilah</th>
-                  <th>Keterangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>OC</strong></td>
-                  <td><em>Original Character.</em> Karakter buatan fan yang berpartisipasi di sandbox universe Wargantara. Berdiri sendiri, terpisah dari identitas pembuatnya. Tidak bisa berstatus Wargantara—itu reserved untuk talent.</td>
-                </tr>
-              </tbody>
-            </table>
+              <div class="gloss-letter" data-letter="C"><h3>C</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="crossing menyeberang batas antara perpindahan">
+                    <td><strong>Crossing</strong></td>
+                    <td>Tindakan menyeberangi Batas Antara secara sadar—permanen maupun semi-permanen. Bukan sekadar perpindahan lokasi, melainkan perubahan kondisi eksistensi. Selalu ada harga yang harus dibayar.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="crossing reason alasan menyeberang latar belakang oc">
+                    <td><strong>Crossing Reason</strong></td>
+                    <td>Alasan mengapa suatu entitas memilih untuk menyeberang ke dunia manusia. Wajib ada dalam latar belakang setiap OC astral yang melakukan crossing.</td>
+                  </tr>
+                </tbody>
+              </table>
 
-            <h3>S</h3>
-            <table class="lore-table">
-              <thead>
-                <tr>
-                  <th>Istilah</th>
-                  <th>Keterangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>SC Code</strong></td>
-                  <td><em>Surveillance Code.</em> Kode yang menunjukkan status pengawasan aktif suatu entitas oleh ARA saat ini. Berbeda dari SC Level—ini bukan soal akses, tapi seberapa besar perhatian ARA sedang diarahkan ke entitas tersebut. Skala SC-01 hingga SC-05.</td>
-                </tr>
-                <tr>
-                  <td><strong>SC Level</strong></td>
-                  <td><em>Security Clearance Level.</em> Tingkat izin akses resmi suatu entitas dalam sistem ARA. Menentukan informasi apa yang bisa diakses dan posisi apa yang bisa dipegang. Skala L1 hingga L5.</td>
-                </tr>
-                <tr>
-                  <td><strong>Semi-Permanent Crossing</strong></td>
-                  <td>Kehadiran di dunia manusia dengan batasan waktu dan/atau manifestasi—selalu ada cost yang dibayar. Status ini tersedia untuk OC fan astral.</td>
-                </tr>
-              </tbody>
-            </table>
+              <div class="gloss-letter" data-letter="D"><h3>D</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="dunia astral alam gaib spiritual dimensi">
+                    <td><strong>Dunia Astral</strong></td>
+                    <td>Lapisan realitas tempat tinggal makhluk gaib—dimensi yang digaibkan oleh Pencipta. Menyalin banyak bentuk yang ada di alam semesta dengan berbagai pengubahan. Terbagi dalam berbagai teritori: kerajaan, perkumpulan ras, kelompok bebas, dan kawasan luar bumi.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="dunia manusia bumi realitas fisik">
+                    <td><strong>Dunia Manusia</strong></td>
+                    <td>Lapisan realitas tempat manusia hidup—berjalan di atas hukum sebab-akibat yang tidak bisa ditawar. Satu-satunya tempat di mana waktu benar-benar bergerak secara linear. Titik tujuan sebagian besar Wargantara.</td>
+                  </tr>
+                </tbody>
+              </table>
 
-            <h3>T</h3>
-            <table class="lore-table">
-              <thead>
-                <tr>
-                  <th>Istilah</th>
-                  <th>Keterangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>The Cost</strong></td>
-                  <td>Harga yang harus dibayar setiap kali entitas astral hadir di dunia manusia. Punya dua dimensi: <strong>waktu</strong> (semakin lama, semakin besar drain) dan <strong>manifestasi</strong> (semakin nyata kehadiran, semakin mahal harganya).</td>
-                </tr>
-              </tbody>
-            </table>
+              <div class="gloss-letter" data-letter="E"><h3>E</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="entitas primordial makhluk tua kuno">
+                    <td><strong>Entitas Primordial</strong></td>
+                    <td>Makhluk-makhluk tua yang keberadaannya mendahului kategorisasi apapun. Ada sebelum sistem, sebelum nama, sebelum ada yang mencatatnya. Tidak semuanya masih aktif atau kohesif sebagai individu. Keterlibatan mereka jarang terjadi—dan ketika terjadi, bukan pertanda baik untuk semua pihak.</td>
+                  </tr>
+                </tbody>
+              </table>
 
-            <h3>W</h3>
-            <table class="lore-table">
-              <thead>
-                <tr>
-                  <th>Istilah</th>
-                  <th>Keterangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Wargafana</strong></td>
-                  <td>Sebutan untuk fans/komunitas Wargantara. Dalam konteks lore, semua Wargafana secara otomatis sudah eksis di universe ini sebagai manusia—penghuni dunia manusia yang ada di sekitar para entitas astral.</td>
-                </tr>
-                <tr>
-                  <td><strong>Wargantara</strong></td>
-                  <td>Sebutan untuk makhluk astral yang memilih hidup di dunia manusia secara permanen atau semi-permanen. Ini bukan ras—ini kondisi. Status ini reserved untuk talent; OC fan tidak bisa mengklaimnya.</td>
-                </tr>
-              </tbody>
-            </table>
+              <div class="gloss-letter" data-letter="G"><h3>G</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="gaib tersembunyi makhluk astral arab">
+                    <td><strong>Gaib</strong></td>
+                    <td>Kata Arab yang berarti <em>tersembunyi</em>. Dalam lore ini digunakan untuk merujuk pada makhluk astral secara umum, sekaligus menggambarkan sifat keberadaan mereka yang tidak terdeteksi oleh kebanyakan manusia.</td>
+                  </tr>
+                </tbody>
+              </table>
 
-            <div class="lore-infobox">
+              <div class="gloss-letter" data-letter="H"><h3>H</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="hybrid campuran dua ras perpaduan substansi">
+                    <td><strong>Hybrid</strong></td>
+                    <td>Entitas yang terbentuk dari dua atau lebih ras yang berbeda—perpaduan substansi, bukan sekadar estetika. Sifat dan kapabilitasnya tidak selalu bisa diprediksi dari komponen asalnya. Status mereka di dunia astral seringkali ambigu.</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="gloss-letter" data-letter="J"><h3>J</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="jin makhluk api kehendak bebas">
+                    <td><strong>Jin</strong></td>
+                    <td>Makhluk astral yang diciptakan dari api tanpa asap, diberi kehendak bebas seperti manusia. Spektrum mereka luas: ada yang taat, ada yang tidak, ada yang tidak peduli dengan kategori itu. Kelompok terbesar yang secara aktif berinteraksi dengan dunia manusia.</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="gloss-letter" data-letter="M"><h3>M</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="makhluk mitologi folklore naga peri mermaid feniks">
+                    <td><strong>Makhluk Mitologi</strong></td>
+                    <td>Naga, peri, mermaid, feniks, dan ratusan kategori lain dari folklore manusia di seluruh dunia—semuanya nyata. Hidup dalam komunitas dengan budaya dan hierarki sendiri.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="malaikat cahaya ciptaan pencipta tunduk">
+                    <td><strong>Malaikat</strong></td>
+                    <td>Makhluk astral yang diciptakan dari cahaya, tunduk penuh pada kehendak Pencipta. Tidak punya otonomi untuk membangkang. Kehadiran mereka di dunia manusia selalu punya tujuan. Tidak tersedia sebagai konsep OC umum.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="medium peka berinteraksi astral sadar">
+                    <td><strong>Medium / Peka</strong></td>
+                    <td>Tingkat lebih lanjut dari sensitif. Interaksi dengan sisi astral lebih konsisten dan lebih sadar—beberapa bisa berkomunikasi secara terbatas. Keberadaan mereka diketahui di kedua sisi.</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="gloss-letter" data-letter="O"><h3>O</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="oc original character karakter fan sandbox">
+                    <td><strong>OC</strong></td>
+                    <td><em>Original Character.</em> Karakter buatan fan yang berpartisipasi di sandbox universe Wargantara. Berdiri sendiri, terpisah dari identitas pembuatnya. Tidak bisa berstatus Wargantara—itu reserved untuk talent.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="outer being entitas dimensi lain asing abstrak">
+                    <td><strong>Outer Being</strong></td>
+                    <td>Entitas yang berasal dari lapisan dimensi di luar yang akrab dikenal—lebih dalam, lebih jauh, atau lebih asing. Wujud mereka bisa sangat abstrak atau hampir seperti manusia tapi ada sesuatu yang tidak tepat. Sistem, logika, bahkan konsep waktu yang mereka anut bisa berbeda total.</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="gloss-letter" data-letter="S"><h3>S</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="sc code surveillance code pengawasan status">
+                    <td><strong>SC Code</strong></td>
+                    <td><em>Surveillance Code.</em> Kode yang menunjukkan status pengawasan aktif suatu entitas oleh ARA saat ini. Berbeda dari SC Level—ini bukan soal akses, tapi seberapa besar perhatian ARA sedang diarahkan ke entitas tersebut. Skala SC-01 hingga SC-05.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="sc level security clearance akses izin">
+                    <td><strong>SC Level</strong></td>
+                    <td><em>Security Clearance Level.</em> Tingkat izin akses resmi suatu entitas dalam sistem ARA. Menentukan informasi apa yang bisa diakses dan posisi apa yang bisa dipegang. Skala L1 hingga L5, plus L0 untuk entitas di luar sistem.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="semi-permanent crossing kehadiran terbatas batasan waktu oc">
+                    <td><strong>Semi-Permanent Crossing</strong></td>
+                    <td>Kehadiran di dunia manusia dengan batasan waktu dan/atau manifestasi—selalu ada cost yang dibayar. Status ini tersedia untuk OC fan astral.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="sensitif manusia persepsi tajam astral">
+                    <td><strong>Sensitif</strong></td>
+                    <td>Manusia dengan ketajaman persepsi di atas rata-rata. Bisa menangkap sinyal dari sisi astral: perasaan, kehadiran, kadang bayangan atau suara. Tidak semuanya menyadari ini bukan imajinasi.</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="gloss-letter" data-letter="T"><h3>T</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="the cost harga crossing waktu manifestasi drain">
+                    <td><strong>The Cost</strong></td>
+                    <td>Harga yang harus dibayar setiap kali entitas astral hadir di dunia manusia. Punya dua dimensi: <strong>waktu</strong> (semakin lama, semakin besar drain) dan <strong>manifestasi</strong> (semakin nyata kehadiran, semakin mahal harganya).</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="gloss-letter" data-letter="W"><h3>W</h3></div>
+              <table class="lore-table gloss-table">
+                <thead><tr><th>Istilah</th><th>Keterangan</th></tr></thead>
+                <tbody>
+                  <tr class="gloss-row" data-term="wantara warta antara surat kabar media lintas dimensi">
+                    <td><strong>WANTARA</strong></td>
+                    <td><em>Warta Antara.</em> Satu-satunya surat kabar yang beroperasi di dua dunia sekaligus. Di dunia manusia dikenal karena meliput fenomena gaib; di dunia astral menjadi sumber utama informasi tentang dunia manusia. Asal-usul dan pendirinya tidak diketahui. Konon, sekali masuk ke redaksi—tidak ada jalan keluar.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="wargafana fan komunitas penonton">
+                    <td><strong>Wargafana</strong></td>
+                    <td>Sebutan untuk fans/komunitas Wargantara. Dalam konteks lore, semua Wargafana secara otomatis sudah eksis di universe ini sebagai manusia—penghuni dunia manusia yang ada di sekitar para entitas astral.</td>
+                  </tr>
+                  <tr class="gloss-row" data-term="wargantara makhluk astral hidup dunia manusia permanen kondisi">
+                    <td><strong>Wargantara</strong></td>
+                    <td>Sebutan untuk makhluk astral yang memilih hidup di dunia manusia secara permanen atau semi-permanen. Ini bukan ras—ini kondisi. Bisa dicapai melalui jalur sukarela atau sebagai hukuman. Status ini reserved untuk talent; OC fan tidak bisa mengklaimnya.</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div><!-- /gloss-entries -->
+
+            <div class="lore-infobox" style="margin-top:2rem">
               <h4>Catatan Arsiparis</h4>
               <p>Daftar ini tidak komprehensif dan akan diperbarui seiring lore berkembang. Untuk detail lengkap setiap istilah, navigasi ke artikel yang relevan melalui sidebar. Kalau ada istilah yang sering muncul tapi tidak ada di sini—kemungkinan memang belum waktunya untuk tercantum.</p>
             </div>
@@ -2456,6 +2579,41 @@
     </footer>
 
     <script>
+      function glossSearch(val) {
+        var q = val.trim().toLowerCase();
+        var rows = document.querySelectorAll('.gloss-row');
+        var letters = document.querySelectorAll('.gloss-letter');
+        var tables = document.querySelectorAll('.gloss-table');
+        var anyVisible = false;
+
+        rows.forEach(function(row) {
+          var term = (row.getAttribute('data-term') || '').toLowerCase();
+          var text = row.textContent.toLowerCase();
+          var match = !q || term.indexOf(q) !== -1 || text.indexOf(q) !== -1;
+          row.style.display = match ? '' : 'none';
+          if (match) anyVisible = true;
+        });
+
+        tables.forEach(function(table) {
+          var count = 0;
+          table.querySelectorAll('.gloss-row').forEach(function(r) {
+            if (r.style.display !== 'none') count++;
+          });
+          table.style.display = count > 0 ? '' : 'none';
+          var thead = table.querySelector('thead');
+          if (thead) thead.style.display = q ? 'none' : '';
+        });
+
+        letters.forEach(function(letter) {
+          if (q) { letter.style.display = 'none'; return; }
+          var next = letter.nextElementSibling;
+          letter.style.display = (next && next.style.display !== 'none') ? '' : 'none';
+        });
+
+        document.getElementById('gloss-empty').style.display = anyVisible ? 'none' : 'block';
+      }
+
+
       function toggleFaq(btn) {
         const item = btn.closest('.faq-item');
         const isOpen = item.classList.contains('open');
