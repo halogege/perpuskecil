@@ -1726,6 +1726,49 @@
         opacity: 1;
         transform: translateX(3px)
       }
+
+      .gl-copy-btn {
+        background: none;
+        border: 1px solid var(--border2);
+        color: var(--muted);
+        cursor: pointer;
+        padding: .3rem .45rem;
+        flex-shrink: 0;
+        transition: color .15s, border-color .15s;
+        font-family: var(--mono);
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: .25rem
+      }
+
+      .gl-copy-btn:hover {
+        color: var(--gold);
+        border-color: var(--gold)
+      }
+
+      .gl-copy-toast {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(8px);
+        background: var(--ink);
+        color: var(--bg);
+        font-size: .72rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .55rem 1.1rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .2s, transform .2s;
+        z-index: 300
+      }
+
+      .gl-copy-toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0)
+      }
     </style>
 
     <meta name="description" content="Wargantara adalah grup VTuber Indonesia bertemakan entitas astral dan sandbox lore universe.">
@@ -2751,6 +2794,16 @@
               </div>
               <div class="gl-channel-arrow">&#8594;</div>
             </a>
+            <div class="gl-channel-card" style="opacity:.4;cursor:default;pointer-events:none">
+              <div class="gl-channel-icon">
+                <i class="fa-brands fa-discord" style="font-size:1.1rem"></i>
+              </div>
+              <div class="gl-channel-info">
+                <div class="gl-channel-name">Discord — Helpdesk Server</div>
+                <div class="gl-channel-handle" style="opacity:.55;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase">// Coming Soon</div>
+              </div>
+              <div class="gl-channel-arrow" style="opacity:.25">&#8212;</div>
+            </div>
             <a class="gl-channel-card" href="mailto:wargantara.help@gmail.com?subject=[Wargantara]%20Pengaduan%20%2F%20Laporan">
               <div class="gl-channel-icon">
                 <span class="sf sf-exclamation-mark" style="font-size:1.1rem"></span>
@@ -2759,6 +2812,9 @@
                 <div class="gl-channel-name">Email</div>
                 <div class="gl-channel-handle">Pengaduan / Laporan</div>
               </div>
+              <button class="gl-copy-btn" onclick="copyEmail(event,'wargantara.help@gmail.com')" title="Salin alamat email">
+                <span class="sf sf-copy-1" style="font-size:.85rem"></span>
+              </button>
               <div class="gl-channel-arrow">&#8594;</div>
             </a>
             <a class="gl-channel-card" href="mailto:wargantara.help@gmail.com?subject=[Wargantara]%20Pertanyaan">
@@ -2769,11 +2825,23 @@
                 <div class="gl-channel-name">Email</div>
                 <div class="gl-channel-handle">Pertanyaan</div>
               </div>
+              <button class="gl-copy-btn" onclick="copyEmail(event,'wargantara.help@gmail.com')" title="Salin alamat email">
+                <span class="sf sf-copy-1" style="font-size:.85rem"></span>
+              </button>
               <div class="gl-channel-arrow">&#8594;</div>
             </a>
           </div>
+          <div class="gl-copy-toast" id="gl-copy-toast">// Email disalin</div>
 
           <p class="gl-note">Semua laporan ditangani secara konfidensial. Respons mungkin memerlukan beberapa hari tergantung volume pengaduan yang masuk.</p>
+
+          <div class="gl-section-title" style="margin-top:2.5rem">Form Langsung</div>
+          <p>Atau isi form di bawah ini—kami akan menindaklanjuti sesuai ketentuan yang berlaku.</p>
+
+          <div style="margin-top:1.5rem">
+            <iframe data-tally-src="https://tally.so/embed/aQzvkq?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="758" frameborder="0" marginheight="0" marginwidth="0" title="Contact Us · Wargantara"></iframe>
+            <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+          </div>
         </div>
 
       </div><!-- /gl-content-area -->
@@ -2809,6 +2877,16 @@
     </footer>
 
     <script>
+      function copyEmail(e, email) {
+        e.preventDefault();
+        e.stopPropagation();
+        navigator.clipboard.writeText(email).then(function() {
+          var toast = document.getElementById('gl-copy-toast');
+          toast.classList.add('show');
+          setTimeout(function() { toast.classList.remove('show'); }, 2000);
+        });
+      }
+
       function toggleMember(id) {
         const body = document.getElementById('mb-' + id);
         const toggle = document.getElementById('mt-' + id);
