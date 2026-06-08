@@ -2105,6 +2105,10 @@
         #pre-splash { background: #f5f5f0; }
       }
 
+      body:has(#pre-splash:not(.hidden)) {
+        overflow: hidden;
+      }
+
       #pre-splash.hidden {
         opacity: 0;
         visibility: hidden;
@@ -3320,11 +3324,25 @@
       }
     </script>
   
-  <!-- PRE-SPLASH COUNTDOWN — standalone script, isolated dari error lain -->
+  <!-- PRE-SPLASH COUNTDOWN — standalone script -->
   <script>
     (function() {
       // Target: 5 Juli 2026, 11:11:00 WIB (GMT+7) = 04:11:00 UTC
       var TARGET = new Date('2026-07-05T04:11:00Z');
+
+      // Kalau countdown sudah habis, langsung hide pre-splash SEBELUM sempat terlihat
+      // tapi tetap reveal splash utama (jangan return dulu)
+      if (new Date() >= TARGET) {
+        var psEl = document.getElementById('pre-splash');
+        if (psEl) psEl.style.display = 'none';
+        // reveal splash utama langsung — tanpa fade-in supaya tidak ada flash background
+        var splash = document.getElementById('splash-main');
+        if (splash && !splash.classList.contains('hidden')) {
+          splash.style.transition = 'none';
+          splash.classList.add('ready', 'visible');
+        }
+        return;
+      }
 
       function pad(n) { return String(n < 10 ? '0' + n : n); }
 
