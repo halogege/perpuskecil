@@ -1895,6 +1895,7 @@
         <li><a href="members.html">Members</a></li>
         <li><a href="lore.html">Lore</a></li>
         <li><a class="active" href="guidelines.html">Guidelines</a></li>
+        <li><a href="/collab">Collab</a></li>
       </ul>
       <div class="nav-right">
         <button class="theme-btn" id="theme-btn-desktop" onclick="toggleTheme()" aria-label="Toggle theme"><span id="theme-icon" class="sf"></span></button>
@@ -1911,6 +1912,7 @@
         <li><a href="members.html">Members</a></li>
         <li><a href="lore.html">Lore</a></li>
         <li><a class="active" href="guidelines.html">Guidelines</a></li>
+        <li><a href="/collab">Collab</a></li>
         <li><a href="arcid.html">AR-CID Editor</a></li>
         <li><a href="credits.html">Credits & Attributions</a></li>
       </ul>
@@ -1936,51 +1938,23 @@
       <!-- SIDEBAR -->
       <div class="gl-sidebar">
         <div class="gl-sidebar-section">
-          <div class="gl-sidebar-cat">// Disclaimer</div>
-          <div class="gl-nav-item" onclick="showGl('disclaimer',this)">00—Disclaimer</div>
           <div class="gl-sidebar-cat">// General Guidelines</div>
           <div class="gl-nav-item active" onclick="showGl('general',this)">01—Sikap & Komunitas</div>
           <div class="gl-nav-item" onclick="showGl('derivative',this)">02—Derivative Works</div>
           <div class="gl-nav-item" onclick="showGl('fanworks',this)">03—Fan Works</div>
           <div class="gl-nav-item" onclick="showGl('boundaries',this)">04—Boundaries</div>
           <div class="gl-nav-item" onclick="showGl('prohibited',this)">05—Absolute Prohibitions</div>
-          <div class="gl-nav-item" onclick="showGl('faq',this)">06—FREQUENTLY ASKED QUESTIONS</div>
+          <div class="gl-nav-item" onclick="showGl('faq',this)">06—FAQ</div>
           <div class="gl-sidebar-cat">// Bantuan</div>
           <div class="gl-nav-item" onclick="showGl('contact',this)">07—Kontak &amp; Pengaduan</div>
+          <div class="gl-sidebar-cat">// Collab</div>
+          <a class="gl-nav-item" href="/collab" style="text-decoration:none">Collab Guidelines &#8599;</a>
         </div>
       </div>
 
       <div class="gl-content-area">
 
         <!-- 00 DISCLAIMER -->
-        <div class="gl-article" id="gl-disclaimer">
-          <div class="gl-article-num">00</div>
-          <h2>DISCLAIMER</h2>
-          <span class="gl-type-badge general">General</span>
-          <div class="gl-rule"></div>
-
-          <p>Wargantara adalah semesta fiksi. Semua karakter, narasi, entitas, dan kejadian yang ada di dalamnya—termasuk seluruh lore yang dibangun di atas fondasi ini—<strong>ditampilkan sebagai karya fiksi</strong> dan tidak dimaksudkan sebagai pernyataan faktual, klaim kebenaran, maupun representasi resmi atas apapun di luar universe ini.</p>
-
-          <div class="gl-callout">
-            <div class="gl-callout-title">// Tentang Sumber Inspirasi</div>
-            <p>Kami menyadari bahwa sebagian elemen dalam lore ini terinspirasi dari sesuatu yang—bagi sebagian orang—bukan sekadar cerita. Kami tidak akan menjelaskan lebih jauh dari yang sudah tertulis, dan itu bukan karena kami tidak tahu. <strong>Justru karena kami tahu</strong>, kami memilih untuk tidak menyebutnya gamblang.</p>
-            <p>Nama-nama, hierarki, dan detail yang mungkin terasa familiar telah <strong>disamarkan, diubah, atau disensor secara sadar</strong>—bukan karena kelalaian, tapi karena ada pertimbangan yang matang di balik setiap pilihan itu. Apa yang tertulis di sini adalah apa yang memang boleh tertulis.</p>
-          </div>
-
-          <div class="gl-section-title">Tidak Ada Afiliasi</div>
-          <p>Wargantara <strong>tidak berafiliasi, tidak mewakili, dan tidak berbicara atas nama</strong> individu, organisasi, institusi, kelompok keagamaan, maupun entitas manapun—baik yang namanya muncul di sini maupun yang tidak. Segala kemiripan dengan nama atau narasi yang ada di luar universe ini adalah hasil dari sensoran yang disengaja—bukan pengakuan, bukan klaim, dan bukan undangan untuk menarik kesimpulan lebih jauh.</p>
-
-          <div class="gl-section-title">Persona & Identitas</div>
-          <p>Seluruh talent Wargantara tampil dalam kapasitas sebagai <strong>karakter dalam semesta fiksi ini</strong>. Segala yang disampaikan dalam konteks tersebut dipahami sebagai bagian dari representasi karakter—bukan pernyataan pribadi dari individu di balik layar, kecuali dinyatakan secara eksplisit.</p>
-
-          <div class="gl-callout">
-            <div class="gl-callout-title">// Konten Fan &amp; Karya Turunan</div>
-            <p>Karya fan, OC, dan konten turunan tunduk pada guidelines yang berlaku. Wargantara <strong>tidak bertanggung jawab</strong> atas konten yang dibuat oleh pihak ketiga di luar kendali resmi tim.</p>
-          </div>
-
-          <p class="gl-note">Dengan memasuki dan berpartisipasi dalam ekosistem Wargantara, kamu menyatakan memahami bahwa semua yang ada di sini adalah fiksi yang dibangun dengan kesadaran penuh—dan tidak ada yang perlu dicari di baliknya selain cerita yang memang sudah ada.</p>
-        </div>
-
         <!-- 01 SIKAP & KOMUNITAS -->
 
         <div class="gl-article active" id="gl-general">
@@ -2894,7 +2868,6 @@
         toggle.classList.toggle('open', isOpen);
       }
       var GL_HASH = {
-        'disclaimer': 'disclaimer',
         'general': 'komunitas',
         'derivative': 'derivative',
         'fanworks': 'fanworks',
@@ -3127,7 +3100,6 @@
     <!-- MOBILE FLOATING NAV -->
     <div class="gl-mob-menu" id="gl-mob-menu">
       <div class="gl-mob-menu-label">// Guidelines</div>
-      <button class="gl-mob-menu-item" data-gl="disclaimer" onclick="showGl('disclaimer',this);closeMobMenu()">00—Disclaimer</button>
       <button class="gl-mob-menu-item active" data-gl="general" onclick="showGl('general',this);closeMobMenu()">01—Sikap &amp; Komunitas</button>
       <button class="gl-mob-menu-item" data-gl="derivative" onclick="showGl('derivative',this);closeMobMenu()">02—Derivative Works</button>
       <button class="gl-mob-menu-item" data-gl="fanworks" onclick="showGl('fanworks',this);closeMobMenu()">03—Fan Works</button>
@@ -3135,6 +3107,7 @@
       <button class="gl-mob-menu-item" data-gl="prohibited" onclick="showGl('prohibited',this);closeMobMenu()">05—Absolute Prohibitions</button>
       <button class="gl-mob-menu-item" data-gl="faq" onclick="showGl('faq',this);closeMobMenu()">06—FAQ</button>
       <button class="gl-mob-menu-item" data-gl="contact" onclick="showGl('contact',this);closeMobMenu()">07—Kontak &amp; Pengaduan</button>
+      <a class="gl-mob-menu-item" href="/collab" style="text-decoration:none;justify-content:flex-start">Collab Guidelines &#8599;</a>
     </div>
     <button class="gl-mob-trigger" id="gl-mob-trigger" onclick="toggleMobMenu()" aria-label="Navigation">
       <div class="gl-mob-trigger-icon"><span></span><span></span><span></span></div>
