@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+
+  <head>
+    <meta charset="UTF-8">
+    <script>
+      (function() {
+        var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
+        if (m) document.documentElement.setAttribute('data-theme', m[1] === 'dark' ? 'dark' : 'light');
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WARGANTARA—Collab Guidelines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+      @import url('https://solrainha.github.io/saturnicons/saturnicons.css');
+      @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap');
+      @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
+
+      * { margin: 0; padding: 0; box-sizing: border-box }
+
+      :root {
+        --bg: #ffffff;
+        --surface: #f5f5f5;
+        --surface2: #ebebeb;
+        --border: #e0e0e0;
+        --border2: #cccccc;
+        --ink: #111111;
+        --ink2: #333333;
+        --muted: #888888;
+        --red: #c0251a;
+        --gold: #9a7e2a;
+        --gold2: #b89a3e;
+        --mono: 'Space Mono', monospace;
+        --display: 'Bebas Neue', sans-serif;
+        --serif: 'Noto Serif Display', serif;
+        --nav-h: 56px;
+      }
+
+      [data-theme="dark"] {
+        --bg: #111111;
+        --surface: #1c1c1c;
+        --surface2: #242424;
+        --border: #2a2a2a;
+        --border2: #383838;
+        --ink: #f0ece3;
+        --ink2: #c8c2b4;
+        --muted: #666666;
+        --red: #c0251a;
+        --gold: #b89a3e;
+        --gold2: #d4b050;
+      }
+
+      html { width: 100% }
+      body { width: 100%; overflow-x: clip }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--mono);
+        transition: background .3s, color .3s;
+        min-height: 100vh;
+        font-size: 16px;
+        line-height: 1.6
+      }
+
+      /* ---- NAV ---- */
+      nav {
+        background: var(--bg);
+        border-bottom: 2px solid var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.5rem;
+        height: var(--nav-h);
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        transition: background .3s
+      }
+      .nav-logo {
+        font-family: var(--display);
+        font-size: 2rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        cursor: pointer;
+        text-decoration: none;
+        transition: color .3s
+      }
+      .nav-logo span { color: var(--red) }
+      .nav-links { display: flex; gap: 0; list-style: none }
+      .nav-links li a {
+        display: block;
+        padding: 0 1rem;
+        height: var(--nav-h);
+        line-height: var(--nav-h);
+        font-size: .78rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--ink);
+        opacity: .6;
+        border-left: 1px solid var(--border);
+        transition: all .15s;
+        cursor: pointer
+      }
+      .nav-links li a:hover { opacity: 1; background: var(--surface) }
+      .nav-links li a.active { opacity: 1; background: var(--red); color: #fff }
+      .nav-right { display: flex; align-items: center; gap: .75rem }
+      .theme-btn {
+        background: none;
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        cursor: pointer;
+        transition: all .2s;
+        height: 32px;
+        width: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        padding: 0
+      }
+      .theme-btn:hover { border-color: var(--gold); color: var(--gold) }
+
+      /* ---- BURGER ---- */
+      .burger-btn {
+        display: none;
+        background: none;
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px;
+        transition: border-color .2s
+      }
+      .burger-btn span {
+        display: block;
+        width: 18px;
+        height: 1.5px;
+        background: currentColor;
+        transition: all .25s
+      }
+      .burger-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg) }
+      .burger-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0) }
+      .burger-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg) }
+
+      .mobile-drawer {
+        display: none;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--bg);
+        z-index: 190;
+        border-top: 1px solid var(--border);
+        flex-direction: column;
+        overflow-y: auto;
+      }
+      .mobile-drawer.open { display: flex }
+      .mobile-drawer ul { list-style: none; border-bottom: 1px solid var(--border) }
+      .mobile-drawer ul li a {
+        display: flex;
+        align-items: center;
+        padding: 1.1rem 1.5rem;
+        font-size: .9rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--ink);
+        opacity: .65;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        transition: all .15s;
+        text-decoration: none;
+        min-height: 48px
+      }
+      .mobile-drawer ul li a:hover,
+      .mobile-drawer ul li a.active { opacity: 1; background: var(--red); color: #fff }
+
+      /* ---- PAGE HEADER ---- */
+      .page-header {
+        padding: 3.5rem 3rem 2.5rem;
+        border-bottom: 2px solid var(--red);
+        position: relative;
+        overflow: hidden
+      }
+      .page-header-pre {
+        font-size: .7rem;
+        letter-spacing: .28em;
+        color: var(--red);
+        text-transform: uppercase;
+        margin-bottom: .75rem
+      }
+      .page-header h1 {
+        font-family: var(--display);
+        font-size: clamp(3.5rem, 7vw, 6rem);
+        line-height: .9;
+        color: var(--ink);
+        transition: color .3s
+      }
+      .page-header p {
+        max-width: 560px;
+        font-size: .95rem;
+        line-height: 1.85;
+        opacity: .75;
+        margin-top: 1.2rem
+      }
+      .page-header-bg {
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--display);
+        font-size: 10rem;
+        color: var(--red);
+        opacity: .04;
+        pointer-events: none;
+        letter-spacing: -.02em;
+        line-height: 1
+      }
+
+      /* ---- LAYOUT ---- */
+      .gl-layout { display: flex; align-items: flex-start; min-height: 100vh }
+
+      /* ---- SIDEBAR ---- */
+      .gl-sidebar {
+        width: 240px;
+        flex-shrink: 0;
+        border-right: 1px solid var(--border);
+        padding: 2rem 0;
+        position: -webkit-sticky;
+        position: sticky;
+        top: var(--nav-h);
+        align-self: flex-start;
+        background: var(--bg);
+        transition: background .3s;
+        max-height: calc(100vh - var(--nav-h));
+        overflow-y: auto
+      }
+      .gl-sidebar-section { margin-bottom: 1.75rem }
+      .gl-sidebar-cat {
+        font-size: .62rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        padding: .35rem 1.4rem;
+        margin-top: 1rem;
+        margin-bottom: .35rem;
+        color: var(--gold);
+        opacity: .85;
+        border-top: 1px solid var(--border)
+      }
+      .gl-sidebar-cat:first-child { border-top: none; margin-top: 0 }
+      .gl-nav-item {
+        display: flex;
+        align-items: center;
+        padding: .55rem 1.4rem;
+        font-size: .74rem;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+        opacity: .55;
+        cursor: pointer;
+        border-left: 2px solid transparent;
+        transition: all .15s;
+        color: var(--ink);
+        min-height: 40px
+      }
+      .gl-nav-item:hover,
+      .gl-nav-item.active { opacity: 1; border-left-color: var(--red); color: var(--red) }
+
+      /* ---- CONTENT ---- */
+      .gl-content-area { flex: 1; min-height: 100vh }
+      .gl-article { display: none; padding: 3.5rem 3rem 4rem; max-width: 760px }
+      .gl-article.active {
+        display: block;
+        animation: articleIn .3s ease both;
+        min-height: calc(100vh - var(--nav-h))
+      }
+      @keyframes articleIn {
+        from { opacity: 0; transform: translateY(10px) }
+        to   { opacity: 1; transform: translateY(0) }
+      }
+      .gl-article-num {
+        font-family: var(--display);
+        font-size: 6rem;
+        color: var(--red);
+        opacity: .06;
+        line-height: 1;
+        margin-bottom: -.6rem
+      }
+      .gl-article h2 {
+        font-family: var(--display);
+        font-size: clamp(2.2rem, 5vw, 3.2rem);
+        letter-spacing: .04em;
+        margin-bottom: .5rem;
+        color: var(--ink);
+        transition: color .3s
+      }
+      .gl-type-badge {
+        display: inline-block;
+        font-size: .65rem;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        padding: .25rem .7rem;
+        margin-bottom: 1.1rem;
+        border: 1px solid;
+        transition: all .3s
+      }
+      .gl-type-badge.lore { border-color: rgba(154,126,42,.5); color: var(--gold); background: rgba(154,126,42,.06) }
+      .gl-type-badge.general { border-color: rgba(192,37,26,.35); color: var(--red); background: rgba(192,37,26,.05) }
+      .gl-type-badge.collab { border-color: rgba(60,120,200,.4); color: #3a78c8; background: rgba(60,120,200,.05) }
+      [data-theme="dark"] .gl-type-badge.collab { color: #6fa0e0; border-color: rgba(111,160,224,.4); background: rgba(111,160,224,.06) }
+
+      .gl-rule { width: 2rem; height: 2px; background: var(--red); margin: 1.1rem 0 1.75rem }
+
+      /* ---- PROSE ---- */
+      .gl-article p {
+        font-size: .95rem;
+        line-height: 2;
+        opacity: .8;
+        margin-bottom: .85rem;
+        text-align: justify;
+        hyphens: auto
+      }
+      .gl-article p:last-child { margin-bottom: 0 }
+      .gl-section-title {
+        font-size: 1.5rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin: 2rem 0 .75rem;
+        opacity: .9
+      }
+
+      /* ---- LIST ---- */
+      .gl-list { list-style: none; margin: .5rem 0 1.5rem }
+      .gl-list li {
+        font-size: .93rem;
+        line-height: 1.9;
+        opacity: .78;
+        padding: .5rem 0;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: flex-start;
+        gap: .65rem
+      }
+      .gl-list li:last-child { border-bottom: none }
+      .gl-list li::before {
+        content: '//';
+        color: var(--red);
+        flex-shrink: 0;
+        font-weight: 700;
+        font-size: .75rem;
+        padding-top: .2rem
+      }
+      .gl-list li>* { min-width: 0 }
+
+      /* ---- CALLOUT BOXES ---- */
+      .gl-callout {
+        border-left: 3px solid var(--red);
+        background: rgba(192,37,26,.04);
+        padding: 1rem 1.25rem;
+        margin: 1.5rem 0
+      }
+      .gl-callout-title {
+        font-size: 1.2rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: var(--red);
+        margin-bottom: .5rem;
+        font-weight: 700
+      }
+      .gl-callout p {
+        font-size: .9rem;
+        line-height: 1.9;
+        opacity: .8;
+        margin-bottom: 0;
+        text-align: justify;
+        hyphens: auto
+      }
+      .gl-highlight {
+        border: 1px solid rgba(154,126,42,.4);
+        background: rgba(154,126,42,.04);
+        padding: 1rem 1.25rem;
+        margin: 1.5rem 0
+      }
+      .gl-highlight p {
+        font-size: .9rem;
+        line-height: 1.9;
+        opacity: .8;
+        margin-bottom: .5rem;
+        text-align: justify;
+        hyphens: auto
+      }
+      .gl-highlight p:last-child { margin-bottom: 0 }
+
+      /* ---- NOTE ---- */
+      .gl-note {
+        font-size: .88rem;
+        line-height: 1.85;
+        opacity: .65;
+        font-style: italic;
+        margin: 1rem 0;
+        padding-left: .85rem;
+        border-left: 2px solid var(--border2)
+      }
+
+      /* ---- STEP FLOW ---- */
+      .gl-step-flow { display: flex; flex-direction: column; gap: 0; margin: .85rem 0 .25rem }
+      .gl-step-row { display: flex; gap: 1rem; align-items: flex-start }
+      .gl-step-num {
+        flex-shrink: 0;
+        width: 1.8rem;
+        height: 1.8rem;
+        border: 1px solid var(--red);
+        color: var(--red);
+        font-family: var(--display);
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        margin-top: .1rem
+      }
+      .gl-step-connector {
+        width: 1.8rem;
+        display: flex;
+        justify-content: center;
+        padding: .3rem 0;
+        flex-shrink: 0
+      }
+      .gl-step-connector-line {
+        width: 1px;
+        height: 1.5rem;
+        background: var(--border2);
+        opacity: .5
+      }
+      .gl-step-body p { margin-bottom: .25rem }
+      .gl-step-body p.gl-step-sub { font-size: .85rem; opacity: .65; margin-bottom: 0 }
+
+      /* ---- BADGE ---- */
+      .gl-badge {
+        font-size: .6rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .18rem .55rem;
+        border: 1px solid;
+        flex-shrink: 0;
+        white-space: nowrap
+      }
+      .gl-badge.allowed { border-color: rgba(60,160,80,.45); color: #3ca050; background: rgba(60,160,80,.06) }
+      .gl-badge.limited { border-color: rgba(180,140,30,.5); color: var(--gold2); background: rgba(180,140,30,.06) }
+      .gl-badge.prohibited { border-color: rgba(192,37,26,.4); color: var(--red); background: rgba(192,37,26,.06) }
+      .gl-badge.info { border-color: rgba(60,120,200,.4); color: #3a78c8; background: rgba(60,120,200,.05) }
+      [data-theme="dark"] .gl-badge.info { color: #6fa0e0; border-color: rgba(111,160,224,.4); background: rgba(111,160,224,.06) }
+
+      /* ---- REQUIREMENTS TABLE ---- */
+      .gl-req-table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem }
+      .gl-req-table th {
+        font-size: .62rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        opacity: .85;
+        text-align: left;
+        padding: .4rem .75rem;
+        border-bottom: 1px solid var(--border);
+        font-weight: 400
+      }
+      .gl-req-table td {
+        font-size: .87rem;
+        line-height: 1.7;
+        padding: .6rem .75rem;
+        border-bottom: 1px solid var(--border);
+        opacity: .8;
+        vertical-align: top
+      }
+      .gl-req-table tr:last-child td { border-bottom: none }
+      .gl-req-table td:first-child { opacity: .55; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap }
+
+      /* ---- FAQ ---- */
+      .faq-item { border-bottom: 1px solid var(--border) }
+      .faq-q {
+        width: 100%;
+        background: none;
+        border: none;
+        color: var(--ink);
+        font-family: var(--mono);
+        font-size: .93rem;
+        letter-spacing: .06em;
+        text-align: left;
+        padding: .9rem 0;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        opacity: .85;
+        transition: opacity .15s
+      }
+      .faq-q:hover { opacity: 1 }
+      .faq-q::after {
+        content: '+';
+        font-family: var(--display);
+        font-size: 1.4rem;
+        color: var(--red);
+        flex-shrink: 0;
+        line-height: 1;
+        transition: transform .2s
+      }
+      .faq-item.open .faq-q { opacity: 1 }
+      .faq-item.open .faq-q::after { transform: rotate(45deg) }
+      .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease }
+      .faq-item.open .faq-a { max-height: 600px }
+      .faq-a-inner { padding: .15rem 0 1.1rem; font-size: .95rem; line-height: 1.95; opacity: .78 }
+      .faq-a-inner code { font-family: var(--mono); font-size: .85em; background: var(--surface2); padding: .1em .35em }
+      .faq-section-label {
+        font-size: .62rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        opacity: .85;
+        padding: .4rem 0;
+        margin: 2rem 0 .5rem;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: .6rem
+      }
+      .faq-section-label:first-child { border-top: none; margin-top: 0 }
+      .faq-section-label::before { content: '//'; color: var(--red); font-weight: 700; font-size: .7rem }
+
+      /* ---- CONTACT ---- */
+      .gl-contact-channels { display: flex; flex-direction: column; gap: .65rem; margin: 1rem 0 1.5rem }
+      .gl-channel-card {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        text-decoration: none;
+        color: var(--ink);
+        transition: border-color .15s, background .15s;
+        cursor: pointer
+      }
+      .gl-channel-card:hover { border-color: var(--red); background: var(--surface2) }
+      .gl-channel-icon {
+        color: var(--red);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border: 1px solid rgba(192,37,26,.25);
+        background: rgba(192,37,26,.05)
+      }
+      .gl-channel-info { flex: 1; min-width: 0 }
+      .gl-channel-name { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; opacity: .55; margin-bottom: .2rem }
+      .gl-channel-handle { font-family: var(--mono); font-size: .9rem; color: var(--ink); opacity: .9 }
+      .gl-channel-arrow { color: var(--red); font-size: 1rem; opacity: .5; flex-shrink: 0; transition: opacity .15s, transform .15s }
+      .gl-channel-card:hover .gl-channel-arrow { opacity: 1; transform: translateX(3px) }
+
+      /* ---- FOOTER ---- */
+      .site-footer {
+        background: var(--surface);
+        border-top: 2px solid var(--red);
+        padding: 2.5rem 3rem;
+        margin-top: auto
+      }
+      .site-footer-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem
+      }
+      .sf-col-title { font-family: var(--display); font-size: 1.1rem; letter-spacing: .08em; color: var(--ink); margin-bottom: .75rem; transition: color .3s }
+      .sf-col p, .sf-col a { font-size: .84rem; line-height: 1.85; opacity: .65; display: block; color: var(--ink); text-decoration: none; transition: opacity .15s }
+      .sf-col a:hover { opacity: 1; color: var(--red) }
+      .sf-bottom { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap }
+      .sf-copy { font-size: .68rem; letter-spacing: .12em; opacity: .25; text-transform: uppercase }
+      .sf-logo { font-family: var(--display); font-size: 1.6rem; letter-spacing: .08em; color: var(--ink); opacity: .3 }
+      .sf-logo span { color: var(--red) }
+
+      /* ---- MOBILE ---- */
+      .gl-sb-spacer { display: none }
+      .gl-mob-trigger {
+        display: none;
+        position: fixed;
+        bottom: 1.25rem;
+        right: 1.25rem;
+        z-index: 200;
+        background: var(--red);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        height: 48px;
+        padding: 0 1.1rem;
+        font-family: var(--mono);
+        font-size: .65rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        align-items: center;
+        gap: .55rem;
+        box-shadow: 0 4px 18px rgba(0,0,0,.28);
+        transition: background .15s, box-shadow .15s;
+      }
+      .gl-mob-trigger:hover { background: #e02a1e }
+      .gl-mob-trigger-icon { display: flex; flex-direction: column; gap: 4px }
+      .gl-mob-trigger-icon span { display: block; width: 14px; height: 1.5px; background: currentColor; transition: all .2s }
+      .gl-mob-trigger.open .gl-mob-trigger-icon span:nth-child(1) { transform: translateY(5.5px) rotate(45deg) }
+      .gl-mob-trigger.open .gl-mob-trigger-icon span:nth-child(2) { opacity: 0 }
+      .gl-mob-trigger.open .gl-mob-trigger-icon span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg) }
+      .gl-mob-menu {
+        display: none;
+        position: fixed;
+        bottom: calc(1.25rem + 48px + .75rem);
+        right: 1.25rem;
+        z-index: 199;
+        background: var(--bg);
+        border: 1px solid var(--border2);
+        border-bottom: 2px solid var(--red);
+        min-width: 220px;
+        max-height: 70vh;
+        overflow-y: auto;
+        box-shadow: 0 8px 32px rgba(0,0,0,.18);
+        flex-direction: column
+      }
+      .gl-mob-menu.open { display: flex }
+      .gl-mob-menu-label { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); opacity: .85; padding: .85rem 1.1rem .55rem; border-bottom: 1px solid var(--border) }
+      .gl-mob-menu-item {
+        background: none;
+        border: none;
+        border-bottom: 1px solid var(--border);
+        color: var(--ink);
+        font-family: var(--mono);
+        font-size: .72rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        padding: .75rem 1.1rem;
+        text-align: left;
+        cursor: pointer;
+        opacity: .55;
+        transition: all .15s;
+        min-height: 44px
+      }
+      .gl-mob-menu-item:last-child { border-bottom: none }
+      .gl-mob-menu-item:hover, .gl-mob-menu-item.active { opacity: 1; color: var(--red); background: rgba(192,37,26,.04) }
+
+      /* ── WARGANTARA SPLASH ── */
+      .wg-splash {
+        position: fixed; inset: 0; background: #0a0a0a; z-index: 9999;
+        display: flex; align-items: center; justify-content: center;
+        padding: 2rem; opacity: 1; transition: opacity .6s ease
+      }
+      .wg-splash.hiding { opacity: 0; pointer-events: none }
+      .wg-splash.hidden { display: none }
+      @keyframes glitch-swap {
+        0%   { opacity: 1; transform: skewX(0) }
+        10%  { opacity: 0; transform: skewX(-4deg) translateX(4px) }
+        15%  { opacity: 1; transform: skewX(3deg) translateX(-3px) }
+        20%  { opacity: 0; transform: skewX(0) }
+        25%  { opacity: 1; transform: skewX(-2deg) }
+        30%  { opacity: 0 }
+        35%, 100% { opacity: 1; transform: skewX(0) }
+      }
+      .splash-box.glitching { animation: glitch-swap .35s steps(1) both }
+      .splash-box {
+        max-width: 560px; width: 100%;
+        border: 1px solid #2a2a2a; border-top: 2px solid #c0251a;
+        padding: 3rem 2.5rem 2.5rem; position: relative;
+        background: #111111; overflow: hidden
+      }
+      .splash-pre { font-family: 'Space Mono', monospace; font-size: .6rem; letter-spacing: .28em; color: #c0251a; text-transform: uppercase; margin-bottom: 1.5rem }
+      .splash-quote { font-family: 'Noto Serif Display', serif; font-style: italic; font-size: clamp(1.05rem,3vw,1.35rem); line-height: 1.75; color: #f0ece3; margin-bottom: .65rem }
+      .splash-attr { font-family: 'Space Mono', monospace; font-size: .62rem; letter-spacing: .1em; color: #555; margin-bottom: 2rem }
+      .splash-rule { width: 2rem; height: 1px; background: #2a2a2a; margin-bottom: 2rem }
+      .splash-disclaimer { font-family: 'Space Mono', monospace; font-size: .78rem; line-height: 1.9; color: #c8c2b4; opacity: .75; margin-bottom: 2rem }
+      .splash-disclaimer strong { color: #b89a3e; font-weight: 400 }
+      .splash-actions { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap }
+      .splash-btn-enter { font-family: 'Space Mono', monospace; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; padding: .7rem 1.5rem; background: #c0251a; color: #fff; border: none; cursor: pointer; transition: background .15s; min-height: 40px }
+      .splash-btn-enter:hover { background: #e02a1e }
+      .splash-btn-deny { font-family: 'Space Mono', monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: #555; background: none; border: 1px solid #2a2a2a; cursor: pointer; padding: .6rem 1rem; transition: color .15s, border-color .15s; min-height: 40px }
+      .splash-btn-deny:hover { color: #f0ece3; border-color: #555 }
+      .splash-privacy { font-family: 'Space Mono', monospace; font-size: .58rem; letter-spacing: .06em; color: #3a3a3a; margin-top: 1.25rem; line-height: 1.7 }
+      .splash-corner { position: absolute; bottom: 1rem; right: 1.5rem; font-family: 'Bebas Neue', sans-serif; font-size: 4.5rem; color: #c0251a; opacity: .04; line-height: 1; pointer-events: none }
+      .splash-step { display: block; opacity: 1; transition: opacity .35s ease }
+      .splash-step.fading { opacity: 0; pointer-events: none }
+      .splash-theme-step { display: none; opacity: 0; transition: opacity .35s ease }
+      .splash-theme-step.active { display: block }
+      .splash-theme-step.visible { opacity: 1 }
+      .splash-theme-choices { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1.5rem }
+      .splash-theme-btn { font-family: 'Space Mono', monospace; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; padding: 1.1rem 1rem; border: 1px solid #2a2a2a; background: none; color: #888; cursor: pointer; transition: all .15s; display: flex; flex-direction: column; align-items: center; gap: .6rem }
+      .splash-theme-btn .t-icon { font-size: 1.4rem; opacity: .5; transition: opacity .15s }
+      .splash-theme-btn:hover { border-color: #b89a3e; color: #f0ece3 }
+      .splash-theme-btn:hover .t-icon { opacity: 1 }
+      .splash-theme-btn.selected { border-color: #c0251a; color: #f0ece3; background: rgba(192,37,26,.08) }
+      .splash-theme-btn.selected .t-icon { opacity: 1 }
+      .splash-theme-confirm { font-family: 'Space Mono', monospace; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; padding: .7rem 1.5rem; background: #c0251a; color: #fff; border: none; cursor: pointer; transition: background .15s, opacity .15s; width: 100%; min-height: 40px; opacity: .35; pointer-events: none }
+      .splash-theme-confirm.ready { opacity: 1; pointer-events: auto }
+      .splash-theme-confirm.ready:hover { background: #e02a1e }
+      .deny-countdown { font-family: 'Space Mono', monospace; font-size: .72rem; letter-spacing: .1em; color: #3a3a3a; margin-top: 1.5rem; transition: color .3s }
+      .deny-countdown.urgent { color: #7a3030 }
+
+      /* ---- PER-MEMBER TABLE ---- */
+      .gl-member-table-wrap { margin: 1.25rem 0 2rem }
+      .gl-member-block { margin-bottom: 2.5rem }
+      .gl-member-block:last-child { margin-bottom: 0 }
+      .gl-member-block-header {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        margin-bottom: .85rem;
+        padding-bottom: .6rem;
+        border-bottom: 2px solid var(--border)
+      }
+      .gl-member-block-name {
+        font-family: var(--display);
+        font-size: 1.55rem;
+        letter-spacing: .06em;
+        color: var(--ink);
+        transition: color .3s;
+        line-height: 1
+      }
+      .gl-member-block-status {
+        font-size: .6rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        padding: .2rem .6rem;
+        border: 1px solid;
+        flex-shrink: 0
+      }
+      .gl-member-block-status.open {
+        border-color: rgba(60,160,80,.45);
+        color: #3ca050;
+        background: rgba(60,160,80,.06)
+      }
+      .gl-member-block-status.limited {
+        border-color: rgba(180,140,30,.5);
+        color: var(--gold2);
+        background: rgba(180,140,30,.06)
+      }
+      .gl-member-block-status.closed {
+        border-color: rgba(192,37,26,.4);
+        color: var(--red);
+        background: rgba(192,37,26,.06)
+      }
+      .gl-member-mini-table { width: 100%; border-collapse: collapse; margin-bottom: .75rem }
+      .gl-member-mini-table tr { border-bottom: 1px solid var(--border) }
+      .gl-member-mini-table tr:last-child { border-bottom: none }
+      .gl-member-mini-table td {
+        font-size: .87rem;
+        line-height: 1.6;
+        padding: .55rem .6rem;
+        vertical-align: top
+      }
+      .gl-member-mini-table td:first-child {
+        font-size: .65rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        opacity: .85;
+        white-space: nowrap;
+        padding-right: 1.25rem;
+        padding-top: .65rem;
+        width: 130px
+      }
+      .gl-member-mini-table td:last-child { opacity: .82 }
+      .gl-member-contact-row {
+        font-size: .78rem;
+        opacity: .55;
+        letter-spacing: .08em;
+        padding-top: .25rem
+      }
+      .gl-member-contact-row code {
+        font-family: var(--mono);
+        font-size: .8em;
+        background: var(--surface2);
+        padding: .1em .35em;
+        opacity: 1
+      }
+      .gl-member-profile-link {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        margin-top: .6rem;
+        font-size: .75rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: var(--gold2);
+        text-decoration: none;
+        border: 1px solid var(--border2);
+        padding: .35rem .75rem;
+        transition: border-color .15s, color .15s
+      }
+      .gl-member-profile-link:hover {
+        border-color: var(--gold2);
+        color: var(--ink)
+      }
+      .gl-member-block.locked-member { opacity: .55 }
+      .gl-member-block.locked-member .gl-member-block-header { border-bottom-style: dashed }
+
+      /* ---- RESPONSIVE ---- */
+      @media (max-width: 900px) {
+        .nav-links { display: none }
+        .burger-btn { display: flex }
+        .gl-sidebar { display: none }
+        .gl-sb-spacer { display: block }
+        .gl-mob-trigger { display: flex }
+        .gl-article { padding: 2rem 1.25rem 3rem }
+        .page-header { padding: 2.5rem 1.25rem 2rem }
+        .site-footer { padding: 2rem 1.25rem }
+        .site-footer-inner { grid-template-columns: 1fr }
+      }
+      @media (max-width: 600px) {
+        .splash-box { padding: 2rem 1.5rem }
+        .gl-req-table thead { display: none }
+        .gl-req-table tr { display: block; margin-bottom: 1rem; border-bottom: 2px solid var(--border) }
+        .gl-req-table td { display: block; padding: .35rem .5rem }
+        .gl-req-table td:first-child { margin-top: .25rem }
+      }
+    </style>
+
+    <meta name="description" content="Panduan resmi untuk kolaborasi dengan talent dan komunitas Wargantara.">
+    <meta property="og:title" content="WARGANTARA—Collab Guidelines">
+    <meta property="og:type" content="website">
+    <script src="/assets/js/head-common.js"></script>
+    <script>
+      if (document.cookie.match(/(?:^|;\s*)wg-visited=1/)) {
+        document.write('<style>.wg-splash{display:none!important}</style>');
+      }
+    </script>
+  </head>
+
+  <body>
+
+    <!-- SPLASH -->
+    <div class="wg-splash" id="splash-main">
+      <div class="splash-box" id="splash-box">
+        <div class="splash-step" id="splash-step1">
+          <div class="splash-pre">// Wargantara &middot; Peringatan Masuk</div>
+          <div class="splash-quote">&ldquo;Cara menyimpan sebuah rahasia terbaik adalah dengan menjadikannya sebuah kisah-kisah fiksi untuk dipercaya.&rdquo;</div>
+          <div class="splash-attr">&mdash; Arsip Wargantara, Dokumen Tak Bernomor</div>
+          <div class="splash-rule"></div>
+          <div class="splash-disclaimer">
+            Seluruh konten dalam website ini adalah karya fiksi. Nama, karakter, kejadian, dan entitas yang ada di dalamnya bersifat fiktif semata.<br><br>
+            <strong>// Dengan memasuki website ini</strong>, kamu menyatakan memahami bahwa semua yang kamu temukan di sini adalah bagian dari sebuah semesta fiksi yang dibangun dengan penuh kesengajaan &mdash; dan tidak ada kaitannya dengan kenyataan di luar batas dunia ini.
+          </div>
+          <div class="splash-actions">
+            <button class="splash-btn-enter" onclick="splashStep2()">// Saya Mengerti &mdash; Lanjut</button>
+            <button class="splash-btn-deny" onclick="splashDeny()">Tidak Setuju</button>
+          </div>
+          <div class="splash-privacy">// Website ini menyimpan preferensi tema secara lokal di browser kamu. Tidak ada data pribadi yang dikumpulkan.</div>
+        </div>
+        <div class="splash-theme-step" id="splash-step2">
+          <div class="splash-pre">// Wargantara &middot; Preferensi Tampilan</div>
+          <div class="splash-quote" style="font-size:clamp(.95rem,2.5vw,1.15rem);margin-bottom:1.5rem">Pilih tampilan yang kamu inginkan.<br><span style="opacity:.4;font-size:.85em">Preferensi ini akan disimpan untuk kunjungan berikutnya.</span></div>
+          <div class="splash-rule"></div>
+          <div class="splash-theme-choices">
+            <button class="splash-theme-btn" id="btn-day" onclick="splashSelectTheme('light')">
+              <span class="t-icon sf sf-sun-1-o"></span>Day Mode
+            </button>
+            <button class="splash-theme-btn" id="btn-night" onclick="splashSelectTheme('dark')">
+              <span class="t-icon sf sf-moon-1-o"></span>Night Mode
+            </button>
+          </div>
+          <button class="splash-theme-confirm" id="splash-confirm" onclick="splashEnter()">// Masuk</button>
+        </div>
+        <div class="deny-countdown" id="deny-countdown" style="display:none">Halaman akan ditutup dalam <span id="deny-secs">5</span> detik...</div>
+        <div class="splash-corner">C</div>
+      </div>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+      <a class="nav-logo" href="index.html">WAR<span>G</span>ANTARA</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a href="lore.html">Lore</a></li>
+        <li><a href="guidelines.html">Guidelines</a></li>
+        <li><a class="active" href="collab-guidelines.html">Collab</a></li>
+        <li><a href="arcid.html">AR-CID Editor</a></li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"><span id="theme-icon" class="sf"></span></button>
+        <button class="burger-btn" id="burger" onclick="toggleMobile()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a href="lore.html">Lore</a></li>
+        <li><a href="guidelines.html">Guidelines</a></li>
+        <li><a class="active" href="collab-guidelines.html">Collab Guidelines</a></li>
+        <li><a href="arcid.html">AR-CID Editor</a></li>
+        <li><a href="credits.html">Credits & Attributions</a></li>
+      </ul>
+      <div style="padding:.75rem 1.5rem;border-top:1px solid var(--border)">
+        <a onclick="toggleTheme();closeMobile()" style="display:flex;align-items:center;gap:.75rem;cursor:pointer;padding:.7rem 0;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);opacity:.75;text-decoration:none">
+          <span id="theme-icon-m" class="sf" style="font-size:1.15rem"></span>
+          <span id="theme-label-m">Night Mode</span>
+        </a>
+      </div>
+    </div>
+    <div class="gl-sb-spacer" id="gl-sb-spacer"></div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="page-header-pre">// Panduan Kolaborasi · Wargantara //</div>
+      <h1>COLLAB<br>GUIDE</h1>
+      <p>Panduan resmi untuk pihak yang ingin berkolaborasi dengan talent atau komunitas Wargantara—baik dari dalam ekosistem maupun dari luar.</p>
+      <div class="page-header-bg">C</div>
+    </div>
+
+    <div class="gl-layout">
+
+      <!-- SIDEBAR -->
+      <div class="gl-sidebar">
+        <div class="gl-sidebar-section">
+          <div class="gl-sidebar-cat">// Pembuka</div>
+          <div class="gl-nav-item active" onclick="showGl('overview',this)">00—Overview</div>
+          <div class="gl-sidebar-cat">// Jenis Kolaborasi</div>
+          <div class="gl-nav-item" onclick="showGl('internal',this)">01—Collab Internal</div>
+          <div class="gl-nav-item" onclick="showGl('external',this)">02—Collab Eksternal</div>
+          <div class="gl-nav-item" onclick="showGl('community',this)">03—Community Collab</div>
+          <div class="gl-sidebar-cat">// Ketentuan</div>
+          <div class="gl-nav-item" onclick="showGl('content',this)">04—Konten & Batasan</div>
+          <div class="gl-nav-item" onclick="showGl('members',this)">05—Per-Member</div>
+          <div class="gl-nav-item" onclick="showGl('process',this)">06—Alur Pengajuan</div>
+          <div class="gl-sidebar-cat">// Bantuan</div>
+          <div class="gl-nav-item" onclick="showGl('faq',this)">07—FAQ</div>
+          <div class="gl-nav-item" onclick="showGl('contact',this)">08—Kontak</div>
+        </div>
+      </div>
+
+      <div class="gl-content-area">
+
+        <!-- 00 OVERVIEW -->
+        <div class="gl-article active" id="gl-overview">
+          <div class="gl-article-num">00</div>
+          <h2>OVERVIEW</h2>
+          <span class="gl-type-badge collab">Collab Guidelines</span>
+          <div class="gl-rule"></div>
+
+          <p>Wargantara terbuka untuk kolaborasi—baik dari sesama kreator dalam ekosistem VTuber Indonesia, kreator lintas komunitas, maupun Wargafana yang ingin terlibat lebih jauh dalam membangun universe ini. Panduan ini dirancang supaya semua pihak punya ekspektasi yang jelas sebelum memulai.</p>
+
+          <div class="gl-highlight">
+            <p><strong>Tiga kategori kolaborasi</strong> yang dicakup dalam panduan ini:</p>
+            <ul class="gl-list" style="margin:.65rem 0 0">
+              <li><span><strong>Collab Internal</strong> — kolaborasi antar talent Wargantara sendiri, termasuk stream bersama dan proyek lore</span></li>
+              <li><span><strong>Collab Eksternal</strong> — kolaborasi dengan kreator, VTuber, atau pihak di luar Wargantara</span></li>
+              <li><span><strong>Community Collab</strong> — kolaborasi dengan atau antar Wargafana, termasuk proyek lore komunitas, fan project berskala, dan karya kolektif</span></li>
+            </ul>
+          </div>
+
+          <div class="gl-section-title">Prinsip Dasar</div>
+          <p>Semua kolaborasi, tanpa memandang kategorinya, berpijak pada prinsip yang sama: <strong>consent, transparansi, dan rasa hormat terhadap semua pihak yang terlibat</strong>. Tidak ada kolaborasi yang diizinkan apabila salah satu pihak tidak memberi persetujuan yang jelas.</p>
+
+          <div class="gl-section-title">Persona & Informasi On-Camera</div>
+          <p>Seluruh talent Wargantara hadir dan berkomunikasi dalam kapasitas sebagai <strong>karakter dalam semesta fiksi ini</strong>. Segala sesuatu yang disampaikan dalam konteks tersebut—pernyataan, opini, preferensi, cerita, maupun reaksi—dipahami sebagai bagian dari representasi persona dan <strong>tidak dapat disamakan dengan informasi atau pernyataan pribadi dari individu di balik layar</strong>, kecuali dinyatakan secara eksplisit oleh yang bersangkutan.</p>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Yang Perlu Dipahami Sebelum Berkolaborasi</div>
+            <p>Kolaborator eksternal—termasuk VTuber, kreator, dan brand—<strong>wajib memahami dan menghormati batas ini</strong>. Informasi yang muncul selama kolaborasi, baik di stream maupun di luar konteks resmi, <strong>tidak boleh diinterpretasikan, dikutip, atau disebarluaskan sebagai representasi off-camera dari individu yang bersangkutan</strong>.</p>
+            <p style="margin-top:.65rem">Ketentuan ini berlaku dua arah: talent Wargantara juga tidak akan mewakili informasi kolaborator mereka di luar konteks yang disepakati.</p>
+          </div>
+
+          <p class="gl-note">Apabila ada pernyataan atau situasi yang dianggap melampaui batas ini selama kolaborasi berlangsung, koordinasi dengan tim adalah jalur yang tepat—bukan spekulasi publik.</p>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Catatan Lore</div>
+            <p>Kolaborasi yang menyentuh konten lore—terutama yang bersinggungan dengan karakter canon, sistem ARA, atau elemen classified—memerlukan persetujuan tambahan dari tim Wargantara. Panduan ini bukan pengganti dari koordinasi langsung untuk konten semacam itu.</p>
+          </div>
+
+          <p class="gl-note">Halaman ini membahas panduan umum. Untuk pertanyaan spesifik yang belum terjawab, gunakan kanal kontak di bagian akhir atau lihat <em>Guidelines → FAQ</em> untuk konteks lore.</p>
+        </div>
+
+        <!-- 01 COLLAB INTERNAL -->
+        <div class="gl-article" id="gl-internal">
+          <div class="gl-article-num">01</div>
+          <h2>COLLAB INTERNAL</h2>
+          <span class="gl-type-badge collab">Collab Guidelines</span>
+          <div class="gl-rule"></div>
+
+          <p>Kolaborasi antar talent Wargantara—baik dalam format stream maupun produksi konten bersama—dikelola secara internal oleh tim. Bagian ini terutama relevan bagi Wargafana yang ingin memahami bagaimana kolaborasi semacam ini bekerja dan apa yang perlu diperhatikan sebagai penonton.</p>
+
+          <div class="gl-section-title">Format Collab Stream</div>
+
+          <table class="gl-req-table">
+            <thead>
+              <tr>
+                <th>Format</th>
+                <th>Keterangan</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Co-stream</td>
+                <td>Talent stream secara bersamaan dari channel masing-masing dengan konten yang sinkron</td>
+                <td><span class="gl-badge allowed">DIPERBOLEHKAN</span></td>
+              </tr>
+              <tr>
+                <td>Satu channel</td>
+                <td>Collab di satu channel utama; talent lain hadir sebagai tamu</td>
+                <td><span class="gl-badge allowed">DIPERBOLEHKAN</span></td>
+              </tr>
+              <tr>
+                <td>Lore collab</td>
+                <td>Stream atau konten yang secara langsung menggerakkan narasi lore canon</td>
+                <td><span class="gl-badge limited">KOORDINASI TIM</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="gl-section-title">Etika Penonton saat Collab</div>
+          <p>Saat menonton collab stream, beberapa hal perlu diperhatikan secara khusus:</p>
+          <ul class="gl-list">
+            <li><span><strong>Godaan atau flirting</strong> dilarang selama collab berlangsung—terlepas dari preferensi masing-masing talent di luar konteks itu. Saat collab, semua ketentuan paling ketat yang berlaku di antara talent yang hadir menjadi standar yang dipakai.</span></li>
+            <li><span><strong>Membandingkan talent</strong> satu dengan yang lain secara merendahkan tidak diperbolehkan, terutama dalam live chat atau interaksi langsung.</span></li>
+            <li><span><strong>Backseating</strong> tetap tidak diperbolehkan kecuali diminta secara eksplisit oleh salah satu talent.</span></li>
+            <li><span>Pertanyaan atau komentar yang <strong>memancing konflik antar fanbase</strong> tidak diperkenankan.</span></li>
+          </ul>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">⚠ Standar Bersama</div>
+            <p>Apabila collab melibatkan talent dengan ketentuan yang berbeda, <strong>standar yang lebih ketat selalu menjadi acuan</strong>. Misalnya: jika talent A mengizinkan komentar romantis tapi talent B tidak, maka komentar romantis dilarang selama collab tersebut berlangsung—untuk kedua talent.</p>
+          </div>
+
+          <div class="gl-section-title">Lore Collab & Narasi Bersama</div>
+          <p>Kolaborasi yang melibatkan pengembangan lore secara langsung—arc cerita bersama, interaksi antar karakter yang berdampak pada narasi canon, atau produksi konten yang memperluas lore resmi—memerlukan koordinasi dan persetujuan dari tim sebelum dipublikasikan. Hal ini berlaku baik untuk stream maupun konten berbasis teks atau visual.</p>
+          <p class="gl-note">Kolaborasi lore yang sudah berjalan organik dalam stream (improvisasi, reaksi natural) masih dalam koridor yang wajar—selama tidak bertentangan dengan lore yang sudah tertulis. Yang memerlukan koordinasi adalah konten yang <em>sengaja</em> dirancang untuk menjadi canon.</p>
+        </div>
+
+        <!-- 02 COLLAB EKSTERNAL -->
+        <div class="gl-article" id="gl-external">
+          <div class="gl-article-num">02</div>
+          <h2>COLLAB EKSTERNAL</h2>
+          <span class="gl-type-badge collab">Collab Guidelines</span>
+          <div class="gl-rule"></div>
+
+          <p>Kolaborasi dengan pihak di luar Wargantara—VTuber lain, kreator konten, komunitas, maupun brand—memerlukan koordinasi yang lebih formal. Bagian ini berlaku baik untuk pihak yang <em>mengajukan</em> kolaborasi kepada Wargantara, maupun bagi Wargafana yang ingin memahami proses ini.</p>
+
+          <div class="gl-section-title">Siapa yang Dapat Mengajukan</div>
+          <ul class="gl-list">
+            <li><span><strong>VTuber atau kreator konten</strong> yang ingin berkolaborasi langsung dengan talent Wargantara untuk stream, konten, atau proyek bersama</span></li>
+            <li><span><strong>Komunitas atau organisasi</strong> yang ingin mengadakan event, proyek, atau inisiatif yang melibatkan nama atau representasi Wargantara</span></li>
+            <li><span><strong>Brand atau pihak komersial</strong> yang ingin eksplorasi kemungkinan kerjasama—dengan catatan ini akan melalui proses review yang berbeda</span></li>
+          </ul>
+
+          <div class="gl-section-title">Persyaratan Umum</div>
+
+          <div class="gl-highlight">
+            <p style="font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;opacity:.9">// Hal yang perlu disiapkan sebelum mengajukan</p>
+            <ul class="gl-list" style="margin:0">
+              <li><span>Gambaran jelas tentang <strong>format dan tujuan kolaborasi</strong>—apa yang ingin dicapai, bagaimana bentuknya, dan siapa yang terlibat</span></li>
+              <li><span><strong>Timeline yang realistis</strong>—minimal dua minggu sebelum tanggal yang diinginkan untuk kolaborasi sederhana; lebih lama untuk proyek berskala besar</span></li>
+              <li><span>Pemahaman dasar tentang <strong>lore dan persona Wargantara</strong>—pihak yang tidak familiar dengan universe ini disarankan membaca setidaknya halaman Members dan Lore sebelum mengajukan</span></li>
+              <li><span>Kesediaan untuk <strong>menyesuaikan konten</strong> apabila ada elemen yang bertentangan dengan guidelines yang berlaku</span></li>
+            </ul>
+          </div>
+
+          <div class="gl-section-title">Kategori & Ketentuan</div>
+
+          <table class="gl-req-table">
+            <thead>
+              <tr>
+                <th>Kategori</th>
+                <th>Ketentuan Khusus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Collab Stream</td>
+                <td>Diperbolehkan. Konten harus sesuai dengan rating konten yang berlaku untuk masing-masing channel. Tidak boleh membawa topik yang melanggar guidelines komunitas.</td>
+              </tr>
+              <tr>
+                <td>Collab Lore</td>
+                <td>Pihak eksternal dapat hadir dalam universe Wargantara sebagai tamu, tapi tidak dapat membawa karakter mereka sebagai bagian dari lore canon tanpa persetujuan resmi.</td>
+              </tr>
+              <tr>
+                <td>Proyek Kreatif</td>
+                <td>Musik, video, artwork, atau konten kreatif bersama diperbolehkan dengan koordinasi langsung. Kredit dan ketentuan penggunaan disepakati sebelum produksi.</td>
+              </tr>
+              <tr>
+                <td>Event / Turnamen</td>
+                <td>Perlu pengajuan lebih awal (minimal satu bulan). Nama dan branding Wargantara tidak boleh digunakan tanpa konfirmasi resmi.</td>
+              </tr>
+              <tr>
+                <td>Sponsorship / Brand</td>
+                <td>Jalur berbeda, bukan melalui form kolaborasi reguler. Hubungi tim melalui email business.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Representasi & Branding</div>
+            <p>Penggunaan nama, logo, atau elemen branding Wargantara dalam konteks kolaborasi pihak eksternal memerlukan izin tertulis dari tim. Ini berlaku untuk thumbnail, poster event, maupun materi promosi lainnya—bahkan apabila kolaborasinya sendiri sudah disetujui.</p>
+          </div>
+        </div>
+
+        <!-- 03 COMMUNITY COLLAB -->
+        <div class="gl-article" id="gl-community">
+          <div class="gl-article-num">03</div>
+          <h2>COMMUNITY COLLAB</h2>
+          <span class="gl-type-badge collab">Collab Guidelines</span>
+          <div class="gl-rule"></div>
+
+          <p>Wargafana yang ingin membuat proyek bersama—baik dengan sesama fans maupun dengan melibatkan talent secara langsung—memiliki ruang yang cukup luas untuk berkreasi. Panduan ini membantu memastikan proyek komunitas berjalan dengan baik tanpa menabrak batasan yang ada.</p>
+
+          <div class="gl-section-title">Fan Project Skala Kecil</div>
+          <p>Proyek yang bersifat personal atau melibatkan lingkaran kecil—zine, kompilasi fanart, roleplay dalam komunitas, atau proyek lore OC bersama—<strong>tidak memerlukan persetujuan resmi</strong> selama tunduk pada guidelines standar. Cukup ikuti panduan di halaman <em>Guidelines → Fan Works</em> dan <em>Guidelines → Derivative Works</em>.</p>
+
+          <div class="gl-section-title">Fan Project Skala Besar</div>
+          <p>Proyek yang melibatkan banyak kontributor, distribusi luas, atau menggunakan nama/branding Wargantara secara eksplisit perlu mengikuti alur berikut:</p>
+
+          <div class="gl-highlight" style="margin:1rem 0 1.5rem">
+            <p style="font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;opacity:.9">// Alur Fan Project Besar</p>
+            <div class="gl-step-flow">
+              <div class="gl-step-row">
+                <div class="gl-step-num">1</div>
+                <div class="gl-step-body">
+                  <p><strong>Hubungi tim terlebih dahulu</strong> melalui kanal kontak resmi. Jelaskan scope proyek, siapa yang terlibat, dan output yang diharapkan.</p>
+                  <p class="gl-step-sub">Ini bukan izin formal—ini langkah awal untuk memastikan proyek tidak bertabrakan dengan sesuatu yang sedang berjalan secara internal.</p>
+                </div>
+              </div>
+              <div class="gl-step-connector"><div class="gl-step-connector-line"></div></div>
+              <div class="gl-step-row">
+                <div class="gl-step-num">2</div>
+                <div class="gl-step-body">
+                  <p><strong>Klarifikasi penggunaan aset dan nama</strong>. Apabila proyek menggunakan artwork official, nama talent, atau elemen canon lore, diskusikan batasan penggunaannya sebelum memulai produksi.</p>
+                </div>
+              </div>
+              <div class="gl-step-connector"><div class="gl-step-connector-line"></div></div>
+              <div class="gl-step-row">
+                <div class="gl-step-num">3</div>
+                <div class="gl-step-body">
+                  <p><strong>Lanjutkan dengan transparan</strong>. Proyek komunitas yang berjalan dengan iktikad baik dan komunikasi terbuka sangat disambut—Wargantara adalah sandbox kolaboratif, dan inisiatif dari fans adalah bagian dari apa yang membuat universe ini hidup.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gl-section-title">Keterlibatan Talent Langsung</div>
+          <p>Apabila proyek komunitas ingin secara aktif melibatkan talent—sebagai kontributor, subjek utama, atau guest—pengajuan harus melalui kanal resmi. Talent tidak dapat dikonfirmasi partisipasinya atas nama Wargantara tanpa koordinasi dengan tim terlebih dahulu.</p>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Monetisasi Fan Project</div>
+            <p>Fan project non-profit (zine gratis, kompilasi bebas, dll.) memiliki kelonggaran yang lebih besar. Proyek yang melibatkan penjualan—bahkan dalam skala kecil—perlu memastikan tidak ada aset resmi yang digunakan secara langsung dan mengikuti ketentuan monetisasi di halaman <em>Derivative Works</em>.</p>
+          </div>
+
+          <div class="gl-section-title">Lore Komunitas & OC Universe</div>
+          <p>Membangun cerita bersama dalam universe Wargantara—lintas OC, arc kolektif, atau event lore komunitas—adalah salah satu hal yang paling didorong dalam ekosistem ini. Satu-satunya catatan adalah: <strong>cerita komunitas tidak bisa mengklaim status canon</strong> tanpa konfirmasi dari tim, dan tidak boleh bertentangan secara langsung dengan lore yang sudah ditetapkan.</p>
+          <p class="gl-note">Kalau cerita komunitasmu berkembang secara organik dan menarik, ada kemungkinan tim tertarik untuk mengakuinya secara semi-canon atau mengintegrasikannya ke dalam narasi yang lebih besar—tapi itu selalu inisiatif dari tim, bukan klaim dari pihak pembuat.</p>
+        </div>
+
+        <!-- 04 KONTEN & BATASAN -->
+        <div class="gl-article" id="gl-content">
+          <div class="gl-article-num">04</div>
+          <h2>KONTEN &amp; BATASAN</h2>
+          <span class="gl-type-badge collab">Collab Guidelines</span>
+          <div class="gl-rule"></div>
+
+          <p>Panduan ini berlaku untuk semua jenis kolaborasi—internal, eksternal, maupun komunitas—dan mendefinisikan batas-batas konten yang perlu dipatuhi dalam konteks apapun yang membawa nama atau representasi Wargantara.</p>
+
+          <div class="gl-section-title">Konten yang Diperbolehkan</div>
+          <ul class="gl-list">
+            <li><span>Kolaborasi gaming, watchalong, atau konten hiburan umum yang sesuai dengan rating masing-masing talent</span></li>
+            <li><span>Proyek kreatif bersama—musik, artwork, cerita—yang sesuai dengan guidelines fan works</span></li>
+            <li><span>Event atau kompetisi komunitas yang tidak menggunakan branding resmi secara tidak sah</span></li>
+            <li><span>Kolaborasi lore dan worldbuilding yang tidak bertentangan dengan narasi canon yang ada</span></li>
+            <li><span>Guest appearance atau mention oleh pihak eksternal yang sudah mendapat konfirmasi</span></li>
+          </ul>
+
+          <div class="gl-section-title">Konten yang Dibatasi</div>
+          <ul class="gl-list">
+            <li><span><strong>Konten NSFW</strong> — semua kolaborasi yang membawa nama Wargantara dibatasi pada konten SFW, kecuali ada ketentuan khusus yang berlaku dan sudah dikonfirmasi</span></li>
+            <li><span><strong>Konten lore sensitif</strong> — topik yang menyentuh elemen classified atau lore yang secara sengaja tidak diungkap memerlukan koordinasi terlebih dahulu</span></li>
+            <li><span><strong>Kolaborasi dengan pihak yang tercatat melanggar guidelines</strong> — tim berhak menolak atau membatalkan kolaborasi dengan pihak yang pernah atau sedang melanggar ketentuan komunitas</span></li>
+          </ul>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Konten yang Tidak Diperbolehkan dalam Konteks Collab</div>
+            <ul class="gl-list" style="margin:.5rem 0 0">
+              <li><span>Konten yang <strong>mengekspos atau berspekulasi tentang identitas dunia nyata</strong> talent dalam konteks apapun</span></li>
+              <li><span>Kolaborasi yang dirancang untuk <strong>memposisikan Wargantara secara negatif</strong> terhadap pihak lain</span></li>
+              <li><span>Penggunaan kolaborasi sebagai <strong>pintu masuk untuk spam, promosi tidak sah, atau kepentingan komersial tersembunyi</strong></span></li>
+              <li><span>Konten yang <strong>bertentangan dengan prinsip disclaimer</strong> di halaman Guidelines—termasuk klaim kebenaran atas elemen lore yang sengaja disamarkan</span></li>
+            </ul>
+          </div>
+
+          <div class="gl-section-title">Penolakan & Pembatalan</div>
+          <p>Tim Wargantara berhak menolak atau membatalkan kolaborasi apapun—baik sebelum maupun setelah persetujuan—apabila ditemukan pelanggaran terhadap panduan ini, atau apabila ada pertimbangan lain yang muncul dalam proses. Keputusan semacam ini tidak selalu perlu disertai penjelasan publik.</p>
+        </div>
+
+        <!-- 05 PER-MEMBER GUIDELINES -->
+        <div class="gl-article" id="gl-members">
+          <div class="gl-article-num">05</div>
+          <h2>PER-MEMBER<br>GUIDELINES</h2>
+          <span class="gl-type-badge collab">Collab Guidelines</span>
+          <div class="gl-rule"></div>
+
+          <p>Setiap talent memiliki preferensi dan batasan yang berbeda terkait kolaborasi. Tabel di bawah adalah ringkasan per-member—termasuk status collab, hal-hal yang perlu diperhatikan, dan cara terbaik untuk mengajukan.</p>
+
+          <div class="gl-callout">
+            <div class="gl-callout-title">// Catatan Penting</div>
+            <p>Informasi di sini mencerminkan preferensi umum talent <strong>sebagai karakter dan persona VTuber mereka</strong>—bukan pernyataan atau keputusan personal dari individu di balik layar. Untuk konfirmasi akhir, semua pengajuan tetap harus melalui kanal resmi tim.</p>
+          </div>
+
+          <div class="gl-member-table-wrap">
+
+            <!-- SOREN -->
+            <div class="gl-member-block">
+              <div class="gl-member-block-header">
+                <span class="gl-member-block-name">TAKAHI SOREN</span>
+                <span class="gl-member-block-status open">OPEN</span>
+              </div>
+              <table class="gl-member-mini-table">
+                <tr>
+                  <td>Format Collab</td>
+                  <td>Gaming, zatsudan, lore-based content, karaoke. Co-stream maupun single-channel.</td>
+                </tr>
+                <tr>
+                  <td>Preferensi</td>
+                  <td>Kolaborasi dengan nuansa kasual hingga semi-serius. Konten dengan unsur investigasi atau misteri disambut.</td>
+                </tr>
+                <tr>
+                  <td>Topik Dihindari</td>
+                  <td>Spekulasi tentang identitas off-camera atau informasi pribadi tanpa koordinasi sebelumnya. Pembahasan bertema off-camera (termasuk konten yang melibatkan perspektif pilot) diperbolehkan asal ada konfirmasi terlebih dahulu.</td>
+                </tr>
+                <tr>
+                  <td>Cara Pengajuan</td>
+                  <td>
+                    Langsung ke talent atau melalui kanal resmi tim (<code>@wgtr_help</code> / <code>@wgtr_info</code>). Sertakan gambaran konten dan estimasi durasi.
+                    <div class="gl-member-contact-row">Untuk collab stream: DM X sudah cukup · Untuk proyek besar: email</div>
+                    <a class="gl-member-profile-link" href="/members/soren">&#8599; Lihat Profil</a>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- LOCKED x5 -->
+            <!-- rui -->
+            <div class="gl-member-block locked-member">
+              <div class="gl-member-block-header">
+                <span class="gl-member-block-name" style="opacity:.4">&#9608;&#9608;&#9608;</span>
+                <span class="gl-member-block-status closed">BELUM DEBUT</span>
+              </div>
+              <table class="gl-member-mini-table">
+                <tr><td colspan="2" style="opacity:.4;font-style:italic;font-size:.82rem">Panduan akan tersedia setelah debut.</td></tr>
+                <tr><td colspan="2"><a class="gl-member-profile-link" href="/members/rui">&#8599; Lihat Profil</a></td></tr>
+              </table>
+            </div>
+
+            <!-- anneliese dyva -->
+            <div class="gl-member-block locked-member">
+              <div class="gl-member-block-header">
+                <span class="gl-member-block-name" style="opacity:.4">&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608;&#9608;</span>
+                <span class="gl-member-block-status closed">BELUM DEBUT</span>
+              </div>
+              <table class="gl-member-mini-table">
+                <tr><td colspan="2" style="opacity:.4;font-style:italic;font-size:.82rem">Panduan akan tersedia setelah debut.</td></tr>
+                <tr><td colspan="2"><a class="gl-member-profile-link" href="/members/anneliese">&#8599; Lihat Profil</a></td></tr>
+              </table>
+            </div>
+
+            <!-- noah chantelune -->
+            <div class="gl-member-block locked-member">
+              <div class="gl-member-block-header">
+                <span class="gl-member-block-name" style="opacity:.4">&#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</span>
+                <span class="gl-member-block-status closed">BELUM DEBUT</span>
+              </div>
+              <table class="gl-member-mini-table">
+                <tr><td colspan="2" style="opacity:.4;font-style:italic;font-size:.82rem">Panduan akan tersedia setelah debut.</td></tr>
+                <tr><td colspan="2"><a class="gl-member-profile-link" href="/members/noah">&#8599; Lihat Profil</a></td></tr>
+              </table>
+            </div>
+
+            <!-- igni vashti -->
+            <div class="gl-member-block locked-member">
+              <div class="gl-member-block-header">
+                <span class="gl-member-block-name" style="opacity:.4">&#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</span>
+                <span class="gl-member-block-status closed">BELUM DEBUT</span>
+              </div>
+              <table class="gl-member-mini-table">
+                <tr><td colspan="2" style="opacity:.4;font-style:italic;font-size:.82rem">Panduan akan tersedia setelah debut.</td></tr>
+                <tr><td colspan="2"><a class="gl-member-profile-link" href="/members/igni">&#8599; Lihat Profil</a></td></tr>
+              </table>
+            </div>
+
+            <!-- ardamevia -->
+            <div class="gl-member-block locked-member">
+              <div class="gl-member-block-header">
+                <span class="gl-member-block-name" style="opacity:.4">&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</span>
+                <span class="gl-member-block-status closed">BELUM DEBUT</span>
+              </div>
+              <table class="gl-member-mini-table">
+                <tr><td colspan="2" style="opacity:.4;font-style:italic;font-size:.82rem">Panduan akan tersedia setelah debut.</td></tr>
+                <tr><td colspan="2"><a class="gl-member-profile-link" href="/members/arda">&#8599; Lihat Profil</a></td></tr>
+              </table>
+            </div>
+
+          </div><!-- /member-table-wrap -->
+
+          <p class="gl-note">Status dan preferensi dapat berubah sewaktu-waktu. Selalu konfirmasi ke tim sebelum memulai produksi, terutama untuk proyek yang membutuhkan persiapan panjang.</p>
+        </div>
+
+        <!-- 06 ALUR PENGAJUAN -->
+        <div class="gl-article" id="gl-process">
+          <div class="gl-article-num">06</div>
+          <h2>ALUR PENGAJUAN</h2>
+          <span class="gl-type-badge collab">Collab Guidelines</span>
+          <div class="gl-rule"></div>
+
+          <p>Untuk kolaborasi yang memerlukan persetujuan resmi—terutama collab eksternal atau fan project berskala besar—ikuti alur di bawah ini. Semakin jelas informasi yang kamu berikan sejak awal, semakin cepat prosesnya bisa berjalan.</p>
+
+          <div class="gl-highlight" style="margin:1rem 0 1.5rem">
+            <p style="font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;opacity:.9">// Alur Pengajuan Kolaborasi</p>
+            <div class="gl-step-flow">
+              <div class="gl-step-row">
+                <div class="gl-step-num">1</div>
+                <div class="gl-step-body">
+                  <p><strong>Baca panduan ini terlebih dahulu</strong>—terutama bagian Konten & Batasan dan kategori kolaborasi yang relevan dengan pengajuanmu.</p>
+                  <p class="gl-step-sub">Pengajuan yang masuk tanpa menunjukkan pemahaman dasar tentang guidelines cenderung diproses lebih lambat.</p>
+                </div>
+              </div>
+              <div class="gl-step-connector"><div class="gl-step-connector-line"></div></div>
+              <div class="gl-step-row">
+                <div class="gl-step-num">2</div>
+                <div class="gl-step-body">
+                  <p><strong>Hubungi tim melalui kanal resmi</strong>. Sertakan: nama/akun kamu, jenis kolaborasi yang diajukan, format dan scope, talent atau bagian Wargantara yang ingin dilibatkan, dan timeline yang diharapkan.</p>
+                  <p class="gl-step-sub">Untuk collab stream sederhana, DM ke akun X resmi sudah cukup. Untuk proyek berskala lebih besar, gunakan email.</p>
+                </div>
+              </div>
+              <div class="gl-step-connector"><div class="gl-step-connector-line"></div></div>
+              <div class="gl-step-row">
+                <div class="gl-step-num">3</div>
+                <div class="gl-step-body">
+                  <p><strong>Tunggu konfirmasi</strong>. Tim akan merespons dalam waktu yang wajar—biasanya beberapa hari untuk pengajuan sederhana, lebih lama untuk proyek kompleks. Jika tidak ada respons dalam satu minggu, kamu boleh follow up satu kali.</p>
+                </div>
+              </div>
+              <div class="gl-step-connector"><div class="gl-step-connector-line"></div></div>
+              <div class="gl-step-row">
+                <div class="gl-step-num">4</div>
+                <div class="gl-step-body">
+                  <p><strong>Koordinasi detail</strong>. Setelah pengajuan disetujui secara prinsip, koordinasi teknis (jadwal, format, penggunaan aset, kredit) dilakukan langsung antara pihak yang terlibat.</p>
+                </div>
+              </div>
+              <div class="gl-step-connector"><div class="gl-step-connector-line"></div></div>
+              <div class="gl-step-row">
+                <div class="gl-step-num">5</div>
+                <div class="gl-step-body">
+                  <p><strong>Kolaborasi berjalan</strong>. Setelah semua detail disepakati, kolaborasi dapat diumumkan dan dilaksanakan. Pastikan semua pihak tetap mematuhi guidelines selama proses berlangsung.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gl-section-title">Timeline Rekomendasi</div>
+          <table class="gl-req-table">
+            <thead>
+              <tr><th>Jenis Collab</th><th>Lead Time Minimum</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Collab Stream (sederhana)</td><td>1–2 minggu</td></tr>
+              <tr><td>Collab Konten Kreatif</td><td>2–4 minggu</td></tr>
+              <tr><td>Fan Project Berskala Besar</td><td>1 bulan atau lebih</td></tr>
+              <tr><td>Event / Turnamen</td><td>Minimal 1 bulan</td></tr>
+              <tr><td>Kolaborasi Lore Canon</td><td>Menyesuaikan dengan jadwal tim</td></tr>
+            </tbody>
+          </table>
+
+          <p class="gl-note">Pengajuan dadakan (<em>last-minute</em>) sangat tidak disarankan—dan tidak ada jaminan bisa diproses dalam waktu singkat, tanpa memandang seberapa menarik proposalnya.</p>
+        </div>
+
+        <!-- 07 FAQ -->
+        <div class="gl-article" id="gl-faq">
+          <div class="gl-article-num">07</div>
+          <h2>FAQ</h2>
+          <span class="gl-type-badge collab">Collab Guidelines</span>
+          <div class="gl-rule"></div>
+          <p>Pertanyaan yang sering muncul seputar kolaborasi. Kalau jawabanmu tidak ada di sini, langsung cek bagian Kontak.</p>
+
+          <div class="faq-section-label">Umum</div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Apakah Wargantara terbuka untuk semua jenis collab?</button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Secara umum, ya—tapi dengan catatan. Kolaborasi yang bertentangan dengan guidelines, melibatkan konten yang tidak sesuai, atau datang dari pihak yang pernah melanggar ketentuan komunitas tidak akan diproses. Selain itu, kapasitas tim juga terbatas, jadi tidak semua pengajuan yang baik pun bisa langsung dijadwalkan.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Apakah saya perlu mengenal lore Wargantara untuk mengajukan collab?</button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Tidak harus mendalam, tapi pemahaman dasar sangat membantu. Terutama kalau kolaborasinya melibatkan konten lore atau karakter—datang tanpa pengetahuan apapun akan membuat koordinasi lebih lambat dan sulit. Disarankan untuk membaca setidaknya halaman Members dan bagian Disclaimer di Guidelines.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Berapa lama biasanya respons dari tim?</button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Untuk pengajuan sederhana melalui DM X, biasanya beberapa hari kerja. Proyek yang lebih kompleks bisa lebih lama. Kalau tidak ada respons dalam satu minggu, satu kali follow-up diperbolehkan. Jangan mengirim pesan berulang—itu tidak mempercepat prosesnya.</div>
+            </div>
+          </div>
+
+          <div class="faq-section-label">Collab Eksternal</div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Saya bukan VTuber, hanya kreator biasa. Bisa mengajukan collab?</button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Bisa. Format kreator tidak menentukan kelayakan—yang dilihat adalah konten yang diajukan, rekam jejak, dan kesesuaian dengan apa yang bisa dilakukan talent. Kalau proposalmu relevan dan tidak melanggar guidelines, pengajuanmu akan dipertimbangkan.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Apakah karakter collab saya bisa masuk ke lore Wargantara?</button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Secara teknis bisa—tapi ini bukan sesuatu yang bisa diklaim atau diminta dalam pengajuan collab. Kalau ada potensi semacam itu, itu adalah sesuatu yang muncul secara organik dari proses kolaborasi dan keputusannya sepenuhnya ada di tangan tim. Jangan menjadikannya syarat atau ekspektasi utama dari pengajuanmu.</div>
+            </div>
+          </div>
+
+          <div class="faq-section-label">Community Collab</div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Bikin zine fan perlu izin resmi gak?</button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Zine non-profit yang tidak menggunakan aset resmi secara langsung umumnya tidak memerlukan izin formal—cukup ikuti guidelines fan works dan derivative works yang ada. Yang perlu diperhatikan: jangan menggunakan nama atau branding Wargantara secara resmi di judul atau materi promosi tanpa konfirmasi. "Zine fan Wargantara" sebagai deskripsi informal berbeda dari penggunaan logo resmi.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Boleh gak ngajak talent ikut dalam fan project?</button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Boleh diajukan—tapi prosesnya harus melalui kanal resmi, bukan langsung ke akun personal talent. Dan perlu diingat bahwa tidak semua pengajuan bisa dipenuhi tergantung jadwal dan kapasitas. Pastikan proyekmu bisa berjalan dengan atau tanpa keterlibatan langsung talent sebelum mengajukan.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 08 KONTAK -->
+        <div class="gl-article" id="gl-contact">
+          <div class="gl-article-num">08</div>
+          <h2>KONTAK</h2>
+          <span class="gl-type-badge collab">Collab Guidelines</span>
+          <div class="gl-rule"></div>
+
+          <p>Untuk pengajuan kolaborasi atau pertanyaan yang belum terjawab di panduan ini, gunakan kanal berikut. Sertakan detail yang cukup dalam pesan pertamamu supaya tim bisa menindaklanjutinya dengan efisien.</p>
+
+          <div class="gl-section-title">Kanal Pengajuan</div>
+
+          <div class="gl-contact-channels">
+            <a class="gl-channel-card" href="https://x.com/wgtr_help" target="_blank" rel="noopener noreferrer">
+              <div class="gl-channel-icon">
+                <i class="fa-brands fa-x-twitter" style="font-size:1.1rem"></i>
+              </div>
+              <div class="gl-channel-info">
+                <div class="gl-channel-name">X / Twitter — Collab & Pertanyaan Umum</div>
+                <div class="gl-channel-handle">@wgtr_help</div>
+              </div>
+              <div class="gl-channel-arrow">&#8594;</div>
+            </a>
+            <a class="gl-channel-card" href="mailto:wargantara.help@gmail.com?subject=[Wargantara]%20Collab%20Request">
+              <div class="gl-channel-icon">
+                <span class="sf sf-mail-1" style="font-size:1.1rem"></span>
+              </div>
+              <div class="gl-channel-info">
+                <div class="gl-channel-name">Email — Proyek Berskala / Formal</div>
+                <div class="gl-channel-handle">wargantara.help@gmail.com</div>
+              </div>
+              <div class="gl-channel-arrow">&#8594;</div>
+            </a>
+          </div>
+
+          <p class="gl-note">Untuk kerjasama komersial atau sponsorship, gunakan subject line <code>[Business]</code> agar pengajuanmu diarahkan ke jalur yang tepat.</p>
+
+          <div class="gl-callout" style="border-left-color:var(--gold);background:rgba(154,126,42,.04);margin-top:2rem">
+            <div class="gl-callout-title" style="color:var(--gold)">// Sebelum Menghubungi</div>
+            <p>Pastikan kamu sudah membaca bagian yang relevan di halaman ini, terutama <em>Alur Pengajuan</em> dan <em>Konten & Batasan</em>. Pengajuan yang datang tanpa pemahaman dasar akan diarahkan kembali ke panduan ini terlebih dahulu.</p>
+          </div>
+        </div>
+
+      </div><!-- /gl-content-area -->
+    </div><!-- /gl-layout -->
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="sf-col">
+          <div class="sf-col-title">WARGANTARA</div>
+          <p>Para entitas yang hidup di ambang—tidak sepenuhnya milik dunia manusia, tidak juga milik dunia astral.</p>
+        </div>
+        <div class="sf-col">
+          <div class="sf-col-title">NAVIGASI</div>
+          <a href="index.html">Home</a>
+          <a href="members.html">Members</a>
+          <a href="lore.html">Lore Archive</a>
+          <a href="guidelines.html">Guidelines</a>
+          <a href="collab-guidelines.html">Collab Guidelines</a>
+          <a href="arcid.html">AR-CID Editor</a>
+          <a href="credits.html">Credits & Attributions</a>
+        </div>
+        <div class="sf-col">
+          <div class="sf-col-title">KOMUNITAS</div>
+          <p>Sandbox lore terbuka untuk semua fan. Buat OC, tulis cerita, dan jadilah bagian dari dua dunia ini.</p>
+          <p style="margin-top:.5rem">Status Lore: <span style="color:var(--gold);opacity:1">Open Sandbox</span></p>
+        </div>
+      </div>
+      <div class="sf-bottom">
+        <span class="sf-logo">WAR<span>G</span>ANTARA</span>
+        <span class="sf-copy">© Wargantara VTuber Group · Est. ???? · All lore is fiction</span>
+        <span class="sf-copy">Lintas Batas</span>
+      </div>
+    </footer>
+
+    <script>
+      /* ── Anti-DevTools (sama dengan guidelines.html) ── */
+      (function() {
+        "use strict";
+        var _blocked = false;
+        function _block() {
+          if (_blocked) return;
+          _blocked = true;
+          document.open();
+          document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Akses Ditolak</title><style>body{background:#0a0a0a;color:#3a3a3a;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-size:.8rem;letter-spacing:.1em}</style></head><body>// AKSES DITOLAK</body></html>');
+          document.close();
+        }
+        var _threshold = 160;
+        setInterval(function() {
+          var before = performance.now();
+          debugger;
+          if (performance.now() - before > _threshold) { _block(); }
+        }, 1000);
+      })();
+
+      function toggleMember(id) {
+        var body = document.getElementById('mb-' + id);
+        var toggle = document.getElementById('mt-' + id);
+        if (!body) return;
+        var isOpen = body.classList.toggle('open');
+        if (toggle) toggle.classList.toggle('open', isOpen);
+      }
+
+      var GL_HASH = {
+        'overview':  'overview',
+        'internal':  'internal',
+        'external':  'eksternal',
+        'community': 'community',
+        'content':   'konten',
+        'members':   'per-member',
+        'process':   'pengajuan',
+        'faq':       'faq',
+        'contact':   'kontak',
+      };
+      var GL_HASH_REV = {};
+      Object.keys(GL_HASH).forEach(function(k) { GL_HASH_REV[GL_HASH[k]] = k; });
+
+      function showGl(id, el, noHash, noScroll) {
+        document.querySelectorAll('.gl-article').forEach(function(x) { x.classList.remove('active') });
+        document.querySelectorAll('.gl-nav-item').forEach(function(x) { x.classList.remove('active') });
+        var art = document.getElementById('gl-' + id);
+        if (art) art.classList.add('active');
+        if (el) el.classList.add('active');
+        if (!noHash && GL_HASH[id]) history.replaceState(null, '', '#' + GL_HASH[id]);
+        document.querySelectorAll('.gl-mob-menu-item').forEach(function(x) {
+          x.classList.toggle('active', x.dataset.gl === id);
+        });
+        var activeItem = document.querySelector('.gl-mob-menu-item[data-gl="' + id + '"]');
+        var labelEl = document.getElementById('gl-mob-label');
+        if (labelEl && activeItem) {
+          var txt = activeItem.textContent.trim();
+          var match = txt.match(/^(\d+)\s*[—\-]\s*(.+)/);
+          if (match) {
+            var words = match[2].trim().split(/\s+/);
+            labelEl.textContent = match[1] + '—' + words[0];
+          } else {
+            labelEl.textContent = txt.length > 16 ? txt.substring(0, 14).trimEnd() + '…' : txt;
+          }
+        }
+        if (!noScroll) {
+          requestAnimationFrame(function() {
+            var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 56;
+            var pageHeader = document.querySelector('.page-header');
+            var top = pageHeader ? pageHeader.offsetTop : 0;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          });
+        }
+      }
+
+      (function() {
+        var hash = location.hash.replace('#', '');
+        var id = GL_HASH_REV[hash] || 'overview';
+        var el = document.querySelector('[onclick*="\'' + id + '\'"]');
+        showGl(id, el, true, true);
+      })();
+
+      function toggleFaq(btn) {
+        var item = btn.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(x) { x.classList.remove('open') });
+        if (!isOpen) item.classList.add('open');
+      }
+
+      function toggleMobile() {
+        var d = document.getElementById('mobile-drawer');
+        var b = document.getElementById('burger');
+        var open = d.classList.toggle('open');
+        b.classList.toggle('open', open);
+      }
+
+      function closeMobile() {
+        document.getElementById('mobile-drawer').classList.remove('open');
+        document.getElementById('burger').classList.remove('open');
+      }
+
+      var isDark = (function() {
+        var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
+        return m ? m[1] === 'dark' : false;
+      })();
+
+      function applyTheme() {
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        var di = document.getElementById('theme-icon');
+        if (di) { di.classList.remove('sf-sun-1-o','sf-moon-1-o'); di.classList.add(isDark ? 'sf-sun-1-o' : 'sf-moon-1-o'); }
+        var mi = document.getElementById('theme-icon-m');
+        if (mi) { mi.classList.remove('sf-sun-1-o','sf-moon-1-o'); mi.classList.add(isDark ? 'sf-sun-1-o' : 'sf-moon-1-o'); }
+        var ml = document.getElementById('theme-label-m');
+        if (ml) ml.textContent = isDark ? 'Day Mode' : 'Night Mode';
+      }
+
+      function toggleTheme() {
+        isDark = !isDark;
+        var exp = new Date();
+        exp.setFullYear(exp.getFullYear() + 1);
+        document.cookie = 'wg-theme=' + (isDark ? 'dark' : 'light') + '; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        applyTheme();
+      }
+      applyTheme();
+      document.addEventListener('visibilitychange', function() { if (!document.hidden) applyTheme(); });
+
+      // Splash
+      (function() {
+        if (document.cookie.match(/(?:^|;\s*)wg-visited=1/)) {
+          var s = document.getElementById('splash-main');
+          if (s) s.classList.add('hidden');
+        }
+      })();
+
+      var _pendingTheme = null, _denyTimer = null;
+
+      function splashStep2() {
+        var s1 = document.getElementById('splash-step1');
+        var s2 = document.getElementById('splash-step2');
+        s1.classList.add('fading');
+        setTimeout(function() {
+          s1.style.display = 'none';
+          s2.classList.add('active');
+          requestAnimationFrame(function() { requestAnimationFrame(function() { s2.classList.add('visible'); }); });
+        }, 350);
+      }
+
+      function splashSelectTheme(theme) {
+        _pendingTheme = theme;
+        document.getElementById('btn-day').classList.toggle('selected', theme === 'light');
+        document.getElementById('btn-night').classList.toggle('selected', theme === 'dark');
+        document.getElementById('splash-confirm').classList.add('ready');
+        isDark = (theme === 'dark');
+        applyTheme();
+      }
+
+      function splashEnter() {
+        if (!_pendingTheme) return;
+        var exp = new Date();
+        exp.setFullYear(exp.getFullYear() + 1);
+        document.cookie = 'wg-theme=' + _pendingTheme + '; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        document.cookie = 'wg-visited=1; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        isDark = (_pendingTheme === 'dark');
+        applyTheme();
+        var s = document.getElementById('splash-main');
+        s.classList.add('hiding');
+        setTimeout(function() { s.classList.add('hidden'); }, 620);
+      }
+
+      function splashDeny() {
+        var box = document.querySelector('#splash-main .splash-box');
+        box.classList.add('glitching');
+        setTimeout(function() {
+          box.innerHTML = '<div class="splash-pre">// Wargantara &middot; Akses Ditolak</div>' +
+            '<div class="splash-quote" style="font-size:clamp(1.3rem,3.5vw,1.75rem)">&ldquo;... I see.&rdquo;</div>' +
+            '<div class="splash-attr" style="margin-bottom:2rem">&mdash;</div>' +
+            '<div class="splash-disclaimer" style="opacity:.6">Tidak ada yang bisa kami lakukan untuk melanjutkan.<br><br>Dunia ini bukan untukmu &mdash; dan itu tidak apa-apa.</div>' +
+            '<div class="deny-countdown" id="deny-countdown">Halaman akan ditutup dalam <span id="deny-secs">5</span> detik...</div>' +
+            '<div class="splash-corner">W</div>';
+          box.classList.remove('glitching');
+          var secs = 5, el = document.getElementById('deny-secs'), wrap = document.getElementById('deny-countdown');
+          _denyTimer = setInterval(function() {
+            secs--;
+            if (el) el.textContent = secs;
+            if (secs <= 2 && wrap) wrap.classList.add('urgent');
+            if (secs <= 0) {
+              clearInterval(_denyTimer);
+              try { window.open('', '_self').close(); } catch(e) {}
+              window.close();
+              setTimeout(function() { document.body.innerHTML = ''; }, 300);
+            }
+          }, 1000);
+        }, 180);
+      }
+
+      function toggleMobMenu() {
+        var menu = document.getElementById('gl-mob-menu');
+        var btn = document.getElementById('gl-mob-trigger');
+        var isOpen = menu.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+      }
+
+      function closeMobMenu() {
+        document.getElementById('gl-mob-menu').classList.remove('open');
+        document.getElementById('gl-mob-trigger').classList.remove('open');
+      }
+
+      document.addEventListener('click', function(e) {
+        var menu = document.getElementById('gl-mob-menu');
+        var btn = document.getElementById('gl-mob-trigger');
+        if (menu && menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+          closeMobMenu();
+        }
+      });
+    </script>
+
+    <!-- MOBILE FLOATING NAV -->
+    <div class="gl-mob-menu" id="gl-mob-menu">
+      <div class="gl-mob-menu-label">// Collab Guidelines</div>
+      <button class="gl-mob-menu-item active" data-gl="overview" onclick="showGl('overview',this);closeMobMenu()">00—Overview</button>
+      <button class="gl-mob-menu-item" data-gl="internal" onclick="showGl('internal',this);closeMobMenu()">01—Collab Internal</button>
+      <button class="gl-mob-menu-item" data-gl="external" onclick="showGl('external',this);closeMobMenu()">02—Collab Eksternal</button>
+      <button class="gl-mob-menu-item" data-gl="community" onclick="showGl('community',this);closeMobMenu()">03—Community Collab</button>
+      <button class="gl-mob-menu-item" data-gl="content" onclick="showGl('content',this);closeMobMenu()">04—Konten &amp; Batasan</button>
+      <button class="gl-mob-menu-item" data-gl="members" onclick="showGl('members',this);closeMobMenu()">05—Per-Member</button>
+      <button class="gl-mob-menu-item" data-gl="process" onclick="showGl('process',this);closeMobMenu()">06—Alur Pengajuan</button>
+      <button class="gl-mob-menu-item" data-gl="faq" onclick="showGl('faq',this);closeMobMenu()">07—FAQ</button>
+      <button class="gl-mob-menu-item" data-gl="contact" onclick="showGl('contact',this);closeMobMenu()">08—Kontak</button>
+    </div>
+    <button class="gl-mob-trigger" id="gl-mob-trigger" onclick="toggleMobMenu()" aria-label="Navigation">
+      <div class="gl-mob-trigger-icon"><span></span><span></span><span></span></div>
+      <span id="gl-mob-label">MENU</span>
+    </button>
+
+  </body>
+</html>
