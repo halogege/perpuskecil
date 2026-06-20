@@ -6,7 +6,15 @@
     <script>
       (function() {
         var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
-        if (m) document.documentElement.setAttribute('data-theme', m[1] === 'dark' ? 'dark' : 'light');
+        var theme;
+        if (m) {
+          theme = m[1] === 'dark' ? 'dark' : 'light';
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          theme = 'dark';
+        } else {
+          theme = 'light';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2262,7 +2270,7 @@
       .wg-splash {
         position: fixed;
         inset: 0;
-        background: #0a0a0a;
+        background: var(--bg);
         z-index: 9999;
         display: flex;
         align-items: center;
@@ -2325,11 +2333,11 @@
       .splash-box {
         max-width: 560px;
         width: 100%;
-        border: 1px solid #2a2a2a;
-        border-top: 2px solid #c0251a;
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--red);
         padding: 3rem 2.5rem 2.5rem;
         position: relative;
-        background: #111111;
+        background: var(--surface);
         overflow: hidden
       }
 
@@ -2337,7 +2345,7 @@
         font-family: 'Space Mono', monospace;
         font-size: .6rem;
         letter-spacing: .28em;
-        color: #c0251a;
+        color: var(--red);
         text-transform: uppercase;
         margin-bottom: 1.5rem
       }
@@ -2347,7 +2355,7 @@
         font-style: italic;
         font-size: clamp(1.05rem, 3vw, 1.35rem);
         line-height: 1.75;
-        color: #f0ece3;
+        color: var(--ink);
         margin-bottom: .65rem
       }
 
@@ -2355,14 +2363,14 @@
         font-family: 'Space Mono', monospace;
         font-size: .62rem;
         letter-spacing: .1em;
-        color: #555;
+        color: var(--muted);
         margin-bottom: 2rem
       }
 
       .splash-rule {
         width: 2rem;
         height: 1px;
-        background: #2a2a2a;
+        background: var(--border);
         margin-bottom: 2rem
       }
 
@@ -2370,13 +2378,13 @@
         font-family: 'Space Mono', monospace;
         font-size: .78rem;
         line-height: 1.9;
-        color: #c8c2b4;
+        color: var(--ink2);
         opacity: .75;
         margin-bottom: 2rem
       }
 
       .splash-disclaimer strong {
-        color: #b89a3e;
+        color: var(--gold2);
         font-weight: 400
       }
 
@@ -2393,7 +2401,7 @@
         letter-spacing: .14em;
         text-transform: uppercase;
         padding: .7rem 1.5rem;
-        background: #c0251a;
+        background: var(--red);
         color: #fff;
         border: none;
         cursor: pointer;
@@ -2402,7 +2410,7 @@
       }
 
       .splash-btn-enter:hover {
-        background: #e02a1e
+        background: var(--red2)
       }
 
       .splash-btn-deny {
@@ -2410,9 +2418,9 @@
         font-size: .68rem;
         letter-spacing: .1em;
         text-transform: uppercase;
-        color: #555;
+        color: var(--muted);
         background: none;
-        border: 1px solid #2a2a2a;
+        border: 1px solid var(--border);
         cursor: pointer;
         padding: .6rem 1rem;
         transition: color .15s, border-color .15s;
@@ -2420,15 +2428,16 @@
       }
 
       .splash-btn-deny:hover {
-        color: #f0ece3;
-        border-color: #555
+        color: var(--ink);
+        border-color: var(--muted)
       }
 
       .splash-privacy {
         font-family: 'Space Mono', monospace;
         font-size: .58rem;
         letter-spacing: .06em;
-        color: #3a3a3a;
+        color: var(--muted);
+        opacity: .55;
         margin-top: 1.25rem;
         line-height: 1.7
       }
@@ -2439,7 +2448,7 @@
         right: 1.5rem;
         font-family: 'Bebas Neue', sans-serif;
         font-size: 4.5rem;
-        color: #c0251a;
+        color: var(--red);
         opacity: .04;
         line-height: 1;
         pointer-events: none
@@ -2481,9 +2490,9 @@
         letter-spacing: .12em;
         text-transform: uppercase;
         padding: 1.1rem 1rem;
-        border: 1px solid #2a2a2a;
+        border: 1px solid var(--border);
         background: none;
-        color: #888;
+        color: var(--muted);
         cursor: pointer;
         transition: all .15s;
         display: flex;
@@ -2499,8 +2508,8 @@
       }
 
       .splash-theme-btn:hover {
-        border-color: #b89a3e;
-        color: #f0ece3
+        border-color: var(--gold2);
+        color: var(--ink)
       }
 
       .splash-theme-btn:hover .t-icon {
@@ -2508,9 +2517,9 @@
       }
 
       .splash-theme-btn.selected {
-        border-color: #c0251a;
-        color: #f0ece3;
-        background: rgba(192, 37, 26, .08)
+        border-color: var(--red);
+        color: var(--ink);
+        background: var(--red-dim)
       }
 
       .splash-theme-btn.selected .t-icon {
@@ -2523,7 +2532,7 @@
         letter-spacing: .14em;
         text-transform: uppercase;
         padding: .7rem 1.5rem;
-        background: #c0251a;
+        background: var(--red);
         color: #fff;
         border: none;
         cursor: pointer;
@@ -2540,20 +2549,20 @@
       }
 
       .splash-theme-confirm.ready:hover {
-        background: #e02a1e
+        background: var(--red2)
       }
 
       .deny-countdown {
         font-family: 'Space Mono', monospace;
         font-size: .72rem;
         letter-spacing: .1em;
-        color: #3a3a3a;
+        color: var(--muted);
         margin-top: 1.5rem;
         transition: color .3s
       }
 
       .deny-countdown.urgent {
-        color: #7a3030
+        color: var(--red)
       }
 
       @media(max-width:600px) {
@@ -3125,11 +3134,11 @@
 
             <p>Sidang selesai. Permintaannya dikonfirmasi. Saat waktunya tiba, sayap raven miliknya hancur dimakan api—pecah jadi serpihan hitam kebiruan yang beterbangan, mata-mata yang melekat di sayap itu runtuh satu per satu sebelum semuanya mengecil jadi inti cahaya yang akhirnya kehilangan bentuk juga. Yang tersisa hanya esensi tanpa wujud fisik. Ia melayang di alam astral sebagai kehadiran yang hanya bisa dirasakan—tetap mencatat, tetap mengamati, hanya dari sudut yang berbeda, tanpa jabatan, tanpa nama yang bisa dipakai. Memorinya dikunci sebagai bagian dari hukuman: bukan dihapus, hanya dibatasi, dengan asumsi kuncinya akan longgar sendiri kalau waktunya sudah tepat.</p>
 
-            <p>Bentuk penebusannya adalah crossing—tapi bukan crossing atas pilihan sendiri seperti kebanyakan makhluk astral yang memilih menetap di dunia manusia dan jadi bagian dari apa yang disebut <strong>Wargantara</strong>. Ini crossing yang diwajibkan. Reinkarnasi: ia harus lahir sebagai manusia, jalani hidupnya sampai habis, mati, lalu kembali ke titik antara untuk dimintai kesaksian. Apakah ia masih konsisten dengan pilihannya. Apakah yang ia rasakan selama hidup itu mengubah sesuatu. Kalau jawabannya dianggap belum cukup, ia dikirim kembali. Lahir lagi, di tempat lain, sebagai orang lain, dengan memori putaran sebelumnya yang terkunci tapi tidak benar-benar hilang.</p>
+            <p>Penebusannya dijalankan tak jauh berbeda dengan jiwa-jiwa yang pernah ia adili sendiri sebelumnya. Ia menjalani reinkarnasi paksa: lahir sebagai manusia, jalani hidupnya sampai habis, mati, lalu ditarik kembali ke titik antara untuk dimintai kesaksian—apakah ia masih konsisten dengan pilihannya, apakah yang ia rasakan selama hidup itu mengubah sesuatu. Kalau jawabannya dianggap belum cukup, ia dikirim kembali. Lahir lagi, di tempat lain, sebagai orang lain—dengan memori surgawinya yang perlahan terlupa, lalu sesekali muncul kembali tanpa diundang, hilang timbul sepanjang hidup yang ia jalani.</p>
 
             <p>Dan di situlah masalahnya. Memori yang dikunci bukan berarti memori yang hilang—ia tetap ada, menumpuk di bawah permukaan, membebani tanpa bisa diakses secara sadar. Setiap putaran baru menambah satu lapisan yang tidak bisa diproses. Efek sampingnya tidak langsung terasa, tapi konsisten: di setiap kehidupan, beban itu makin berat dibawa. Ini bukan soal mendramatisir hidup, melainkan kelelahan yang tidak punya sumber jelas untuk ditunjuk—seperti tubuh dan jiwanya sudah tahu bahwa ini bukan yang pertama, dan belum tentu yang terakhir. Umurnya jarang panjang. Paling sering berakhir di penghujung usia dua puluhan. Kadang mendekati empat puluh. Sekali pernah hampir delapan puluh, tapi itu kasus langka—dan bahkan di putaran itu, bebannya tetap ada, hanya lebih tersembunyi.</p>
 
-            <p>Sampai suatu putaran, jawabannya akhirnya dianggap cukup—justru karena tidak pernah berubah, bukan karena berbeda dari yang sebelumnya. Status Seraph-nya ditetapkan kembali. Posisi No. 9 tidak dihapus dari catatannya, hanya sekarang bersifat kondisional—aktif kalau dipanggil. Yang paling penting: ia tidak perlu lagi lahir sebagai manusia. Keanggotaan Wargantara yang ia sandang selama periode hukuman itu pun tidak ikut dicabut—tetap terdaftar, sekarang resmi, dengan penanda <strong>Senior</strong> di belakang namanya. Bukan gelar yang diberikan dari atas, sebetulnya. Lebih ke ejekan internal untuk angkatan pertama yang entah kenapa masih ada sampai sekarang—sekaligus penanda bahwa siklus yang jarang orang tuntaskan sampai ujungnya itu sudah ia lewati.</p>
+            <p>Sidang terakhirnya jatuh di periode yang catatannya kini diarsipkan sebagai <span class="glitch-redact" data-glitch="████████">[tahun disensor]</span>—tidak lama setelah dunia manusia memasuki babak baru menjelang perang besar berikutnya. Jawabannya akhirnya dianggap cukup—justru karena tidak pernah berubah, bukan karena berbeda dari yang sebelumnya. Ia dibebaskan dari kewajiban reinkarnasi. Status Seraph-nya ditetapkan kembali, dan posisi No. 9 tidak dihapus dari catatannya, hanya sekarang bersifat kondisional—aktif kalau dipanggil. Tapi yang lebih signifikan dari itu: ia diberi akses untuk hidup berkeliaran keluar masuk dunia manusia, membaur, tanpa harus lahir dan mati lagi setiap kali. Bentuknya mirip tugas lama sebagai malaikat, hanya saja jauh lebih kasual, tidak selalu formal. Saat itu status semacam ini belum punya nama. Baru belakangan dikenal sebagai <strong>Wargantara</strong>—dan apakah itu sejak awal dirancang sebagai solusi untuk kasusnya, atau justru konsekuensi yang baru kemudian dilembagakan, catatan resminya tidak pernah benar-benar menjelaskan. Yang pasti, ia salah satu yang pertama menyandangnya—karenanya, penanda <strong>Senior</strong> melekat di belakang namanya sampai sekarang. Bukan gelar yang diberikan dari atas, sebetulnya. Lebih ke ejekan internal untuk angkatan pertama yang entah kenapa masih ada sampai sekarang—sekaligus penanda bahwa siklus yang jarang orang tuntaskan sampai ujungnya itu sudah ia lewati.</p>
 
             <p>Tiga status sekarang berjalan bersamaan di belakang satu nama yang di dunia fana mengaku anak tunggal blasteran yang keluarganya sudah lama pergi entah ke mana.</p>
           </div>
@@ -3532,7 +3541,8 @@
       /* ---- THEME ---- */
       var isDark = (function() {
         var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
-        return m ? m[1] === 'dark' : false;
+        if (m) return m[1] === 'dark';
+        return !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
       })();
 
       function applyTheme() {
@@ -3588,6 +3598,8 @@
             });
           });
         }, 350);
+        // pre-select tombol sesuai preferensi sistem/browser, user tetap bisa ganti manual
+        splashSelectTheme(isDark ? 'dark' : 'light');
       }
 
       function splashSelectTheme(theme) {

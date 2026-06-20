@@ -126,11 +126,7 @@
         cursor: pointer
       }
 
-      .nav-links li a:hover {
-        opacity: 1;
-        background: var(--surface)
-      }
-
+      .nav-links li a:hover,
       .nav-links li a.active {
         opacity: 1;
         background: var(--red);
@@ -1261,7 +1257,7 @@
       .wg-splash {
         position: fixed;
         inset: 0;
-        background: #0a0a0a;
+        background: var(--bg);
         z-index: 9999;
         display: flex;
         align-items: center;
@@ -1324,11 +1320,11 @@
       .splash-box {
         max-width: 560px;
         width: 100%;
-        border: 1px solid #2a2a2a;
-        border-top: 2px solid #c0251a;
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--red);
         padding: 3rem 2.5rem 2.5rem;
         position: relative;
-        background: #111111;
+        background: var(--bg);
         overflow: hidden
       }
 
@@ -1336,7 +1332,7 @@
         font-family: 'Space Mono', monospace;
         font-size: .6rem;
         letter-spacing: .28em;
-        color: #c0251a;
+        color: var(--red);
         text-transform: uppercase;
         margin-bottom: 1.5rem
       }
@@ -1346,7 +1342,7 @@
         font-style: italic;
         font-size: clamp(1.05rem, 3vw, 1.35rem);
         line-height: 1.75;
-        color: #f0ece3;
+        color: var(--ink);
         margin-bottom: .65rem
       }
 
@@ -1354,14 +1350,14 @@
         font-family: 'Space Mono', monospace;
         font-size: .62rem;
         letter-spacing: .1em;
-        color: #555;
+        color: var(--muted);
         margin-bottom: 2rem
       }
 
       .splash-rule {
         width: 2rem;
         height: 1px;
-        background: #2a2a2a;
+        background: var(--border);
         margin-bottom: 2rem
       }
 
@@ -1369,13 +1365,13 @@
         font-family: 'Space Mono', monospace;
         font-size: .78rem;
         line-height: 1.9;
-        color: #c8c2b4;
+        color: var(--ink2);
         opacity: .75;
         margin-bottom: 2rem
       }
 
       .splash-disclaimer strong {
-        color: #b89a3e;
+        color: var(--gold);
         font-weight: 400
       }
 
@@ -1392,7 +1388,7 @@
         letter-spacing: .14em;
         text-transform: uppercase;
         padding: .7rem 1.5rem;
-        background: #c0251a;
+        background: var(--red);
         color: #fff;
         border: none;
         cursor: pointer;
@@ -1401,7 +1397,7 @@
       }
 
       .splash-btn-enter:hover {
-        background: #e02a1e
+        background: var(--red2)
       }
 
       .splash-btn-deny {
@@ -1409,9 +1405,9 @@
         font-size: .68rem;
         letter-spacing: .1em;
         text-transform: uppercase;
-        color: #555;
+        color: var(--muted);
         background: none;
-        border: 1px solid #2a2a2a;
+        border: 1px solid var(--border);
         cursor: pointer;
         padding: .6rem 1rem;
         transition: color .15s, border-color .15s;
@@ -1419,15 +1415,15 @@
       }
 
       .splash-btn-deny:hover {
-        color: #f0ece3;
-        border-color: #555
+        color: var(--ink);
+        border-color: var(--muted)
       }
 
       .splash-privacy {
         font-family: 'Space Mono', monospace;
         font-size: .58rem;
         letter-spacing: .06em;
-        color: #3a3a3a;
+        color: var(--border2);
         margin-top: 1.25rem;
         line-height: 1.7
       }
@@ -1438,7 +1434,7 @@
         right: 1.5rem;
         font-family: 'Bebas Neue', sans-serif;
         font-size: 4.5rem;
-        color: #c0251a;
+        color: var(--red);
         opacity: .04;
         line-height: 1;
         pointer-events: none
@@ -1769,6 +1765,181 @@
         opacity: 1;
         transform: translateX(-50%) translateY(0)
       }
+    
+      /* NAV DROPDOWN */
+      .nav-links li.has-drop {
+        position: relative
+      }
+      .nav-links li.has-drop > a {
+        display: flex !important;
+        align-items: center;
+        gap: .35rem
+      }
+      .nav-links li.has-drop > a::after {
+        content: '';
+        width: 5px;
+        height: 5px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: rotate(45deg) translateY(-1px);
+        opacity: .6;
+        transition: transform .15s
+      }
+      .nav-links li.has-drop:hover > a::after {
+        transform: rotate(-135deg) translateY(-2px)
+      }
+      .nav-drop {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 180px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--red);
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 9999;
+        box-shadow: 0 4px 16px rgba(0,0,0,.18);
+        transition: opacity .15s, visibility .15s
+      }
+      .nav-links li.has-drop:hover .nav-drop {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto
+      }
+      .nav-drop a {
+        display: block !important;
+        padding: .65rem 1rem !important;
+        height: auto !important;
+        line-height: 1.4 !important;
+        font-size: .75rem !important;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--ink) !important;
+        opacity: .65 !important;
+        border-bottom: 1px solid var(--border) !important;
+        border-left: none !important;
+        transition: all .12s !important;
+        white-space: nowrap
+      }
+      .nav-drop a:last-child {
+        border-bottom: none !important
+      }
+      .nav-drop a:hover, .nav-drop a.active {
+        opacity: 1 !important;
+        background: var(--red) !important;
+        color: #fff !important
+      }
+
+      /* MOBILE DRAWER SUB */
+      .mobile-drawer ul li.has-msub > a {
+        justify-content: space-between
+      }
+      .mobile-drawer ul li.has-msub > a::after {
+        content: '›';
+        font-size: 1.1rem;
+        opacity: .4
+      }
+      .mobile-sub {
+        display: none;
+        border-top: 1px solid var(--border)
+      }
+      .mobile-sub.open {
+        display: block
+      }
+      .mobile-sub a {
+        padding-left: 2.75rem !important;
+        background: var(--surface) !important;
+        font-size: .82rem !important;
+        opacity: .55 !important
+      }
+      .mobile-sub a:hover, .mobile-sub a.active {
+        opacity: 1 !important;
+        background: var(--red) !important;
+        color: #fff !important
+      }
+
+    
+      /* contact box */
+      .sf-contact-box {
+        margin-top: .65rem;
+        border: 1px solid var(--border2);
+        border-top: 2px solid var(--red);
+        padding: 1rem 1rem .85rem
+      }
+      .sf-contact-box-label {
+        font-size: .6rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--red);
+        margin-bottom: .5rem;
+        opacity: 1
+      }
+      .sf-contact-box-body {
+        font-size: .8rem;
+        line-height: 1.75;
+        opacity: .65;
+        margin-bottom: .85rem
+      }
+      .sf-contact-cta {
+        display: block;
+        width: 100%;
+        padding: .55rem 1rem;
+        font-family: var(--mono);
+        font-size: .7rem;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+        text-align: center;
+        background: var(--red);
+        color: #fff !important;
+        opacity: 1 !important;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: background .15s
+      }
+      .sf-contact-cta:hover {
+        background: #a01e14
+      }
+
+    
+      /* ── SOCIAL PILLS ── */
+      .sf-socials {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: .5rem;
+        margin-top: .85rem
+      }
+      .sf-social-pill {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 52px !important;
+        height: 52px !important;
+        border: 1px solid var(--border2);
+        color: var(--ink) !important;
+        opacity: .45 !important;
+        text-decoration: none;
+        transition: all .15s;
+        cursor: pointer;
+        flex-shrink: 0 !important
+      }
+      .sf-social-pill i {
+        font-size: 1.7rem
+      }
+      a.sf-social-pill:hover {
+        border-color: var(--ink);
+        opacity: 1 !important
+      }
+      .sf-social-pill--disabled {
+        opacity: .18 !important;
+        cursor: not-allowed !important;
+        border-style: dashed
+      }
+
     </style>
 
     <meta name="description" content="Wargantara adalah grup VTuber Indonesia bertemakan entitas astral dan sandbox lore universe.">
@@ -1894,8 +2065,13 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="members.html">Members</a></li>
         <li><a href="lore.html">Lore</a></li>
-        <li><a class="active" href="guidelines.html">Guidelines</a></li>
-        <li><a href="/collab">Collab</a></li>
+        <li class="has-drop">
+          <a class="active" href="guidelines.html">Guidelines</a>
+          <div class="nav-drop">
+            <a class="active" href="guidelines.html">General Guidelines</a>
+            <a href="collab.html">Collab with Us</a>
+          </div>
+        </li>
       </ul>
       <div class="nav-right">
         <button class="theme-btn" id="theme-btn-desktop" onclick="toggleTheme()" aria-label="Toggle theme"><span id="theme-icon" class="sf"></span></button>
@@ -1911,10 +2087,15 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="members.html">Members</a></li>
         <li><a href="lore.html">Lore</a></li>
-        <li><a class="active" href="guidelines.html">Guidelines</a></li>
-        <li><a href="/collab">Collab</a></li>
+        <li class="has-msub">
+          <a class="active" href="guidelines.html" onclick="toggleMSub(event,'msub-gl')">Guidelines</a>
+          <div class="mobile-subopen" id="msub-gl">
+            <a class="active" href="guidelines.html">General Guidelines</a>
+            <a href="collab.html">Collab with Us</a>
+          </div>
+        </li>
         <li><a href="arcid.html">AR-CID Editor</a></li>
-        <li><a href="credits.html">Credits & Attributions</a></li>
+        <li><a href="credits.html">Credits</a></li>
       </ul>
       <div style="padding:.75rem 1.5rem;border-top:1px solid var(--border)">
         <a onclick="toggleTheme();closeMobile()" id="mnav-theme" style="display:flex;align-items:center;gap:.75rem;cursor:pointer;padding:.7rem 0;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);opacity:.75;text-decoration:none">
@@ -2822,25 +3003,37 @@
     </div><!-- /gl-layout -->
 
     <!-- FOOTER -->
-    <footer class="site-footer">
+            <footer class="site-footer">
       <div class="site-footer-inner">
         <div class="sf-col">
           <div class="sf-col-title">WARGANTARA</div>
           <p>Para entitas yang hidup di ambang—tidak sepenuhnya milik dunia manusia, tidak juga milik dunia astral.</p>
+          <p style="margin-top:.6rem">Status Lore: <span style="color:var(--gold);opacity:1">Open Sandbox</span></p>
         </div>
         <div class="sf-col">
           <div class="sf-col-title">NAVIGASI</div>
           <a href="index.html">Home</a>
           <a href="members.html">Members</a>
           <a href="lore.html">Lore Archive</a>
-          <a href="guidelines.html">Guidelines</a>
+          <a href="guidelines.html">General Guidelines</a>
+          <a href="collab.html">Collab with Us</a>
           <a href="arcid.html">AR-CID Editor</a>
-          <a href="credits.html">Credits & Attributions</a>
+          <a href="credits.html">Credits &amp; Attributions</a>
         </div>
         <div class="sf-col">
-          <div class="sf-col-title">KOMUNITAS</div>
-          <p>Sandbox lore terbuka untuk semua fan. Buat OC, tulis cerita, dan jadilah bagian dari dua dunia ini.</p>
-          <p style="margin-top:.5rem">Status Lore: <span style="color:var(--gold);opacity:1">Open Sandbox</span></p>
+          <div class="sf-col-title">KONTAK</div>
+          <p style="font-size:.84rem;line-height:1.85;opacity:.65">Ikuti kami di media sosial untuk update terbaru seputar Wargantara.</p>
+          <div class="sf-socials">
+            <a class="sf-social-pill" href="https://x.com/wgtr_id" target="_blank" rel="noopener" title="Twitter / X">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a class="sf-social-pill" href="https://youtube.com/wgtr_id" target="_blank" rel="noopener" title="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <span class="sf-social-pill sf-social-pill--disabled" title="Discord — Coming Soon">
+              <i class="fa-brands fa-discord"></i>
+            </span>
+          </div>
         </div>
       </div>
       <div class="sf-bottom">
