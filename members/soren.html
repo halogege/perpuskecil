@@ -104,10 +104,17 @@
         color: var(--ink);
         cursor: pointer;
         transition: color .3s;
-        text-decoration: none
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center
       }
 
-      .nav-logo span {
+      .nav-logo-img {
+        height: 2rem;
+        width: auto
+      }
+
+      .nav-logo-text span {
         color: var(--red)
       }
 
@@ -1343,10 +1350,17 @@
         font-size: 1.6rem;
         letter-spacing: .08em;
         color: var(--ink);
-        opacity: .3
+        opacity: .3;
+        display: inline-flex;
+        align-items: center
       }
 
-      .sf-logo span {
+      .sf-logo-img {
+        height: 1.6rem;
+        width: auto
+      }
+
+      .sf-logo-text span {
         color: var(--red)
       }
 
@@ -2547,6 +2561,135 @@
           padding: 2rem 1.5rem
         }
       }
+    
+      .nav-links li.has-drop {
+        position: relative
+      }
+      .nav-links li.has-drop > a {
+        display: flex !important;
+        align-items: center;
+        gap: .35rem
+      }
+      .nav-links li.has-drop > a::after {
+        content: '';
+        width: 5px;
+        height: 5px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: rotate(45deg) translateY(-1px);
+        opacity: .6;
+        transition: transform .15s
+      }
+      .nav-links li.has-drop:hover > a::after {
+        transform: rotate(-135deg) translateY(-2px)
+      }
+      .nav-drop {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 180px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--red);
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 9999;
+        box-shadow: 0 4px 16px rgba(0,0,0,.18);
+        transition: opacity .15s, visibility .15s
+      }
+      .nav-links li.has-drop:hover .nav-drop {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto
+      }
+      .nav-drop a {
+        display: block !important;
+        padding: .65rem 1rem !important;
+        height: auto !important;
+        line-height: 1.4 !important;
+        font-size: .75rem !important;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--ink) !important;
+        opacity: .65 !important;
+        border-bottom: 1px solid var(--border) !important;
+        border-left: none !important;
+        transition: all .12s !important;
+        white-space: nowrap
+      }
+      .nav-drop a:last-child {
+        border-bottom: none !important
+      }
+      .nav-drop a:hover, .nav-drop a.active {
+        opacity: 1 !important;
+        background: var(--red) !important;
+        color: #fff !important
+      }
+
+      /* MOBILE DRAWER SUB */
+      .mobile-drawer ul li.has-msub > a {
+        justify-content: space-between
+      }
+      .mobile-drawer ul li.has-msub > a::after {
+        content: '›';
+        font-size: 1.1rem;
+        opacity: .4
+      }
+      .mobile-sub {
+        display: none;
+        border-top: 1px solid var(--border)
+      }
+      .mobile-sub.open {
+        display: block
+      }
+      .mobile-sub a {
+        padding-left: 2.75rem !important;
+        background: var(--surface) !important;
+        font-size: .82rem !important;
+        opacity: .55 !important
+      }
+      .mobile-sub a:hover, .mobile-sub a.active {
+        opacity: 1 !important;
+        background: var(--red) !important;
+        color: #fff !important
+      }
+
+      /* ── SOCIAL PILLS ── */
+      .sf-socials {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: .5rem;
+        margin-top: .85rem
+      }
+      .sf-social-pill {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 52px !important;
+        height: 52px !important;
+        border: 1px solid var(--border2);
+        color: var(--ink) !important;
+        opacity: .45 !important;
+        text-decoration: none;
+        transition: all .15s;
+        cursor: pointer;
+        flex-shrink: 0 !important
+      }
+      .sf-social-pill i {
+        font-size: 1.7rem
+      }
+      a.sf-social-pill:hover {
+        border-color: var(--ink);
+        opacity: 1 !important
+      }
+      .sf-social-pill--disabled {
+        opacity: .18 !important;
+        cursor: not-allowed !important;
+        border-style: dashed
+      }
     </style>
 
     <meta name="description" content="Wargantara adalah grup VTuber Indonesia bertemakan entitas astral dan sandbox lore universe.">
@@ -2672,12 +2815,18 @@
 
     <!-- NAV -->
     <nav>
-      <div class="nav-logo" onclick="window.location.href='/index.html'">WAR<span>G</span>ANTARA</div>
+      <a class="nav-logo" href="/index.html"><span class="nav-logo-text">WAR<span>G</span>ANTARA</span><img class="nav-logo-img" src="/assets/og/logo-small.png" alt="WARGANTARA" style="display:none" onload="this.style.display='inline';this.previousElementSibling.style.display='none'" onerror="this.remove()"></a>
       <ul class="nav-links">
         <li><a href="/index.html">Home</a></li>
-        <li><a class="active" href="members.html">Members</a></li>
+        <li><a class="active" href="/members">Members</a></li>
         <li><a href="/lore.html">Lore</a></li>
-        <li><a href="/guidelines.html">Guidelines</a></li>
+        <li class="has-drop">
+          <a href="/guidelines.html">Guidelines</a>
+          <div class="nav-drop">
+            <a href="/guidelines.html">General Guidelines</a>
+            <a href="/collab.html">Collab with Us</a>
+          </div>
+        </li>
       </ul>
       <div class="nav-right">
         <button class="theme-btn" id="theme-btn-desktop" onclick="toggleTheme()" aria-label="Toggle theme"><span id="theme-icon" class="sf"></span></button>
@@ -2691,11 +2840,17 @@
     <div class="mobile-drawer" id="mobile-drawer">
       <ul>
         <li><a href="/index.html">Home</a></li>
-        <li><a class="active" href="/members.html">Members</a></li>
+        <li><a class="active" href="/members">Members</a></li>
         <li><a href="/lore.html">Lore</a></li>
-        <li><a href="/guidelines.html">Guidelines</a></li>
+        <li class="has-msub">
+          <a href="/guidelines.html" onclick="toggleMSub(event,'msub-gl')">Guidelines</a>
+          <div class="mobile-sub" id="msub-gl">
+            <a href="/guidelines.html">General Guidelines</a>
+            <a href="/collab.html">Collab with Us</a>
+          </div>
+        </li>
         <li><a href="/arcid.html">AR-CID Editor</a></li>
-        <li><a href="/credits.html">Credits & Attributions</a></li>
+        <li><a href="/credits.html">Credits &amp; Attributions</a></li>
       </ul>
       <div style="padding:.75rem 1.5rem;border-top:1px solid var(--border)">
         <a onclick="toggleTheme();closeMobile()" id="mnav-theme" style="display:flex;align-items:center;gap:.75rem;cursor:pointer;padding:.7rem 0;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);opacity:.75;text-decoration:none">
@@ -2952,29 +3107,29 @@
 
           <div class="lore-infobox">
             <h4>// Catatan Narasi</h4>
-            <p>Penjelasan berikut disajikan dalam bahasa yang lebih 'manusiawi'. Katanya, istilah yang digunakan oleh kelompok fana bernama <em>budak korporat</em> lebih mudah dipahami.</p>
+            <p>Penjelasan berikut disajikan dengan bahasa yang lebih "manusiawi". Katanya, istilah yang dipakai kelompok fana bernama <em>budak korporat</em> lebih mudah dimengerti.</p>
           </div>
 
           <div class="lore-body">
-            <p>Kalau mau diceritakan dari awal, ia mulai dari bawah—staf pencatat di Divisi Akashic Records, tugasnya memastikan tidak ada satu pun hukum kosmis yang meleset dari jalurnya dan arsip semesta tetap rapi. Bayangkan pustakawan, tapi perpustakaannya berisi pengetahuan seluruh alam semesta dan satu salah catat bisa berdampak sampai ke generasi yang bahkan belum lahir. Lima tahun ia di sana—dan dalam lima tahun itu ia sudah naik tiga kali. Lalu naik lagi, dan terus, sampai akhirnya duduk di rank 3 Seraph of High End Orders. Bukan karena agresif mengejar jabatan, tapi karena cara kerjanya memang begitu: terlalu teliti, terlalu menyeluruh, mengerjakan satu hal sampai tidak ada yang tersisa sebelum lanjut ke hal berikutnya. Rekan-rekannya tidak bisa protes hasilnya—tapi tidak jarang juga yang cuma bisa geleng-geleng kepala melihat prosesnya. Di sela tugasnya menimbang takdir jiwa-jiwa yang lewat—apakah layak reinkarnasi, apakah ada hutang yang belum lunas, apakah ada pengecualian yang perlu dicatat—ia juga menumpuk catatan-catatan pribadinya tentang manusia yang pernah ia amati. Bukan untuk laporan resmi. Hanya karena ia merasa perlu memahami apa yang sedang ia nilai.</p>
+            <p>Karirnya dimulai dari bawah—staf pencatat di Divisi Akashic Records, tugasnya menjaga supaya tidak ada satu pun ilmu pengetahuan yang meleset dari arsipnya dan tetap rapi tersimpan. Semacam pustakawan, kalau boleh dianalogikan, hanya saja perpustakaannya berisi seluruh ilmu pengetahuan alam semesta dan satu kesalahan pencatatan bisa berdampak sampai generasi yang belum lahir. Lima tahun menjadi staf rendahan di posisi itu, sampai akhirnya ia naik ke Seraph of High End Orders—divisi yang berurusan langsung dengan kontrak jiwa dan timbangan takdir. Sepuluh tahun berikutnya di sana, ia naik pangkat berulang kali, sampai menduduki rank 3. Bukan hasil dari mengejar jabatan—ia memang bekerja seperti itu, terlalu teliti, terlalu menyeluruh, menuntaskan satu hal sampai tidak ada yang tersisa sebelum pindah ke yang berikutnya. Rekan-rekannya tidak bisa membantah hasilnya, walau tidak sedikit juga yang hanya bisa menggelengkan kepala melihat caranya bekerja. Di sela tugas menimbang takdir jiwa-jiwa yang lewat mejanya—layak reinkarnasi atau tidak, ada hutang yang belum lunas atau tidak, ada pengecualian yang perlu dicatat atau tidak—ia diam-diam menumpuk catatan pribadi soal manusia-manusia yang pernah ia amati. Bukan untuk laporan resmi. Sekadar kebutuhannya sendiri untuk memahami apa yang sedang ia nilai.</p>
 
-            <p>Sepuluh tahun menjadi Seraph of High End Orders berarti ia sudah lebih dari akrab dengan sebagian besar yang bertugas di Angel of Death Division—mereka yang lewat mejanya, yang catatannya ia periksa, yang keputusannya sesekali ia komentari dalam dokumen internal. Ketika <span class="glitch-redact" data-glitch="████████████">Malakul Al-Maut</span> memintanya pindah divisi, bukan nama baru yang masuk—melainkan seseorang yang sebagian dari mereka sudah tahu cara kerjanya, dan tidak sepenuhnya antusias dengan prospek itu. Begitu resmi bergabung, ia tidak mengambil salah satu dari delapan posisi yang sudah ada. Ia mengamati, mencatat celah dalam sistem, lalu naik ke kedudukan yang sebelumnya tidak pernah ada dalam struktur resmi: <strong>No. 9</strong>. Bukan karena ia merebutnya—tapi karena hasil kerjanya selama masa pengamatan itu cukup untuk membuat manajemen memutuskan bahwa slot tambahan memang diperlukan, dan tidak ada nama lain yang lebih masuk akal untuk mengisinya. Delapan orang sebelumnya tahu persis apa yang itu artinya. Tidak ada yang bilang selamat datang dengan tulus. Ia mencatat itu juga.</p>
+            <p>Sepuluh tahun menjadi Seraph of High End Orders membuat ia kenal hampir semua orang yang bertugas di Angel of Death Division—orang-orang yang lewat mejanya, yang catatannya ia periksa, yang keputusannya kadang ia komentari di dokumen internal. Maka ketika <span class="glitch-redact" data-glitch="████████████">Malakul Al-Maut</span> memintanya pindah divisi, yang masuk bukan nama baru, melainkan orang yang sebagian dari mereka sudah tahu cara kerjanya—dan tidak semuanya senang dengan kabar itu. Begitu resmi bergabung, ia tidak mengambil satu pun dari delapan posisi yang sudah ada. Ia mengamati dulu, mencatat celah di sistem, baru kemudian naik ke kedudukan yang sebelumnya tidak ada dalam struktur resmi: <strong>No. 9</strong>. Posisi itu bukan hasil rebutan; kerjanya selama masa pengamatan cukup untuk membuat manajemen memutuskan slot tambahan memang dibutuhkan, dan tidak ada nama lain yang lebih cocok mengisinya. Delapan orang sebelumnya tahu persis apa artinya itu. Tidak ada yang menyambutnya dengan tulus. Ia mencatat itu juga.</p>
 
-            <p>Yang tidak ia perhitungkan adalah soal akses. AOD punya jalur lintas dimensi yang jauh lebih luas dari divisi sebelumnya—termasuk ke lapisan-lapisan yang bahkan tidak tercantum dalam peta resmi. Perjalanan ke berbagai bentuk underworld jadi bagian dari rutinitas. Sampai suatu hari, di akhir tugas yang seharusnya biasa saja, sesuatu muncul dari sisi yang salah.</p>
+            <p>Yang tidak diperhitungkannya adalah soal akses. AOD punya jalur lintas dimensi yang jauh lebih luas dari divisi sebelumnya—sampai ke lapisan-lapisan yang bahkan tidak ada di peta resmi. Perjalanan ke berbagai bentuk underworld jadi rutinitas biasa. Sampai suatu hari, di penghujung tugas yang seharusnya tidak ada apa-apanya, sesuatu muncul dari sisi yang salah.</p>
 
-            <p>Entitas itu langsung mengenali identitas Seraphim yang ia sembunyikan rapat-rapat—seakan membaca halaman terbuka. Nadanya dingin, tapi isi bicaranya bukan ancaman—lebih ke tawaran. Kedudukan lebih tinggi dari No. 9, akses lebih besar. Hanya butuh satu hal: buka jalur-jalur yang ia jaga. Muzakiel menolak—tegas, tanpa kompromi, tanpa perlu waktu untuk mempertimbangkan. Percakapan selesai, mereka berpisah. Dan baru setelah itu, dalam keheningan yang menyusul, satu pikiran sempat melintas di kepalanya sendiri. <em>Bagaimana kalau aku buka sedikit saja?</em> Sekejap. Tapi bagi makhluk seperti mereka, itu sudah cukup untuk dianggap cacat.</p>
+            <p>Entitas itu langsung tahu identitas Seraphim yang ia sembunyikan rapat-rapat, seolah sedang membaca buku terbuka. Suaranya dingin, tapi yang ditawarkan bukan ancaman—lebih ke tawaran kerja sama. Kedudukan lebih tinggi dari No. 9, akses yang lebih besar. Hanya butuh satu hal: buka jalur-jalur yang ia jaga. Muzakiel menolak, tegas, tanpa kompromi, tanpa perlu berpikir dua kali. Percakapan berakhir, mereka berpisah jalan. Baru setelah itu, di tengah keheningan yang menyusul, satu pikiran sempat melintas di kepalanya. <em>Bagaimana kalau aku buka sedikit saja?</em> Hanya sekejap. Tapi untuk makhluk seperti mereka, sekejap itu sudah cukup dihitung sebagai cacat.</p>
 
-            <p>Ia tidak menunggu ditegur. Menghadap <span class="glitch-redact" data-glitch="████████████">Malakul Al-Maut</span> sebelum ada yang sempat menyadari—menunduk, menyampaikan apa adanya: niat itu sempat hadir, meski hanya sekejap, dan ia tidak merasa pantas lagi memegang posisinya. Ia minta dijatuhkan. Yang menyusul bukan perdebatan, bukan pembelaan. Hanya kesunyian panjang, lalu satu jawaban yang datar tapi tidak ringan: <em>kejatuhanmu akan dilakukan setenang kenaikanmu dulu.</em></p>
+            <p>Ia tidak menunggu ditegur. Sebelum ada yang sempat menyadari, ia langsung menghadap <span class="glitch-redact" data-glitch="████████████">Malakul Al-Maut</span>, menunduk, dan menyampaikan apa adanya: niat itu sempat muncul, walau hanya sekejap, dan ia merasa tidak pantas lagi memegang posisinya. Ia minta dijatuhkan sendiri. Tidak ada perdebatan, tidak ada pembelaan yang menyusul. Hanya kesunyian panjang, lalu satu jawaban datar yang sebenarnya cukup berat: <em>kejatuhanmu akan dilakukan setenang kenaikanmu dulu.</em></p>
 
-            <p>Laporan yang ia bawa tentang entitas itu—pola rekrutmen terorganisir dari lapisan bawah, arsip yang hilang dari sistem resmi, sesuatu yang sudah bergerak lama tanpa ketahuan—terlalu besar untuk diabaikan begitu saja. Sidang tertutup digelar. Berbagai divisi hadir. Muzakiel duduk di kursi terdakwa bukan karena ia dianggap berkhianat, melainkan karena ia tahu terlalu banyak dan sistem perlu memverifikasi seberapa jauh itu benar.</p>
+            <p>Laporan yang ia bawa soal entitas itu—pola rekrutmen terorganisir dari lapisan bawah, arsip yang hilang dari sistem resmi, sesuatu yang sudah bergerak lama tanpa ketahuan—terlalu besar untuk diabaikan begitu saja. Sidang tertutup digelar, berbagai divisi hadir. Muzakiel duduk di kursi terdakwa, bukan karena dianggap berkhianat, tapi karena ia tahu terlalu banyak dan sistem perlu memastikan seberapa jauh itu benar.</p>
 
-            <p>Sidang selesai. Permintaannya dikonfirmasi. Saat waktunya tiba, sayap raven miliknya hancur dimakan api—pecah jadi serpihan hitam kebiruan yang beterbangan, mata-mata yang melekat di sayapnya runtuh satu per satu sebelum semuanya mengecil jadi inti cahaya yang akhirnya juga kehilangan bentuk. Yang tersisa hanya esensi tanpa wujud fisik. Ia melayang di alam astral sebagai kehadiran yang hanya bisa dirasakan—mencatat, mengamati, hanya dari perspektif yang berbeda, tanpa jabatan, tanpa nama yang bisa digunakan. Memorinya dikunci sebagai bagian dari ketentuannya: bukan dihapus, hanya dibatasi, dengan asumsi bahwa kunci itu akan longgar sendiri kalau waktunya sudah tepat.</p>
+            <p>Sidang selesai. Permintaannya dikonfirmasi. Saat waktunya tiba, sayap raven miliknya hancur dimakan api—pecah jadi serpihan hitam kebiruan yang beterbangan, mata-mata yang melekat di sayap itu runtuh satu per satu sebelum semuanya mengecil jadi inti cahaya yang akhirnya kehilangan bentuk juga. Yang tersisa hanya esensi tanpa wujud fisik. Ia melayang di alam astral sebagai kehadiran yang hanya bisa dirasakan—tetap mencatat, tetap mengamati, hanya dari sudut yang berbeda, tanpa jabatan, tanpa nama yang bisa dipakai. Memorinya dikunci sebagai bagian dari hukuman: bukan dihapus, hanya dibatasi, dengan asumsi kuncinya akan longgar sendiri kalau waktunya sudah tepat.</p>
 
-            <p>Bentuk penebusannya adalah crossing—tapi bukan jenis crossing yang dilakukan atas pilihan sendiri seperti kebanyakan makhluk astral yang memutuskan menetap di dunia manusia dan menjadi bagian dari apa yang disebut <strong>Wargantara</strong>. Ini crossing yang diwajibkan; ah, benar. Reinkarnasi—di mana ia harus lahir sebagai manusia, jalani hidupnya sampai habis, mati—lalu kembali ke titik antara untuk dimintai kesaksian. Apakah ia masih konsisten dengan pilihannya. Apakah yang ia rasakan selama hidup itu mengubah sesuatu. Kalau jawabannya dianggap belum cukup, ia dikirim kembali. Lahir lagi. Di tempat lain, sebagai orang lain, dengan memori putaran sebelumnya yang terkunci tapi tidak benar-benar hilang.</p>
+            <p>Bentuk penebusannya adalah crossing—tapi bukan crossing atas pilihan sendiri seperti kebanyakan makhluk astral yang memilih menetap di dunia manusia dan jadi bagian dari apa yang disebut <strong>Wargantara</strong>. Ini crossing yang diwajibkan. Reinkarnasi: ia harus lahir sebagai manusia, jalani hidupnya sampai habis, mati, lalu kembali ke titik antara untuk dimintai kesaksian. Apakah ia masih konsisten dengan pilihannya. Apakah yang ia rasakan selama hidup itu mengubah sesuatu. Kalau jawabannya dianggap belum cukup, ia dikirim kembali. Lahir lagi, di tempat lain, sebagai orang lain, dengan memori putaran sebelumnya yang terkunci tapi tidak benar-benar hilang.</p>
 
-            <p>Dan di situlah masalahnya. Memori yang dikunci tidak berarti memori yang tidak ada—ia tetap ada, terakumulasi di bawah permukaan, membebani tanpa bisa diakses secara sadar. Setiap putaran baru membawa satu lapisan tambahan yang tidak bisa diproses. Efek sampingnya tidak langsung terasa, tapi konsisten: di setiap kehidupan, dorongan untuk mengakhiri hidupnya yang makin lama makin berat. Sayangnya hal ini bukan untuk mendramatisir kehidupan, melainkan wujud kelelahan yang tidak punya sumber yang bisa ditunjuk—seolah tubuh dan jiwanya sudah tahu bahwa ini bukan pertama kali, dan belum tentu yang terakhir. Umurnya tidak pernah panjang. Paling sering mati di akhir dua puluhan. Kadang hampir empat puluh. Pernah sekali hampir delapan puluh, tapi itu langka—dan bahkan di putaran itu pun, dorongan itu tetap ada, hanya lebih tersembunyi.</p>
+            <p>Dan di situlah masalahnya. Memori yang dikunci bukan berarti memori yang hilang—ia tetap ada, menumpuk di bawah permukaan, membebani tanpa bisa diakses secara sadar. Setiap putaran baru menambah satu lapisan yang tidak bisa diproses. Efek sampingnya tidak langsung terasa, tapi konsisten: di setiap kehidupan, beban itu makin berat dibawa. Ini bukan soal mendramatisir hidup, melainkan kelelahan yang tidak punya sumber jelas untuk ditunjuk—seperti tubuh dan jiwanya sudah tahu bahwa ini bukan yang pertama, dan belum tentu yang terakhir. Umurnya jarang panjang. Paling sering berakhir di penghujung usia dua puluhan. Kadang mendekati empat puluh. Sekali pernah hampir delapan puluh, tapi itu kasus langka—dan bahkan di putaran itu, bebannya tetap ada, hanya lebih tersembunyi.</p>
 
-            <p>Sampai suatu putaran, jawabannya dianggap cukup—bukan karena berbeda dari sebelumnya, justru karena tidak pernah berubah. Status Seraph-nya ditetapkan kembali. Posisi No. 9 tidak dihapus dari catatannya, hanya bersifat kondisional sekarang—aktif kalau dipanggil. Yang paling sederhana: ia tidak perlu lagi lahir sebagai manusia. Keanggotaan Wargantara yang ia sandang selama periode hukuman itu tidak ikut dicabut—ia tetap terdaftar, sekarang resmi, dengan penanda <strong>Senior</strong> di belakang namanya. Bukan gelar yang dijatuhkan dari atas, memang. Lebih ke ejekan internal untuk angkatan pertama yang entah kenapa masih ada sampai sekarang—dan penanda bahwa siklus yang tidak banyak orang selesaikan sampai ujungnya itu memang sudah ia lewati.</p>
+            <p>Sampai suatu putaran, jawabannya akhirnya dianggap cukup—justru karena tidak pernah berubah, bukan karena berbeda dari yang sebelumnya. Status Seraph-nya ditetapkan kembali. Posisi No. 9 tidak dihapus dari catatannya, hanya sekarang bersifat kondisional—aktif kalau dipanggil. Yang paling penting: ia tidak perlu lagi lahir sebagai manusia. Keanggotaan Wargantara yang ia sandang selama periode hukuman itu pun tidak ikut dicabut—tetap terdaftar, sekarang resmi, dengan penanda <strong>Senior</strong> di belakang namanya. Bukan gelar yang diberikan dari atas, sebetulnya. Lebih ke ejekan internal untuk angkatan pertama yang entah kenapa masih ada sampai sekarang—sekaligus penanda bahwa siklus yang jarang orang tuntaskan sampai ujungnya itu sudah ia lewati.</p>
 
             <p>Tiga status sekarang berjalan bersamaan di belakang satu nama yang di dunia fana mengaku anak tunggal blasteran yang keluarganya sudah lama pergi entah ke mana.</p>
           </div>
@@ -2982,7 +3137,7 @@
           <div style="margin-top:2.5rem">
             <div class="lore-infobox" style="border-left-color:var(--red)">
               <h4 style="color:var(--red)">// Identitas Dunia Fana</h4>
-              <p>Di dunia fana, Muzakiel menciptakan identitas yang 'seharusnya' cukup normal: <strong>Takahi Soren</strong>, anak tunggal dari keluarga blasteran Indonesia dan Jepang, keluarga melancong keluar negeri dan meninggalkannya sendirian sejak berusia 20 tahun (mengaku berusia 28+ tahun), dan mengaku sebagai seorang indigo yang sering 'meramal tidak sengaja'. Sayangnya, ia sendiri juga seorang pengangguran dan tidak suka bekerja selain 'hobi' praktik spiritual-nya itu.</p>
+              <p>Di dunia fana, Muzakiel menciptakan identitas yang seharusnya cukup normal: <strong>Takahi Soren</strong>, anak tunggal dari keluarga blasteran Indonesia-Jepang yang keluarganya melancong ke luar negeri dan meninggalkannya sendirian sejak usia 20 tahun (mengaku berusia 28+ tahun), dan dikenal sebagai indigo yang sering "meramal tidak sengaja". Sayangnya, ia sendiri pengangguran dan tidak suka bekerja selain "hobi" praktik spiritual itu.</p>
             </div>
 
             <div class="lore-spoiler" id="spoiler-classified" onclick="toggleSpoiler('spoiler-classified')">
@@ -2990,9 +3145,9 @@
               <div class="lore-spoiler-content">
                 <div class="lore-infobox" style="border-left-color:var(--red)">
                   <h4 style="color:var(--red)">// CLASSIFIED — WARGANTARA INTERNAL</h4>
-                  <p>Titik balik riwayat Muzakiel diarsipkan di bawah kode kasus yang tidak tersedia pada level akses ini. Yang bisa dikonfirmasi: selama periode aktif di AOD, ia melakukan perjalanan lintas dimensi secara reguler—termasuk ke lapisan-lapisan yang tidak tercantum dalam peta resmi ARA. Di sanalah kontak terjadi. Bukan satu entitas, tapi pola yang berulang: pendekatan dari berbagai entitas lapisan bawah yang terkoordinasi, membawa tawaran yang bukan ancaman tapi ajakan. Muzakiel sempat berhenti sejenak—dan menilai bahwa berhenti sejenak sudah cukup alasan untuk tidak lagi percaya pada dirinya sendiri di posisi itu.</p>
-                  <p style="margin-top:.75rem">Ia melapor sendiri. Yang dibawanya bukan hanya permintaan untuk dipecat—tapi informasi soal pola gerakan rekrutmen yang, setelah diverifikasi, berkorelasi dengan entitas yang catatannya sudah lama dihapus dari sistem resmi. Sidang tertutup digelar. Berbagai divisi hadir. Yang duduk di kursi terdakwa adalah Muzakiel—bukan karena ia dianggap berkhianat, tapi karena ia tahu terlalu banyak dan sistem perlu memastikan seberapa jauh itu benar.</p>
-                  <p style="margin-top:.75rem">Pemecatannya dikonfirmasi dalam sidang tersebut. Memorinya dikunci sebagai bagian dari ketentuan—tidak dihapus, hanya dibatasi, dengan asumsi bahwa kunci itu akan longgar sendiri pada waktunya. Selebihnya diserahkan ke hukum alam. Permintaan akses ke arsip lengkap sidang tersebut konsisten dikembalikan dengan status <em>tidak tersedia</em> di semua level di bawah L5.</p>
+                  <p>Titik balik riwayat Muzakiel diarsipkan di bawah kode kasus yang tidak tersedia pada level akses ini. Yang bisa dikonfirmasi: selama aktif di AOD, ia rutin melakukan perjalanan lintas dimensi—termasuk ke lapisan-lapisan yang tidak ada di peta resmi ARA. Di sanalah kontak terjadi. Bukan satu entitas, tapi pola berulang: pendekatan dari berbagai entitas lapisan bawah yang terkoordinasi, membawa tawaran yang lebih ke ajakan ketimbang ancaman. Muzakiel sempat ragu sejenak—dan baginya, ragu sejenak saja sudah cukup jadi alasan untuk tidak lagi percaya pada dirinya sendiri di posisi itu.</p>
+                  <p style="margin-top:.75rem">Ia melapor sendiri. Yang dibawanya bukan hanya permintaan untuk dipecat, tapi juga informasi soal pola gerakan rekrutmen yang, setelah diverifikasi, berkorelasi dengan entitas yang catatannya sudah lama dihapus dari sistem resmi. Sidang tertutup digelar, berbagai divisi hadir. Yang duduk di kursi terdakwa adalah Muzakiel—bukan karena dianggap berkhianat, tapi karena ia tahu terlalu banyak dan sistem perlu memastikan seberapa jauh itu benar.</p>
+                  <p style="margin-top:.75rem">Pemecatannya dikonfirmasi dalam sidang tersebut. Memorinya dikunci sebagai bagian dari hukuman—tidak dihapus, hanya dibatasi, dengan asumsi kuncinya akan longgar sendiri pada waktunya. Sisanya diserahkan ke hukum alam. Permintaan akses ke arsip lengkap sidang itu selalu dikembalikan dengan status <em>tidak tersedia</em> di semua level di bawah L5.</p>
                 </div>
               </div>
             </div>
@@ -3512,24 +3667,36 @@
         <div class="sf-col">
           <div class="sf-col-title">WARGANTARA</div>
           <p>Para entitas yang hidup di ambang—tidak sepenuhnya milik dunia manusia, tidak juga milik dunia astral.</p>
+          <p style="margin-top:.6rem">Status Lore: <span style="color:var(--gold);opacity:1">Open Sandbox</span></p>
         </div>
         <div class="sf-col">
           <div class="sf-col-title">NAVIGASI</div>
           <a href="/index.html">Home</a>
-          <a href="/members.html">Members</a>
+          <a href="/members">Members</a>
           <a href="/lore.html">Lore Archive</a>
-          <a href="/guidelines.html">Guidelines</a>
+          <a href="/guidelines.html">General Guidelines</a>
+          <a href="/collab.html">Collab with Us</a>
           <a href="/arcid.html">AR-CID Editor</a>
-          <a href="/credits.html">Credits & Attributions</a>
+          <a href="/credits.html">Credits &amp; Attributions</a>
         </div>
         <div class="sf-col">
-          <div class="sf-col-title">KOMUNITAS</div>
-          <p>Sandbox lore terbuka untuk semua fan. Buat OC, tulis cerita, dan jadilah bagian dari dua dunia ini.</p>
-          <p style="margin-top:.5rem">Status Lore: <span style="color:var(--gold);opacity:1">Open Sandbox</span></p>
+          <div class="sf-col-title">KONTAK</div>
+          <p style="font-size:.84rem;line-height:1.85;opacity:.65">Ikuti kami di media sosial untuk update terbaru seputar Wargantara.</p>
+          <div class="sf-socials">
+            <a class="sf-social-pill" href="https://x.com/wgtr_id" target="_blank" rel="noopener" title="Twitter / X">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a class="sf-social-pill" href="https://youtube.com/wgtr_id" target="_blank" rel="noopener" title="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <span class="sf-social-pill sf-social-pill--disabled" title="Discord — Coming Soon">
+              <i class="fa-brands fa-discord"></i>
+            </span>
+          </div>
         </div>
       </div>
       <div class="sf-bottom">
-        <span class="sf-logo">WAR<span>G</span>ANTARA</span>
+        <span class="sf-logo"><span class="sf-logo-text">WAR<span>G</span>ANTARA</span><img class="sf-logo-img" src="/assets/og/logo-large.png" alt="WARGANTARA" style="display:none" onload="this.style.display='inline';this.previousElementSibling.style.display='none'" onerror="this.remove()"></span>
         <span class="sf-copy">© Wargantara VTuber Group · Est. ???? · All lore is fiction</span>
         <span class="sf-copy">Lintas Batas</span>
       </div>
