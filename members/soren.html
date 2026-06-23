@@ -2699,6 +2699,93 @@
         cursor: not-allowed !important;
         border-style: dashed
       }
+
+      /* ---- CLASSIFIED WARNING MODAL ---- */
+      .cl-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.65);
+        z-index: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .2s
+      }
+      .cl-modal-overlay.open {
+        opacity: 1;
+        pointer-events: auto
+      }
+      .cl-modal {
+        max-width: 480px;
+        width: 100%;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--red);
+        padding: 2rem 1.75rem 1.75rem;
+        position: relative;
+        transform: translateY(8px);
+        transition: transform .2s
+      }
+      .cl-modal-overlay.open .cl-modal {
+        transform: translateY(0)
+      }
+      .cl-modal-pre {
+        font-size: .6rem;
+        letter-spacing: .28em;
+        color: var(--red);
+        text-transform: uppercase;
+        margin-bottom: 1rem
+      }
+      .cl-modal-title {
+        font-family: var(--display);
+        font-size: 1.6rem;
+        letter-spacing: .06em;
+        color: var(--ink);
+        margin-bottom: .85rem;
+        transition: color .3s
+      }
+      .cl-modal-body {
+        font-size: .85rem;
+        line-height: 1.9;
+        opacity: .75;
+        margin-bottom: 1.5rem
+      }
+      .cl-modal-actions {
+        display: flex;
+        gap: .65rem;
+        flex-wrap: wrap
+      }
+      .cl-modal-confirm {
+        font-family: var(--mono);
+        font-size: .7rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .65rem 1.25rem;
+        background: var(--red);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background .15s;
+        min-height: 40px
+      }
+      .cl-modal-confirm:hover { background: #a01e14 }
+      .cl-modal-cancel {
+        font-family: var(--mono);
+        font-size: .7rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        padding: .65rem 1.25rem;
+        background: none;
+        color: var(--muted);
+        border: 1px solid var(--border2);
+        cursor: pointer;
+        transition: all .15s;
+        min-height: 40px
+      }
+      .cl-modal-cancel:hover { color: var(--ink); border-color: var(--muted) }
     </style>
 
     <meta name="description" content="Wargantara adalah grup VTuber Indonesia bertemakan entitas astral dan sandbox lore universe.">
@@ -3046,7 +3133,7 @@
               </div>
               <div class="cid-f span3">
                 <div class="cid-f-label">Pekerjaan (Dunia Fana)</div>
-                <div class="cid-f-val">Spiritualist · Content Creator</div>
+                <div class="cid-f-val">Engineer <span style="opacity:.45;font-size:.78rem">(main)</span> · Spiritualist <span style="opacity:.45;font-size:.78rem">(side)</span></div>
               </div>
               <div class="ain-block">
                 <div class="ain-label">Astral Identification<br>Number (AIN)</div>
@@ -3086,7 +3173,7 @@
             <div class="lore-block">
               <div class="lore-block-num">04</div>
               <h3>HUMANOID—TAKAHI SOREN</h3>
-              <p>Identitas manusiawi yang dibangun untuk menyamar di dunia fana. Mengklaim berusia 28+ tahun, anak tunggal dari keluarga blasteran Indonesia-Jepang yang sudah lama melancong ke luar negeri—meninggalkannya sendirian sejak usia 20 tahun. Tinggi badan 182 cm dengan berat 69 kg; postur yang cukup mencolok untuk ukuran rata-rata, tetapi tidak sampai menarik perhatian berlebih jika dipadukan dengan cara berjalannya yang tenang dan hampir tidak bersuara. Meredam kecurigaan dengan mengaku sebagai seorang indigo—seseorang yang bisa merasakan hal-hal yang orang biasa tidak bisa. Cukup masuk akal, cukup tidak bisa dibuktikan.</p>
+              <p>Identitas manusiawi yang dibangun untuk menyamar di dunia fana. Mengklaim berusia 28+ tahun, dari keluarga blasteran Indonesia-Jepang yang sudah lama melancong ke luar negeri—meninggalkannya sendirian sejak usia 20 tahun, meski bukan anak tunggal; ada beberapa kakak yang keberadaannya jarang ia sebut. Tinggi badan 182 cm dengan berat 69 kg. Bekerja sebagai <strong>engineer</strong>, menjalankan praktik <strong>spiritualist</strong> di sampingnya—diam-diam, tidak diekspos lebar. Aktivitas content creator-nya tidak direncanakan; bermula dari arsip pribadi sampai suatu kejadian membuatnya tidak bisa berhenti.</p>
             </div>
             <div class="lore-block">
               <div class="lore-block-num">05</div>
@@ -3140,23 +3227,24 @@
 
             <p>Sidang terakhirnya jatuh di periode yang catatannya kini diarsipkan sebagai <span class="glitch-redact" data-glitch="████████">[tahun disensor]</span>—tidak lama setelah dunia manusia memasuki babak baru menjelang perang besar berikutnya. Jawabannya akhirnya dianggap cukup—justru karena tidak pernah berubah, bukan karena berbeda dari yang sebelumnya. Ia dibebaskan dari kewajiban reinkarnasi. Status Seraph-nya ditetapkan kembali, dan posisi No. 9 tidak dihapus dari catatannya, hanya sekarang bersifat kondisional—aktif kalau dipanggil. Tapi yang lebih signifikan dari itu: ia diberi akses untuk hidup berkeliaran keluar masuk dunia manusia, membaur, tanpa harus lahir dan mati lagi setiap kali. Bentuknya mirip tugas lama sebagai malaikat, hanya saja jauh lebih kasual, tidak selalu formal. Saat itu status semacam ini belum punya nama. Baru belakangan dikenal sebagai <strong>Wargantara</strong>—dan apakah itu sejak awal dirancang sebagai solusi untuk kasusnya, atau justru konsekuensi yang baru kemudian dilembagakan, catatan resminya tidak pernah benar-benar menjelaskan. Yang pasti, ia salah satu yang pertama menyandangnya—karenanya, penanda <strong>Senior</strong> melekat di belakang namanya sampai sekarang. Bukan gelar yang diberikan dari atas, sebetulnya. Lebih ke ejekan internal untuk angkatan pertama yang entah kenapa masih ada sampai sekarang—sekaligus penanda bahwa siklus yang jarang orang tuntaskan sampai ujungnya itu sudah ia lewati.</p>
 
-            <p>Tiga status sekarang berjalan bersamaan di belakang satu nama yang di dunia fana mengaku anak tunggal blasteran yang keluarganya sudah lama pergi entah ke mana.</p>
+            <p>Tiga status sekarang berjalan bersamaan di belakang satu nama yang di dunia fana mengaku dari keluarga blasteran—kakak-kakaknya jarang disebut, keluarganya sudah lama pergi entah ke mana.</p>
           </div>
 
           <div style="margin-top:2.5rem">
             <div class="lore-infobox" style="border-left-color:var(--red)">
               <h4 style="color:var(--red)">// Identitas Dunia Fana</h4>
-              <p>Di dunia fana, Muzakiel menciptakan identitas yang seharusnya cukup normal: <strong>Takahi Soren</strong>, anak tunggal dari keluarga blasteran Indonesia-Jepang yang keluarganya melancong ke luar negeri dan meninggalkannya sendirian sejak usia 20 tahun (mengaku berusia 28+ tahun), dan dikenal sebagai indigo yang sering "meramal tidak sengaja". Sayangnya, ia sendiri pengangguran dan tidak suka bekerja selain "hobi" praktik spiritual itu.</p>
+              <p>Di dunia fana, Muzakiel menciptakan identitas yang seharusnya cukup normal: <strong>Takahi Soren</strong>, anak tunggal dari keluarga blasteran Indonesia-Jepang yang keluarganya melancong ke luar negeri dan meninggalkannya sendirian sejak usia 20 tahun (mengaku berusia 28+ tahun). Bekerja sebagai engineer—pekerjaan yang cukup masuk akal, cukup tidak mencolok. Aktivitas content creator-nya lain cerita: awalnya tidak lebih dari arsip pribadi, dokumentasi yang tidak dimaksudkan untuk siapa pun selain dirinya sendiri—sampai sesuatu terjadi, dan tiba-tiba berhenti bukan lagi pilihan yang tersedia.</p>
             </div>
 
             <div class="lore-spoiler" id="spoiler-classified" onclick="toggleSpoiler('spoiler-classified')">
               <div class="lore-spoiler-toggle" id="spoiler-toggle-classified">SHOW CLASSIFIED FRAGMENT [SC L5 REQUIRED]</div>
               <div class="lore-spoiler-content">
-                <div class="lore-infobox" style="border-left-color:var(--red)">
+              <div class="lore-infobox" style="border-left-color:var(--red)">
                   <h4 style="color:var(--red)">// CLASSIFIED — WARGANTARA INTERNAL</h4>
-                  <p>Titik balik riwayat Muzakiel diarsipkan di bawah kode kasus yang tidak tersedia pada level akses ini. Yang bisa dikonfirmasi: selama aktif di AOD, ia rutin melakukan perjalanan lintas dimensi—termasuk ke lapisan-lapisan yang tidak ada di peta resmi ARA. Di sanalah kontak terjadi. Bukan satu entitas, tapi pola berulang: pendekatan dari berbagai entitas lapisan bawah yang terkoordinasi, membawa tawaran yang lebih ke ajakan ketimbang ancaman. Muzakiel sempat ragu sejenak—dan baginya, ragu sejenak saja sudah cukup jadi alasan untuk tidak lagi percaya pada dirinya sendiri di posisi itu.</p>
-                  <p style="margin-top:.75rem">Ia melapor sendiri. Yang dibawanya bukan hanya permintaan untuk dipecat, tapi juga informasi soal pola gerakan rekrutmen yang, setelah diverifikasi, berkorelasi dengan entitas yang catatannya sudah lama dihapus dari sistem resmi. Sidang tertutup digelar, berbagai divisi hadir. Yang duduk di kursi terdakwa adalah Muzakiel—bukan karena dianggap berkhianat, tapi karena ia tahu terlalu banyak dan sistem perlu memastikan seberapa jauh itu benar.</p>
-                  <p style="margin-top:.75rem">Pemecatannya dikonfirmasi dalam sidang tersebut. Memorinya dikunci sebagai bagian dari hukuman—tidak dihapus, hanya dibatasi, dengan asumsi kuncinya akan longgar sendiri pada waktunya. Sisanya diserahkan ke hukum alam. Permintaan akses ke arsip lengkap sidang itu selalu dikembalikan dengan status <em>tidak tersedia</em> di semua level di bawah L5.</p>
+                  <p>Keterkaitan Muzakiel dengan <span class="glitch-redact" data-glitch="██████">Raziel</span> bukan sekadar soal jalur pelaporan atau otoritas struktural. Arsip internal ARA mencatat sesuatu yang lebih dalam dari itu—sesuatu yang diklasifikasikan di bawah kode <span class="glitch-redact" data-glitch="████████████████">[RESTRICTED — NATURE OF ORIGIN]</span>. Yang bisa dibaca pada level ini hanya fragmennya: bahwa keberadaan Muzakiel dan <span class="glitch-redact" data-glitch="██████">Raziel</span> memiliki <span class="glitch-redact" data-glitch="████████████████████████████████">titik asal yang tidak sepenuhnya terpisah</span>. Implikasi dari pernyataan itu tidak dijelaskan lebih lanjut dalam dokumen yang tersedia.</p>
+                  <p style="margin-top:.75rem">Perpindahan ke Angel of Death Division tercatat sebagai konsensual—tapi konteks di baliknya lebih rumit dari sekadar permintaan biasa. Dokumen internal yang berhasil diakses menunjukkan adanya <span class="glitch-redact" data-glitch="█████████████████████████████">komunikasi lintas divisi sebelum permintaan resmi diajukan</span>: antara <span class="glitch-redact" data-glitch="██████">Raziel</span> dan <span class="glitch-redact" data-glitch="████████████">Malakul Al-Maut</span>, dengan Muzakiel tidak tercatat sebagai pihak yang hadir. Apakah perpindahan itu benar-benar inisiatifnya—atau sesuatu yang sudah diputuskan sebelum ia sempat ditanya—tidak ada dokumen yang menjawab secara langsung.</p>
+                  <p style="margin-top:.75rem">Catatan reinkarnasi: <strong>20 putaran</strong> sebagai manusia biasa, tercatat lengkap. Jumlah putaran sebagai entitas non-manusia: <span class="glitch-redact" data-glitch="██ █████">[DISENSOR]</span>. Total akumulasi memori yang dikunci selama siklus berlangsung: <span class="glitch-redact" data-glitch="████████████████████">[TIDAK TERSEDIA DI LEVEL INI]</span>. Efek jangka panjang dari akumulasi tersebut terhadap kondisi entitas saat ini: <span class="glitch-redact" data-glitch="████████████████████████████████████">sedang dalam pemantauan — SC-03</span>.</p>
+                  <p style="margin-top:.75rem"><span class="glitch-redact" data-glitch="████████████████████████████████████████████████████████████████████████████████████████████████████████">[FRAGMEN ARSIP — TIDAK TERBACA PADA LEVEL AKSES INI. HUBUNGI ARA CLEARANCE DIVISION UNTUK AKSES LEBIH LANJUT.]</span></p>
                 </div>
               </div>
             </div>
@@ -3192,8 +3280,7 @@
             <li>Meski sudah jutaan tahun hidup, Soren <strong>masih belajar bagaimana cara kerja empati manusia</strong>. Bukan karena tidak mampu—justru karena terlalu banyak mengamati kehidupan manusia dari masa aktif di divisi lamanya, ia jadi terlalu bingung menyikapinya. Sering kena teguran karena terlalu <em>rigid</em>.</li>
             <li>Pernah memiliki sifat yang sangat berkebalikan dengan kepribadiannya saat ini—datangnya dari <em>meniru manusia di sekelilingnya</em>. Tetapi sekarang sifat-sifat itu hanya muncul di waktu ketika ia merasa perlu. Misalkan: tampil ramah tamah untuk kepentingan tertentu.</li>
             <li>Urutan jabatan: <strong>Akashic Records → Angel of Death No.9 → (pengunduran diri) → Wargantara → Seraph of High End Orders (kembali)</strong>. No. 9 tidak dihapus dari catatannya—bersifat kondisional, aktif hanya jika dipanggil. Secara teknis, tiga status itu berjalan bersamaan sekarang.</li>
-            <li>Tidak suka bekerja selain hobi praktik spiritualnya. Di dunia fana, mengaku pengangguran—dan secara teknis tidak salah, karena tidak ada yang benar-benar tahu apa yang ia kerjakan selain berpindah-pindah tempat.</li>
-            <li>Mengklaim kewarganegaraan Jepang-Indonesia (blasteran) agar sesuai dengan nama samarannya, Takahi Soren—meski secara teknis ia tidak betah berlama-lama singgah di dunia fana mana pun.</li>
+            <li>Aktivitas content creator-nya tidak pernah direncanakan: bermula dari dokumentasi pribadi, sampai suatu insiden membuatnya tidak bisa begitu saja berhenti. Ia tidak membicarakan insidennya.</li>
           </ul>
         </section>
 
@@ -3290,6 +3377,22 @@
 
       </div><!-- /main-content -->
     </div><!-- /content-wrap -->
+
+    <!-- CLASSIFIED WARNING MODAL -->
+    <div class="cl-modal-overlay" id="cl-modal-overlay">
+      <div class="cl-modal">
+        <div class="cl-modal-pre">// Wargantara · Peringatan Akses</div>
+        <div class="cl-modal-title">CLASSIFIED FRAGMENT</div>
+        <div class="cl-modal-body">
+          Bagian ini mengandung informasi yang diarsipkan di bawah clearance <strong>Security Level 5</strong>—dan kemungkinan besar mengandung <strong>spoiler lore</strong> yang belum tentu sudah terungkap dalam narasi publik.<br><br>
+          Dengan melanjutkan, kamu menyatakan siap menemukan informasi yang mungkin mengubah cara kamu membaca karakter ini—dan itu tidak bisa di-<em>undo</em>.
+        </div>
+        <div class="cl-modal-actions">
+          <button class="cl-modal-confirm" onclick="classifiedConfirm()">// Lanjutkan</button>
+          <button class="cl-modal-cancel" onclick="classifiedCancel()">Kembali</button>
+        </div>
+      </div>
+    </div>
 
     <!-- LIGHTBOX
 
@@ -3487,14 +3590,32 @@
           });
         });
       })();
-      /* ---- SPOILER ---- */
+      /* ---- SPOILER / CLASSIFIED ---- */
+      var _classifiedPending = false;
       function toggleSpoiler(id) {
         const el = document.getElementById(id);
-        const tog = document.getElementById('spoiler-toggle-' + id.replace('spoiler-', ''));
-        el.classList.toggle('open');
-        tog.textContent = el.classList.contains('open') ?
-          'HIDE CLASSIFIED FRAGMENT' :
-          'SHOW CLASSIFIED FRAGMENT [SC L5 REQUIRED]';
+        if (!el.classList.contains('open')) {
+          // Not yet open — show warning modal first
+          _classifiedPending = true;
+          document.getElementById('cl-modal-overlay').classList.add('open');
+        } else {
+          // Already open — just close it
+          el.classList.remove('open');
+          document.getElementById('spoiler-toggle-classified').textContent = 'SHOW CLASSIFIED FRAGMENT [SC L5 REQUIRED]';
+        }
+      }
+      function classifiedConfirm() {
+        document.getElementById('cl-modal-overlay').classList.remove('open');
+        if (_classifiedPending) {
+          const el = document.getElementById('spoiler-classified');
+          el.classList.add('open');
+          document.getElementById('spoiler-toggle-classified').textContent = 'HIDE CLASSIFIED FRAGMENT';
+          _classifiedPending = false;
+        }
+      }
+      function classifiedCancel() {
+        document.getElementById('cl-modal-overlay').classList.remove('open');
+        _classifiedPending = false;
       }
       /* ---- TAB SWITCHING ---- */
       var TAB_HASH = {

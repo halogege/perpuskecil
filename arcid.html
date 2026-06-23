@@ -2586,6 +2586,21 @@
       function closeErr() {
         document.getElementById('err-modal').classList.remove('open');
       }
+      /* ── SUPABASE CONFIG ── */
+      const SUPABASE_URL = 'https://czlbfywykjdlojexhrca.supabase.co';
+      const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6bGJmeXd5a2pkbG9qZXhocmNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxOTQ3NDIsImV4cCI6MjA5Nzc3MDc0Mn0.OBBn8PRjPeS26P48C5I05zEFchjhiPF2LEs4HGcgRrE';
+
+      /* ── AIN BLOCKLIST (fixed, tidak boleh di-generate random) ── */
+      const RESERVED_AIN = new Set([
+        'AR-25XD-54NA-065T', // Soren Takahi
+        'AR-99UE-18WP-935X', // Rui
+        'AR-17NC-77NM-228F', // Noah
+        'AR-12AF-65UE-315K', // Igni
+        'AR-99HF-54WV-829U', // Arda
+        'AR-88HT-26KA-699N', // Anne
+        'AR-18KT-16NB-584G', // Finnian
+      ]);
+
       /* ── AIN ── */
       const CH = 'ABCDEFGHJKLMNPQRSTUVWXYZ',
         DG = '0123456789';
@@ -2597,14 +2612,101 @@
       }
 
       function generateAIN() {
-        return 'AR-' + rnd(DG, 2) + rnd(CH, 2) + '-' + rnd(DG, 2) + rnd(CH, 2) + '-' + rnd(DG, 3) + rnd(CH, 1);
+        let v;
+        do {
+          v = 'AR-' + rnd(DG, 2) + rnd(CH, 2) + '-' + rnd(DG, 2) + rnd(CH, 2) + '-' + rnd(DG, 3) + rnd(CH, 1);
+        } while (RESERVED_AIN.has(v));
+        return v;
       }
 
-      function regenAIN() {
-        const v = generateAIN();
-        document.getElementById('f-ain').value = v;
-        document.getElementById('o-ain').textContent = v;
+      // Cek AIN ke Supabase — return true kalau sudah dipakai
+      async function isAINTaken(ain) {
+        try {
+          const res = await fetch(
+            `${SUPABASE_URL}/rest/v1/ain_registry?ain=eq.${encodeURIComponent(ain)}&confirmed=eq.true`,
+            { headers: { 'apikey': SUPABASE_KEY, 'Accept': 'application/json' } }
+          );
+          const data = await res.json();
+          return data.length > 0;
+        } catch (e) {
+          return false; // kalau Supabase error, jangan blok user
+        }
+      }
+
+      // Register AIN ke Supabase sebagai confirmed, sekaligus simpan data form terkait
+      async function registerAIN(ain, formData) {
+        try {
+          const payload = Object.assign({ ain: ain, confirmed: true }, formData || {});
+          // Pakai upsert supaya kalau AIN sama di-confirm ulang (misal admin edit)
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/ain_registry`, {
+            method: 'POST',
+            headers: {
+              'apikey': SUPABASE_KEY,
+              'Content-Type': 'application/json',
+              'Prefer': 'resolution=merge-duplicates'
+            },
+            body: JSON.stringify(payload)
+          });
+          return res.ok || res.status === 409; // 409 = conflict (sudah ada), masih ok
+        } catch (e) {
+          return false;
+        }
+      }
+
+      // Kumpulkan data form saat ini untuk disimpan bareng AIN
+      function collectAINFormData() {
+        return {
+          dispname: document.getElementById('f-dispname').value.toUpperCase(),
+          legalname: document.getElementById('f-legalname').value.toUpperCase(),
+          dob: document.getElementById('f-dob').value,
+          dob_month: document.getElementById('f-dob-month').value,
+          gender: document.getElementById('f-gender').value,
+          race: (_entityType === 'human' ? document.getElementById('f-race-ktp').value : document.getElementById('f-race').value).toUpperCase(),
+          occ: document.getElementById('f-occ').value.toUpperCase(),
+          level: document.getElementById('f-level').value,
+          sc: document.getElementById('f-sc').value,
+          entity_type: _entityType
+        };
+      }
+
+      // Generate AIN baru yg dipastikan belum dipakai (cek lokal RESERVED_AIN + Supabase confirmed)
+      async function generateUniqueAIN() {
+        let v;
+        let tries = 0;
+        do {
+          v = generateAIN();
+          tries++;
+          if (tries > 8) break; // safety valve biar ga infinite loop kalau Supabase down
+        } while (await isAINTaken(v));
+        return v;
+      }
+
+      function regenAIN(force = false) {
+        // Kalau tidak force, cek localStorage dulu
+        if (!force) {
+          try {
+            const saved = localStorage.getItem(SAVE_KEY);
+            if (saved) {
+              const data = JSON.parse(saved);
+              if (data.ain) {
+                // AIN sudah ada di save data, pakai itu
+                document.getElementById('f-ain').value = data.ain;
+                document.getElementById('o-ain').textContent = data.ain;
+                return;
+              }
+            }
+          } catch (e) { /* silent */ }
+        }
+        // Generate baru — tampilkan AIN sementara dulu (sync), lalu validasi keunikan ke Supabase di belakang
+        const tmp = generateAIN();
+        document.getElementById('f-ain').value = tmp;
+        document.getElementById('o-ain').textContent = tmp;
         autoSave();
+        generateUniqueAIN().then(function(v) {
+          document.getElementById('f-ain').value = v;
+          document.getElementById('o-ain').textContent = v;
+          autoSave();
+        });
       }
       regenAIN();
 
@@ -3177,6 +3279,9 @@
             a.download = fname;
             a.href = canvas.toDataURL('image/png');
             a.click();
+            // Simpan AIN + data form ke Supabase begitu PNG berhasil di-download
+            const ainVal = document.getElementById('f-ain').value;
+            registerAIN(ainVal, collectAINFormData());
             btn.textContent = '⬇ Download PNG HD';
             btn.disabled = false;
           }).catch(function() {
@@ -3406,8 +3511,8 @@
         document.getElementById('o-occ').textContent = occTA.value.toUpperCase() || '\u00A0';
         // Lock/unlock security clearance for KTP mode
         setKTPSecLock(type === 'human');
-        // Regen AIN
-        regenAIN();
+        // Regen AIN hanya kalau belum ada AIN tersimpan
+        regenAIN(false);
         // Refresh DOB preview for new entity type
         if (typeof updateDobPreview === 'function') updateDobPreview();
         // Move Race col: Human → append to DOB row (beside DOB), Inhuman → append to Gender row (beside Gender)
