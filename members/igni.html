@@ -110,7 +110,7 @@
       }
 
       .nav-logo-img {
-        height: 2rem;
+        height: 32px;
         width: auto
       }
 
@@ -3461,6 +3461,11 @@
         if (ml) {
           ml.textContent = isDark ? 'Day Mode' : 'Night Mode';
         }
+        // swap logo WARGANTARA sesuai tema
+        document.querySelectorAll('.wgtr-logo').forEach(function(el) {
+          var src = isDark ? el.dataset.dark : el.dataset.light;
+          if (src) el.src = src;
+        });
       }
 
       function toggleTheme() {

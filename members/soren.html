@@ -118,7 +118,7 @@
       }
 
       .nav-logo-img {
-        height: 2rem;
+        height: 32px;
         width: auto
       }
 
@@ -1364,8 +1364,16 @@
       }
 
       .sf-logo-img {
-        height: 1.6rem;
-        width: auto
+        height: 26px;
+        width: auto;
+        opacity: .3
+      }
+
+      .sf-col-title-img {
+        display: block;
+        height: 60px;
+        width: auto;
+        margin-bottom: .75rem
       }
 
       .sf-logo-text span {
@@ -3681,6 +3689,11 @@
         if (ml) {
           ml.textContent = isDark ? 'Day Mode' : 'Night Mode';
         }
+        // swap logo WARGANTARA sesuai tema
+        document.querySelectorAll('.wgtr-logo').forEach(function(el) {
+          var src = isDark ? el.dataset.dark : el.dataset.light;
+          if (src) el.src = src;
+        });
       }
 
       function toggleTheme() {
