@@ -1876,6 +1876,9 @@
         applyTheme();
       }
       applyTheme();
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function() { applyTheme(); });
+      }
       document.addEventListener('visibilitychange', function() { if (!document.hidden) applyTheme(); });
 
       // Splash

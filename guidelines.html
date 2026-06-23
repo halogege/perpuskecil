@@ -3254,6 +3254,10 @@
         applyTheme();
       }
       applyTheme();
+      // re-apply setelah font Saturn Icons selesai load (icon bisa blank kalau font belum ready)
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function() { applyTheme(); });
+      }
       // re-apply icon saat tab aktif kembali (icon font kadang blank setelah tab switch)
       document.addEventListener("visibilitychange", function() {
         if (!document.hidden) applyTheme();

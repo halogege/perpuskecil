@@ -2825,8 +2825,8 @@
             bergabung dan membawa bangundunia ini kepada kesenangannya.</p>
         </div>
         <div class="explore-btns">
-          <button class="cta-btn cta-primary" onclick="goTo('lore')">Baca Lore Archive →</button>
-          <button class="cta-btn cta-secondary" onclick="goTo('guidelines')">Lihat Guidelines
+          <button class="cta-btn cta-primary" onclick="window.location.href='lore.html'">Baca Lore Archive →</button>
+          <button class="cta-btn cta-secondary" onclick="window.location.href='guidelines.html'">Lihat Guidelines
             →</button>
           <button class="cta-btn cta-secondary" onclick="window.location.href='members.html'">Kenali The Six →</button>
         </div>
@@ -2878,7 +2878,6 @@
         </div>
       </div>
       <div class="sf-bottom">
-        <img class="sf-logo-img wgtr-logo" data-light="assets/og/wgtr-small-light.png" data-dark="assets/og/wgtr-small-dark.png" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
         <span class="sf-copy">© Wargantara VTuber Group · Est. ???? · All lore is fiction</span>
         <span class="sf-copy">Lintas Batas</span>
       </div>
@@ -3454,6 +3453,10 @@
       // tema ditentukan manual lewat splash, tidak perlu ikutin device
       // terapkan theme saat load — script ini sudah di bawah body jadi DOM pasti ready
       applyTheme();
+      // re-apply setelah font Saturn Icons selesai load (icon bisa blank kalau font belum ready)
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function() { applyTheme(); });
+      }
       // re-apply icon saat tab aktif kembali (icon font kadang blank setelah tab switch)
       document.addEventListener("visibilitychange", function() {
         if (!document.hidden) applyTheme();
