@@ -209,7 +209,6 @@
       .sf-contact-cta:hover {
         background: #a01e14
       }
-      a
 
       /* BURGER — mobile */
       .burger-btn {
@@ -385,9 +384,12 @@
 
       .hero-title-img {
         display: block;
-        width: clamp(220px, 32vw, 460px);
-        height: auto;
-        margin-bottom: .5rem
+        width: auto;
+        height: 420px;
+        margin-bottom: .5rem;
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-select: none
       }
 
       .hero-sub {
@@ -1099,9 +1101,9 @@
 
       .sf-col-title-img {
         display: block;
-        height: 18px;
+        height: 60px;
         width: auto;
-        margin-bottom: .75rem
+        margin-bottom: .75rem;
       }
 
       .sf-col p,
@@ -1142,13 +1144,6 @@
         font-size: 1.6rem;
         letter-spacing: .08em;
         color: var(--ink);
-        opacity: .3
-      }
-
-      .sf-logo-img {
-        display: block;
-        height: 26px;
-        width: auto;
         opacity: .3
       }
 
