@@ -414,13 +414,6 @@
     background: var(--surface2);
   }
 
-  .toolbar button.redact {
-    color: var(--accent2);
-    font-size: 11.5px;
-    font-weight: 700;
-    letter-spacing: .05em;
-  }
-
   .toolbar button.clear-fmt {
     color: var(--muted);
     font-size: 13px;
@@ -451,15 +444,6 @@
     content: attr(data-placeholder);
     color: var(--muted);
     pointer-events: none;
-  }
-
-  .rte-editor .redacted {
-    background: #000;
-    color: #fff;
-    border-radius: 2px;
-    padding: 0 4px;
-    cursor: pointer;
-    user-select: none;
   }
 
   /* Output */
@@ -798,8 +782,7 @@
         <button onclick="fmt('bold')" title="Bold (Ctrl+B)"><b>B</b></button>
         <button onclick="fmt('italic')" title="Italic (Ctrl+I)"><i>I</i></button>
         <button onclick="fmt('underline')" title="Underline (Ctrl+U)"><u>U</u></button>
-        <button onclick="fmt('strikeThrough')" title="Strikethrough"><s>S</s></button>
-        <button class="redact" onclick="doRedact()" title="Blok hitam / Redacted">REDACT</button>
+        <button onclick="fmt('strikeThrough')" title="Redacted / Strikethrough (Ctrl+Shift+S)"><s>S</s> <span style="font-size:11px;font-weight:700;letter-spacing:.04em">REDACTED</span></button>
         <button class="clear-fmt" onclick="fmt('removeFormat')" title="Hapus formatting">✕ Clear</button>
       </div>
     </div>
@@ -811,11 +794,11 @@
         id="editor"
         class="rte-editor"
         contenteditable="true"
-        data-placeholder="Tulis atau paste teks di sini… bold, italic, redacted semua bisa."
+        data-placeholder="Tulis atau paste teks di sini… bold, italic, strikethrough = redacted."
         style="flex:1; min-height:160px;"
       ></div>
       <div class="hint">
-        Shortcut: <code>Ctrl+B</code> bold · <code>Ctrl+I</code> italic · <code>Ctrl+U</code> underline.
+        Shortcut: <code>Ctrl+B</code> bold · <code>Ctrl+I</code> italic · <code>Ctrl+U</code> underline · <code>Ctrl+Shift+S</code> redacted.
         Paste dari Google Docs / Word otomatis dibersihkan.
       </div>
     </div>
@@ -995,7 +978,7 @@
     }
     const editor = document.getElementById('editor');
     if (m === 'inline') {
-      editor.dataset.placeholder = 'Tulis atau paste teks satu baris… bold, italic, redacted bisa.';
+      editor.dataset.placeholder = 'Tulis atau paste teks satu baris… bold, italic, strikethrough = redacted.';
       editor.addEventListener('keydown', blockEnter);
     } else {
       editor.dataset.placeholder = 'Tulis atau paste paragraf… Enter untuk baris baru, dua Enter untuk paragraf baru.';
@@ -1037,6 +1020,7 @@
     if (k === 'b') { e.preventDefault(); fmt('bold'); }
     else if (k === 'i') { e.preventDefault(); fmt('italic'); }
     else if (k === 'u') { e.preventDefault(); fmt('underline'); }
+    else if (k === 's' && e.shiftKey) { e.preventDefault(); fmt('strikeThrough'); }
   });
 
   editor.addEventListener('input', saveState);
@@ -1060,26 +1044,6 @@
   function fmt(cmd) {
     editor.focus();
     document.execCommand(cmd);
-    saveState();
-  }
-
-  function doRedact() {
-    editor.focus();
-    const sel = window.getSelection();
-    if (!sel.rangeCount) return;
-    const range = sel.getRangeAt(0);
-    const span = document.createElement('span');
-    span.className = 'redacted';
-    if (range.collapsed) {
-      span.textContent = 'teks rahasia';
-      range.insertNode(span);
-      range.setStartAfter(span);
-      range.setEndAfter(span);
-    } else {
-      span.appendChild(range.extractContents());
-      range.insertNode(span);
-    }
-    sel.removeAllRanges();
     saveState();
   }
 
@@ -1140,12 +1104,8 @@
       s.innerHTML = el.innerHTML;
       el.replaceWith(s);
     });
-    clone.querySelectorAll('strike').forEach(el => {
-      const s = document.createElement('s');
-      s.innerHTML = el.innerHTML;
-      el.replaceWith(s);
-    });
-    clone.querySelectorAll('span.redacted').forEach(el => {
+    // Strikethrough → glitch-redact (sekalian handle <strike> dan <s>)
+    clone.querySelectorAll('strike, s').forEach(el => {
       const text = el.textContent;
       const label = text.replace(/[^\s]/g, '█');
       const span = document.createElement('span');
@@ -1158,7 +1118,31 @@
     if (mode === 'multiline') {
       return buildParagraphs(clone);
     }
-    return clone.innerHTML.trim();
+    return buildInline(clone);
+  }
+
+  function buildInline(clone) {
+    // Walk semua node, div/br → spasi, ambil innerHTML inline tags saja
+    function walk(node) {
+      let out = '';
+      node.childNodes.forEach(child => {
+        if (child.nodeType === 3) {
+          out += child.textContent;
+        } else if (child.nodeType === 1) {
+          const tag = child.tagName;
+          if (tag === 'BR' || tag === 'DIV' || tag === 'P') {
+            // flatten jadi spasi kalau ada konten sebelumnya
+            const inner = walk(child);
+            if (inner) out += (out ? ' ' : '') + inner;
+          } else {
+            // inline tag — pertahankan outerHTML-nya
+            out += child.outerHTML;
+          }
+        }
+      });
+      return out;
+    }
+    return walk(clone).replace(/&nbsp;/gi, ' ').replace(/\s{2,}/g, ' ').trim();
   }
 
   /* ── Live preview: writes the HTML code itself, re-rendered on every keystroke ── */
@@ -1189,6 +1173,7 @@
       }
     });
 
+    html = html.replace(/&nbsp;/gi, ' ');
     html = html.replace(/(<br\s*\/?>\s*){2,}/gi, '|||SPLIT|||');
     const parts = html.split('|||SPLIT|||').map(p => p.trim()).filter(Boolean);
     const paragraphs = [];
