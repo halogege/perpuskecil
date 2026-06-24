@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://solrainha.github.io/saturnicons/saturnicons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap">
     <style>
       * {
         margin: 0;
@@ -64,7 +64,7 @@
       body {
         background: var(--bg);
         color: var(--ink);
-        font-family: var(--mono);
+        font-family: 'Inter', sans-serif;
         transition: background .3s, color .3s;
         min-height: 100vh;
         font-size: 16px;
@@ -103,6 +103,12 @@
         height: 32px;
         width: auto
       }
+
+      /* Logo theme switching via CSS — no JS src swap needed */
+      .wgtr-logo-light { display: block }
+      .wgtr-logo-dark  { display: none  !important }
+      [data-theme="dark"] .wgtr-logo-light { display: none  !important }
+      [data-theme="dark"] .wgtr-logo-dark  { display: block !important }
 
       .nav-logo span {
         color: var(--red)
@@ -1271,7 +1277,7 @@
       }
 
       .splash-disclaimer {
-        font-family: 'Space Mono', monospace;
+        font-family: 'Inter', sans-serif;
         font-size: .78rem;
         line-height: 1.9;
         color: var(--ink2);
@@ -1395,9 +1401,9 @@
         letter-spacing: .12em;
         text-transform: uppercase;
         padding: 1.1rem 1rem;
-        border: 1px solid #2a2a2a;
+        border: 1px solid var(--border2);
         background: none;
-        color: #888;
+        color: var(--muted);
         cursor: pointer;
         transition: all .15s;
         display: flex;
@@ -1413,8 +1419,8 @@
       }
 
       .splash-theme-btn:hover {
-        border-color: #b89a3e;
-        color: #f0ece3;
+        border-color: var(--gold2);
+        color: var(--ink);
       }
 
       .splash-theme-btn:hover .t-icon {
@@ -1422,13 +1428,20 @@
       }
 
       .splash-theme-btn.selected {
-        border-color: #c0251a;
-        color: #f0ece3;
+        border-color: var(--red);
+        color: var(--ink);
         background: rgba(192, 37, 26, .08);
       }
 
       .splash-theme-btn.selected .t-icon {
         opacity: 1;
+      }
+
+      [data-theme="light"] .splash-theme-btn {
+        color: var(--ink2);
+      }
+      [data-theme="light"] .splash-theme-btn .t-icon {
+        opacity: .7;
       }
 
       .splash-theme-confirm {
@@ -1473,7 +1486,34 @@
 
       @media(max-width:600px) {
         .splash-box {
-          padding: 2rem 1.5rem;
+          padding: 1.5rem 1.25rem 1.25rem;
+        }
+        .splash-pre {
+          margin-bottom: 1rem;
+        }
+        .splash-quote {
+          margin-bottom: .5rem;
+        }
+        .splash-attr {
+          margin-bottom: 1.25rem;
+        }
+        .splash-rule {
+          margin-bottom: 1.25rem;
+        }
+        .splash-disclaimer {
+          font-size: .75rem;
+          line-height: 1.75;
+          margin-bottom: 1.25rem;
+        }
+        .splash-privacy {
+          margin-top: .85rem;
+        }
+        .splash-theme-choices {
+          gap: .5rem;
+          margin-bottom: 1rem;
+        }
+        .splash-theme-btn {
+          padding: .85rem .75rem;
         }
       }
 
@@ -1515,6 +1555,11 @@
 
         .hero-title {
           font-size: clamp(3.8rem, 18vw, 6.5rem)
+        }
+
+        .hero-title-img {
+          width: 50vw;
+          height: auto
         }
 
         .hero-desc {
@@ -2724,7 +2769,10 @@
 
  <!-- NAV -->
     <nav>
-      <a class="nav-logo" href="index.html"><img class="nav-logo-img wgtr-logo" data-light="assets/og/wgtr-small-light.png" data-dark="assets/og/wgtr-small-dark.png" src="assets/og/wgtr-small-light.png" alt="WARGANTARA"></a>
+      <a class="nav-logo" href="index.html">
+  <img class="nav-logo-img wgtr-logo-light" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+  <img class="nav-logo-img wgtr-logo-dark"  src="assets/og/wgtr-small-dark.png"  alt="WARGANTARA">
+</a>
       <ul class="nav-links">
         <li><a class="active" href="index.html">Home</a></li>
         <li><a href="members.html">Members</a></li>
@@ -2774,7 +2822,8 @@
       <div id="page-home" class="page active">
         <div class="hero">
           <div class="hero-eyebrow">// Sebuah pintasan antara dua dunia //</div>
-          <img class="hero-title-img wgtr-logo" data-light="assets/og/wgtr-big-light.png" data-dark="assets/og/wgtr-big-dark.png" src="assets/og/wgtr-big-light.png" alt="WAR/GAN/TARA">
+          <img class="hero-title-img wgtr-logo-light" src="assets/og/wgtr-big-light.png" alt="WAR/GAN/TARA">
+          <img class="hero-title-img wgtr-logo-dark"  src="assets/og/wgtr-big-dark.png"  alt="WAR/GAN/TARA">
           <div class="hero-sub"><em>'Mereka'</em> yang melintasi batas</div>
           <p class="hero-desc">Wargantara adalah sebuah grup VTuber dari Indonesia yang berkonsep makhluk gaib mancanegara
             yang berkumpul di dalam satu takdir yang sama.</p>
@@ -2846,7 +2895,8 @@
             <footer class="site-footer">
       <div class="site-footer-inner">
         <div class="sf-col">
-          <img class="sf-col-title-img wgtr-logo" data-light="assets/og/wgtr-small-light.png" data-dark="assets/og/wgtr-small-dark.png" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+          <img class="sf-col-title-img wgtr-logo-light" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+          <img class="sf-col-title-img wgtr-logo-dark"  src="assets/og/wgtr-small-dark.png"  alt="WARGANTARA">
           <p>Para entitas yang hidup di ambang—tidak sepenuhnya milik dunia manusia, tidak juga milik dunia astral.</p>
           <p style="margin-top:.6rem">Status Lore: <span style="color:var(--gold);opacity:1">Open Sandbox</span></p>
         </div>
@@ -3429,11 +3479,7 @@
         if (ml) {
           ml.textContent = isDark ? 'Day Mode' : 'Night Mode';
         }
-        // swap logo WARGANTARA sesuai tema (logo punya warna fixed, gak bisa cuma invert CSS)
-        document.querySelectorAll('.wgtr-logo').forEach(function(el) {
-          const src = isDark ? el.dataset.dark : el.dataset.light;
-          if (src) el.src = src;
-        });
+        // logo swap kini via CSS [data-theme] → .wgtr-logo-light/.wgtr-logo-dark, tanpa JS src swap
         // force-repaint semua saturnicon — font kadang suspend saat tab background
         document.querySelectorAll('.sf').forEach(function(el) {
           el.style.display = 'none';

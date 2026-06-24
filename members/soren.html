@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
       @import url('https://solrainha.github.io/saturnicons/saturnicons.css');
-      @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap');
       @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
 
       * {
@@ -83,7 +83,7 @@
       body {
         background: var(--bg);
         color: var(--ink);
-        font-family: var(--mono);
+        font-family: 'Inter', sans-serif;
         min-height: 100vh;
         font-size: 16px;
         transition: background .3s, color .3s;
@@ -2280,13 +2280,21 @@
         position: fixed;
         inset: 0;
         background: var(--bg);
-        z-index: 9999;
-        display: flex;
+        z-index: 9998;
+        display: none;
         align-items: center;
         justify-content: center;
         padding: 2rem;
-        opacity: 1;
+        opacity: 0;
         transition: opacity .6s ease
+      }
+
+      .wg-splash.ready {
+        display: flex
+      }
+
+      .wg-splash.visible {
+        opacity: 1
       }
 
       .wg-splash.hiding {
@@ -2346,7 +2354,7 @@
         border-top: 2px solid var(--red);
         padding: 3rem 2.5rem 2.5rem;
         position: relative;
-        background: var(--surface);
+        background: var(--bg);
         overflow: hidden
       }
 
@@ -2384,7 +2392,7 @@
       }
 
       .splash-disclaimer {
-        font-family: 'Space Mono', monospace;
+        font-family: 'Inter', sans-serif;
         font-size: .78rem;
         line-height: 1.9;
         color: var(--ink2);
@@ -2393,7 +2401,7 @@
       }
 
       .splash-disclaimer strong {
-        color: var(--gold2);
+        color: var(--gold);
         font-weight: 400
       }
 
@@ -2445,8 +2453,7 @@
         font-family: 'Space Mono', monospace;
         font-size: .58rem;
         letter-spacing: .06em;
-        color: var(--muted);
-        opacity: .55;
+        color: var(--border2);
         margin-top: 1.25rem;
         line-height: 1.7
       }
@@ -2528,11 +2535,18 @@
       .splash-theme-btn.selected {
         border-color: var(--red);
         color: var(--ink);
-        background: var(--red-dim)
+        background: rgba(192, 37, 26, .08)
       }
 
       .splash-theme-btn.selected .t-icon {
         opacity: 1
+      }
+
+      [data-theme="light"] .splash-theme-btn {
+        color: var(--ink2)
+      }
+      [data-theme="light"] .splash-theme-btn .t-icon {
+        opacity: .7
       }
 
       .splash-theme-confirm {
@@ -2565,18 +2579,45 @@
         font-family: 'Space Mono', monospace;
         font-size: .72rem;
         letter-spacing: .1em;
-        color: var(--muted);
+        color: #3a3a3a;
         margin-top: 1.5rem;
         transition: color .3s
       }
 
       .deny-countdown.urgent {
-        color: var(--red)
+        color: #7a3030
       }
 
       @media(max-width:600px) {
         .splash-box {
-          padding: 2rem 1.5rem
+          padding: 1.5rem 1.25rem 1.25rem
+        }
+        .splash-pre {
+          margin-bottom: 1rem
+        }
+        .splash-quote {
+          margin-bottom: .5rem
+        }
+        .splash-attr {
+          margin-bottom: 1.25rem
+        }
+        .splash-rule {
+          margin-bottom: 1.25rem
+        }
+        .splash-disclaimer {
+          font-size: .75rem;
+          line-height: 1.75;
+          margin-bottom: 1.25rem
+        }
+        .splash-privacy {
+          margin-top: .85rem
+        }
+        .splash-theme-choices {
+          gap: .5rem;
+          margin-bottom: 1rem
+        }
+        .splash-theme-btn {
+          padding: .85rem .75rem
         }
       }
     

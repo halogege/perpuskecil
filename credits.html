@@ -13,9 +13,9 @@
     <title>WARGANTARA—Credits</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <style>
-      @import url('https://solrainha.github.io/saturnicons/saturnicons.css');
-      @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap');
+        <style>
+@import url('https://solrainha.github.io/saturnicons/saturnicons.css');
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap');
       @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
 
       * {
@@ -24,7 +24,739 @@
         box-sizing: border-box
       }
 
-      :root {
+html {
+        width: 100%
+      }
+
+body {
+        width: 100%;
+        overflow-x: clip
+      }
+
+body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: 'Inter', sans-serif;
+        transition: background .3s, color .3s;
+        min-height: 100vh;
+        font-size: 16px;
+        line-height: 1.6
+      }
+
+/* ---- NAV ---- */
+      nav {
+        background: var(--bg);
+        border-bottom: 2px solid var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.5rem;
+        height: var(--nav-h);
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        transition: background .3s
+      }
+
+.nav-logo {
+        font-family: var(--display);
+        font-size: 2rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        cursor: pointer;
+        text-decoration: none;
+        transition: color .3s
+      }
+
+.nav-logo-img {
+        display: block;
+        height: 32px;
+        width: auto
+      }
+
+/* Logo theme switching via CSS — no JS src swap needed */
+      .wgtr-logo-light { display: block }
+
+.wgtr-logo-dark  { display: none  !important }
+
+[data-theme="dark"] .wgtr-logo-light { display: none  !important }
+
+[data-theme="dark"] .wgtr-logo-dark  { display: block !important }
+
+.sf-col-title-img {
+        display: block;
+        height: 60px;
+        width: auto;
+        margin-bottom: .75rem
+      }
+
+.sf-logo-img {
+        display: block;
+        height: 26px;
+        width: auto;
+        opacity: .3
+      }
+
+.nav-logo span {
+        color: var(--red)
+      }
+
+.nav-links {
+        display: flex;
+        gap: 0;
+        list-style: none
+      }
+
+.nav-links li a {
+        display: block;
+        padding: 0 1rem;
+        height: var(--nav-h);
+        line-height: var(--nav-h);
+        font-size: .78rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--ink);
+        opacity: .6;
+        border-left: 1px solid var(--border);
+        transition: all .15s;
+        cursor: pointer
+      }
+
+.nav-right {
+        display: flex;
+        align-items: center;
+        gap: .75rem
+      }
+
+.theme-btn {
+        background: none;
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        cursor: pointer;
+        transition: all .2s;
+        height: 32px;
+        width: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        padding: 0
+      }
+
+.theme-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold)
+      }
+
+.burger-btn span {
+        display: block;
+        width: 18px;
+        height: 1.5px;
+        background: currentColor;
+        transition: all .25s
+      }
+
+.burger-btn.open span:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg)
+      }
+
+.burger-btn.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0)
+      }
+
+.burger-btn.open span:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg)
+      }
+
+.mobile-drawer.open {
+        display: flex
+      }
+
+.mobile-drawer ul {
+        list-style: none;
+        border-bottom: 1px solid var(--border)
+      }
+
+.mobile-drawer ul li a {
+        display: flex;
+        align-items: center;
+        padding: 1.1rem 1.5rem;
+        font-size: .9rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--ink);
+        opacity: .65;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        transition: all .15s;
+        text-decoration: none;
+        min-height: 48px
+      }
+
+.mobile-drawer ul li a:hover,
+      .mobile-drawer ul li a.active {
+        opacity: 1;
+        background: var(--red);
+        color: #fff
+      }
+
+/* ---- PAGE HEADER ---- */
+      .page-header {
+        padding: 3.5rem 3rem 2.5rem;
+        border-bottom: 2px solid var(--red);
+        position: relative;
+        overflow: hidden
+      }
+
+.page-header-pre {
+        font-size: .7rem;
+        letter-spacing: .28em;
+        color: var(--red);
+        text-transform: uppercase;
+        margin-bottom: .75rem
+      }
+
+.page-header h1 {
+        font-family: var(--display);
+        font-size: clamp(3.5rem, 7vw, 6rem);
+        line-height: .9;
+        color: var(--ink);
+        transition: color .3s
+      }
+
+.page-header-bg {
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--display);
+        font-size: 10rem;
+        color: var(--red);
+        opacity: .04;
+        pointer-events: none;
+        letter-spacing: -.02em;
+        line-height: 1
+      }
+
+/* ---- FOOTER ---- */
+      .site-footer {
+        background: var(--surface);
+        border-top: 2px solid var(--red);
+        padding: 2.5rem 3rem;
+        margin-top: auto
+      }
+
+.site-footer-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem
+      }
+
+.sf-col-title {
+        font-family: var(--display);
+        font-size: 1.1rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        margin-bottom: .75rem;
+        transition: color .3s
+      }
+
+.sf-col p,
+      .sf-col a {
+        font-size: .84rem;
+        line-height: 1.85;
+        opacity: .65;
+        display: block;
+        color: var(--ink);
+        text-decoration: none;
+        transition: opacity .15s
+      }
+
+.sf-col a:hover {
+        opacity: 1;
+        color: var(--red)
+      }
+
+.sf-bottom {
+        border-top: 1px solid var(--border);
+        padding-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap
+      }
+
+.sf-copy {
+        font-size: .68rem;
+        letter-spacing: .12em;
+        opacity: .25;
+        text-transform: uppercase
+      }
+
+.sf-logo {
+        font-family: var(--display);
+        font-size: 1.6rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        opacity: .3
+      }
+
+.sf-logo span {
+        color: var(--red)
+      }
+
+.wg-splash.hiding {
+        opacity: 0;
+        pointer-events: none
+      }
+
+.wg-splash.hidden {
+        display: none
+      }
+
+@keyframes glitch-swap {
+        0% {
+          opacity: 1;
+          transform: skewX(0)
+        }
+
+        10% {
+          opacity: 0;
+          transform: skewX(-4deg) translateX(4px)
+        }
+
+        15% {
+          opacity: 1;
+          transform: skewX(3deg) translateX(-3px)
+        }
+
+        20% {
+          opacity: 0;
+          transform: skewX(0)
+        }
+
+        25% {
+          opacity: 1;
+          transform: skewX(-2deg)
+        }
+
+        30% {
+          opacity: 0
+        }
+
+        35%,
+        100% {
+          opacity: 1;
+          transform: skewX(0)
+        }
+      }
+
+.splash-box.glitching {
+        animation: glitch-swap .35s steps(1) both
+      }
+
+.splash-box {
+        max-width: 560px;
+        width: 100%;
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--red);
+        padding: 3rem 2.5rem 2.5rem;
+        position: relative;
+        background: var(--bg);
+        overflow: hidden
+      }
+
+.splash-pre {
+        font-family: 'Space Mono', monospace;
+        font-size: .6rem;
+        letter-spacing: .28em;
+        color: var(--red);
+        text-transform: uppercase;
+        margin-bottom: 1.5rem
+      }
+
+.splash-attr {
+        font-family: 'Space Mono', monospace;
+        font-size: .62rem;
+        letter-spacing: .1em;
+        color: var(--muted);
+        margin-bottom: 2rem
+      }
+
+.splash-rule {
+        width: 2rem;
+        height: 1px;
+        background: var(--border);
+        margin-bottom: 2rem
+      }
+
+.splash-disclaimer {
+        font-family: 'Inter', sans-serif;
+        font-size: .78rem;
+        line-height: 1.9;
+        color: var(--ink2);
+        opacity: .75;
+        margin-bottom: 2rem
+      }
+
+.splash-disclaimer strong {
+        color: var(--gold);
+        font-weight: 400
+      }
+
+.splash-actions {
+        display: flex;
+        gap: .75rem;
+        align-items: center;
+        flex-wrap: wrap
+      }
+
+.splash-btn-enter {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .7rem 1.5rem;
+        background: var(--red);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background .15s;
+        min-height: 40px
+      }
+
+.splash-btn-enter:hover {
+        background: var(--red2)
+      }
+
+.splash-btn-deny {
+        font-family: 'Space Mono', monospace;
+        font-size: .68rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        background: none;
+        border: 1px solid var(--border);
+        cursor: pointer;
+        padding: .6rem 1rem;
+        transition: color .15s, border-color .15s;
+        min-height: 40px
+      }
+
+.splash-btn-deny:hover {
+        color: var(--ink);
+        border-color: var(--muted)
+      }
+
+.splash-privacy {
+        font-family: 'Space Mono', monospace;
+        font-size: .58rem;
+        letter-spacing: .06em;
+        color: var(--border2);
+        margin-top: 1.25rem;
+        line-height: 1.7
+      }
+
+.splash-corner {
+        position: absolute;
+        bottom: 1rem;
+        right: 1.5rem;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 4.5rem;
+        color: var(--red);
+        opacity: .04;
+        line-height: 1;
+        pointer-events: none
+      }
+
+.splash-theme-choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .75rem;
+        margin-bottom: 1.5rem
+      }
+
+.splash-theme-btn {
+        font-family: 'Space Mono', monospace;
+        font-size: .7rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        padding: 1.1rem 1rem;
+        border: 1px solid #2a2a2a;
+        background: none;
+        color: #888;
+        cursor: pointer;
+        transition: all .15s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .6rem
+      }
+
+.splash-theme-btn .t-icon {
+        font-size: 1.4rem;
+        opacity: .5;
+        transition: opacity .15s
+      }
+
+.splash-theme-btn:hover {
+        border-color: #b89a3e;
+        color: #f0ece3
+      }
+
+.splash-theme-btn:hover .t-icon {
+        opacity: 1
+      }
+
+.splash-theme-btn.selected .t-icon {
+        opacity: 1
+      }
+
+[data-theme="light"] .splash-theme-btn {
+        color: var(--ink2)
+      }
+
+[data-theme="light"] .splash-theme-btn .t-icon {
+        opacity: .7
+      }
+
+.splash-theme-confirm {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .7rem 1.5rem;
+        background: #c0251a;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background .15s, opacity .15s;
+        width: 100%;
+        min-height: 40px;
+        opacity: .35;
+        pointer-events: none
+      }
+
+.splash-theme-confirm.ready {
+        opacity: 1;
+        pointer-events: auto
+      }
+
+.splash-theme-confirm.ready:hover {
+        background: #e02a1e
+      }
+
+.deny-countdown {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .1em;
+        color: #3a3a3a;
+        margin-top: 1.5rem;
+        transition: color .3s
+      }
+
+.deny-countdown.urgent {
+        color: #7a3030
+      }
+
+/* NAV DROPDOWN */
+      .nav-links li.has-drop {
+        position: relative
+      }
+
+.nav-links li.has-drop > a {
+        display: flex !important;
+        align-items: center;
+        gap: .35rem
+      }
+
+.nav-links li.has-drop > a::after {
+        content: '';
+        width: 5px;
+        height: 5px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: rotate(45deg) translateY(-1px);
+        opacity: .6;
+        transition: transform .15s
+      }
+
+.nav-links li.has-drop:hover > a::after {
+        transform: rotate(-135deg) translateY(-2px)
+      }
+
+.nav-drop {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 180px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--red);
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 9999;
+        box-shadow: 0 4px 16px rgba(0,0,0,.18);
+        transition: opacity .15s, visibility .15s
+      }
+
+.nav-links li.has-drop:hover .nav-drop {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto
+      }
+
+.nav-drop a {
+        display: block !important;
+        padding: .65rem 1rem !important;
+        height: auto !important;
+        line-height: 1.4 !important;
+        font-size: .75rem !important;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--ink) !important;
+        opacity: .65 !important;
+        border-bottom: 1px solid var(--border) !important;
+        border-left: none !important;
+        transition: all .12s !important;
+        white-space: nowrap
+      }
+
+.nav-drop a:last-child {
+        border-bottom: none !important
+      }
+
+.nav-drop a:hover, .nav-drop a.active {
+        opacity: 1 !important;
+        background: var(--red) !important;
+        color: #fff !important
+      }
+
+/* MOBILE DRAWER SUB */
+      .mobile-drawer ul li.has-msub > a {
+        justify-content: space-between
+      }
+
+.mobile-drawer ul li.has-msub > a::after {
+        content: '›';
+        font-size: 1.1rem;
+        opacity: .4
+      }
+
+.mobile-sub {
+        display: none;
+        border-top: 1px solid var(--border)
+      }
+
+.mobile-sub.open {
+        display: block
+      }
+
+.mobile-sub a {
+        padding-left: 2.75rem !important;
+        background: var(--surface) !important;
+        font-size: .82rem !important;
+        opacity: .55 !important
+      }
+
+.mobile-sub a:hover, .mobile-sub a.active {
+        opacity: 1 !important;
+        background: var(--red) !important;
+        color: #fff !important
+      }
+
+/* contact box */
+      .sf-contact-box {
+        margin-top: .65rem;
+        border: 1px solid var(--border2);
+        border-top: 2px solid var(--red);
+        padding: 1rem 1rem .85rem
+      }
+
+.sf-contact-box-label {
+        font-size: .6rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--red);
+        margin-bottom: .5rem;
+        opacity: 1
+      }
+
+.sf-contact-box-body {
+        font-size: .8rem;
+        line-height: 1.75;
+        opacity: .65;
+        margin-bottom: .85rem
+      }
+
+.sf-contact-cta {
+        display: block;
+        width: 100%;
+        padding: .55rem 1rem;
+        font-family: var(--mono);
+        font-size: .7rem;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+        text-align: center;
+        background: var(--red);
+        color: #fff !important;
+        opacity: 1 !important;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: background .15s
+      }
+
+.sf-contact-cta:hover {
+        background: #a01e14
+      }
+
+/* ── SOCIAL PILLS ── */
+      .sf-socials {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: .5rem;
+        margin-top: .85rem
+      }
+
+.sf-social-pill {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 52px !important;
+        height: 52px !important;
+        border: 1px solid var(--border2);
+        color: var(--ink) !important;
+        opacity: .45 !important;
+        text-decoration: none;
+        transition: all .15s;
+        cursor: pointer;
+        flex-shrink: 0 !important
+      }
+
+.sf-social-pill i {
+        font-size: 1.7rem
+      }
+
+a.sf-social-pill:hover {
+        border-color: var(--ink);
+        opacity: 1 !important
+      }
+
+.sf-social-pill--disabled {
+        opacity: .18 !important;
+        cursor: not-allowed !important;
+        border-style: dashed
+      }
+
+:root {
         --bg: #ffffff;
         --surface: #f5f5f5;
         --surface2: #ebebeb;
@@ -45,7 +777,7 @@
         --nav-h: 56px;
       }
 
-      [data-theme="dark"] {
+[data-theme="dark"] {
         --bg: #111111;
         --surface: #1c1c1c;
         --surface2: #242424;
@@ -61,135 +793,18 @@
         --gold-dim: rgba(184, 154, 62, .1);
       }
 
-      html {
-        width: 100%
-      }
-
-      body {
-        width: 100%;
-        overflow-x: clip
-      }
-
-      body {
-        background: var(--bg);
-        color: var(--ink);
-        font-family: var(--mono);
-        transition: background .3s, color .3s;
-        min-height: 100vh;
-        font-size: 16px;
-        line-height: 1.6
-      }
-
-      /* ---- NAV ---- */
-      nav {
-        background: var(--bg);
-        border-bottom: 2px solid var(--red);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 1.5rem;
-        height: var(--nav-h);
-        position: sticky;
-        top: 0;
-        z-index: 200;
-        transition: background .3s
-      }
-
-      .nav-logo {
-        font-family: var(--display);
-        font-size: 2rem;
-        letter-spacing: .08em;
-        color: var(--ink);
-        cursor: pointer;
-        text-decoration: none;
-        transition: color .3s
-      }
-
-      .nav-logo-img {
-        display: block;
-        height: 32px;
-        width: auto
-      }
-
-      .sf-col-title-img {
-        display: block;
-        height: 60px;
-        width: auto;
-        margin-bottom: .75rem
-      }
-
-      .sf-logo-img {
-        display: block;
-        height: 26px;
-        width: auto;
-        opacity: .3
-      }
-
-
-      .nav-logo span {
-        color: var(--red)
-      }
-
-      .nav-links {
-        display: flex;
-        gap: 0;
-        list-style: none
-      }
-
-      .nav-links li a {
-        display: block;
-        padding: 0 1rem;
-        height: var(--nav-h);
-        line-height: var(--nav-h);
-        font-size: .78rem;
-        letter-spacing: .1em;
-        text-transform: uppercase;
-        text-decoration: none;
-        color: var(--ink);
-        opacity: .6;
-        border-left: 1px solid var(--border);
-        transition: all .15s;
-        cursor: pointer
-      }
-
-      .nav-links li a:hover {
+.nav-links li a:hover {
         opacity: 1;
         background: var(--surface)
       }
 
-      .nav-links li a.active {
+.nav-links li a.active {
         opacity: 1;
         background: var(--red);
         color: #fff
       }
 
-      .nav-right {
-        display: flex;
-        align-items: center;
-        gap: .75rem
-      }
-
-      .theme-btn {
-        background: none;
-        border: 1px solid var(--border2);
-        color: var(--ink);
-        cursor: pointer;
-        transition: all .2s;
-        height: 32px;
-        width: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        padding: 0
-      }
-
-      .theme-btn:hover {
-        border-color: var(--gold);
-        color: var(--gold)
-      }
-
-      .burger-btn {
+.burger-btn {
         display: none;
         background: none;
         border: 1px solid var(--border2);
@@ -205,28 +820,7 @@
         transition: border-color .2s
       }
 
-      .burger-btn span {
-        display: block;
-        width: 18px;
-        height: 1.5px;
-        background: currentColor;
-        transition: all .25s
-      }
-
-      .burger-btn.open span:nth-child(1) {
-        transform: translateY(6.5px) rotate(45deg)
-      }
-
-      .burger-btn.open span:nth-child(2) {
-        opacity: 0;
-        transform: scaleX(0)
-      }
-
-      .burger-btn.open span:nth-child(3) {
-        transform: translateY(-6.5px) rotate(-45deg)
-      }
-
-      .mobile-drawer {
+.mobile-drawer {
         display: none;
         position: fixed;
         top: var(--nav-h);
@@ -240,63 +834,7 @@
         overflow-y: auto
       }
 
-      .mobile-drawer.open {
-        display: flex
-      }
-
-      .mobile-drawer ul {
-        list-style: none;
-        border-bottom: 1px solid var(--border)
-      }
-
-      .mobile-drawer ul li a {
-        display: flex;
-        align-items: center;
-        padding: 1.1rem 1.5rem;
-        font-size: .9rem;
-        letter-spacing: .12em;
-        text-transform: uppercase;
-        color: var(--ink);
-        opacity: .65;
-        border-bottom: 1px solid var(--border);
-        cursor: pointer;
-        transition: all .15s;
-        text-decoration: none;
-        min-height: 48px
-      }
-
-      .mobile-drawer ul li a:hover,
-      .mobile-drawer ul li a.active {
-        opacity: 1;
-        background: var(--red);
-        color: #fff
-      }
-
-      /* ---- PAGE HEADER ---- */
-      .page-header {
-        padding: 3.5rem 3rem 2.5rem;
-        border-bottom: 2px solid var(--red);
-        position: relative;
-        overflow: hidden
-      }
-
-      .page-header-pre {
-        font-size: .7rem;
-        letter-spacing: .28em;
-        color: var(--red);
-        text-transform: uppercase;
-        margin-bottom: .75rem
-      }
-
-      .page-header h1 {
-        font-family: var(--display);
-        font-size: clamp(3.5rem, 7vw, 6rem);
-        line-height: .9;
-        color: var(--ink);
-        transition: color .3s
-      }
-
-      .page-header p {
+.page-header p {
         max-width: 560px;
         font-size: .95rem;
         line-height: 1.85;
@@ -306,28 +844,14 @@
         hyphens: auto
       }
 
-      .page-header-bg {
-        position: absolute;
-        right: 2rem;
-        top: 50%;
-        transform: translateY(-50%);
-        font-family: var(--display);
-        font-size: 10rem;
-        color: var(--red);
-        opacity: .04;
-        pointer-events: none;
-        letter-spacing: -.02em;
-        line-height: 1
-      }
-
-      /* ---- LAYOUT ---- */
+/* ---- LAYOUT ---- */
       .cr-layout {
         display: grid;
         grid-template-columns: 240px 1fr;
         min-height: calc(100vh - var(--nav-h))
       }
 
-      /* ---- SIDEBAR ---- */
+/* ---- SIDEBAR ---- */
       .cr-sidebar {
         border-right: 1px solid var(--border);
         padding: 2rem 0;
@@ -339,7 +863,7 @@
         transition: background .3s
       }
 
-      .cr-sidebar-head {
+.cr-sidebar-head {
         font-size: .62rem;
         letter-spacing: .2em;
         text-transform: uppercase;
@@ -349,11 +873,11 @@
         margin-top: 1.5rem
       }
 
-      .cr-sidebar-head:first-child {
+.cr-sidebar-head:first-child {
         margin-top: 0
       }
 
-      .cr-nav-item {
+.cr-nav-item {
         display: flex;
         align-items: center;
         gap: .6rem;
@@ -376,18 +900,18 @@
         text-align: left
       }
 
-      .cr-nav-item:hover {
+.cr-nav-item:hover {
         opacity: .85;
         border-left-color: var(--border2)
       }
 
-      .cr-nav-item.active {
+.cr-nav-item.active {
         opacity: 1;
         border-left-color: var(--red);
         color: var(--red)
       }
 
-      .cr-nav-item .cr-nav-dot {
+.cr-nav-item .cr-nav-dot {
         width: 6px;
         height: 6px;
         border-radius: 50%;
@@ -396,33 +920,33 @@
         opacity: .5
       }
 
-      .cr-nav-item.active .cr-nav-dot {
+.cr-nav-item.active .cr-nav-dot {
         opacity: 1
       }
 
-      .cr-nav-divider {
+.cr-nav-divider {
         height: 1px;
         background: var(--border);
         margin: .75rem 1.4rem
       }
 
-      /* ---- CONTENT ---- */
+/* ---- CONTENT ---- */
       .cr-content-area {
         min-height: calc(100vh - var(--nav-h))
       }
 
-      .cr-panel {
+.cr-panel {
         display: none;
         padding: 3.5rem 3rem 4rem;
         max-width: 820px
       }
 
-      .cr-panel.active {
+.cr-panel.active {
         display: block;
         animation: panelIn .25s ease both
       }
 
-      @keyframes panelIn {
+@keyframes panelIn {
         from {
           opacity: 0;
           transform: translateY(8px)
@@ -434,7 +958,7 @@
         }
       }
 
-      .cr-eyebrow {
+.cr-eyebrow {
         font-size: .64rem;
         letter-spacing: .2em;
         text-transform: uppercase;
@@ -443,7 +967,7 @@
         opacity: .85
       }
 
-      .cr-title {
+.cr-title {
         font-family: var(--display);
         font-size: clamp(2.5rem, 5vw, 3.5rem);
         letter-spacing: .04em;
@@ -453,19 +977,19 @@
         transition: color .3s
       }
 
-      .cr-rule {
+.cr-rule {
         width: 2rem;
         height: 2px;
         background: var(--red);
         margin-bottom: 2rem
       }
 
-      /* ---- CREDIT GROUPS ---- */
+/* ---- CREDIT GROUPS ---- */
       .cr-group {
         margin-bottom: 3rem
       }
 
-      .cr-group-title {
+.cr-group-title {
         font-size: .6rem;
         letter-spacing: .22em;
         text-transform: uppercase;
@@ -476,12 +1000,12 @@
         border-bottom: 1px solid var(--border)
       }
 
-      /* ---- CREDIT ROWS ---- */
+/* ---- CREDIT ROWS ---- */
       .cr-row:last-child {
         border-bottom: none
       }
 
-      .cr-role {
+.cr-role {
         font-size: .62rem;
         letter-spacing: .14em;
         text-transform: uppercase;
@@ -489,29 +1013,29 @@
         padding-top: .05rem
       }
 
-      .cr-name {
+.cr-name {
         font-size: .92rem;
         letter-spacing: .03em;
         color: var(--ink)
       }
 
-      .cr-name a {
+.cr-name a {
         color: inherit;
         text-decoration: none;
         transition: color .15s
       }
 
-      .cr-name a:hover {
+.cr-name a:hover {
         color: var(--gold)
       }
 
-      .cr-name a::after {
+.cr-name a::after {
         content: ' ↗';
         font-size: .65rem;
         opacity: .4
       }
 
-      .cr-tag {
+.cr-tag {
         font-size: .55rem;
         letter-spacing: .14em;
         text-transform: uppercase;
@@ -522,19 +1046,19 @@
         flex-shrink: 0
       }
 
-      .cr-tag.gold {
+.cr-tag.gold {
         border-color: rgba(154, 126, 42, .45);
         color: var(--gold);
         background: var(--gold-dim)
       }
 
-      .cr-tag.red {
+.cr-tag.red {
         border-color: rgba(192, 37, 26, .4);
         color: var(--red);
         background: var(--red-dim)
       }
 
-      /* ---- REDACTED ROW ---- */
+/* ---- REDACTED ROW ---- */
       .cr-name-redacted {
         display: inline-block;
         background: var(--ink);
@@ -546,7 +1070,7 @@
         -webkit-user-select: none
       }
 
-      /* ---- AVATAR ---- */
+/* ---- AVATAR ---- */
       .cr-row {
         display: grid;
         grid-template-columns: 180px 1fr auto;
@@ -556,13 +1080,13 @@
         border-bottom: 1px solid var(--border)
       }
 
-      .cr-row-inner {
+.cr-row-inner {
         display: flex;
         align-items: center;
         gap: .65rem
       }
 
-      .cr-avatar {
+.cr-avatar {
         width: 30px;
         height: 30px;
         border-radius: 50%;
@@ -576,7 +1100,7 @@
         display: block
       }
 
-      .cr-avatar-placeholder {
+.cr-avatar-placeholder {
         width: 30px;
         height: 30px;
         border-radius: 50%;
@@ -592,31 +1116,30 @@
         line-height: 1
       }
 
-      img {
+img {
         pointer-events: none;
         -webkit-user-drag: none;
  
       }
 
-      /* ---- SPECIAL THANKS ---- */
+/* ---- SPECIAL THANKS ---- */
       .cr-special-thanks {
         border: 1px solid var(--border);
-        border-left: 3px solid var(--red);
-        padding: 1.2rem 1.4rem;
+        border-left: 3px solid var(--gold);
+        padding: 1.25rem 1.5rem;
         margin-bottom: 2rem;
-        background: var(--red-dim)
+        background: var(--surface)
       }
 
-      .cr-special-thanks-label {
-        font-size: .55rem;
-        letter-spacing: .22em;
+.cr-special-thanks-label {
+        font-size: .6rem;
+        letter-spacing: .2em;
         text-transform: uppercase;
-        color: var(--red);
-        margin-bottom: .5rem;
-        opacity: .9
+        color: var(--gold);
+        margin-bottom: .5rem
       }
 
-      .cr-special-thanks-name {
+.cr-special-thanks-name {
         font-family: var(--display);
         font-size: 1.6rem;
         letter-spacing: .05em;
@@ -625,13 +1148,54 @@
         transition: color .3s
       }
 
-      .cr-special-thanks-desc {
-        font-size: .84rem;
-        line-height: 1.85;
-        opacity: .75
+.cr-special-thanks-desc {
+        font-size: .9rem;
+        line-height: 1.9;
+        opacity: .78
       }
 
-      /* ---- STAFF GRID ---- */
+.cr-special-thanks.warning,
+      .cr-infobox.warning {
+        border-left-color: var(--red);
+        background: var(--red-dim)
+      }
+
+.cr-special-thanks.warning .cr-special-thanks-label,
+      .cr-infobox.warning strong {
+        color: var(--red)
+      }
+
+.cr-infobox p {
+        font-size: .9rem;
+        line-height: 1.9;
+        opacity: .78;
+        margin-bottom: .75rem;
+        text-align: justify;
+        hyphens: auto
+      }
+
+.cr-infobox p:last-child {
+        margin-bottom: 0
+      }
+
+.cr-infobox strong {
+        color: var(--gold);
+        font-weight: 400
+      }
+
+.cr-infobox-label {
+        font-size: .6rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: .6rem
+      }
+
+.cr-infobox.warning strong {
+        color: var(--red)
+      }
+
+/* ---- STAFF GRID ---- */
       .cr-staff-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -639,7 +1203,7 @@
         margin-top: .5rem
       }
 
-      .cr-staff-card {
+.cr-staff-card {
         border: 1px solid var(--border);
         padding: 1.25rem 1rem 1rem;
         display: flex;
@@ -651,22 +1215,22 @@
         cursor: default
       }
 
-      .cr-staff-card:hover {
+.cr-staff-card:hover {
         border-color: var(--border2);
         background: var(--surface)
       }
 
-      .cr-staff-card a {
+.cr-staff-card a {
         text-decoration: none;
         color: inherit;
         transition: color .15s
       }
 
-      .cr-staff-card a:hover {
+.cr-staff-card a:hover {
         color: var(--gold)
       }
 
-      .cr-staff-avatar {
+.cr-staff-avatar {
         width: 140px;
         height: 140px;
         border-radius: 50%;
@@ -686,7 +1250,7 @@
         line-height: 1
       }
 
-      .cr-staff-avatar img {
+.cr-staff-avatar img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -696,7 +1260,7 @@
         display: block
       }
 
-      .cr-staff-name {
+.cr-staff-name {
         font-size: .82rem;
         letter-spacing: .04em;
         color: var(--ink);
@@ -704,7 +1268,7 @@
         margin-top: .1rem
       }
 
-      .cr-staff-role {
+.cr-staff-role {
         font-size: .56rem;
         letter-spacing: .15em;
         text-transform: uppercase;
@@ -712,14 +1276,14 @@
         opacity: .85
       }
 
-      .cr-staff-desc {
+.cr-staff-desc {
         font-size: .7rem;
         line-height: 1.75;
         opacity: .55;
         margin-top: .1rem
       }
 
-      /* ---- MEMBER HEADER ---- */
+/* ---- MEMBER HEADER ---- */
       .cr-member-header {
         display: flex;
         align-items: flex-end;
@@ -729,7 +1293,7 @@
         border-bottom: 1px solid var(--border)
       }
 
-      .cr-member-num {
+.cr-member-num {
         font-family: var(--display);
         font-size: 5rem;
         color: var(--red);
@@ -738,9 +1302,9 @@
         flex-shrink: 0
       }
 
-      .cr-member-info {}
+.cr-member-info {}
 
-      .cr-member-codename {
+.cr-member-codename {
         font-size: .6rem;
         letter-spacing: .22em;
         text-transform: uppercase;
@@ -749,7 +1313,7 @@
         margin-bottom: .25rem
       }
 
-      .cr-member-name {
+.cr-member-name {
         font-family: var(--display);
         font-size: 2.5rem;
         letter-spacing: .04em;
@@ -758,24 +1322,21 @@
         transition: color .3s
       }
 
-      /* ---- INFOBOX ---- */
+/* ---- INFOBOX ---- */
       .cr-infobox {
         border: 1px solid var(--border);
         border-left: 3px solid var(--gold);
-        padding: 1.1rem 1.4rem;
+        padding: 1.25rem 1.5rem;
         margin-bottom: 2rem;
-        background: var(--surface);
-        font-size: .88rem;
-        line-height: 1.85;
-        opacity: .8
+        background: var(--surface)
       }
 
-      .cr-infobox strong {
+.cr-infobox strong {
         color: var(--gold);
         font-weight: 400
       }
 
-      /* ---- INSPIRED ---- */
+/* ---- INSPIRED ---- */
       .cr-inspired-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -783,17 +1344,17 @@
         margin-top: .5rem
       }
 
-      .cr-inspired-item {
+.cr-inspired-item {
         border: 1px solid var(--border);
         padding: .85rem 1rem;
         transition: border-color .2s
       }
 
-      .cr-inspired-item:hover {
+.cr-inspired-item:hover {
         border-color: var(--border2)
       }
 
-      .cr-inspired-cat {
+.cr-inspired-cat {
         font-size: .55rem;
         letter-spacing: .18em;
         text-transform: uppercase;
@@ -802,82 +1363,13 @@
         margin-bottom: .3rem
       }
 
-      .cr-inspired-name {
+.cr-inspired-name {
         font-size: .88rem;
         letter-spacing: .03em;
         color: var(--ink)
       }
 
-      /* ---- FOOTER ---- */
-      .site-footer {
-        background: var(--surface);
-        border-top: 2px solid var(--red);
-        padding: 2.5rem 3rem;
-        margin-top: auto
-      }
-
-      .site-footer-inner {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 2rem;
-        margin-bottom: 2rem
-      }
-
-      .sf-col-title {
-        font-family: var(--display);
-        font-size: 1.1rem;
-        letter-spacing: .08em;
-        color: var(--ink);
-        margin-bottom: .75rem;
-        transition: color .3s
-      }
-
-      .sf-col p,
-      .sf-col a {
-        font-size: .84rem;
-        line-height: 1.85;
-        opacity: .65;
-        display: block;
-        color: var(--ink);
-        text-decoration: none;
-        transition: opacity .15s
-      }
-
-      .sf-col a:hover {
-        opacity: 1;
-        color: var(--red)
-      }
-
-      .sf-bottom {
-        border-top: 1px solid var(--border);
-        padding-top: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        flex-wrap: wrap
-      }
-
-      .sf-copy {
-        font-size: .68rem;
-        letter-spacing: .12em;
-        opacity: .25;
-        text-transform: uppercase
-      }
-
-      .sf-logo {
-        font-family: var(--display);
-        font-size: 1.6rem;
-        letter-spacing: .08em;
-        color: var(--ink);
-        opacity: .3
-      }
-
-      .sf-logo span {
-        color: var(--red)
-      }
-
-      /* ---- MOBILE ---- */
+/* ---- MOBILE ---- */
       @media(max-width:768px) {
         .nav-links {
           display: none
@@ -981,7 +1473,7 @@
         }
       }
 
-      /* ── WARGANTARA SPLASH (shared) ── */
+/* ── WARGANTARA SPLASH (shared) ── */
       .wg-splash {
         position: fixed;
         inset: 0;
@@ -995,467 +1487,63 @@
         transition: opacity .6s ease
       }
 
-      .wg-splash.hiding {
-        opacity: 0;
-        pointer-events: none
-      }
-
-      .wg-splash.hidden {
-        display: none
-      }
-
-      @keyframes glitch-swap {
-        0% {
-          opacity: 1;
-          transform: skewX(0)
-        }
-
-        10% {
-          opacity: 0;
-          transform: skewX(-4deg) translateX(4px)
-        }
-
-        15% {
-          opacity: 1;
-          transform: skewX(3deg) translateX(-3px)
-        }
-
-        20% {
-          opacity: 0;
-          transform: skewX(0)
-        }
-
-        25% {
-          opacity: 1;
-          transform: skewX(-2deg)
-        }
-
-        30% {
-          opacity: 0
-        }
-
-        35%,
-        100% {
-          opacity: 1;
-          transform: skewX(0)
-        }
-      }
-
-      .splash-box.glitching {
-        animation: glitch-swap .35s steps(1) both
-      }
-
-      .splash-box {
-        max-width: 560px;
-        width: 100%;
-        border: 1px solid var(--border);
-        border-top: 2px solid var(--red);
-        padding: 3rem 2.5rem 2.5rem;
-        position: relative;
-        background: var(--bg);
-        overflow: hidden
-      }
-
-      .splash-pre {
-        font-family: 'Space Mono', monospace;
-        font-size: .6rem;
-        letter-spacing: .28em;
-        color: var(--red);
-        text-transform: uppercase;
-        margin-bottom: 1.5rem
-      }
-
-      .splash-quote {
+.splash-quote {
         font-family: 'Noto Serif Display', serif;
         font-style: italic;
-        font-size: clamp(1.05rem, 3vw, 1.35rem);
+        font-size: clamp(.9rem, 2.5vw, 1.15rem);
         line-height: 1.75;
         color: var(--ink);
         margin-bottom: .65rem
       }
 
-      .splash-attr {
-        font-family: 'Space Mono', monospace;
-        font-size: .62rem;
-        letter-spacing: .1em;
-        color: var(--muted);
-        margin-bottom: 2rem
-      }
-
-      .splash-rule {
-        width: 2rem;
-        height: 1px;
-        background: var(--border);
-        margin-bottom: 2rem
-      }
-
-      .splash-disclaimer {
-        font-family: 'Space Mono', monospace;
-        font-size: .78rem;
-        line-height: 1.9;
-        color: var(--ink2);
-        opacity: .75;
-        margin-bottom: 2rem
-      }
-
-      .splash-disclaimer strong {
-        color: var(--gold);
-        font-weight: 400
-      }
-
-      .splash-actions {
-        display: flex;
-        gap: .75rem;
-        align-items: center;
-        flex-wrap: wrap
-      }
-
-      .splash-btn-enter {
-        font-family: 'Space Mono', monospace;
-        font-size: .72rem;
-        letter-spacing: .14em;
-        text-transform: uppercase;
-        padding: .7rem 1.5rem;
-        background: var(--red);
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        transition: background .15s;
-        min-height: 40px
-      }
-
-      .splash-btn-enter:hover {
-        background: var(--red2)
-      }
-
-      .splash-btn-deny {
-        font-family: 'Space Mono', monospace;
-        font-size: .68rem;
-        letter-spacing: .1em;
-        text-transform: uppercase;
-        color: var(--muted);
-        background: none;
-        border: 1px solid var(--border);
-        cursor: pointer;
-        padding: .6rem 1rem;
-        transition: color .15s, border-color .15s;
-        min-height: 40px
-      }
-
-      .splash-btn-deny:hover {
-        color: var(--ink);
-        border-color: var(--muted)
-      }
-
-      .splash-privacy {
-        font-family: 'Space Mono', monospace;
-        font-size: .58rem;
-        letter-spacing: .06em;
-        color: var(--border2);
-        margin-top: 1.25rem;
-        line-height: 1.7
-      }
-
-      .splash-corner {
-        position: absolute;
-        bottom: 1rem;
-        right: 1.5rem;
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 4.5rem;
-        color: var(--red);
-        opacity: .04;
-        line-height: 1;
-        pointer-events: none
-      }
-
-      .splash-step {
+.splash-step {
         transition: opacity .35s ease;
       }
 
-      .splash-step.fading {
+.splash-step.fading {
         opacity: 0;
         pointer-events: none;
       }
 
-      .splash-theme-step {
+.splash-theme-step {
         display: none;
         opacity: 0;
         transition: opacity .35s ease;
       }
 
-      .splash-theme-step.active {
+.splash-theme-step.active {
         display: block;
       }
 
-      .splash-theme-step.visible {
+.splash-theme-step.visible {
         opacity: 1;
       }
 
-      .splash-theme-choices {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: .75rem;
-        margin-bottom: 1.5rem
-      }
-
-      .splash-theme-btn {
-        font-family: 'Space Mono', monospace;
-        font-size: .7rem;
-        letter-spacing: .12em;
-        text-transform: uppercase;
-        padding: 1.1rem 1rem;
-        border: 1px solid #2a2a2a;
-        background: none;
-        color: #888;
-        cursor: pointer;
-        transition: all .15s;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: .6rem
-      }
-
-      .splash-theme-btn .t-icon {
-        font-size: 1.4rem;
-        opacity: .5;
-        transition: opacity .15s
-      }
-
-      .splash-theme-btn:hover {
-        border-color: #b89a3e;
-        color: #f0ece3
-      }
-
-      .splash-theme-btn:hover .t-icon {
-        opacity: 1
-      }
-
-      .splash-theme-btn.selected {
+.splash-theme-btn.selected {
         border-color: #c0251a;
         color: #f0ece3;
         background: rgba(192, 37, 26, .08)
       }
 
-      .splash-theme-btn.selected .t-icon {
-        opacity: 1
-      }
-
-      .splash-theme-confirm {
-        font-family: 'Space Mono', monospace;
-        font-size: .72rem;
-        letter-spacing: .14em;
-        text-transform: uppercase;
-        padding: .7rem 1.5rem;
-        background: #c0251a;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        transition: background .15s, opacity .15s;
-        width: 100%;
-        min-height: 40px;
-        opacity: .35;
-        pointer-events: none
-      }
-
-      .splash-theme-confirm.ready {
-        opacity: 1;
-        pointer-events: auto
-      }
-
-      .splash-theme-confirm.ready:hover {
-        background: #e02a1e
-      }
-
-      .deny-countdown {
-        font-family: 'Space Mono', monospace;
-        font-size: .72rem;
-        letter-spacing: .1em;
-        color: #3a3a3a;
-        margin-top: 1.5rem;
-        transition: color .3s
-      }
-
-      .deny-countdown.urgent {
-        color: #7a3030
-      }
-
-      @media(max-width:600px) {
+@media(max-width:600px) {
         .splash-box {
           padding: 2rem 1.5rem
         }
       }
-    
-      /* NAV DROPDOWN */
-      .nav-links li.has-drop {
-        position: relative
-      }
-      .nav-links li.has-drop > a {
-        display: flex !important;
-        align-items: center;
-        gap: .35rem
-      }
-      .nav-links li.has-drop > a::after {
-        content: '';
-        width: 5px;
-        height: 5px;
-        border-right: 1.5px solid currentColor;
-        border-bottom: 1.5px solid currentColor;
-        transform: rotate(45deg) translateY(-1px);
-        opacity: .6;
-        transition: transform .15s
-      }
-      .nav-links li.has-drop:hover > a::after {
-        transform: rotate(-135deg) translateY(-2px)
-      }
-      .nav-drop {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        min-width: 180px;
-        background: var(--bg);
-        border: 1px solid var(--border);
-        border-top: 2px solid var(--red);
-        visibility: hidden;
-        opacity: 0;
-        pointer-events: none;
-        z-index: 9999;
-        box-shadow: 0 4px 16px rgba(0,0,0,.18);
-        transition: opacity .15s, visibility .15s
-      }
-      .nav-links li.has-drop:hover .nav-drop {
-        visibility: visible;
-        opacity: 1;
-        pointer-events: auto
-      }
-      .nav-drop a {
-        display: block !important;
-        padding: .65rem 1rem !important;
-        height: auto !important;
-        line-height: 1.4 !important;
-        font-size: .75rem !important;
-        letter-spacing: .1em;
-        text-transform: uppercase;
-        text-decoration: none;
-        color: var(--ink) !important;
-        opacity: .65 !important;
-        border-bottom: 1px solid var(--border) !important;
-        border-left: none !important;
-        transition: all .12s !important;
-        white-space: nowrap
-      }
-      .nav-drop a:last-child {
-        border-bottom: none !important
-      }
-      .nav-drop a:hover, .nav-drop a.active {
-        opacity: 1 !important;
-        background: var(--red) !important;
-        color: #fff !important
+      /* ---- DISCLAIMER / GENERAL PROSE SPACING (fix: jarak teks ke box) ---- */
+      .cr-panel > p,
+      .cr-group > p {
+        font-size: .95rem;
+        line-height: 1.9;
+        opacity: .8;
+        margin-bottom: 1.5rem;
+        text-align: justify;
+        hyphens: auto
       }
 
-      /* MOBILE DRAWER SUB */
-      .mobile-drawer ul li.has-msub > a {
-        justify-content: space-between
-      }
-      .mobile-drawer ul li.has-msub > a::after {
-        content: '›';
-        font-size: 1.1rem;
-        opacity: .4
-      }
-      .mobile-sub {
-        display: none;
-        border-top: 1px solid var(--border)
-      }
-      .mobile-sub.open {
-        display: block
-      }
-      .mobile-sub a {
-        padding-left: 2.75rem !important;
-        background: var(--surface) !important;
-        font-size: .82rem !important;
-        opacity: .55 !important
-      }
-      .mobile-sub a:hover, .mobile-sub a.active {
-        opacity: 1 !important;
-        background: var(--red) !important;
-        color: #fff !important
-      }
-
-    
-      /* contact box */
-      .sf-contact-box {
-        margin-top: .65rem;
-        border: 1px solid var(--border2);
-        border-top: 2px solid var(--red);
-        padding: 1rem 1rem .85rem
-      }
-      .sf-contact-box-label {
-        font-size: .6rem;
-        letter-spacing: .22em;
-        text-transform: uppercase;
-        color: var(--red);
-        margin-bottom: .5rem;
-        opacity: 1
-      }
-      .sf-contact-box-body {
-        font-size: .8rem;
-        line-height: 1.75;
-        opacity: .65;
-        margin-bottom: .85rem
-      }
-      .sf-contact-cta {
-        display: block;
-        width: 100%;
-        padding: .55rem 1rem;
-        font-family: var(--mono);
-        font-size: .7rem;
-        letter-spacing: .13em;
-        text-transform: uppercase;
-        text-align: center;
-        background: var(--red);
-        color: #fff !important;
-        opacity: 1 !important;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        transition: background .15s
-      }
-      .sf-contact-cta:hover {
-        background: #a01e14
-      }
-
-          /* ── SOCIAL PILLS ── */
-      .sf-socials {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        gap: .5rem;
-        margin-top: .85rem
-      }
-      .sf-social-pill {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 52px !important;
-        height: 52px !important;
-        border: 1px solid var(--border2);
-        color: var(--ink) !important;
-        opacity: .45 !important;
-        text-decoration: none;
-        transition: all .15s;
-        cursor: pointer;
-        flex-shrink: 0 !important
-      }
-      .sf-social-pill i {
-        font-size: 1.7rem
-      }
-      a.sf-social-pill:hover {
-        border-color: var(--ink);
-        opacity: 1 !important
-      }
-      .sf-social-pill--disabled {
-        opacity: .18 !important;
-        cursor: not-allowed !important;
-        border-style: dashed
+      .cr-panel > p:last-child,
+      .cr-group > p:last-child {
+        margin-bottom: 0
       }
     </style>
 
@@ -1579,7 +1667,9 @@
     </div>
 
     <nav>
-      <a class="nav-logo" href="index.html"><img class="nav-logo-img wgtr-logo" data-light="assets/og/wgtr-small-light.png" data-dark="assets/og/wgtr-small-dark.png" src="assets/og/wgtr-small-light.png" alt="WARGANTARA"></a>
+      <a class="nav-logo" href="index.html">
+  <img class="nav-logo-img wgtr-logo-light" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+  <img class="nav-logo-img wgtr-logo-dark"  src="assets/og/wgtr-small-dark.png"  alt="WARGANTARA"></a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="members.html">Members</a></li>
@@ -1667,13 +1757,13 @@
           <div class="cr-rule"></div>
 
           <div class="cr-infobox">
-            Halaman ini mencatat semua kontribusi yang membangun Wargantara secara keseluruhan—kepemilikan IP, pengembangan website, penulisan konten, hingga inspirasi yang membentuk dunia ini.<br><br>
-            <strong>// Tentang Kami</strong>—Wargantara adalah komunitas indie dan UMKM lokal yang bergerak secara mandiri. Semua yang ada di sini dibangun dari nol oleh orang-orang yang terlalu cinta sama proyeknya sendiri.
+            <p>Halaman ini mencatat semua kontribusi yang membangun Wargantara secara keseluruhan—kepemilikan IP, pengembangan website, penulisan konten, hingga inspirasi yang membentuk dunia ini.</p>
+            <p><strong>// Tentang Kami</strong>—Wargantara adalah komunitas indie dan UMKM lokal yang bergerak secara mandiri. Semua yang ada di sini dibangun dari nol oleh orang-orang yang terlalu cinta sama proyeknya sendiri.</p>
           </div>
 
           <!-- ATTRIBUTION TERTINGGI -->
-          <div class="cr-special-thanks" style="border-left-color: var(--gold); background: var(--gold-dim); margin-bottom: 2.5rem;">
-            <div class="cr-special-thanks-label" style="color: var(--gold);">// Kepemilikan Sejati</div>
+          <div class="cr-special-thanks">
+            <div class="cr-special-thanks-label">// Kepemilikan Sejati</div>
             <div class="cr-special-thanks-name">Tuhan Maha Segalanya</div>
             <div class="cr-special-thanks-desc">Ini semua milik Allah. Dunia ini, lore-nya, orangnya, idenya—semuanya. Kami hanya meminjam IP-nya aja.</div>
           </div>
@@ -1843,30 +1933,30 @@
           <div class="cr-title">DISCLAIMER</div>
           <div class="cr-rule"></div>
 
-          <p style="font-family:var(--mono);font-size:.88rem;line-height:1.85;color:var(--ink2);margin-bottom:1.5rem">Wargantara adalah semesta fiksi. Semua karakter, narasi, entitas, dan kejadian yang ada di dalamnya—termasuk seluruh lore yang dibangun di atas fondasi ini—<strong>ditampilkan sebagai karya fiksi</strong> dan tidak dimaksudkan sebagai pernyataan faktual, klaim kebenaran, maupun representasi resmi atas apapun di luar universe ini.</p>
+          <p>Wargantara adalah semesta fiksi. Semua karakter, narasi, entitas, dan kejadian yang ada di dalamnya—termasuk seluruh lore yang dibangun di atas fondasi ini—<strong>ditampilkan sebagai karya fiksi</strong> dan tidak dimaksudkan sebagai pernyataan faktual, klaim kebenaran, maupun representasi resmi atas apapun di luar universe ini.</p>
 
           <div class="cr-infobox">
             <div class="cr-infobox-label">// Tentang Sumber Inspirasi</div>
-            <p style="font-family:var(--mono);font-size:.83rem;line-height:1.85;color:var(--ink2);margin-bottom:.75rem">Kami menyadari bahwa sebagian elemen dalam lore ini terinspirasi dari sesuatu yang—bagi sebagian orang—bukan sekadar cerita. Kami tidak akan menjelaskan lebih jauh dari yang sudah tertulis, dan itu bukan karena kami tidak tahu. <strong>Justru karena kami tahu</strong>, kami memilih untuk tidak menyebutnya gamblang.</p>
-            <p style="font-family:var(--mono);font-size:.83rem;line-height:1.85;color:var(--ink2)">Nama-nama, hierarki, dan detail yang mungkin terasa familiar telah <strong>disamarkan, diubah, atau disensor secara sadar</strong>—bukan karena kelalaian, tapi karena ada pertimbangan yang matang di balik setiap pilihan itu. Apa yang tertulis di sini adalah apa yang memang boleh tertulis.</p>
+            <p>Kami menyadari bahwa sebagian elemen dalam lore ini terinspirasi dari sesuatu yang—bagi sebagian orang—bukan sekadar cerita. Kami tidak akan menjelaskan lebih jauh dari yang sudah tertulis, dan itu bukan karena kami tidak tahu. <strong>Justru karena kami tahu</strong>, kami memilih untuk tidak menyebutnya gamblang.</p>
+            <p>Nama-nama, hierarki, dan detail yang mungkin terasa familiar telah <strong>disamarkan, diubah, atau disensor secara sadar</strong>—bukan karena kelalaian, tapi karena ada pertimbangan yang matang di balik setiap pilihan itu. Apa yang tertulis di sini adalah apa yang memang boleh tertulis.</p>
           </div>
 
           <div class="cr-group">
             <div class="cr-group-title">// Tidak Ada Afiliasi</div>
-            <p style="font-family:var(--mono);font-size:.85rem;line-height:1.85;color:var(--ink2)">Wargantara <strong>tidak berafiliasi, tidak mewakili, dan tidak berbicara atas nama</strong> individu, organisasi, institusi, kelompok keagamaan, maupun entitas manapun—baik yang namanya muncul di sini maupun yang tidak. Segala kemiripan dengan nama atau narasi yang ada di luar universe ini adalah hasil dari sensoran yang disengaja—bukan pengakuan, bukan klaim, dan bukan undangan untuk menarik kesimpulan lebih jauh.</p>
+            <p>Wargantara <strong>tidak berafiliasi, tidak mewakili, dan tidak berbicara atas nama</strong> individu, organisasi, institusi, kelompok keagamaan, maupun entitas manapun—baik yang namanya muncul di sini maupun yang tidak. Segala kemiripan dengan nama atau narasi yang ada di luar universe ini adalah hasil dari sensoran yang disengaja—bukan pengakuan, bukan klaim, dan bukan undangan untuk menarik kesimpulan lebih jauh.</p>
           </div>
 
           <div class="cr-group">
             <div class="cr-group-title">// Persona &amp; Identitas</div>
-            <p style="font-family:var(--mono);font-size:.85rem;line-height:1.85;color:var(--ink2)">Seluruh talent Wargantara tampil dalam kapasitas sebagai <strong>karakter dalam semesta fiksi ini</strong>. Segala yang disampaikan dalam konteks tersebut dipahami sebagai bagian dari representasi karakter—bukan pernyataan pribadi dari individu di balik layar, kecuali dinyatakan secara eksplisit.</p>
+            <p>Seluruh talent Wargantara tampil dalam kapasitas sebagai <strong>karakter dalam semesta fiksi ini</strong>. Segala yang disampaikan dalam konteks tersebut dipahami sebagai bagian dari representasi karakter—bukan pernyataan pribadi dari individu di balik layar, kecuali dinyatakan secara eksplisit.</p>
           </div>
 
           <div class="cr-infobox">
             <div class="cr-infobox-label">// Konten Fan &amp; Karya Turunan</div>
-            <p style="font-family:var(--mono);font-size:.83rem;line-height:1.85;color:var(--ink2)">Karya fan, OC, dan konten turunan tunduk pada guidelines yang berlaku. Wargantara <strong>tidak bertanggung jawab</strong> atas konten yang dibuat oleh pihak ketiga di luar kendali resmi tim.</p>
+            <p>Karya fan, OC, dan konten turunan tunduk pada guidelines yang berlaku. Wargantara <strong>tidak bertanggung jawab</strong> atas konten yang dibuat oleh pihak ketiga di luar kendali resmi tim.</p>
           </div>
 
-          <p style="font-family:var(--mono);font-size:.78rem;line-height:1.85;color:var(--muted);margin-top:1.5rem">Dengan memasuki dan berpartisipasi dalam ekosistem Wargantara, kamu menyatakan memahami bahwa semua yang ada di sini adalah fiksi yang dibangun dengan kesadaran penuh—dan tidak ada yang perlu dicari di baliknya selain cerita yang memang sudah ada.</p>
+          <p>Dengan memasuki dan berpartisipasi dalam ekosistem Wargantara, kamu menyatakan memahami bahwa semua yang ada di sini adalah fiksi yang dibangun dengan kesadaran penuh—dan tidak ada yang perlu dicari di baliknya selain cerita yang memang sudah ada.</p>
         </div><!-- /panel-disclaimer -->
         <div class="cr-panel" id="panel-soren">
           <div class="cr-eyebrow">// Member—01</div>
@@ -1992,40 +2082,40 @@
           <div class="cr-eyebrow">// Member—03</div>
           <div class="cr-title">IDENTITY<br>REDACTED</div>
           <div class="cr-rule"></div>
-          <div class="cr-infobox">
-            <strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.
+          <div class="cr-infobox warning">
+            <p><strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.</p>
           </div>
         </div>
         <div class="cr-panel" id="panel-igni">
           <div class="cr-eyebrow">// Member—05</div>
           <div class="cr-title">IDENTITY<br>REDACTED</div>
           <div class="cr-rule"></div>
-          <div class="cr-infobox">
-            <strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.
+          <div class="cr-infobox warning">
+            <p><strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.</p>
           </div>
         </div>
         <div class="cr-panel" id="panel-rui">
           <div class="cr-eyebrow">// Member—02</div>
           <div class="cr-title">IDENTITY<br>REDACTED</div>
           <div class="cr-rule"></div>
-          <div class="cr-infobox">
-            <strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.
+          <div class="cr-infobox warning">
+            <p><strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.</p>
           </div>
         </div>
         <div class="cr-panel" id="panel-arda">
           <div class="cr-eyebrow">// Member—06</div>
           <div class="cr-title">IDENTITY<br>REDACTED</div>
           <div class="cr-rule"></div>
-          <div class="cr-infobox">
-            <strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.
+          <div class="cr-infobox warning">
+            <p><strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.</p>
           </div>
         </div>
         <div class="cr-panel" id="panel-noah">
           <div class="cr-eyebrow">// Member—04</div>
           <div class="cr-title">IDENTITY<br>REDACTED</div>
           <div class="cr-rule"></div>
-          <div class="cr-infobox">
-            <strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.
+          <div class="cr-infobox warning">
+            <p><strong>// AKSES TERBATAS</strong>—Data kredit untuk entitas ini belum dapat dipublikasikan. Informasi akan tersedia setelah proses debut selesai.</p>
           </div>
         </div>
 
@@ -2035,7 +2125,8 @@
             <footer class="site-footer">
       <div class="site-footer-inner">
         <div class="sf-col">
-          <img class="sf-col-title-img wgtr-logo" data-light="assets/og/wgtr-small-light.png" data-dark="assets/og/wgtr-small-dark.png" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+          <img class="sf-col-title-img wgtr-logo-light" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+          <img class="sf-col-title-img wgtr-logo-dark"  src="assets/og/wgtr-small-dark.png"  alt="WARGANTARA">
           <p>Para entitas yang hidup di ambang—tidak sepenuhnya milik dunia manusia, tidak juga milik dunia astral.</p>
           <p style="margin-top:.6rem">Status Lore: <span style="color:var(--gold);opacity:1">Open Sandbox</span></p>
         </div>
@@ -2066,7 +2157,8 @@
         </div>
       </div>
       <div class="sf-bottom">
-        <img class="sf-logo-img wgtr-logo" data-light="assets/og/wgtr-small-light.png" data-dark="assets/og/wgtr-small-dark.png" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+        <img class="sf-logo-img wgtr-logo-light" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+        <img class="sf-logo-img wgtr-logo-dark"  src="assets/og/wgtr-small-dark.png"  alt="WARGANTARA">
         <span class="sf-copy">© Wargantara VTuber Group · Est. ???? · All lore is fiction</span>
         <span class="sf-copy">Lintas Batas</span>
       </div>
@@ -2149,10 +2241,7 @@
           ml.textContent = isDark ? 'Day Mode' : 'Night Mode';
         }
         // swap logo WARGANTARA sesuai tema
-        document.querySelectorAll('.wgtr-logo').forEach(function(el) {
-          var src = isDark ? el.dataset.dark : el.dataset.light;
-          if (src) el.src = src;
-        });
+        // logo swap kini via CSS [data-theme] → .wgtr-logo-light/.wgtr-logo-dark, tanpa JS src swap
       }
 
       function toggleTheme() {
@@ -2225,7 +2314,7 @@
         box.classList.add('glitching');
         setTimeout(function() {
           box.innerHTML = '<div class="splash-pre">// Wargantara &middot; Akses Ditolak</div>' +
-            '<div class="splash-quote" style="font-size:clamp(1.3rem,3.5vw,1.75rem)">&ldquo;... I see.&rdquo;</div>' +
+            '<div class="splash-quote" style="font-size:clamp(1.05rem,3vw,1.35rem)">&ldquo;... I see.&rdquo;</div>' +
             '<div class="splash-attr" style="margin-bottom:2rem">&mdash;</div>' +
             '<div class="splash-disclaimer" style="opacity:.6">Tidak ada yang bisa kami lakukan untuk melanjutkan.<br><br>Dunia ini bukan untukmu &mdash; dan itu tidak apa-apa.</div>' +
             '<div class="deny-countdown" id="deny-countdown">Halaman akan ditutup dalam <span id="deny-secs">5</span> detik...</div>' +

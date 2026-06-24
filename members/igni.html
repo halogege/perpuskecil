@@ -6,7 +6,15 @@
     <script>
       (function() {
         var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
-        if (m) document.documentElement.setAttribute('data-theme', m[1] === 'dark' ? 'dark' : 'light');
+        var theme;
+        if (m) {
+          theme = m[1] === 'dark' ? 'dark' : 'light';
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          theme = 'dark';
+        } else {
+          theme = 'light';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
       @import url('https://solrainha.github.io/saturnicons/saturnicons.css');
-      @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap');
       @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
 
       * {
@@ -75,7 +83,7 @@
       body {
         background: var(--bg);
         color: var(--ink);
-        font-family: var(--mono);
+        font-family: 'Inter', sans-serif;
         min-height: 100vh;
         font-size: 16px;
         transition: background .3s, color .3s;
@@ -291,7 +299,7 @@
         opacity: .04;
         pointer-events: none;
         letter-spacing: -.01em;
- 
+
       }
 
       .hero-eyebrow {
@@ -420,7 +428,7 @@
         font-size: 16rem;
         color: var(--red);
         opacity: .1;
- 
+
         transition: opacity .3s;
         position: relative;
         z-index: 1
@@ -962,7 +970,7 @@
 
       .lore-spoiler {
         cursor: pointer;
- 
+
       }
 
       .lore-spoiler-content {
@@ -1351,10 +1359,25 @@
         font-size: 1.6rem;
         letter-spacing: .08em;
         color: var(--ink);
+        opacity: .3;
+        display: inline-flex;
+        align-items: center
+      }
+
+      .sf-logo-img {
+        height: 26px;
+        width: auto;
         opacity: .3
       }
 
-      .sf-logo span {
+      .sf-col-title-img {
+        display: block;
+        height: 60px;
+        width: auto;
+        margin-bottom: .75rem
+      }
+
+      .sf-logo-text span {
         color: var(--red)
       }
 
@@ -1889,7 +1912,7 @@
 
       .thumb-ph {
         width: 100%;
-        aspect-ratio: 4/5;
+        aspect-ratio: 2/1;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1901,7 +1924,7 @@
         font-size: 6rem;
         color: var(--red);
         opacity: .1;
- 
+
       }
 
       .thumb-overlay {
@@ -2257,13 +2280,21 @@
         position: fixed;
         inset: 0;
         background: var(--bg);
-        z-index: 9999;
-        display: flex;
+        z-index: 9998;
+        display: none;
         align-items: center;
         justify-content: center;
         padding: 2rem;
-        opacity: 1;
+        opacity: 0;
         transition: opacity .6s ease
+      }
+
+      .wg-splash.ready {
+        display: flex
+      }
+
+      .wg-splash.visible {
+        opacity: 1
       }
 
       .wg-splash.hiding {
@@ -2361,7 +2392,7 @@
       }
 
       .splash-disclaimer {
-        font-family: 'Space Mono', monospace;
+        font-family: 'Inter', sans-serif;
         font-size: .78rem;
         line-height: 1.9;
         color: var(--ink2);
@@ -2370,7 +2401,7 @@
       }
 
       .splash-disclaimer strong {
-        color: var(--gold2);
+        color: var(--gold);
         font-weight: 400
       }
 
@@ -2504,11 +2535,18 @@
       .splash-theme-btn.selected {
         border-color: var(--red);
         color: var(--ink);
-        background: var(--red-dim)
+        background: rgba(192, 37, 26, .08)
       }
 
       .splash-theme-btn.selected .t-icon {
         opacity: 1
+      }
+
+      [data-theme="light"] .splash-theme-btn {
+        color: var(--ink2)
+      }
+      [data-theme="light"] .splash-theme-btn .t-icon {
+        opacity: .7
       }
 
       .splash-theme-confirm {
@@ -2541,18 +2579,45 @@
         font-family: 'Space Mono', monospace;
         font-size: .72rem;
         letter-spacing: .1em;
-        color: var(--border2);
+        color: #3a3a3a;
         margin-top: 1.5rem;
         transition: color .3s
       }
 
       .deny-countdown.urgent {
-        color: var(--red)
+        color: #7a3030
       }
 
       @media(max-width:600px) {
         .splash-box {
-          padding: 2rem 1.5rem
+          padding: 1.5rem 1.25rem 1.25rem
+        }
+        .splash-pre {
+          margin-bottom: 1rem
+        }
+        .splash-quote {
+          margin-bottom: .5rem
+        }
+        .splash-attr {
+          margin-bottom: 1.25rem
+        }
+        .splash-rule {
+          margin-bottom: 1.25rem
+        }
+        .splash-disclaimer {
+          font-size: .75rem;
+          line-height: 1.75;
+          margin-bottom: 1.25rem
+        }
+        .splash-privacy {
+          margin-top: .85rem
+        }
+        .splash-theme-choices {
+          gap: .5rem;
+          margin-bottom: 1rem
+        }
+        .splash-theme-btn {
+          padding: .85rem .75rem
         }
       }
     
@@ -2684,6 +2749,93 @@
         cursor: not-allowed !important;
         border-style: dashed
       }
+
+      /* ---- CLASSIFIED WARNING MODAL ---- */
+      .cl-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.65);
+        z-index: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .2s
+      }
+      .cl-modal-overlay.open {
+        opacity: 1;
+        pointer-events: auto
+      }
+      .cl-modal {
+        max-width: 480px;
+        width: 100%;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--red);
+        padding: 2rem 1.75rem 1.75rem;
+        position: relative;
+        transform: translateY(8px);
+        transition: transform .2s
+      }
+      .cl-modal-overlay.open .cl-modal {
+        transform: translateY(0)
+      }
+      .cl-modal-pre {
+        font-size: .6rem;
+        letter-spacing: .28em;
+        color: var(--red);
+        text-transform: uppercase;
+        margin-bottom: 1rem
+      }
+      .cl-modal-title {
+        font-family: var(--display);
+        font-size: 1.6rem;
+        letter-spacing: .06em;
+        color: var(--ink);
+        margin-bottom: .85rem;
+        transition: color .3s
+      }
+      .cl-modal-body {
+        font-size: .85rem;
+        line-height: 1.9;
+        opacity: .75;
+        margin-bottom: 1.5rem
+      }
+      .cl-modal-actions {
+        display: flex;
+        gap: .65rem;
+        flex-wrap: wrap
+      }
+      .cl-modal-confirm {
+        font-family: var(--mono);
+        font-size: .7rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .65rem 1.25rem;
+        background: var(--red);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background .15s;
+        min-height: 40px
+      }
+      .cl-modal-confirm:hover { background: #a01e14 }
+      .cl-modal-cancel {
+        font-family: var(--mono);
+        font-size: .7rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        padding: .65rem 1.25rem;
+        background: none;
+        color: var(--muted);
+        border: 1px solid var(--border2);
+        cursor: pointer;
+        transition: all .15s;
+        min-height: 40px
+      }
+      .cl-modal-cancel:hover { color: var(--ink); border-color: var(--muted) }
     </style>
 
     <meta name="description" content="Wargantara adalah grup VTuber Indonesia bertemakan entitas astral dan sandbox lore universe.">
@@ -2691,11 +2843,11 @@
     <meta property="og:description" content="Wargantara—grup VTuber Indonesia bertemakan entitas astral. Karena cara terbaik menyimpan rahasia adalah menjadikannya fiksi—dan fiksi ini terbuka untuk semua yang ingin ikut membangunnya.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wgtr1.netlify.app/members/soren.html">
-    <meta property="og:image" content="https://wgtr1.netlify.app/assets/og/default.png">
+    <meta property="og:image" content="https://wgtr.netlify.app/assets/og/default.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://wgtr1.netlify.app/assets/og/default.png">
+    <meta name="twitter:image" content="https://wgtr.netlify.app/assets/og/default.png">
 
     <script src="/assets/js/head-common.js"></script>
 
@@ -2761,10 +2913,7 @@
           console.log(_el);
           console.clear();
         }, 1000);
-        // 6. Disable text selection
-        var _style = document.createElement("style");
-        _style.textContent = "img { pointer-events:auto!important; }";
-        document.head.appendChild(_style);
+        // 6. Text selection: allowed
       })();
     </script>
   </head>
@@ -2812,7 +2961,8 @@
 
     <!-- NAV -->
     <nav>
-      <a class="nav-logo" href="../index.html"><img class="nav-logo-img wgtr-logo" data-light="../assets/og/wgtr-small-light.png" data-dark="../assets/og/wgtr-small-dark.png" src="../assets/og/wgtr-small-light.png" alt="WARGANTARA"></a>
+      <a class="nav-logo" href="../index.html">
+  <img class="nav-logo-img wgtr-logo" data-light="../assets/og/wgtr-small-light.png" data-dark="../assets/og/wgtr-small-dark.png" src="../assets/og/wgtr-small-light.png" alt="WARGANTARA"></a>
       <ul class="nav-links">
         <li><a href="../index.html">Home</a></li>
         <li><a class="active" href="../members.html">Members</a></li>
@@ -3463,10 +3613,7 @@
           ml.textContent = isDark ? 'Day Mode' : 'Night Mode';
         }
         // swap logo WARGANTARA sesuai tema
-        document.querySelectorAll('.wgtr-logo').forEach(function(el) {
-          var src = isDark ? el.dataset.dark : el.dataset.light;
-          if (src) el.src = src;
-        });
+        // logo swap via CSS [data-theme] → .wgtr-logo-light/.wgtr-logo-dark
       }
 
       function toggleTheme() {
@@ -3806,5 +3953,6 @@
       })();
     </script>
   </body>
+
 
 </html>
