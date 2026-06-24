@@ -1006,9 +1006,13 @@ a.sf-social-pill:hover {
         font-size: 1.2rem;
         letter-spacing: .2em;
         text-transform: uppercase;
-        color: var(--red);
+        color: var(--gold);
         margin-bottom: .5rem;
         font-weight: 700
+      }
+
+.gl-callout.warning .gl-callout-title {
+        color: var(--red)
       }
 
 .gl-callout p {
@@ -1231,10 +1235,15 @@ a.sf-social-pill:hover {
 
 /* ---- CALLOUT BOXES ---- */
       .gl-callout {
-        border-left: 3px solid var(--red);
-        background: rgba(192,37,26,.04);
+        border-left: 3px solid var(--gold);
+        background: rgba(154, 126, 42, .05);
         padding: 1rem 1.25rem;
         margin: 1.5rem 0
+      }
+
+.gl-callout.warning {
+        border-left-color: var(--red);
+        background: rgba(192, 37, 26, .04)
       }
 
 .gl-highlight {
@@ -1805,12 +1814,12 @@ a.sf-social-pill:hover {
             <li><span><strong>Jokes atau komentar berbasis identitas</strong>—menyangkut etnisitas, warna kulit, kondisi fisik/disabilitas, agama, suku, ras, atau atribut personal lainnya—tidak diperbolehkan, baik ditujukan kepada talent maupun kolaborator yang hadir. Ini berlaku untuk semua pihak yang terlibat dalam collab, bukan hanya talent utama.</span></li>
           </ul>
 
-          <div class="gl-callout">
+          <div class="gl-callout warning">
             <div class="gl-callout-title">⚠ Standar Bersama</div>
             <p>Apabila collab melibatkan talent dengan ketentuan yang berbeda, <strong>standar yang lebih ketat selalu menjadi acuan</strong>. Misalnya: jika talent A mengizinkan komentar romantis tapi talent B tidak, maka komentar romantis dilarang selama collab tersebut berlangsung—untuk kedua talent.</p>
           </div>
 
-          <div class="gl-callout">
+          <div class="gl-callout warning">
             <div class="gl-callout-title">// Etika Antar Talent</div>
             <p>Ketentuan mengenai jokes dan komentar berbasis identitas berlaku pula <strong>antar sesama talent Wargantara</strong> selama collab berlangsung. Humor yang menyinggung etnisitas, warna kulit, kondisi fisik/disabilitas, agama, suku, ras, atau atribut personal lainnya dari talent lain yang hadir <strong>tidak diperbolehkan</strong>—terlepas dari kedekatan hubungan antar talent yang bersangkutan.</p>
             <p style="margin-top:.65rem">Talent Wargantara yang ditemukan melakukan pelanggaran terhadap ketentuan ini dapat dikenakan <strong>sanksi oleh tim</strong>, yang bentuk dan beratnya ditentukan berdasarkan pertimbangan internal.</p>
@@ -1968,7 +1977,7 @@ a.sf-social-pill:hover {
             <li><span><strong>Kolaborasi dengan pihak yang tercatat melanggar guidelines</strong> — tim berhak menolak atau membatalkan kolaborasi dengan pihak yang pernah atau sedang melanggar ketentuan komunitas</span></li>
           </ul>
 
-          <div class="gl-callout">
+          <div class="gl-callout warning">
             <div class="gl-callout-title">// Konten yang Tidak Diperbolehkan dalam Konteks Collab</div>
             <ul class="gl-list" style="margin:.5rem 0 0">
               <li><span>Konten yang <strong>mengekspos atau berspekulasi tentang identitas dunia nyata</strong> talent dalam konteks apapun</span></li>
