@@ -992,7 +992,8 @@
         'p{margin-bottom:.75em;}strong{font-weight:bold;}em{font-style:italic;}' +
         's{text-decoration:line-through;}</style>' +
         '</head><body>' + tmp.innerHTML + '</body></html>';
-      triggerDownload('rte-output.doc', wordHtml, 'application/msword');
+      var today = new Date(); var dd = String(today.getDate()).padStart(2,'0'); var mm = String(today.getMonth()+1).padStart(2,'0'); var yyyy = today.getFullYear(); var dateStr = yyyy + mm + dd;
+      triggerDownload('rte-output-' + dateStr + '.docx', wordHtml, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
     } else {
       var html = document.getElementById('output-code').textContent;
       var tmp2 = document.createElement('div');
@@ -1236,7 +1237,7 @@
     } else {
       codeEl.style.display = 'none';
       richEl.style.display = '';
-      if (dlBtn) dlBtn.textContent = 'Download .doc';
+      if (dlBtn) dlBtn.textContent = 'Download .docx';
       updateRichPreview();
     }
   }
