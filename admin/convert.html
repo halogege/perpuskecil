@@ -421,150 +421,7 @@
     font-family: var(--mono);
   }
 
-  /* ── SAVE AS DROPDOWN ── */
-  .save-row {
-    display: flex;
-    align-items: stretch;
-    margin-top: 8px;
-    position: relative;
-  }
 
-  .btn-copy-main {
-    flex: 1;
-    padding: 10px 14px;
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-right: none;
-    color: var(--ink);
-    font-size: 11.5px;
-    font-family: var(--mono);
-    font-weight: 700;
-    letter-spacing: .09em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: border-color .15s, color .15s, background .15s;
-    text-align: left;
-  }
-
-  .btn-copy-main:hover {
-    border-color: var(--red);
-    color: var(--red);
-  }
-
-  .btn-copy-main.copied {
-    border-color: var(--good);
-    color: var(--good);
-  }
-
-  .btn-saveas-toggle {
-    padding: 0 13px;
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    color: var(--muted);
-    font-size: 12px;
-    font-family: var(--mono);
-    cursor: pointer;
-    transition: border-color .15s, color .15s, background .15s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    white-space: nowrap;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    font-size: 10.5px;
-    font-weight: 700;
-  }
-
-  .btn-saveas-toggle:hover,
-  .btn-saveas-toggle.open {
-    border-color: var(--red);
-    color: var(--red);
-    background: var(--accent-dim);
-  }
-
-  .saveas-arrow {
-    font-size: 9px;
-    display: inline-block;
-    transition: transform .2s;
-  }
-
-  .btn-saveas-toggle.open .saveas-arrow { transform: rotate(180deg); }
-
-  /* Dropdown menu */
-  .saveas-menu {
-    position: absolute;
-    bottom: calc(100% + 4px);
-    right: 0;
-    background: var(--bg);
-    border: 1px solid var(--border2);
-    border-top: 2px solid var(--red);
-    min-width: 200px;
-    z-index: 100;
-    display: none;
-    flex-direction: column;
-    box-shadow: 0 4px 16px rgba(0,0,0,.12);
-  }
-
-  .saveas-menu.open { display: flex; }
-
-  .saveas-menu-label {
-    padding: 8px 14px 6px;
-    font-size: 9.5px;
-    font-family: var(--mono);
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--red);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .saveas-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    font-family: var(--mono);
-    font-size: 11.5px;
-    font-weight: 700;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    color: var(--ink);
-    cursor: pointer;
-    background: none;
-    border: none;
-    text-align: left;
-    width: 100%;
-    transition: background .12s, color .12s;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .saveas-item:last-child { border-bottom: none; }
-
-  .saveas-item:hover {
-    background: var(--surface);
-    color: var(--red);
-  }
-
-  .saveas-item .si-icon {
-    width: 20px;
-    font-size: 13px;
-    flex-shrink: 0;
-    color: var(--muted);
-    text-align: center;
-  }
-
-  .saveas-item:hover .si-icon { color: var(--red); }
-
-  .saveas-item .si-desc {
-    font-size: 10px;
-    color: var(--muted);
-    font-weight: 400;
-    letter-spacing: .03em;
-    text-transform: none;
-    display: block;
-    margin-top: 1px;
-  }
-
-  .saveas-item .si-label { display: flex; flex-direction: column; }
 
   /* ── HINT ── */
   .hint {
@@ -764,6 +621,114 @@
   .qt-cell:first-child { border-right: 1px solid var(--border); }
   .qt-row:not(:first-child) .qt-cell:first-child { color: var(--red); font-weight: 600; font-family: var(--mono); font-size: 11.5px; }
   .qt-row:not(:first-child) .qt-cell:last-child { color: var(--gold2); font-weight: 600; font-family: var(--mono); font-size: 11.5px; }
+
+  /* ── ACTION BUTTONS ── */
+  .save-row {
+    display: flex;
+    gap: 0;
+    margin-top: 8px;
+  }
+
+  .btn-action {
+    flex: 1;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-right: none;
+    color: var(--ink);
+    font-size: 11.5px;
+    font-family: var(--mono);
+    font-weight: 700;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color .15s, color .15s;
+    text-align: center;
+  }
+
+  .btn-action:last-child { border-right: 1px solid var(--border2); }
+  .btn-action:hover { border-color: var(--red); color: var(--red); }
+  .btn-action.copied,
+  .btn-action.done { border-color: var(--good); color: var(--good); }
+
+  /* ── OUTPUT TABS ── */
+  .out-tabs {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 8px;
+  }
+
+  .out-tab {
+    padding: 7px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-right: none;
+    color: var(--muted);
+    font-size: 10.5px;
+    font-family: var(--mono);
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .15s;
+  }
+
+  .out-tab:last-of-type { border-right: 1px solid var(--border2); }
+
+  .out-tab.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+  }
+
+  .out-tab:not(.active):hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  /* ── RICH TEXT PREVIEW ── */
+  .rich-preview {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    padding: 14px 16px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+    overflow-y: auto;
+    overflow-wrap: break-word;
+  }
+
+  .rich-preview p { margin-bottom: .75em; }
+  .rich-preview p:last-child { margin-bottom: 0; }
+  .rich-preview strong { font-weight: 700; }
+  .rich-preview em { font-style: italic; }
+  .rich-preview u { text-decoration: underline; }
+
+  /* glitch-redact style (sama kayak di soren/wargantara) */
+  .rich-preview .glitch-redact {
+    background: var(--ink);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 0 3px;
+    font-family: var(--mono);
+    font-size: .88em;
+    cursor: default;
+    position: relative;
+    transition: background .2s, color .2s;
+  }
+
+  .rich-preview .glitch-redact:hover {
+    background: var(--red);
+    color: #fff;
+  }
+
+  .rich-preview-empty {
+    color: var(--muted);
+    font-style: italic;
+    font-size: 13px;
+    font-family: var(--mono);
+  }
 </style>
 </head>
 <body>
@@ -781,7 +746,7 @@
 <header>
   <div>
     <h1>RTE <span>→</span> HTML</h1>
-    <p>// ketik atau paste rich text — output HTML muncul langsung</p>
+    <p>Ketik, paste rich text, atau langsung tempel HTML-nya.</p>
   </div>
 </header>
 
@@ -842,44 +807,26 @@
   <!-- PREVIEW PANEL -->
   <div class="split-panel split-panel-preview" id="panel-preview">
     <div class="section" style="margin-bottom:0; flex:1; display:flex; flex-direction:column;">
-      <div class="section-label">
-        <span class="live-dot" aria-hidden="true"></span>
-        Live Preview — HTML Output
-      </div>
-      <div class="output-box" id="output-code" data-empty-text="Kode HTML muncul otomatis di sini begitu kamu mulai mengetik." style="flex:1; max-height:none; min-height:160px;"></div>
 
-      <!-- SAVE AS ROW -->
-      <div class="save-row" id="save-row">
-        <button class="btn-copy-main" id="btn-copy-html" onclick="copyHtml()">⎘ Copy HTML</button>
-        <button class="btn-saveas-toggle" id="btn-saveas-toggle" onclick="toggleSaveMenu()" title="Pilih format save">
-          Save As <span class="saveas-arrow" id="saveas-arrow">▼</span>
-        </button>
-        <!-- Dropdown -->
-        <div class="saveas-menu" id="saveas-menu">
-          <div class="saveas-menu-label">// Simpan sebagai</div>
-          <button class="saveas-item" onclick="saveAction('copy')">
-            <span class="si-icon">⎘</span>
-            <span class="si-label">
-              Copy HTML
-              <span class="si-desc">Salin ke clipboard</span>
-            </span>
-          </button>
-          <button class="saveas-item" onclick="saveAction('txt')">
-            <span class="si-icon">T</span>
-            <span class="si-label">
-              Download .txt
-              <span class="si-desc">Plain text tanpa tag</span>
-            </span>
-          </button>
-          <button class="saveas-item" onclick="saveAction('html')">
-            <span class="si-icon">&lt;/&gt;</span>
-            <span class="si-label">
-              Download .html
-              <span class="si-desc">File HTML siap pakai</span>
-            </span>
-          </button>
-        </div>
+      <!-- Output mode tabs -->
+      <div class="out-tabs">
+        <div class="out-tab active" id="out-tab-html" onclick="setOutMode('html', this)">HTML</div>
+        <div class="out-tab" id="out-tab-rich" onclick="setOutMode('rich', this)">Rich Text</div>
+        <span class="live-dot" aria-hidden="true" style="margin-left:auto; margin-right:4px; align-self:center;"></span>
       </div>
+
+      <!-- HTML output -->
+      <div class="output-box" id="output-code" data-empty-text="Kode HTML muncul di sini." style="flex:1; max-height:none; min-height:160px;"></div>
+
+      <!-- Rich text preview -->
+      <div class="rich-preview" id="rich-preview" style="display:none; flex:1; min-height:160px;"></div>
+
+      <!-- ACTION ROW -->
+      <div class="save-row" id="save-row">
+        <button class="btn-action" id="btn-copy-html" onclick="copyHtml()">Copy HTML</button>
+        <button class="btn-action" id="btn-download-txt" onclick="downloadOut()">Download .txt</button>
+      </div>
+
 
     </div>
   </div>
@@ -981,27 +928,9 @@
   applyTheme();
 
   /* ── SAVE AS MENU ── */
-  function toggleSaveMenu() {
-    var menu = document.getElementById('saveas-menu');
-    var toggle = document.getElementById('btn-saveas-toggle');
-    var open = menu.classList.toggle('open');
-    toggle.classList.toggle('open', open);
-  }
-
-  // Close menu when clicking outside
-  document.addEventListener('click', function(e) {
-    var row = document.getElementById('save-row');
-    if (row && !row.contains(e.target)) {
-      document.getElementById('saveas-menu').classList.remove('open');
-      document.getElementById('btn-saveas-toggle').classList.remove('open');
-    }
-  });
 
   function saveAction(type) {
     // close menu
-    document.getElementById('saveas-menu').classList.remove('open');
-    document.getElementById('btn-saveas-toggle').classList.remove('open');
-
     const html = document.getElementById('output-code').textContent;
 
     if (type === 'copy') {
@@ -1037,9 +966,56 @@
     URL.revokeObjectURL(url);
   }
 
-  /* ── COPY HTML (main button shortcut) ── */
   function copyHtml() {
-    saveAction('copy');
+    var html = document.getElementById('output-code').textContent;
+    navigator.clipboard.writeText(html).then(function() {
+      var btn = document.getElementById('btn-copy-html');
+      var orig = btn.textContent;
+      btn.textContent = '✓ Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function() { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function downloadOut() {
+    var btn = document.getElementById('btn-download-txt');
+    if (outMode === 'rich') {
+      var richEl = document.getElementById('rich-preview');
+      var tmp = richEl.cloneNode(true);
+      tmp.querySelectorAll('.glitch-redact').forEach(function(el) {
+        var s = document.createElement('s');
+        s.textContent = el.textContent;
+        el.replaceWith(s);
+      });
+      var wordHtml = '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
+        '<style>body{font-family:Calibri,sans-serif;font-size:12pt;line-height:1.6;margin:2cm;}' +
+        'p{margin-bottom:.75em;}strong{font-weight:bold;}em{font-style:italic;}' +
+        's{text-decoration:line-through;}</style>' +
+        '</head><body>' + tmp.innerHTML + '</body></html>';
+      triggerDownload('rte-output.doc', wordHtml, 'application/msword');
+    } else {
+      var html = document.getElementById('output-code').textContent;
+      var tmp2 = document.createElement('div');
+      tmp2.innerHTML = html;
+      var text = tmp2.innerText || tmp2.textContent || '';
+      triggerDownload('rte-output.txt', text, 'text/plain;charset=utf-8');
+    }
+    var orig = btn.textContent;
+    btn.textContent = '✓ Downloaded!';
+    btn.classList.add('done');
+    setTimeout(function() { btn.textContent = orig; btn.classList.remove('done'); }, 2000);
+  }
+
+  function triggerDownload(filename, content, mime) {
+    var blob = new Blob([content], { type: mime });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
   }
 
   /* ── MODE ── */
@@ -1240,9 +1216,46 @@
     return paragraphs.map(function(p) { return '<p>' + p + '</p>'; }).join('\n');
   }
 
+  var outMode = 'html'; // 'html' | 'rich'
+
+  function setOutMode(m, tab) {
+    outMode = m;
+    document.querySelectorAll('.out-tab').forEach(function(t) { t.classList.remove('active'); });
+    if (tab) tab.classList.add('active');
+    else {
+      var t = document.getElementById('out-tab-' + m);
+      if (t) t.classList.add('active');
+    }
+    var codeEl = document.getElementById('output-code');
+    var richEl = document.getElementById('rich-preview');
+    var dlBtn  = document.getElementById('btn-download-txt');
+    if (m === 'html') {
+      codeEl.style.display = '';
+      richEl.style.display = 'none';
+      if (dlBtn) dlBtn.textContent = 'Download .txt';
+    } else {
+      codeEl.style.display = 'none';
+      richEl.style.display = '';
+      if (dlBtn) dlBtn.textContent = 'Download .doc';
+      updateRichPreview();
+    }
+  }
+
   function updateLivePreview() {
     var result = buildResult();
     document.getElementById('output-code').textContent = result;
+    if (outMode === 'rich') updateRichPreview();
+  }
+
+  function updateRichPreview() {
+    var result = buildResult();
+    var richEl = document.getElementById('rich-preview');
+    if (!result.trim()) {
+      richEl.innerHTML = '<span class="rich-preview-empty">Tampilan rich text muncul di sini.</span>';
+      return;
+    }
+    // render langsung — hasilnya udah trusted (dari editor sendiri)
+    richEl.innerHTML = result;
   }
 
   /* ── HELPERS ── */
