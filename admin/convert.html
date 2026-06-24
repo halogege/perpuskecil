@@ -102,8 +102,154 @@
   }
 
   .page {
-    max-width: 640px;
+    max-width: 1280px;
     margin: 0 auto;
+  }
+
+  /* ============================================
+     SPLIT LAYOUT
+  ============================================ */
+  .split-wrapper {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    min-height: 300px;
+    margin-bottom: 18px;
+  }
+
+  .split-wrapper.preview-left {
+    flex-direction: row-reverse;
+  }
+
+  .split-panel {
+    overflow: hidden;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .split-panel-editor {
+    flex: 1 1 50%;
+    width: 50%;
+  }
+
+  .split-panel-preview {
+    flex: 1 1 50%;
+    width: 50%;
+  }
+
+  /* Drag handle */
+  .split-divider {
+    width: 8px;
+    flex-shrink: 0;
+    cursor: col-resize;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  .split-divider::before {
+    content: '';
+    width: 2px;
+    height: 100%;
+    background: var(--border);
+    border-radius: 2px;
+    transition: background .15s, width .15s;
+  }
+
+  .split-divider:hover::before,
+  .split-divider.dragging::before {
+    background: var(--accent);
+    width: 3px;
+  }
+
+  .split-divider-grip {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    pointer-events: none;
+  }
+
+  .split-divider-grip span {
+    display: block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--muted);
+    transition: background .15s;
+  }
+
+  .split-divider:hover .split-divider-grip span,
+  .split-divider.dragging .split-divider-grip span {
+    background: var(--accent);
+  }
+
+  /* Swap button */
+  .split-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .btn-swap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 11.5px;
+    font-family: var(--sans);
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: border-color .15s, color .15s;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .btn-swap:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .btn-swap .swap-icon {
+    font-size: 13px;
+    display: inline-block;
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+  }
+
+  .split-wrapper.preview-left .btn-swap .swap-icon {
+    transform: scaleX(-1);
+  }
+
+  .preview-pos-label {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: var(--sans);
+  }
+
+  /* Mobile: stack vertically */
+  @media (max-width: 640px) {
+    .split-wrapper,
+    .split-wrapper.preview-left {
+      flex-direction: column !important;
+    }
+    .split-panel-editor,
+    .split-panel-preview {
+      width: 100% !important;
+      flex: unset;
+    }
+    .split-divider { display: none; }
   }
 
   /* ============================================
@@ -212,6 +358,33 @@
     gap: 6px;
   }
 
+  /* Live preview indicator */
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--good);
+    flex-shrink: 0;
+    animation: live-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes live-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .35; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .live-dot { animation: none; }
+  }
+
+  #output-code:empty:before {
+    content: attr(data-empty-text);
+    color: var(--muted);
+    font-style: italic;
+    font-size: 13px;
+    font-family: var(--sans);
+  }
+
   /* Toolbar */
   .toolbar {
     display: flex;
@@ -281,39 +454,15 @@
   }
 
   .rte-editor .redacted {
-    background: var(--text);
-    color: var(--text);
+    background: #000;
+    color: #fff;
     border-radius: 2px;
-    padding: 0 2px;
+    padding: 0 4px;
     cursor: pointer;
     user-select: none;
   }
 
-  /* Convert button */
-  .btn-convert {
-    width: 100%;
-    padding: 15px;
-    background: var(--accent);
-    color: #fff;
-    font-size: 14px;
-    font-family: var(--sans);
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    border: none;
-    border-radius: var(--radius);
-    cursor: pointer;
-    margin-bottom: 18px;
-    transition: opacity .15s;
-    box-shadow: var(--shadow);
-  }
-
-  .btn-convert:active { opacity: .85; }
-
   /* Output */
-  .output-wrap { display: none; }
-  .output-wrap.show { display: block; }
-
   .output-box {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -327,31 +476,6 @@
     word-break: break-all;
     max-height: 240px;
     overflow-y: auto;
-  }
-
-  .preview-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    margin-top: 10px;
-  }
-
-  .preview-box strong, .preview-box b { font-weight: 700; }
-  .preview-box em, .preview-box i { font-style: italic; }
-  .preview-box u { text-decoration: underline; }
-  .preview-box s { text-decoration: line-through; color: var(--muted); }
-
-  .preview-box .glitch-redact {
-    background: var(--text);
-    color: var(--text);
-    border-radius: 2px;
-    padding: 0 3px;
-    font-family: var(--mono);
-    user-select: none;
   }
 
   /* Copy buttons */
@@ -636,7 +760,7 @@
 <header>
   <div>
     <h1>RTE → HTML</h1>
-    <p>Ketik atau paste rich text di bawah, klik Convert, copy hasilnya.</p>
+    <p>Ketik atau paste rich text di bawah — hasilnya muncul langsung di preview.</p>
   </div>
   <div class="theme-toggle">
     <span class="toggle-label" id="toggle-label">Auto</span>
@@ -648,61 +772,78 @@
   </div>
 </header>
 
-<!-- Mode tabs -->
-<div class="mode-tabs">
-  <div class="mode-tab active" data-mode="inline" onclick="setMode('inline', this)">Inline</div>
-  <div class="mode-tab" data-mode="multiline" onclick="setMode('multiline', this)">Paragraf</div>
+<!-- Split controls -->
+<div class="split-controls">
+  <span class="preview-pos-label" id="preview-pos-label">Preview: Kanan</span>
+  <button class="btn-swap" id="btn-swap" onclick="swapPanels()" title="Pindah posisi preview">
+    <span class="swap-icon">⇄</span> Swap
+  </button>
 </div>
 
-<!-- Toolbar -->
-<div class="section">
-  <div class="section-label">Format</div>
-  <div class="toolbar" id="toolbar">
-    <button onclick="fmt('bold')" title="Bold (Ctrl+B)"><b>B</b></button>
-    <button onclick="fmt('italic')" title="Italic (Ctrl+I)"><i>I</i></button>
-    <button onclick="fmt('underline')" title="Underline (Ctrl+U)"><u>U</u></button>
-    <button onclick="fmt('strikeThrough')" title="Strikethrough"><s>S</s></button>
-    <button class="redact" onclick="doRedact()" title="Blok hitam / Redacted">REDACT</button>
-    <button class="clear-fmt" onclick="fmt('removeFormat')" title="Hapus formatting">✕ Clear</button>
-  </div>
-</div>
+<!-- Split wrapper: editor + divider + preview -->
+<div class="split-wrapper" id="split-wrapper">
 
-<!-- Editor -->
-<div class="section">
-  <div class="section-label">Input</div>
-  <div
-    id="editor"
-    class="rte-editor"
-    contenteditable="true"
-    data-placeholder="Tulis atau paste teks di sini… bold, italic, redacted semua bisa."
-  ></div>
-  <div class="hint">
-    Shortcut: <code>Ctrl+B</code> bold · <code>Ctrl+I</code> italic · <code>Ctrl+U</code> underline.
-    Paste dari Google Docs / Word akan otomatis dibersihkan dan formatting dipertahankan.
-  </div>
-</div>
+  <!-- EDITOR PANEL -->
+  <div class="split-panel split-panel-editor" id="panel-editor">
+    <!-- Mode tabs -->
+    <div class="mode-tabs">
+      <div class="mode-tab active" data-mode="inline" onclick="setMode('inline', this)">Inline</div>
+      <div class="mode-tab" data-mode="multiline" onclick="setMode('multiline', this)">Paragraf</div>
+    </div>
 
-<!-- Convert -->
-<button class="btn-convert" onclick="doConvert()">▶ Convert</button>
+    <!-- Toolbar -->
+    <div class="section" style="margin-bottom:0">
+      <div class="section-label">Format</div>
+      <div class="toolbar" id="toolbar">
+        <button onclick="fmt('bold')" title="Bold (Ctrl+B)"><b>B</b></button>
+        <button onclick="fmt('italic')" title="Italic (Ctrl+I)"><i>I</i></button>
+        <button onclick="fmt('underline')" title="Underline (Ctrl+U)"><u>U</u></button>
+        <button onclick="fmt('strikeThrough')" title="Strikethrough"><s>S</s></button>
+        <button class="redact" onclick="doRedact()" title="Blok hitam / Redacted">REDACT</button>
+        <button class="clear-fmt" onclick="fmt('removeFormat')" title="Hapus formatting">✕ Clear</button>
+      </div>
+    </div>
 
-<!-- Output -->
-<div class="output-wrap" id="output-wrap">
-  <div class="section">
-    <div class="section-label">HTML Output</div>
-    <div class="output-box" id="output-code"></div>
-    <div class="copy-row">
-      <button class="btn-copy" id="btn-copy-html" onclick="copyHtml()">Copy HTML</button>
-      <button class="btn-copy" id="btn-copy-preview" onclick="copyPreview()">Copy Text</button>
+    <!-- Editor -->
+    <div class="section" style="margin-bottom:0; flex:1; display:flex; flex-direction:column;">
+      <div class="section-label">Input</div>
+      <div
+        id="editor"
+        class="rte-editor"
+        contenteditable="true"
+        data-placeholder="Tulis atau paste teks di sini… bold, italic, redacted semua bisa."
+        style="flex:1; min-height:160px;"
+      ></div>
+      <div class="hint">
+        Shortcut: <code>Ctrl+B</code> bold · <code>Ctrl+I</code> italic · <code>Ctrl+U</code> underline.
+        Paste dari Google Docs / Word otomatis dibersihkan.
+      </div>
     </div>
   </div>
 
-  <hr class="divider">
-
-  <div class="section">
-    <div class="section-label">Preview</div>
-    <div class="preview-box" id="preview"></div>
+  <!-- DRAG DIVIDER -->
+  <div class="split-divider" id="split-divider">
+    <div class="split-divider-grip">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
   </div>
-</div>
+
+  <!-- PREVIEW PANEL -->
+  <div class="split-panel split-panel-preview" id="panel-preview">
+    <div class="section" style="margin-bottom:0; flex:1; display:flex; flex-direction:column;">
+      <div class="section-label">
+        <span class="live-dot" aria-hidden="true"></span>
+        Live Preview — HTML Output
+      </div>
+      <div class="output-box" id="output-code" data-empty-text="Kode HTML muncul otomatis di sini begitu kamu mulai mengetik." style="flex:1; max-height:none; min-height:160px;"></div>
+      <div class="copy-row">
+        <button class="btn-copy" id="btn-copy-html" onclick="copyHtml()">Copy HTML</button>
+        <button class="btn-copy" id="btn-download-txt" onclick="downloadTxt()">Download .txt</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.split-wrapper -->
 
 <hr class="divider">
 
@@ -873,6 +1014,7 @@
       localStorage.setItem(LS_MODE, mode);
       localStorage.setItem(LS_CONTENT, editor.innerHTML);
     } catch(e) {}
+    updateLivePreview();
   }
 
   function loadState() {
@@ -882,6 +1024,7 @@
       setMode(savedMode, null, true);
       if (savedContent) editor.innerHTML = savedContent;
     } catch(e) {}
+    updateLivePreview();
   }
 
   /* ── Editor setup ── */
@@ -917,6 +1060,7 @@
   function fmt(cmd) {
     editor.focus();
     document.execCommand(cmd);
+    saveState();
   }
 
   function doRedact() {
@@ -982,8 +1126,8 @@
     return escaped.replace(/\s*\n+\s*/g, ' ');
   }
 
-  /* ── Convert ── */
-  function doConvert() {
+  /* ── Build result (pure — used by both live preview and Convert button) ── */
+  function buildResult() {
     const clone = editor.cloneNode(true);
 
     clone.querySelectorAll('b').forEach(el => {
@@ -1011,19 +1155,16 @@
       el.replaceWith(span);
     });
 
-    let result;
     if (mode === 'multiline') {
-      result = buildParagraphs(clone);
-    } else {
-      result = clone.innerHTML.trim();
+      return buildParagraphs(clone);
     }
+    return clone.innerHTML.trim();
+  }
 
+  /* ── Live preview: writes the HTML code itself, re-rendered on every keystroke ── */
+  function updateLivePreview() {
+    const result = buildResult();
     document.getElementById('output-code').textContent = result;
-    renderPreview(result);
-    const wrap = document.getElementById('output-wrap');
-    wrap.classList.add('show');
-    wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    resetCopyBtns();
   }
 
   function buildParagraphs(clone) {
@@ -1058,11 +1199,6 @@
     return paragraphs.map(p => `<p>${p}</p>`).join('\n');
   }
 
-  function renderPreview(html) {
-    const preview = document.getElementById('preview');
-    preview.innerHTML = html;
-  }
-
   /* ── Copy ── */
   function copyHtml() {
     const text = document.getElementById('output-code').textContent;
@@ -1074,21 +1210,26 @@
     });
   }
 
-  function copyPreview() {
-    const text = document.getElementById('preview').innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.getElementById('btn-copy-preview');
-      btn.textContent = '✓ Copied!';
-      btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = 'Copy Text'; btn.classList.remove('copied'); }, 2000);
-    });
-  }
+  function downloadTxt() {
+    const html = document.getElementById('output-code').textContent;
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    const text = tmp.innerText || tmp.textContent || '';
 
-  function resetCopyBtns() {
-    document.getElementById('btn-copy-html').textContent = 'Copy HTML';
-    document.getElementById('btn-copy-html').classList.remove('copied');
-    document.getElementById('btn-copy-preview').textContent = 'Copy Text';
-    document.getElementById('btn-copy-preview').classList.remove('copied');
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'rte-output.txt';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+
+    const btn = document.getElementById('btn-download-txt');
+    btn.textContent = '✓ Downloaded!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Download .txt'; btn.classList.remove('copied'); }, 2000);
   }
 
   /* ── Helpers ── */
@@ -1100,8 +1241,100 @@
       .replace(/"/g, '&quot;');
   }
 
+  /* ── Split layout: swap & drag resize ── */
+  const LS_SWAP   = 'rte_preview_side';   // 'right' | 'left'
+  const LS_SPLIT  = 'rte_split_pct';      // e.g. '50'
+
+  let previewSide = 'right'; // default
+
+  function swapPanels() {
+    previewSide = previewSide === 'right' ? 'left' : 'right';
+    applySwap();
+    try { localStorage.setItem(LS_SWAP, previewSide); } catch(e) {}
+  }
+
+  function applySwap() {
+    const wrapper = document.getElementById('split-wrapper');
+    const label   = document.getElementById('preview-pos-label');
+    if (previewSide === 'left') {
+      wrapper.classList.add('preview-left');
+      label.textContent = 'Preview: Kiri';
+    } else {
+      wrapper.classList.remove('preview-left');
+      label.textContent = 'Preview: Kanan';
+    }
+  }
+
+  function applySplitPct(pct) {
+    const editorPanel  = document.getElementById('panel-editor');
+    const previewPanel = document.getElementById('panel-preview');
+    editorPanel.style.flex  = 'none';
+    editorPanel.style.width = pct + '%';
+    previewPanel.style.flex  = 'none';
+    previewPanel.style.width = (100 - pct) + '%';
+  }
+
+  function initSplitLayout() {
+    // Restore swap side
+    let savedSide = null;
+    try { savedSide = localStorage.getItem(LS_SWAP); } catch(e) {}
+    previewSide = savedSide || 'right';
+    applySwap();
+
+    // Restore split percentage
+    let savedPct = null;
+    try { savedPct = localStorage.getItem(LS_SPLIT); } catch(e) {}
+    if (savedPct) applySplitPct(parseFloat(savedPct));
+
+    // Drag-to-resize
+    const divider = document.getElementById('split-divider');
+    const wrapper  = document.getElementById('split-wrapper');
+
+    let dragging = false;
+
+    divider.addEventListener('mousedown', startDrag);
+    divider.addEventListener('touchstart', startDrag, { passive: false });
+
+    function startDrag(e) {
+      dragging = true;
+      divider.classList.add('dragging');
+      document.body.style.userSelect = 'none';
+      document.body.style.cursor = 'col-resize';
+      e.preventDefault();
+    }
+
+    document.addEventListener('mousemove', onDrag);
+    document.addEventListener('touchmove', onDrag, { passive: false });
+
+    function onDrag(e) {
+      if (!dragging) return;
+      e.preventDefault();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const rect = wrapper.getBoundingClientRect();
+      let pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(20, Math.min(80, pct));
+      // If preview-left, editor is on the right so invert
+      if (previewSide === 'left') pct = 100 - pct;
+      applySplitPct(pct);
+      try { localStorage.setItem(LS_SPLIT, pct); } catch(e) {}
+    }
+
+    document.addEventListener('mouseup', stopDrag);
+    document.addEventListener('touchend', stopDrag);
+
+    function stopDrag() {
+      if (!dragging) return;
+      dragging = false;
+      divider.classList.remove('dragging');
+      document.body.style.userSelect = '';
+      document.body.style.cursor = '';
+    }
+  }
+
   /* ── Init ── */
   loadState();
+  initSplitLayout();
+
 </script>
 </body>
 </html>
