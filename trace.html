@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRACE — Wargantara Risk Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://solrainha.github.io/saturnicons/saturnicons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{
+  --bg:#ffffff; --surface:#f5f5f5; --surface2:#ebebeb;
+  --border:#e0e0e0; --border2:#cccccc;
+  --ink:#111111; --ink2:#333333; --muted:#888888;
+  --red:#c0251a; --red2:#a01e14; --gold:#9a7e2a; --gold2:#b89a3e;
+  --mono:'Space Mono',monospace; --display:'Bebas Neue',sans-serif; --serif:'Noto Serif Display',serif;
+  --nav-h:60px; --side-w:248px;
+  --lv-low:#3ca050; --lv-med:#b89a3e; --lv-high:#c0251a; --lv-vhigh:#7a1410;
+}
+[data-theme="dark"]{
+  --bg:#111111; --surface:#1c1c1c; --surface2:#242424;
+  --border:#2a2a2a; --border2:#383838;
+  --ink:#f0ece3; --ink2:#c8c2b4; --muted:#666666;
+  --red:#c0251a; --red2:#e02a1e; --gold:#b89a3e; --gold2:#d4b050;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{width:100%;scrollbar-gutter:stable}
+body{
+  width:100%;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;
+  font-size:15px;line-height:1.55;transition:background .25s,color .25s;min-height:100vh;
+}
+/* ---- TOPBAR ---- */
+.topbar{
+  height:var(--nav-h);position:sticky;top:0;z-index:300;background:var(--bg);
+  border-bottom:2px solid var(--red);display:flex;align-items:center;
+  justify-content:space-between;padding:0 1.25rem;
+}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:var(--display);font-size:1.5rem;letter-spacing:.06em;color:var(--ink)}
+.brand span{color:var(--red)}
+.brand-tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border-left:1px solid var(--border2);padding-left:.6rem;margin-left:.2rem}
+.nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;cursor:pointer}
+.nav-logo-img{display:block;height:30px;width:auto}
+.wgtr-logo-light{display:block}
+.wgtr-logo-dark{display:none!important}
+[data-theme="dark"] .wgtr-logo-light{display:none!important}
+[data-theme="dark"] .wgtr-logo-dark{display:block!important}
+.top-right{display:flex;align-items:center;gap:.6rem}
+.theme-btn{
+  background:none;border:1px solid var(--border2);color:var(--ink);cursor:pointer;
+  height:34px;width:34px;display:flex;align-items:center;justify-content:center;
+  font-size:1rem;transition:all .2s;
+}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.burger{display:none;background:none;border:1px solid var(--border2);height:34px;width:34px;align-items:center;justify-content:center;cursor:pointer;color:var(--ink)}
+.burger span{display:block;width:16px;height:1.5px;background:currentColor;margin:2.5px auto}
+
+/* ---- NAV LINKS (samain dengan index.html) ---- */
+.nav-links{display:flex;gap:0;list-style:none;margin-left:.5rem}
+.nav-links li a{
+  display:flex;align-items:center;gap:.35rem;padding:0 1rem;height:var(--nav-h);
+  font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+  color:var(--ink);opacity:.6;border-left:1px solid var(--border);transition:all .15s;cursor:pointer;
+}
+.nav-links li a:hover,.nav-links li a.active{opacity:1;background:var(--red);color:#fff}
+.nav-links li.has-drop{position:relative}
+.nav-links li.has-drop>a::after{
+  content:'';width:5px;height:5px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg) translateY(-1px);opacity:.6;transition:transform .15s;
+}
+.nav-links li.has-drop:hover>a::after{transform:rotate(-135deg) translateY(-2px)}
+.nav-drop{
+  position:absolute;top:100%;left:0;min-width:180px;background:var(--bg);border:1px solid var(--border);
+  border-top:2px solid var(--red);visibility:hidden;opacity:0;pointer-events:none;z-index:9999;
+  box-shadow:0 4px 16px rgba(0,0,0,.18);transition:opacity .15s,visibility .15s;
+}
+.nav-links li.has-drop:hover .nav-drop{visibility:visible;opacity:1;pointer-events:auto}
+.nav-drop a{
+  display:block!important;padding:.65rem 1rem!important;height:auto!important;line-height:1.4!important;
+  font-size:.75rem!important;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+  color:var(--ink)!important;opacity:.65!important;border-bottom:1px solid var(--border)!important;
+  border-left:none!important;transition:all .12s!important;white-space:nowrap;
+}
+.nav-drop a:last-child{border-bottom:none!important}
+.nav-drop a:hover,.nav-drop a.active{opacity:1!important;background:var(--red)!important;color:#fff!important}
+.nav-burger{display:none;background:none;border:1px solid var(--border2);height:34px;width:34px;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);flex-direction:column;gap:4px;padding:8px}
+.nav-burger span{display:block;width:16px;height:1.5px;background:currentColor;transition:all .25s}
+.nav-burger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-burger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.nav-mobile-drawer{
+  display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;background:var(--bg);
+  z-index:290;border-top:1px solid var(--border);flex-direction:column;overflow-y:auto;
+}
+.nav-mobile-drawer.open{display:flex}
+.nav-mobile-drawer ul{list-style:none;border-bottom:1px solid var(--border)}
+.nav-mobile-drawer ul li a{
+  display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.5rem;font-size:.9rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink);opacity:.65;border-bottom:1px solid var(--border);
+  cursor:pointer;transition:all .15s;min-height:48px;text-decoration:none;
+}
+.nav-mobile-drawer ul li a:hover,.nav-mobile-drawer ul li a.active{opacity:1;background:var(--red);color:#fff}
+.nav-mobile-drawer ul li.has-msub>a::after{content:'›';font-size:1.1rem;opacity:.4}
+.nav-mobile-sub{display:none;border-top:1px solid var(--border)}
+.nav-mobile-sub.open{display:block}
+.nav-mobile-sub a{padding-left:2.75rem!important;background:var(--surface)!important;font-size:.82rem!important;opacity:.55!important}
+.nav-mobile-sub a:hover,.nav-mobile-sub a.active{opacity:1!important;background:var(--red)!important;color:#fff!important}
+@media(min-width:901px){
+  .nav-burger{display:none!important}
+}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+}
+
+/* ---- LAYOUT ---- */
+.shell{display:flex;min-height:calc(100vh - var(--nav-h))}
+.sidebar{
+  width:var(--side-w);flex-shrink:0;border-right:1px solid var(--border);
+  background:var(--bg);position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));
+  overflow-y:auto;padding:1.5rem 0;
+}
+.side-eyebrow{font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;padding:0 1.5rem;margin-bottom:.6rem}
+.side-nav{list-style:none}
+.side-nav li a{
+  display:flex;align-items:baseline;gap:.6rem;padding:.65rem 1.5rem;
+  font-size:.82rem;letter-spacing:.03em;color:var(--ink);opacity:.62;
+  text-decoration:none;cursor:pointer;border-left:2px solid transparent;
+  transition:all .15s;
+}
+.side-nav li a .num{font-family:var(--mono);font-size:.72rem;color:var(--red);opacity:.85}
+.side-nav li a:hover{opacity:1;background:var(--surface)}
+.side-nav li a.active{opacity:1;border-left-color:var(--red);background:var(--surface);font-weight:600}
+.side-foot{padding:1.25rem 1.5rem;margin-top:1rem;border-top:1px solid var(--border);font-family:var(--mono);font-size:.66rem;color:var(--muted);letter-spacing:.05em}
+
+.main{flex:1;min-width:0;padding:2.25rem 2.5rem 5rem}
+.page-head{margin-bottom:2rem;border-bottom:1px solid var(--border);padding-bottom:1.25rem}
+.page-eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;color:var(--red);text-transform:uppercase;margin-bottom:.5rem}
+.page-head h1{font-family:var(--display);font-size:clamp(2rem,4vw,2.9rem);letter-spacing:.02em;line-height:1}
+.page-sub{color:var(--ink2);margin-top:.6rem;max-width:760px;font-size:.92rem}
+
+.view{display:none}
+.view.active{display:block}
+
+/* ---- CARDS ---- */
+.grid{display:grid;gap:1rem}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1100px){.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(2,1fr)}}
+.card{
+  border:1px solid var(--border);background:var(--surface);padding:1.25rem 1.4rem;
+  border-top:2px solid var(--border2);
+}
+.card.accent{border-top-color:var(--red)}
+.kpi-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.kpi-value{font-family:var(--display);font-size:2.4rem;line-height:1}
+.kpi-foot{margin-top:.5rem;font-size:.78rem;color:var(--ink2)}
+
+.section-title{
+  font-family:var(--display);font-size:1.4rem;letter-spacing:.03em;margin:2.4rem 0 1rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ---- TABLE ---- */
+.table-wrap{border:1px solid var(--border);overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.84rem;min-width:880px}
+thead th{
+  background:var(--surface2);text-align:left;padding:.65rem .8rem;font-family:var(--mono);
+  font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);
+  border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;
+}
+tbody td{padding:.7rem .8rem;border-bottom:1px solid var(--border);vertical-align:top}
+tbody tr:hover{background:var(--surface)}
+.badge{
+  display:inline-block;font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;
+  padding:.18rem .5rem;border:1px solid currentColor;white-space:nowrap;
+}
+.lv-Rendah{color:var(--lv-low)}
+.lv-Sedang{color:var(--lv-med)}
+.lv-Tinggi{color:var(--lv-high)}
+.lv-Sangat.Tinggi,.lv-SangatTinggi{color:var(--lv-vhigh)}
+.score-pill{font-family:var(--mono);font-weight:700}
+
+/* ---- FILTER BAR ---- */
+.filterbar{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem;align-items:center}
+.filterbar input, .filterbar select{
+  background:var(--bg);border:1px solid var(--border2);color:var(--ink);
+  padding:.5rem .7rem;font-family:'Inter',sans-serif;font-size:.82rem;min-width:160px;
+}
+.filterbar input{flex:1;min-width:220px}
+.filterbar .count{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-left:auto;white-space:nowrap}
+
+/* ---- MATRIX HEATMAP ---- */
+.matrix-wrap{display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap}
+.heatmap{display:grid;grid-template-columns:90px repeat(5,72px);gap:3px}
+.hm-cell{
+  height:72px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);
+  font-weight:700;font-size:1.1rem;color:#fff;cursor:default;position:relative;
+}
+.hm-axis{background:transparent;color:var(--ink2);font-size:.68rem;font-family:var(--mono);
+  display:flex;align-items:center;justify-content:flex-end;padding-right:.4rem;text-align:right;line-height:1.2}
+.hm-corner{background:transparent}
+.hm-head{background:transparent;color:var(--ink2);font-size:.62rem;font-family:var(--mono);text-align:center;
+  display:flex;align-items:center;justify-content:center;line-height:1.15;padding:0 .2rem}
+.legend-box{border:1px solid var(--border);padding:1rem 1.2rem;flex:1;min-width:260px}
+.legend-row{display:flex;gap:.6rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.82rem}
+.legend-row:last-child{border-bottom:none}
+.legend-sw{width:14px;height:14px;flex-shrink:0;margin-top:.18rem}
+
+/* ---- ACCORDION ---- */
+.acc{border:1px solid var(--border);margin-bottom:.6rem}
+.acc-head{
+  display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;
+  cursor:pointer;background:var(--surface);gap:1rem;
+}
+.acc-head:hover{background:var(--surface2)}
+.acc-title{display:flex;align-items:center;gap:.7rem;font-weight:600;font-size:.92rem}
+.acc-body{display:none;padding:1.1rem;border-top:1px solid var(--border);background:var(--bg)}
+.acc.open .acc-body{display:block}
+.acc-arrow{font-family:var(--mono);transition:transform .2s;color:var(--muted)}
+.acc.open .acc-arrow{transform:rotate(90deg)}
+.acc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+@media(max-width:800px){.acc-grid{grid-template-columns:1fr}}
+.acc-block-label{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.acc-block pre{white-space:pre-wrap;font-family:'Inter',sans-serif;font-size:.85rem;line-height:1.6}
+.pri-pill{font-family:var(--mono);font-size:.68rem;padding:.15rem .55rem;border:1px solid currentColor}
+
+/* ---- TOOLKIT CARD ---- */
+.tk-card{border:1px solid var(--border);margin-bottom:.9rem}
+.tk-head{display:flex;justify-content:space-between;align-items:center;padding:.8rem 1.1rem;background:var(--surface)}
+.tk-title{font-weight:600;font-size:.88rem}
+.tk-body{padding:1.1rem;white-space:pre-wrap;font-family:var(--mono);font-size:.82rem;line-height:1.65;border-top:1px solid var(--border)}
+.copy-btn{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;
+  background:none;border:1px solid var(--border2);color:var(--ink);padding:.35rem .7rem;cursor:pointer;
+}
+.copy-btn:hover{border-color:var(--gold);color:var(--gold)}
+.copy-btn.copied{border-color:var(--lv-low);color:var(--lv-low)}
+
+/* ---- SWOT ---- */
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:800px){.swot-grid{grid-template-columns:1fr}}
+.swot-cell{border:1px solid var(--border);padding:1.2rem 1.3rem;border-top:3px solid var(--border2)}
+.swot-cell.s{border-top-color:var(--lv-low)}
+.swot-cell.w{border-top-color:var(--gold)}
+.swot-cell.o{border-top-color:#4a7fc0}
+.swot-cell.t{border-top-color:var(--red)}
+.swot-cell h3{font-family:var(--display);font-size:1.1rem;letter-spacing:.04em;margin-bottom:.7rem;display:flex;justify-content:space-between}
+.swot-cell ul{list-style:none}
+.swot-cell li{padding:.4rem 0;border-bottom:1px dashed var(--border);font-size:.86rem}
+.swot-cell li:last-child{border-bottom:none}
+.swot-note{font-size:.78rem;color:var(--muted);margin-top:1.2rem;font-family:var(--mono)}
+
+/* ---- TRIAGE TREE ---- */
+.tree-q{border:1px solid var(--border);padding:1.1rem 1.3rem;margin-bottom:.7rem;position:relative}
+.tree-q .qn{font-family:var(--mono);font-size:.68rem;color:var(--red);letter-spacing:.1em;margin-bottom:.4rem}
+.tree-q .qtext{font-weight:600;margin-bottom:.8rem}
+.tree-branches{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media(max-width:700px){.tree-branches{grid-template-columns:1fr}}
+.branch{border:1px solid var(--border2);padding:.7rem .9rem;font-size:.84rem}
+.branch.yes{border-left:3px solid var(--red)}
+.branch.no{border-left:3px solid var(--gold)}
+.branch b{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:.3rem}
+.branch.yes b{color:var(--red)}
+.branch.no b{color:var(--gold2)}
+.branch pre{white-space:pre-wrap;font-family:'Inter',sans-serif}
+
+/* ---- COVER ---- */
+.cover{
+  min-height:calc(100vh - var(--nav-h) - 4rem);display:flex;flex-direction:column;
+  justify-content:center;position:relative;padding:2rem 0;
+}
+.cover-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.26em;color:var(--red);text-transform:uppercase;margin-bottom:1rem}
+.cover h1{font-family:var(--display);font-size:clamp(3rem,8vw,6.5rem);line-height:.92;letter-spacing:.01em;margin-bottom:1.3rem}
+.cover h1 span{color:var(--red)}
+.cover-sub{font-family:var(--serif);font-style:italic;font-size:1.2rem;color:var(--ink2);max-width:620px;margin-bottom:2rem}
+.cover-meta{display:flex;gap:2.5rem;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:1.4rem;margin-top:1rem}
+.cover-meta div{font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.04em}
+.cover-meta strong{display:block;font-family:var(--display);font-size:1.6rem;color:var(--ink);letter-spacing:.02em;margin-top:.25rem}
+.cover-cta{margin-top:2.2rem;display:flex;gap:.8rem;flex-wrap:wrap}
+.cover-btn{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.7rem 1.2rem;border:1px solid var(--border2);background:none;color:var(--ink);
+  cursor:pointer;transition:all .15s;
+}
+.cover-btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+.cover-btn.primary:hover{background:var(--red2)}
+.cover-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ---- CONDUCT / COMMUNICATION ---- */
+.principle-card{border:1px solid var(--border);border-left:3px solid var(--red);padding:1.1rem 1.3rem;margin-bottom:.8rem}
+.principle-card h4{font-family:var(--display);font-size:1.1rem;letter-spacing:.02em;margin-bottom:.5rem}
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.7rem}
+@media(max-width:700px){.do-dont{grid-template-columns:1fr}}
+.do-col,.dont-col{padding:.8rem 1rem;font-size:.84rem}
+.do-col{background:rgba(60,160,80,.08);border:1px solid var(--lv-low)}
+.dont-col{background:rgba(192,37,26,.06);border:1px solid var(--red)}
+.do-col .lbl{color:var(--lv-low)}
+.dont-col .lbl{color:var(--red)}
+.do-dont .lbl{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.45rem}
+.do-dont ul{list-style:none}
+.do-dont li{padding:.3rem 0;line-height:1.5}
+.script-box{border:1px dashed var(--border2);padding:.85rem 1rem;margin-top:.7rem;font-family:var(--mono);font-size:.8rem;color:var(--ink2);white-space:pre-wrap}
+
+/* ---- MEMBER SWOT ---- */
+.member-card{border:1px solid var(--border);margin-bottom:1.6rem}
+.member-header{display:flex;gap:1.2rem;align-items:center;padding:1.2rem 1.4rem;background:var(--surface);border-bottom:1px solid var(--border)}
+.member-portrait{
+  width:76px;height:76px;border-radius:50%;object-fit:cover;border:2px solid var(--red);
+  background:var(--surface2);flex-shrink:0;
+}
+.member-initial{
+  width:76px;height:76px;border-radius:50%;border:2px solid var(--red);background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:1.8rem;
+  color:var(--red);flex-shrink:0;
+}
+.member-name{font-family:var(--display);font-size:1.7rem;letter-spacing:.03em;line-height:1}
+.member-debut{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:.25rem;letter-spacing:.04em}
+.member-body{padding:1.3rem 1.4rem}
+
+.site-footer{border-top:2px solid var(--red);background:var(--surface);padding:2.25rem 2.5rem 1.5rem;margin-top:2rem}
+.site-footer-inner{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem;margin-bottom:1.75rem}
+.sf-col-title-img{display:block;height:42px;width:auto;margin-bottom:.65rem}
+.sf-col-title{font-family:var(--display);font-size:1rem;letter-spacing:.06em;color:var(--ink);margin-bottom:.6rem}
+.sf-col p,.sf-col a{font-size:.8rem;line-height:1.8;opacity:.65;display:block;color:var(--ink);text-decoration:none;transition:opacity .15s}
+.sf-col a:hover{opacity:1;color:var(--red)}
+.sf-socials{display:flex;flex-wrap:nowrap;gap:.5rem;margin-top:.75rem}
+.sf-social-pill{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid var(--border2);color:var(--ink);opacity:.5;text-decoration:none;transition:all .15s;cursor:pointer;flex-shrink:0}
+.sf-social-pill i{font-size:1.15rem}
+a.sf-social-pill:hover{border-color:var(--red);color:var(--red);opacity:1}
+.sf-social-pill--disabled{opacity:.18;cursor:not-allowed;border-style:dashed}
+.sf-bottom{border-top:1px solid var(--border);padding-top:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sf-logo-img{display:block;height:20px;width:auto;opacity:.35}
+.sf-copy{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;opacity:.4;text-transform:uppercase;color:var(--muted)}
+@media(max-width:700px){.site-footer-inner{grid-template-columns:1fr}}
+
+@media(max-width:900px){
+  .sidebar{position:fixed;left:-100%;top:var(--nav-h);width:78%;max-width:300px;z-index:250;transition:left .25s;box-shadow:8px 0 24px rgba(0,0,0,.2)}
+  .sidebar.open{left:0}
+  .burger{display:flex}
+  .main{padding:1.5rem 1.2rem 4rem}
+  .grid-4,.grid-3,.grid-2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:.5rem">
+    <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a class="nav-logo" href="index.html">
+      <img class="nav-logo-img wgtr-logo-light" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+      <img class="nav-logo-img wgtr-logo-dark" src="assets/og/wgtr-small-dark.png" alt="WARGANTARA">
+    </a>
+    <div class="brand-tag">TRACE · Risk Console</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="members.html">Members</a></li>
+    <li><a href="lore.html">Lore</a></li>
+    <li class="has-drop">
+      <a href="guidelines.html">Guidelines</a>
+      <div class="nav-drop">
+        <a href="guidelines.html">General Guidelines</a>
+        <a href="collab.html">Collab with Us</a>
+      </div>
+    </li>
+  </ul>
+  <div class="top-right">
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme"><span id="themeIcon" class="sf"></span></button>
+    <button class="nav-burger" id="navBurger" aria-label="Menu Navigasi"><span></span><span></span><span></span></button>
+  </div>
+</div>
+
+<div class="nav-mobile-drawer" id="navMobileDrawer">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="members.html">Members</a></li>
+    <li><a href="lore.html">Lore</a></li>
+    <li class="has-msub">
+      <a href="guidelines.html" onclick="toggleNavMSub(event)">Guidelines</a>
+      <div class="nav-mobile-sub" id="navMSubGl">
+        <a href="guidelines.html">General Guidelines</a>
+        <a href="collab.html">Collab with Us</a>
+      </div>
+    </li>
+    <li><a href="arcid.html">AR-CID Editor</a></li>
+    <li><a href="credits.html">Credits</a></li>
+  </ul>
+</div>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+    <div class="side-eyebrow">// Navigasi</div>
+    <ul class="side-nav" id="sideNav">
+      <li><a data-view="cover" class="active"><span class="num">00</span> Cover</a></li>
+      <li><a data-view="dashboard"><span class="num">01</span> Dashboard</a></li>
+      <li><a data-view="register"><span class="num">02</span> TRACE Register</a></li>
+      <li><a data-view="matrix"><span class="num">03</span> Matriks Risiko</a></li>
+      <li><a data-view="contingency"><span class="num">04</span> Contingency Plan</a></li>
+      <li><a data-view="triage"><span class="num">05</span> Triage Tree</a></li>
+      <li><a data-view="sop"><span class="num">06</span> SOP Darurat</a></li>
+      <li><a data-view="conduct"><span class="num">07</span> Cara Jadi Streamer</a></li>
+      <li><a data-view="swotmember"><span class="num">08</span> SWOT Member</a></li>
+      <li><a data-view="swot"><span class="num">09</span> SWOT Wargantara</a></li>
+    </ul>
+  </nav>
+
+  <main class="main" id="main">
+    <!-- views injected by JS -->
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="sf-col">
+      <img class="sf-col-title-img wgtr-logo-light" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+      <img class="sf-col-title-img wgtr-logo-dark" src="assets/og/wgtr-small-dark.png" alt="WARGANTARA">
+      <p>Para entitas yang hidup di ambang—tidak sepenuhnya milik dunia manusia, tidak juga milik dunia astral.</p>
+      <p style="margin-top:.6rem">Status Lore: <span style="color:var(--gold);opacity:1">Open Sandbox</span></p>
+    </div>
+    <div class="sf-col">
+      <div class="sf-col-title">NAVIGASI</div>
+      <a href="index.html">Home</a>
+      <a href="members.html">Members</a>
+      <a href="lore.html">Lore Archive</a>
+      <a href="guidelines.html">General Guidelines</a>
+      <a href="collab.html">Collab with Us</a>
+      <a href="arcid.html">AR-CID Editor</a>
+      <a href="credits.html">Credits &amp; Attributions</a>
+    </div>
+    <div class="sf-col">
+      <div class="sf-col-title">KONTAK</div>
+      <p style="font-size:.84rem;line-height:1.85;opacity:.65">Ikuti kami di media sosial untuk update terbaru seputar Wargantara.</p>
+      <div class="sf-socials">
+        <a class="sf-social-pill" href="https://x.com/wgtr_id" target="_blank" rel="noopener" title="Twitter / X">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a class="sf-social-pill" href="https://youtube.com/wgtr_id" target="_blank" rel="noopener" title="YouTube">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+        <span class="sf-social-pill sf-social-pill--disabled" title="Discord — Coming Soon">
+          <i class="fa-brands fa-discord"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="sf-bottom">
+    <span class="sf-copy">© Wargantara VTuber Group · Est. ???? · All lore is fiction</span>
+    <span class="sf-copy">Lintas Batas</span>
+  </div>
+</footer>
+
+<script>
+const DATA = {"register": [{"no": 1, "fase": "Persiapan & Setup", "kategori": "Teknis", "bahaya": "Kegagalan setup OBS / software capture", "situasi": "Tidak melakukan test run sebelum stream; update otomatis merusak konfigurasi", "kemungkinan": 3, "keparahan": 3, "skor": 9, "level": "Sedang", "pengendalian": "Buat profil OBS backup; lakukan test stream 15 mnt sebelum jadwal; nonaktifkan auto-update software saat dekat jadwal stream", "pic": "Streamer", "status": "Aktif"}, {"no": 2, "fase": "Persiapan & Setup", "kategori": "Teknis", "bahaya": "Model VTuber / avatar tidak berfungsi (tracking error)", "situasi": "Software tracking (VTube Studio, VSeeFace) crash; kamera tidak terdeteksi; lip-sync lag", "kemungkinan": 4, "keparahan": 3, "skor": 12, "level": "Tinggi", "pengendalian": "Buat avatar backup (versi statis / PNG mode); simpan preset konfigurasi tracking; test avatar minimal 10 mnt sebelum live", "pic": "Streamer", "status": "Aktif"}, {"no": 3, "fase": "Persiapan & Setup", "kategori": "Teknis", "bahaya": "Koneksi internet tidak stabil / putus saat stream", "situasi": "ISP bermasalah; bandwidth dibagi perangkat lain; tidak ada backup koneksi", "kemungkinan": 3, "keparahan": 4, "skor": 12, "level": "Tinggi", "pengendalian": "Siapkan hotspot HP sebagai backup; matikan perangkat lain yang tidak perlu; gunakan kabel LAN bukan Wi-Fi; beli paket data cadangan", "pic": "Streamer", "status": "Aktif"}, {"no": 4, "fase": "Persiapan & Setup", "kategori": "Keamanan Digital", "bahaya": "Identitas asli tertanam di metadata aset digital", "situasi": "File model VTuber, thumbnail, atau musik mengandung metadata nama asli / lokasi", "kemungkinan": 3, "keparahan": 5, "skor": 15, "level": "Tinggi", "pengendalian": "Strip metadata semua file sebelum digunakan (gunakan ExifTool); gunakan akun terpisah untuk aset karakter; buat folder kerja khusus karakter", "pic": "Streamer", "status": "Aktif"}, {"no": 5, "fase": "Persiapan & Setup", "kategori": "Keamanan Digital", "bahaya": "Kebocoran IP address melalui platform streaming", "situasi": "Platform atau plugin tertentu dapat mengekspos IP publik streamer", "kemungkinan": 2, "keparahan": 5, "skor": 10, "level": "Tinggi", "pengendalian": "Gunakan VPN selalu saat streaming; hindari direct P2P connection; gunakan layanan stream key yang tidak mengekspos IP langsung", "pic": "Streamer", "status": "Aktif"}, {"no": 6, "fase": "Persiapan & Setup", "kategori": "Psikis", "bahaya": "Pre-stream anxiety & prokrastinasi streaming", "situasi": "Takut gagal, takut sepi penonton, atau tidak siap sebelum go live", "kemungkinan": 4, "keparahan": 3, "skor": 12, "level": "Tinggi", "pengendalian": "Buat checklist pre-stream yang rutin; set ekspektasi viewer count yang realistis di awal; mulai stream meski penonton sedikit; bangun ritual pre-stream positif", "pic": "Streamer", "status": "Aktif"}, {"no": 7, "fase": "Persiapan & Setup", "kategori": "Teknis", "bahaya": "Peralatan rusak mendadak (mic, kamera, PC)", "situasi": "Hardware failure tanpa peringatan; tidak ada peralatan cadangan", "kemungkinan": 2, "keparahan": 4, "skor": 8, "level": "Sedang", "pengendalian": "Sisihkan dana darurat untuk hardware; buat daftar peralatan minimum untuk stream darurat; ketahui repair shop terdekat dan waktu estimasi", "pic": "Streamer", "status": "Aktif"}, {"no": 8, "fase": "Persiapan & Setup", "kategori": "Keamanan Digital", "bahaya": "Penggunaan aset berlisensi tanpa izin pada model/overlay", "situasi": "Menggunakan musik, font, atau gambar berlisensi di overlay, intro, atau model VTuber", "kemungkinan": 3, "keparahan": 4, "skor": 12, "level": "Tinggi", "pengendalian": "Audit semua aset visual dan audio yang digunakan; gunakan hanya aset CC0 atau yang sudah dibeli lisensinya; untuk konten yang dimonetisasi, pastikan lisensi mencakup penggunaan komersial (bukan hanya personal) sesuai Pasal 6 Perjanjian Komunitas; dokumentasikan sumber semua aset", "pic": "Streamer", "status": "Aktif"}, {"no": 9, "fase": "Saat Live Streaming", "kategori": "Teknis", "bahaya": "Stream crash / putus di tengah live", "situasi": "OBS crash; PC overheat; ISP bermasalah; listrik mati", "kemungkinan": 4, "keparahan": 3, "skor": 12, "level": "Tinggi", "pengendalian": "Aktifkan auto-reconnect di OBS; pasang UPS untuk proteksi listrik; monitor suhu PC; buat pesan otomatis untuk offline screen", "pic": "Streamer", "status": "Aktif"}, {"no": 10, "fase": "Saat Live Streaming", "kategori": "Keamanan Digital", "bahaya": "Screen share tidak sengaja menampilkan info pribadi", "situasi": "Notifikasi muncul di layar; tab browser dengan info sensitif terbuka; nama file mengandung nama asli", "kemungkinan": 4, "keparahan": 4, "skor": 16, "level": "Sangat Tinggi", "pengendalian": "Aktifkan mode Do Not Disturb sebelum stream; gunakan profil browser khusus stream tanpa histori; buat desktop workspace terpisah khusus streaming", "pic": "Streamer", "status": "Aktif"}, {"no": 11, "fase": "Saat Live Streaming", "kategori": "Konten", "bahaya": "Performa konten buruk / awkward silence berkepanjangan", "situasi": "Tidak ada bahan obrolan; game membosankan; kehilangan fokus saat streaming", "kemungkinan": 3, "keparahan": 2, "skor": 6, "level": "Sedang", "pengendalian": "Siapkan talking points dan pertanyaan untuk chat sebelum live; punya daftar topik fallback; riset konten game sebelum dimainkan", "pic": "Streamer", "status": "Aktif"}, {"no": 12, "fase": "Saat Live Streaming", "kategori": "Keamanan Digital", "bahaya": "Raid dari komunitas hostile", "situasi": "Streamer atau komunitas lain mengirim wave penonton dengan maksud mengganggu", "kemungkinan": 3, "keparahan": 4, "skor": 12, "level": "Tinggi", "pengendalian": "Siapkan mod aktif saat stream; punya template respons raid hostile; ketahui cara aktifkan subscriber-only mode dengan cepat; tidak merespons troll secara emosional", "pic": "Streamer / Moderator", "status": "Aktif"}, {"no": 13, "fase": "Saat Live Streaming", "kategori": "Psikis", "bahaya": "Tipping/donasi yang memicu tekanan emosional", "situasi": "Donasi dengan pesan manipulatif, menyedihkan, atau menuntut respons tertentu", "kemungkinan": 4, "keparahan": 3, "skor": 12, "level": "Tinggi", "pengendalian": "Set batas minimum donasi dengan TTS; blokir kata kunci donasi yang tidak pantas; tidak merasa wajib memenuhi request donasi; buat kebijakan donasi yang jelas", "pic": "Streamer", "status": "Aktif"}, {"no": 14, "fase": "Saat Live Streaming", "kategori": "Konten", "bahaya": "Pelanggaran ToS platform tidak disengaja", "situasi": "Memainkan konten yang ternyata dilarang; berbicara tentang topik sensitif; reaksi emosional berlebihan", "kemungkinan": 3, "keparahan": 4, "skor": 12, "level": "Tinggi", "pengendalian": "Pelajari ToS platform secara mendalam; hindari reaksi berlebihan terhadap konten; siapkan 'panic button' untuk end stream cepat; hindari konten NSFW tanpa pengaturan age-gate", "pic": "Streamer", "status": "Aktif"}, {"no": 15, "fase": "Saat Live Streaming", "kategori": "Fisik", "bahaya": "Overheating PC saat stream gaming intensif", "situasi": "Game berat + OBS + browser berjalan bersamaan tanpa manajemen resource yang baik", "kemungkinan": 3, "keparahan": 3, "skor": 9, "level": "Sedang", "pengendalian": "Monitor suhu CPU/GPU dengan HWiNFO; bersihkan PC secara berkala; atur bitrate OBS yang sesuai spesifikasi PC; pertimbangkan upgrade cooling", "pic": "Streamer", "status": "Aktif"}, {"no": 16, "fase": "Saat Live Streaming", "kategori": "Psikis", "bahaya": "Viewer count drop drastis saat sedang live", "situasi": "Algoritma berubah; konten tidak menarik; bersaing dengan event besar di hari yang sama", "kemungkinan": 4, "keparahan": 3, "skor": 12, "level": "Tinggi", "pengendalian": "Jangan tampilkan viewer count di depan layar; fokus pada kualitas konten bukan angka; riset jadwal event besar sebelum tentukan jadwal stream", "pic": "Streamer", "status": "Aktif"}, {"no": 17, "fase": "Saat Live Streaming", "kategori": "Keamanan Digital", "bahaya": "Akun streaming di-ban atau disuspend mendadak", "situasi": "False positive dari sistem moderasi otomatis platform; laporan massal dari hostile community", "kemungkinan": 2, "keparahan": 5, "skor": 10, "level": "Tinggi", "pengendalian": "Pahami kebijakan appeal platform; jangan taruh semua di satu platform; siapkan akun cadangan yang sudah diverifikasi; dokumentasikan setiap stream untuk bukti", "pic": "Streamer", "status": "Aktif"}, {"no": 18, "fase": "Saat Live Streaming", "kategori": "Konten", "bahaya": "Insiden tidak terduga di lingkungan streaming (suara luar, orang masuk frame)", "situasi": "Anggota keluarga masuk ruangan; suara berisik; kucing/hewan peliharaan", "kemungkinan": 3, "keparahan": 2, "skor": 6, "level": "Sedang", "pengendalian": "Pasang tanda 'Sedang Live' di pintu; beri tahu anggota rumah jadwal stream; gunakan soundproofing minimal; buat ini jadi konten natural jika terjadi", "pic": "Streamer", "status": "Aktif"}, {"no": 19, "fase": "Kolaborasi & Event", "kategori": "Sosial", "bahaya": "Kebocoran identitas saat collab", "situasi": "Partner collab tidak sengaja menyebut nama asli; background suara atau visual bocor lewat audio partner", "kemungkinan": 3, "keparahan": 5, "skor": 15, "level": "Tinggi", "pengendalian": "Brief collab partner tentang opsec sebelum sesi; gunakan nama karakter secara konsisten; test audio/video bersama sebelum go live", "pic": "Streamer", "status": "Aktif"}, {"no": 20, "fase": "Kolaborasi & Event", "kategori": "Sosial", "bahaya": "Chemistry buruk dengan collab partner", "situasi": "Kepribadian tidak cocok; perbedaan nilai konten; komunikasi sebelum collab tidak cukup", "kemungkinan": 3, "keparahan": 3, "skor": 9, "level": "Sedang", "pengendalian": "Lakukan pre-collab chat minimal 30 mnt; sepakati topik dan batasan konten; pilih partner yang sudah dikenal baik untuk collab perdana", "pic": "Streamer", "status": "Aktif"}, {"no": 21, "fase": "Kolaborasi & Event", "kategori": "Hukum", "bahaya": "Tidak ada perjanjian collab yang jelas", "situasi": "Tidak ada kesepakatan tentang pembagian revenue, hak klip, atau penggunaan VOD", "kemungkinan": 3, "keparahan": 3, "skor": 9, "level": "Sedang", "pengendalian": "Buat MOU collab sederhana tertulis; sepakati hak klipping, upload ulang, dan monetisasi sebelum collab; simpan semua kesepakatan via chat/email", "pic": "Streamer", "status": "Aktif"}, {"no": 22, "fase": "Kolaborasi & Event", "kategori": "Sosial", "bahaya": "Fandom war antar komunitas pasca collab", "situasi": "Fanbase masing-masing streamer konflik di media sosial setelah collab", "kemungkinan": 3, "keparahan": 3, "skor": 9, "level": "Sedang", "pengendalian": "Pantau sosmed setelah collab; koordinasi dengan partner untuk respons seragam; buat pernyataan bersama jika diperlukan; jangan pilih 'pihak' di depan publik", "pic": "Streamer / Moderator", "status": "Aktif"}, {"no": 23, "fase": "Kolaborasi & Event", "kategori": "Teknis", "bahaya": "Masalah teknis sinkronisasi saat collab (lag, desync audio)", "situasi": "Perbedaan koneksi; software incompatible; server Discord/Parsec bermasalah", "kemungkinan": 4, "keparahan": 2, "skor": 8, "level": "Sedang", "pengendalian": "Test koneksi bersama 30 mnt sebelum live; siapkan alternatif platform komunikasi; buat protokol jika terjadi disconnect di tengah collab", "pic": "Streamer", "status": "Aktif"}, {"no": 24, "fase": "Kolaborasi & Event", "kategori": "Konten", "bahaya": "Undangan event/tournament palsu (scam)", "situasi": "Tawaran event dengan iming-iming prize money palsu; meminta data pribadi atau pembayaran di muka", "kemungkinan": 2, "keparahan": 4, "skor": 8, "level": "Sedang", "pengendalian": "Verifikasi penyelenggara event secara independen; jangan bayar biaya pendaftaran tanpa konfirmasi jelas; cek reputasi event di komunitas; gunakan email karakter bukan email pribadi", "pic": "Streamer", "status": "Aktif"}, {"no": 25, "fase": "Kolaborasi & Event", "kategori": "Psikis", "bahaya": "Tekanan sosial untuk collab dengan streamer yang tidak diinginkan", "situasi": "Tekanan dari komunitas atau partner bisnis untuk berkolaborasi dengan seseorang yang tidak nyaman", "kemungkinan": 3, "keparahan": 3, "skor": 9, "level": "Sedang", "pengendalian": "Buat kebijakan collab pribadi yang jelas; latih diri menolak dengan sopan; tidak perlu beri alasan detail saat menolak collab", "pic": "Streamer", "status": "Aktif"}, {"no": 26, "fase": "Pasca Stream", "kategori": "Teknis", "bahaya": "Kehilangan file rekaman / VOD rusak", "situasi": "OBS lupa diset record; storage penuh; file corrupt; drive rusak", "kemungkinan": 3, "keparahan": 3, "skor": 9, "level": "Sedang", "pengendalian": "Aktifkan local recording selalu; cek space storage sebelum stream; gunakan cloud backup otomatis; test playback file rekaman setelah stream", "pic": "Streamer", "status": "Aktif"}, {"no": 27, "fase": "Pasca Stream", "kategori": "Keamanan Digital", "bahaya": "Metadata di thumbnail / video mengandung info sensitif", "situasi": "File thumbnail menyimpan GPS, nama asli, atau device info dari kamera/ponsel", "kemungkinan": 3, "keparahan": 4, "skor": 12, "level": "Tinggi", "pengendalian": "Strip metadata semua file sebelum upload; gunakan tools seperti ExifTool atau Metadata Cleaner; buat thumbnail di cloud editor (Canva) bukan dari file lokal", "pic": "Streamer", "status": "Aktif"}, {"no": 28, "fase": "Pasca Stream", "kategori": "Konten", "bahaya": "DMCA otomatis pada VOD saat upload", "situasi": "Platform mendeteksi musik, game OST, atau klip berlisensi secara otomatis pasca upload", "kemungkinan": 4, "keparahan": 3, "skor": 12, "level": "Tinggi", "pengendalian": "Edit atau mute segmen bermasalah sebelum upload; gunakan software pengecek copyright seperti Pex atau fitur Content ID YouTube; simpan VOD tanpa musik sebagai backup", "pic": "Streamer", "status": "Aktif"}, {"no": 29, "fase": "Pasca Stream", "kategori": "Psikis", "bahaya": "Doom-scrolling analitik pasca stream", "situasi": "Mengecek viewer count, subscriber change, dan komentar berulang-ulang setelah stream selesai", "kemungkinan": 4, "keparahan": 3, "skor": 12, "level": "Tinggi", "pengendalian": "Set aturan: cek analitik hanya 1x per hari, di pagi hari; jangan buka analitik malam hari; fokus pada tren mingguan bukan angka per-stream", "pic": "Streamer", "status": "Aktif"}, {"no": 30, "fase": "Pasca Stream", "kategori": "Keamanan Digital", "bahaya": "Klip stream disebarkan tanpa konteks (clipping out of context)", "situasi": "Segmen diambil dan disebarkan untuk memfitnah; reaksi emosional dikontekskan berbeda", "kemungkinan": 4, "keparahan": 4, "skor": 16, "level": "Sangat Tinggi", "pengendalian": "Arsip semua VOD sebagai bukti konteks asli; buat kebijakan clipping yang jelas di komunitas; respond dengan calm dan sertakan timestamp konteks", "pic": "Streamer", "status": "Aktif"}, {"no": 31, "fase": "Pasca Stream", "kategori": "Teknis", "bahaya": "Akun YouTube / VOD platform di-strike atau dihapus", "situasi": "Pelanggaran DMCA; false report; konten dianggap melanggar ToS setelah review manual", "kemungkinan": 2, "keparahan": 4, "skor": 8, "level": "Sedang", "pengendalian": "Pahami proses appeal YouTube; diversifikasi platform penyimpanan VOD; upload ke minimal 2 platform berbeda; backup lokal semua konten penting", "pic": "Streamer", "status": "Aktif"}, {"no": 32, "fase": "Pasca Stream", "kategori": "Sosial", "bahaya": "Screenshot komentar/chat diambil dan disalahgunakan", "situasi": "Komentar chat atau reply sosmed diambil screenshot dan disebarkan tanpa konteks", "kemungkinan": 3, "keparahan": 3, "skor": 9, "level": "Sedang", "pengendalian": "Pertimbangkan tidak merespons provokasi di kolom komentar; sembunyikan komentar sensitif; private akun sosmed non-karakter", "pic": "Streamer", "status": "Aktif"}, {"no": 33, "fase": "Manajemen Komunitas", "kategori": "Sosial", "bahaya": "Moderator tidak aktif atau tidak kompeten", "situasi": "Mod ghosting; mod tidak paham community guidelines; mod bias atau pilih kasih", "kemungkinan": 3, "keparahan": 4, "skor": 12, "level": "Tinggi", "pengendalian": "Rekrut minimal 3 moderator aktif; buat moderator handbook tertulis; adakan briefing mod rutin; evaluasi performa mod setiap bulan", "pic": "Streamer", "status": "Aktif"}, {"no": 34, "fase": "Manajemen Komunitas", "kategori": "Sosial", "bahaya": "Konflik internal di komunitas Discord", "situasi": "Perselisihan antar member; drama fandom; sub-group yang toksik terbentuk", "kemungkinan": 3, "keparahan": 3, "skor": 9, "level": "Sedang", "pengendalian": "Buat community guidelines yang detail; sediakan channel laporan anonim; latih mod cara deeskalasi konflik; buat aturan zero tolerance untuk harassment", "pic": "Streamer / Moderator", "status": "Aktif"}, {"no": 35, "fase": "Manajemen Komunitas", "kategori": "Psikis", "bahaya": "Burnout moderator (mod burnout)", "situasi": "Mod terlalu banyak menanggung beban moderasi tanpa apresiasi atau dukungan", "kemungkinan": 3, "keparahan": 3, "skor": 9, "level": "Sedang", "pengendalian": "Apresiasi mod secara berkala; rotasi jadwal moderasi; jangan bebankan semua ke 1-2 orang; beri mod akses tools yang memudahkan pekerjaan mereka", "pic": "Streamer", "status": "Aktif"}, {"no": 36, "fase": "Manajemen Komunitas", "kategori": "Sosial", "bahaya": "Grooming atau predatory behavior di komunitas", "situasi": "Member dewasa mendekati member muda di server; DM tidak diminta", "kemungkinan": 2, "keparahan": 5, "skor": 10, "level": "Tinggi", "pengendalian": "Aktifkan fitur age-verification jika tersedia; buat aturan DM eksplisit; latih mod mengenali tanda grooming; buat jalur laporan yang aman dan anonim", "pic": "Streamer / Moderator", "status": "Aktif"}, {"no": 37, "fase": "Manajemen Komunitas", "kategori": "Psikis", "bahaya": "Fan mengirim konten disturbing ke streamer", "situasi": "Fan art tidak pantas; cerita fanfic ekstrem; pesan yang mengancam atau obsesif", "kemungkinan": 3, "keparahan": 3, "skor": 9, "level": "Sedang", "pengendalian": "Batasi DM hanya dari follower/subscriber; buat filter keyword untuk DM; jangan buka kiriman dari akun asing; koordinasi mod untuk filter submission art", "pic": "Streamer / Moderator", "status": "Aktif"}, {"no": 38, "fase": "Manajemen Komunitas", "kategori": "Sosial", "bahaya": "Impersonasi streamer oleh akun palsu", "situasi": "Akun dengan nama/avatar mirip menipu komunitas atau brand; meminta donasi palsu", "kemungkinan": 3, "keparahan": 4, "skor": 12, "level": "Tinggi", "pengendalian": "Monitor username mirip di semua platform; buat daftar akun resmi yang dipublikasikan; laporkan impersonasi ke platform dengan cepat; edukasi komunitas tentang akun palsu", "pic": "Streamer", "status": "Aktif"}, {"no": 39, "fase": "Manajemen Komunitas", "kategori": "Keamanan Digital", "bahaya": "Serangan bot / spam di chat dan Discord", "situasi": "Bot mengirim spam link, scam, atau konten tidak pantas ke komunitas", "kemungkinan": 4, "keparahan": 3, "skor": 12, "level": "Tinggi", "pengendalian": "Aktifkan Dyno/MEE6 atau bot moderasi; set verification level Discord minimal medium; blokir link otomatis dari akun baru; audit bot yang terpasang di server", "pic": "Streamer / Moderator", "status": "Aktif"}, {"no": 40, "fase": "Urusan Bisnis", "kategori": "Hukum", "bahaya": "Kontrak sponsor yang merugikan atau manipulatif", "situasi": "Klausul eksklusivitas tersembunyi; kewajiban posting tanpa batas waktu; tidak ada hak penolakan konten", "kemungkinan": 3, "keparahan": 4, "skor": 12, "level": "Tinggi", "pengendalian": "Baca setiap klausul kontrak; minta bantuan teman yang paham hukum atau konsultasi LBH; tolak kontrak tanpa batas waktu yang jelas; negosiasikan hak editorial", "pic": "Streamer", "status": "Aktif"}, {"no": 41, "fase": "Urusan Bisnis", "kategori": "Hukum", "bahaya": "Produk sponsor palsu / penipuan brand", "situasi": "Brand palsu menawarkan deal besar; meminta data KTP/rekening untuk 'pembayaran'; bayar di muka", "kemungkinan": 3, "keparahan": 4, "skor": 12, "level": "Tinggi", "pengendalian": "Verifikasi legalitas perusahaan di AHU online; cari review brand di Google; jangan berikan data rekening sebelum kontrak ditandatangani; negosiasikan terms pembayaran secara tertulis dalam kontrak (sesuai Pasal 10 Perjanjian Komunitas)", "pic": "Streamer", "status": "Aktif"}, {"no": 42, "fase": "Urusan Bisnis", "kategori": "Hukum", "bahaya": "Masalah pajak penghasilan konten kreator", "situasi": "Tidak mendeklarasikan pendapatan donasi/sponsor; tidak paham kewajiban perpajakan sebagai individu", "kemungkinan": 3, "keparahan": 4, "skor": 12, "level": "Tinggi", "pengendalian": "Daftar NPWP individu; catat semua pemasukan stream secara rapi; konsultasi konsultan pajak setahun sekali; pisahkan rekening bisnis dan pribadi", "pic": "Streamer", "status": "Aktif"}, {"no": 43, "fase": "Urusan Bisnis", "kategori": "Hukum", "bahaya": "Sengketa kepemilikan nama/karakter VTuber", "situasi": "Tidak ada bukti kepemilikan nama karakter; orang lain mendaftarkan nama lebih dulu; desainer model mengklaim kepemilikan", "kemungkinan": 2, "keparahan": 5, "skor": 10, "level": "Tinggi", "pengendalian": "Daftarkan nama karakter sebagai merek dagang sedini mungkin; buat kontrak tertulis dengan desainer model yang menyatakan kepemilikan aset; simpan semua bukti penggunaan pertama. Kepemilikan karakter sepenuhnya milik anggota — komunitas tidak memiliki klaim apapun (Pasal 7 Perjanjian Komunitas).", "pic": "Streamer", "status": "Aktif"}, {"no": 44, "fase": "Urusan Bisnis", "kategori": "Bisnis", "bahaya": "Produksi merchandise bermasalah (vendor scam atau kualitas buruk)", "situasi": "Vendor tidak kirim produk; kualitas sangat buruk dari sample; tidak ada refund policy", "kemungkinan": 2, "keparahan": 4, "skor": 8, "level": "Sedang", "pengendalian": "Gunakan vendor dengan track record jelas dan review komunitas VTuber; pesan sample dulu sebelum bulk order; gunakan platform Printify/Redbubble untuk awal; buat kontrak dengan vendor", "pic": "Streamer", "status": "Aktif"}, {"no": 45, "fase": "Urusan Bisnis", "kategori": "Bisnis", "bahaya": "Tidak ada diversifikasi sumber pendapatan", "situasi": "100% bergantung pada donasi/sub; satu platform di-ban = kehilangan semua income", "kemungkinan": 4, "keparahan": 5, "skor": 20, "level": "Sangat Tinggi", "pengendalian": "Bangun minimal 3 sumber income (donasi Tako, merchandise, sponsor, YouTube AdSense, membership); jangan skip monetisasi YouTube meski utama di TikTok Live; bangun mailing list komunitas", "pic": "Streamer", "status": "Aktif"}, {"no": 46, "fase": "Urusan Bisnis", "kategori": "Bisnis", "bahaya": "Pengelolaan keuangan yang buruk", "situasi": "Pengeluaran hardware/software tidak terkontrol; tidak ada tabungan; mencampur uang stream dengan uang pribadi", "kemungkinan": 4, "keparahan": 4, "skor": 16, "level": "Sangat Tinggi", "pengendalian": "Buat anggaran bulanan khusus streaming; pisahkan rekening stream dan pribadi; catat semua pengeluaran; sisihkan 30% penghasilan stream untuk pajak dan darurat", "pic": "Streamer", "status": "Aktif"}, {"no": 47, "fase": "Persiapan & Setup", "kategori": "Hukum", "bahaya": "Penggunaan konten Generative AI yang melanggar aturan platform/komunitas", "situasi": "Aset visual, suara, atau materi kreatif memakai Generative AI (gambar, voice, musik) secara sengaja tanpa cek aturan platform; atau tidak sengaja terpakai tanpa disadari (template, asset pack, model commission)", "kemungkinan": 2, "keparahan": 3, "skor": 6, "level": "Sedang", "pengendalian": "Cek kebijakan AI-generated content di setiap platform sebelum publish; minta konfirmasi tertulis dari desainer/komisi soal proses pembuatan aset; jika terindikasi tidak sengaja, lakukan klarifikasi & perbaikan segera (sesuai Pasal 10 Perjanjian Komunitas) sebelum sanksi dijatuhkan", "pic": "Streamer", "status": "Aktif"}], "contingency": [{"emoji": "🔴", "no": "K-1", "skenario": "Doxxing / Kebocoran Identitas Asli", "prioritas": "KRITIS", "langkah": "1. Tutup OBS/end stream SEKARANG — tidak perlu berpamitan panjang\n2. Screenshot semua bukti sebelum konten dihapus orang lain\n3. Log out dari SEMUA akun di browser (bukan hanya streaming)\n4. Ganti password: email utama → akun streaming → sosmed → payment\n5. Aktifkan 2FA yang belum aktif\n6. Kirim takedown request ke platform dalam 1 jam\n7. Post singkat di Discord: 'Ada gangguan teknis, stream ditunda'\n8. Lapor ke patrolisiber.polri.go.id jika menyangkut data pribadi", "tidak": "✗ Jangan langsung klarifikasi publik — tunggu 24 jam\n✗ Jangan balas komentar apapun hari ini\n✗ Jangan jadwalkan stream pengganti dulu\n✗ Jangan minta bantuan komunitas untuk 'cari pelaku'", "alat": "ExifTool · patrolisiber.polri.go.id · Password Manager · Bitwarden", "waktu": "0–2 jam penanganan awal"}, {"emoji": "🔴", "no": "K-2", "skenario": "Akun Streaming Di-ban / Suspended", "prioritas": "KRITIS", "langkah": "1. Cek email — baca alasan penangguhan sebelum bertindak apapun\n2. Jangan buat akun baru — ini bisa permanen ban\n3. Submit appeal dalam 24 jam (ikuti form resmi platform)\n4. Aktifkan akun backup yang sudah disiapkan sebelumnya\n5. Umumkan di Discord/Twitter bahwa ada 'gangguan teknis'\n6. Simpan nomor tiket appeal untuk follow-up\n7. Jadwalkan stream pertama di platform backup", "tidak": "✗ Jangan sebut 'di-ban' di publik sebelum appeal jelas\n✗ Jangan spam email ke support platform\n✗ Jangan minta komunitas untuk mass-report balik\\n⚠ Catatan: Ban akibat gangguan platform di luar kendali anggota termasuk Force Majeure (Pasal 16 Perjanjian Komunitas) — anggota tidak dianggap lalai. Ban akibat pelanggaran ToS oleh anggota sendiri bukan Force Majeure dan dapat dikenai mekanisme Pasal 15.", "alat": "YouTube: support.google.com/youtube · TikTok: support.tiktok.com\nPlatform backup: TikTok / YouTube (jika YouTube utama)", "waktu": "1–3 hari (appeal proses)"}, {"emoji": "🔴", "no": "K-3", "skenario": "Harassment & Brigading Massal Saat Live", "prioritas": "KRITIS", "langkah": "1. Aktifkan slow mode (30 detik) SEKARANG\n2. Aktifkan subscriber-only mode jika brigading parah\n3. JANGAN engage troll secara verbal — abaikan total\n4. Ping mod di Discord sambil tetap stream (kalau ada mod)\n5. Jika tidak ada mod aktif: end stream dengan 'ada gangguan teknis'\n6. Setelah stream: kumpulkan username penyerang, lapor ke platform\n7. Posting penjelasan singkat ke komunitas setelah 24 jam", "tidak": "✗ Jangan baca TTS donasi dari akun asing saat brigading\n✗ Jangan buat keputusan besar di tengah situasi panas\n✗ Jangan unfollow/block secara live — lakukan offline", "alat": "YouTube: Slow Mode / Subscriber-only Chat · TikTok: Comment Filter · Discord: Mass ban", "waktu": "30 menit – 2 jam"}, {"emoji": "🟠", "no": "M-1", "skenario": "Krisis Kesehatan Mental Saat atau Pasca Stream", "prioritas": "MENDESAK", "langkah": "1. Gunakan kata kode dengan mod: 'Wah cuacanya bagus' → mod umumkan gangguan teknis\n2. End stream tanpa penjelasan panjang — ini 100% boleh\n3. Hubungi 1 orang trusted di luar dunia streaming\n4. Tunggu minimum 24 jam sebelum buat pernyataan publik apapun\n5. Jika krisis serius: Into The Light Indonesia 119 ext 8\n6. Hiatus tidak harus diumumkan segera — 1–2 hari tidak ada yang rusak", "tidak": "✗ Jangan performatif di kamera saat sedang tidak baik\n✗ Jangan buka sosmed atau Discord 24 jam ke depan\n✗ Jangan buat keputusan besar (hiatus panjang, hapus akun) saat krisis", "alat": "Into The Light: 119 ext 8 · Yayasan Pulih: (021) 788-42580\nTemplate: 'Butuh istirahat teknis, kembali segera' (copy-paste ready)", "waktu": "Immediate + 24 jam recovery"}, {"emoji": "🟠", "no": "M-2", "skenario": "DMCA Strike / Konten Otomatis Dihapus", "prioritas": "MENDESAK", "langkah": "1. Stop stream jika platform mute/cut otomatis\n2. Edit VOD: mute atau cut segmen bermasalah sebelum re-upload\n3. JANGAN counter-claim tanpa yakin — bisa memperburuk\n4. Identifikasi sumber DMCA: musik, game OST, atau klip?\n5. Ganti ke library musik aman permanen (lihat resource)\n6. Dokumentasikan insiden untuk referensi ke depan", "tidak": "✗ Jangan panik upload ulang tanpa edit dulu\n✗ Jangan counter-claim sembarangan\n✗ Tidak perlu minta maaf panjang ke komunitas", "alat": "Epidemic Sound · Pretzel Rocks · Musicbed\nYouTube Content ID checker · Pex.com", "waktu": "2–6 jam editing + upload"}, {"emoji": "🟠", "no": "M-3", "skenario": "Collab Partner Bocorkan Identitas (OPSEC Breach)", "prioritas": "MENDESAK", "langkah": "1. Jangan panik di depan penonton — lanjutkan dengan tenang atau end stream\n2. Setelah stream: hubungi partner secara PRIVAT (bukan publik)\n3. Minta partner hapus klip/VOD yang bermasalah\n4. Audit apakah informasi sudah menyebar luas (search di Twitter/Reddit)\n5. Jika sudah tersebar: ikuti protokol K-1 (Doxxing)\n6. Evaluasi kebijakan briefing OPSEC sebelum collab berikutnya\\n7. Jika partner adalah anggota komunitas: ini pelanggaran Pasal 13 (Kerahasiaan) — tempuh Pasal 15 (teguran → sanksi bertahap via musyawarah). Jika partner eksternal: selesaikan via Pasal 12, atau jalur hukum jika diperlukan.", "tidak": "✗ Jangan konfrontasi partner di depan publik\n✗ Jangan langsung umumkan ke komunitas\n✗ Jangan batalkan semua collab ke depan secara impulsif", "alat": "Template brief OPSEC pra-collab (sheet Toolkit)\nTwitter Advanced Search · Google Alert untuk nama karakter", "waktu": "1–48 jam tergantung skala"}, {"emoji": "🟠", "no": "M-4", "skenario": "Kontrak Sponsor Bermasalah / Brand Scam", "prioritas": "MENDESAK", "langkah": "1. STOP — jangan tanda tangani apapun dulu\n2. Verifikasi legalitas perusahaan di AHU Online (ahu.go.id)\n3. Google nama brand + 'scam' / 'review'\n4. Konsultasikan ke LBH Jakarta: (021) 314-5518 (gratis)\n5. Jika sudah terlanjur tanda tangan: dokumentasikan semua klausul\n6. Minta adendum atau terminasi kontrak secara tertulis", "tidak": "✗ Jangan berikan data rekening sebelum kontrak ditandatangani\n✗ Jangan accept kontrak tanpa batas waktu yang jelas\n✗ Jangan bayar 'biaya pendaftaran' apapun", "alat": "AHU Online: ahu.go.id · LBH Jakarta: (021) 314-5518\nTemplate MOU collab sederhana (sheet Toolkit)", "waktu": "1–7 hari verifikasi"}, {"emoji": "🟡", "no": "P-1", "skenario": "VOD / File Rekaman Hilang atau Corrupt", "prioritas": "PENTING", "langkah": "1. Cek folder OBS recording — apakah auto-record aktif?\n2. Coba repair file dengan VLC atau Handbrake\n3. Cek cloud backup (Google Drive / Backblaze) jika sudah disetup\n4. Jika tidak bisa recovery: buat pengumuman singkat ke komunitas\n5. Setup cloud backup otomatis agar tidak terulang", "tidak": "✗ Tidak perlu minta maaf panjang ke penonton\n✗ Jangan habiskan lebih dari 2 jam recovery manual", "alat": "VLC Media Player · Handbrake · Google Drive Auto-backup\nOBS: Settings → Output → Recording (aktifkan selalu)", "waktu": "2–4 jam recovery"}, {"emoji": "🟡", "no": "P-2", "skenario": "Masalah Teknis Besar Saat Live (PC Crash, Internet Putus)", "prioritas": "PENTING", "langkah": "1. Umumkan di chat: 'Ada gangguan teknis, kembali sebentar'\n2. Troubleshoot cepat (max 5 menit): restart OBS → cek koneksi → reboot\n3. Jika lebih dari 5 menit: switch ke mobile stream (hotspot + OBS mobile)\n4. Jika tidak bisa: end stream, post update di Discord\n5. Jadwalkan stream susulan dalam 24–48 jam", "tidak": "✗ Jangan diam lama tanpa update ke penonton\n✗ Jangan troubleshoot lebih dari 5 menit saat live", "alat": "OBS Mobile · Hotspot HP · UPS (untuk proteksi listrik)\nHWiNFO (monitor suhu PC) · LAN kabel sebagai backup Wi-Fi", "waktu": "15–60 menit"}, {"emoji": "🟡", "no": "P-3", "skenario": "Konflik Internal Komunitas Discord", "prioritas": "PENTING", "langkah": "1. Jangan pilih 'pihak' di depan publik\n2. Moderasi dengan kebijakan yang sudah ada — jangan buat aturan baru di tengah konflik\n3. Beri cooling period: mute channel yang bermasalah 24 jam\n4. Tangani secara DM, bukan di publik server\n5. Jika konflik besar: post statement netral 'Komunitas ini untuk semua'\n6. Evaluasi: apakah ada 1–2 aktor utama yang perlu di-ban?", "tidak": "✗ Jangan balas konflik saat kamu sendiri emosional\n✗ Jangan hapus semua pesan — bisa hilangkan konteks\n✗ Jangan buat polling publik tentang keputusan moderasi", "alat": "Discord Timeout · Discord Mute Channel · MEE6 / Dyno bot\nTemplate: 'Community Statement' (sheet Toolkit)", "waktu": "1–3 hari deeskalasi"}, {"emoji": "🟡", "no": "P-4", "skenario": "Akun Impersonasi / Akun Palsu Muncul", "prioritas": "PENTING", "langkah": "1. Screenshot akun palsu segera (sebelum dihapus atau diubah)\n2. Lapor ke platform dengan fitur 'Report Impersonation'\n3. Umumkan akun-akun RESMI kamu di Discord + pinned post sosmed\n4. Edukasi komunitas: 'Saya tidak akan pernah DM minta donasi'\n5. Setup Google Alert untuk nama karakter kamu", "tidak": "✗ Jangan engage atau balas akun palsu\n✗ Tidak perlu buat thread panjang — statement singkat sudah cukup", "alat": "Google Alert · Laporan platform (YouTube/TikTok/X)\nTemplate: 'Akun Resmi' announcement (sheet Toolkit)", "waktu": "2–4 jam"}, {"emoji": "🟢", "no": "Pr-1", "skenario": "Setup Rutin Bulanan (Pencegahan)", "prioritas": "PREVENTIF", "langkah": "Jadwalkan 1x per bulan:\n□ Audit metadata semua aset baru (ExifTool)\n□ Cek storage dan cloud backup masih berjalan\n□ Review moderator handbook — masih relevan?\n□ Cek semua password masih unik dan kuat\n□ Backup database Discord (roles, rules)\n□ Rekonsiliasi keuangan stream bulan ini (transparansi ke seluruh anggota sesuai Pasal 9)\n□ Update daftar akun resmi yang dipublish", "tidak": "✗ Tidak perlu dilakukan sekaligus dalam satu hari\n✗ Skip yang tidak relevan bulan ini", "alat": "Bitwarden / 1Password · ExifTool · Google Drive\nNotion / spreadsheet tracking keuangan", "waktu": "2–3 jam/bulan"}, {"emoji": "🟢", "no": "Pr-2", "skenario": "Pra-Collab OPSEC Briefing", "prioritas": "PREVENTIF", "langkah": "Sebelum setiap collab:\n□ Kirim brief OPSEC ke partner (lihat template di sheet Toolkit)\n□ Test audio bersama — pastikan background suara aman\n□ Test video — pastikan tidak ada info pribadi di background\n□ Sepakati: boleh klip apa saja? Boleh upload ulang?\n□ Tulis MOU sederhana jika collab melibatkan uang", "tidak": "✗ Tidak perlu brief sepanjang dokumen ini\n✗ Collab kasual dengan teman dekat bisa lebih ringkas\\n⚠ Jika tidak bisa memenuhi komitmen collab, beri tahu anggota lain yang terlibat sesegera mungkin (kewajiban Pasal 6 Perjanjian Komunitas).", "alat": "Template Brief OPSEC · Template MOU Collab (sheet Toolkit)", "waktu": "30 menit prep"}], "sop": [{"title": "🔴 Doxxing / Kebocoran Identitas", "steps": [{"step": "1. Hentikan stream seketika", "desc": "Tutup OBS/platform tanpa penjelasan panjang. Tidak perlu bilang alasan ke penonton."}, {"step": "2. Dokumentasi semua bukti", "desc": "Screenshot, rekam layar, dan catat URL sebelum konten sempat dihapus oleh pihak lain."}, {"step": "3. Takedown request platform", "desc": "Hubungi support platform dalam 1 jam pertama. Siapkan bukti kepemilikan identitas karakter."}, {"step": "4. Ganti semua password", "desc": "Prioritaskan: email utama → akun streaming → akun sosmed → payment (Paypal/rekening terhubung)."}, {"step": "5. Aktifkan 2FA semua akun", "desc": "Jika belum aktif, lakukan sekarang sebelum lanjutkan aktivitas apapun."}, {"step": "6. Lapor polisi siber", "desc": "Gunakan patrolisiber.polri.go.id jika menyangkut NIK, alamat, atau nomor HP asli."}, {"step": "7. Evaluasi dan audit OPSEC", "desc": "Setelah situasi stabil, lakukan audit menyeluruh: dari mana kebocoran berasal? Apa yang perlu diubah?"}, {"step": "8. Jika sumber dari anggota komunitas", "desc": "Kebocoran identitas oleh sesama anggota merupakan pelanggaran Pasal 13 (Kerahasiaan) Perjanjian Komunitas. Tempuh mekanisme Pasal 15 (Kelalaian/Wanprestasi): teguran → sanksi bertahap melalui musyawarah anggota tetap."}]}, {"title": "🔴 Akun Di-ban / Suspended Mendadak", "steps": [{"step": "1. Jangan panik, cek email", "desc": "Platform biasanya kirim email alasan penangguhan. Baca dulu sebelum bertindak."}, {"step": "2. Submit appeal segera", "desc": "Setiap platform punya form appeal. Kirim dalam 24 jam pertama dengan bukti yang relevan."}, {"step": "3. Umumkan ke komunitas", "desc": "Beri tahu via Discord/Twitter bahwa sedang ada masalah teknis. Jangan sebut 'banned' dulu sebelum jelas."}, {"step": "4. Aktifkan platform backup", "desc": "Ini alasan kenapa akun backup harus sudah disiapkan dan diverifikasi sebelumnya."}, {"step": "5. Dokumentasikan proses appeal", "desc": "Simpan semua nomor tiket dan korespondensi dengan platform untuk follow-up."}]}, {"title": "🔴 Harassment & Brigading Massal", "steps": [{"step": "1. Aktifkan slow mode / sub-only", "desc": "Lakukan dalam 30 detik pertama sejak menyadari adanya brigading."}, {"step": "2. Panggil mod aktif", "desc": "Chat pribadi dengan mod terpercaya: koordinasi mass-ban dan filter kata kunci."}, {"step": "3. Jangan engage troll di live", "desc": "Tidak merespons = tidak memberikan konten yang mereka cari. Abaikan secara konsisten."}, {"step": "4. End stream jika eskalasi", "desc": "Tidak ada stream yang lebih penting dari keselamatanmu. Buat pernyataan singkat setelahnya."}, {"step": "5. Lapor ke platform", "desc": "Kumpulkan username penyerang dan lapor secara massal ke platform."}]}, {"title": "🟡 Krisis Kesehatan Mental Saat Live", "steps": [{"step": "1. Gunakan kode kata darurat", "desc": "Sepakati kata kode dengan mod (contoh: 'Wah cuacanya bagus') → mod umumkan 'ada gangguan teknis'."}, {"step": "2. End stream tanpa penjelasan", "desc": "Boleh. Penonton yang baik akan mengerti. Tidak perlu performatif di depan kamera saat sedang tidak baik."}, {"step": "3. Hubungi orang kepercayaan", "desc": "Satu orang di luar dunia streaming yang tahu identitas aslimu. Kontak mereka segera."}, {"step": "4. Tunggu 24 jam sebelum posting", "desc": "Jangan buat pernyataan publik, klarifikasi, atau keputusan besar dalam kondisi emosional."}, {"step": "5. Cari bantuan profesional", "desc": "Into The Light Indonesia: 119 ext 8. Hubungi jika dibutuhkan, tanpa malu."}]}, {"title": "🟡 DMCA Strike / Konten Dihapus", "steps": [{"step": "1. Stop stream jika platform memutus", "desc": "Platform kadang mute/cut stream otomatis. Hentikan dan edit sumber masalah dulu."}, {"step": "2. Edit VOD sebelum publish", "desc": "Mute atau cut segmen bermasalah. Cek ulang sebelum upload ke YouTube/platform lain."}, {"step": "3. Jangan counter-claim sembarangan", "desc": "Counter-claim yang gagal bisa memperburuk situasi. Konsultasi dulu jika tidak yakin."}, {"step": "4. Switch ke musik aman", "desc": "Epidemic Sound, Pretzel Rocks, atau Musicbed — investasi yang wajib untuk VTuber indie."}]}, {"title": "🟡 Masalah Teknis Besar Saat Live", "steps": [{"step": "1. Umumkan di chat/Discord", "desc": "Beri tahu penonton bahwa ada masalah teknis. Jangan diam-diam disconnect."}, {"step": "2. Coba troubleshoot cepat (maks 5 mnt)", "desc": "Restart OBS, cek koneksi, reboot software tracking. Jika lebih dari 5 menit, end stream."}, {"step": "3. Switch ke mobile stream jika perlu", "desc": "Hotspot + OBS mobile atau platform bawaan bisa jadi solusi darurat sementara."}, {"step": "4. Jadwalkan stream susulan", "desc": "Beri tahu komunitas kapan stream akan dilanjutkan. Transparansi membangun kepercayaan."}]}, {"title": "⚫ Kontak & Resource Darurat", "steps": [{"step": "Platform Support", "desc": "YouTube: support.google.com/youtube/creator  |  TikTok: support.tiktok.com"}, {"step": "Polisi Siber Indonesia", "desc": "patrolisiber.polri.go.id  —  laporan kejahatan siber online 24 jam"}, {"step": "Layanan Konseling", "desc": "Into The Light Indonesia: 119 ext 8  |  Yayasan Pulih: (021) 788-42580"}, {"step": "Bantuan Hukum", "desc": "LBH Jakarta: (021) 314-5518  |  Konsultasi hukum gratis tersedia"}, {"step": "Komunitas Support VTuber ID", "desc": "Cari komunitas VTuber Indonesia di Discord untuk peer support dan referral vendor terpercaya"}, {"step": "Backup Platform", "desc": "Siapkan akun di: YouTube dan TikTok sebagai platform live, plus channel cadangan jika platform utama bermasalah"}]}], "toolkit": [{"title": "[TEMPLATE PESAN] Gangguan Teknis (Discord/Twitter)", "content": "⚙️ Hai Wargantara!\n\nAda gangguan teknis mendadak yang membutuhkan penanganan segera.\nStream hari ini ditunda sementara. Update lebih lanjut segera menyusul.\n\nTerima kasih atas pengertiannya! 🙏"}, {"title": "[TEMPLATE PESAN] Hiatus Singkat (Discord/Twitter)", "content": "🛑 Hai Wargantara!\n\n[Nama Karakter] butuh istirahat sebentar — akan kembali dalam [X hari/minggu].\nTidak ada yang perlu dikhawatirkan, ini hanya recharge time.\n\nNantikan update selanjutnya! ♡"}, {"title": "[TEMPLATE PESAN] Akun Resmi (Pinned Post)", "content": "📌 AKUN RESMI [NAMA KARAKTER]\n\n✅ YouTube: [link]\n✅ TikTok: [link]\n✅ Twitter/X: [link]\n✅ Instagram: [link]\n✅ Discord: [link]\n\n⚠️ Saya TIDAK PERNAH DM duluan minta donasi atau personal data.\nJika ada akun yang mengatasnamakan saya, mohon lapor ke saya dan platform terkait."}, {"title": "[TEMPLATE PESAN] Community Statement (Konflik Discord)", "content": "💬 Pesan dari [Nama Karakter]\n\nSaya aware tentang situasi yang terjadi di server belakangan ini.\nKomunitas ini adalah ruang yang inklusif untuk semua Wargantara.\n\nKami akan mengevaluasi situasi dan memastikan semua member merasa aman.\nSaya harap kita semua bisa menjaga suasana yang positif bersama. ♡"}, {"title": "[CHECKLIST] Pre-Collab OPSEC Brief (untuk Partner)", "content": "Hei! Sebelum collab, ada beberapa hal yang perlu kita sepakati:\n\n□ Tolong jangan sebut nama asli / nama RL-ku dalam apapun\n□ Pastikan background audio kamu tidak mengandung info pribadimu (dan aku juga akan pastikan hal yang sama)\n□ Klip boleh dibuat, tapi mohon tidak digunakan untuk konteks yang tidak sesuai\n□ VOD boleh disimpan/diupload? (sepakati dulu sebelum live)\n□ Jika ada hal tidak nyaman saat live, kita bisa gunakan kata kode: [kata kode kita]\n\nTerima kasih sudah kooperatif! Ini untuk keamanan kita berdua ♡"}, {"title": "[CHECKLIST] Pre-Stream Checklist (Solo Operator)", "content": "□ Test OBS (preview stream aktif?)\n□ Test avatar/tracking (VTube Studio/VSeeFace)\n□ Test audio (mic + output ke OBS)\n□ Cek koneksi internet (kabel LAN tersambung?)\n□ Aktifkan Do Not Disturb di semua notifikasi\n□ Tutup tab browser yang tidak perlu\n□ Cek storage OBS recording (cukup space?)\n□ VPN aktif\n□ Mod sudah on standby (jika ada)\n□ Talking points untuk hari ini sudah siap?"}, {"title": "[CHECKLIST] Post-Stream Checklist (Solo Operator)", "content": "□ Stop recording OBS\n□ Cek file rekaman — bisa diplay?\n□ Strip metadata dari thumbnail sebelum upload\n□ Edit/mute segmen DMCA sebelum upload VOD\n□ Catat pemasukan hari ini (donasi, bit, sub)\n□ Backup file rekaman ke cloud\n□ Update jadwal stream berikutnya\n□ Cek 1x analitik — HANYA 1x, besok pagi saja"}, {"title": "[RESOURCE] Kontak Darurat", "content": "🚨 Polisi Siber: patrolisiber.polri.go.id\n💙 Into The Light (konseling): 119 ext 8\n💙 Yayasan Pulih: (021) 788-42580\n⚖️ LBH Jakarta: (021) 314-5518\n🎵 Epidemic Sound: epidemicsound.com\n🎵 Pretzel Rocks: pretzel.rocks\n📋 AHU Online (cek legalitas brand): ahu.go.id\n📺 YouTube Creator Support: support.google.com/youtube/creator\n📺 TikTok Support: support.tiktok.com"}, {"title": "[RESOURCE] Tools Wajib Punya", "content": "🔧 ExifTool — strip metadata dari semua file\n🔒 Bitwarden / 1Password — password manager\n🌐 VPN — wajib aktif saat streaming\n📹 OBS dengan auto-record aktif\n🔊 Epidemic Sound / Pretzel Rocks — musik aman DMCA\n🤖 MEE6 / Dyno — bot moderasi Discord\n☁️ Google Drive — cloud backup otomatis\n🛡️ 2FA aktif di SEMUA akun\n📊 HWiNFO — monitor suhu PC"}, {"title": "[RESOURCE] Template MOU Collab Sederhana", "content": "KESEPAKATAN KOLABORASI\n\nPihak A: [Nama Karakter A]\nPihak B: [Nama Karakter B]\nTanggal Collab: [dd/mm/yyyy]\n\nDisepakati:\n1. Hak klip: Boleh / Tidak boleh (coret salah satu)\n2. Upload VOD ke channel masing-masing: Boleh / Tidak boleh\n3. Monetisasi VOD: Boleh / Tidak boleh\n4. Pembagian revenue (jika ada): A: __% / B: __%\n5. Tidak saling menyebut nama RL di live maupun sosmed\n\nKesepakatan ini berlaku untuk collab tanggal di atas.\n\nTTD (via chat/DM dianggap sah sebagai bukti persetujuan)"}], "dashboard": {"phase_summary": [{"fase": "Persiapan & Setup", "jml": 9, "rendah": 2, "sedang": 4, "tinggi": 2, "sgttinggi": 1, "utama": "Kebocoran IP & metadata identitas", "tindakan": "Audit aset digital & wajibkan VPN"}, {"fase": "Saat Live Streaming", "jml": 10, "rendah": 1, "sedang": 4, "tinggi": 4, "sgttinggi": 1, "utama": "Akun di-ban mendadak", "tindakan": "Diversifikasi platform & backup akun"}, {"fase": "Kolaborasi & Event", "jml": 7, "rendah": 1, "sedang": 3, "tinggi": 1, "sgttinggi": 1, "utama": "Kebocoran identitas saat collab", "tindakan": "Brief partner collab tentang OPSEC"}, {"fase": "Pasca Stream", "jml": 7, "rendah": 0, "sedang": 3, "tinggi": 3, "sgttinggi": 1, "utama": "Klip dimanipulasi out of context", "tindakan": "Arsip VOD & buat kebijakan clipping"}, {"fase": "Manajemen Komunitas", "jml": 7, "rendah": 0, "sedang": 3, "tinggi": 3, "sgttinggi": 1, "utama": "Grooming di komunitas", "tindakan": "Buat jalur laporan anonim & latih mod"}, {"fase": "Urusan Bisnis", "jml": 7, "rendah": 0, "sedang": 0, "tinggi": 3, "sgttinggi": 4, "utama": "Tidak ada diversifikasi income", "tindakan": "Bangun 3+ sumber pendapatan segera"}], "top5": [{"fase": "Urusan Bisnis", "bahaya": "Tidak ada diversifikasi sumber pendapatan", "skor": 20, "kendali": "Bangun min. 3 sumber income: donasi Tako, merch, sponsor, AdSense, membership"}, {"fase": "Kolaborasi & Event", "bahaya": "Kebocoran identitas saat collab", "skor": 15, "kendali": "Brief partner tentang OPSEC; test audio/visual sebelum live bersama"}, {"fase": "Persiapan & Setup", "bahaya": "Identitas asli tertanam di metadata aset digital", "skor": 15, "kendali": "Strip metadata semua file sebelum digunakan (ExifTool); gunakan akun terpisah untuk aset karakter"}, {"fase": "Saat Live Streaming", "bahaya": "Screen share tidak sengaja menampilkan info pribadi", "skor": 16, "kendali": "Aktifkan Do Not Disturb sebelum stream; gunakan profil browser khusus stream"}, {"fase": "Pasca Stream", "bahaya": "Klip stream disebarkan tanpa konteks", "skor": 16, "kendali": "Arsip semua VOD sebagai bukti konteks asli; buat kebijakan clipping yang jelas"}]}, "triage": [{"q": "Apakah kamu dalam bahaya fisik atau identitas aslimu sedang bocor?", "yes": "Ikuti SOP K-1 (Doxxing)\nEnd stream → Screenshot bukti → Ganti password → Lapor", "no": "Lanjut ke pertanyaan 2"}, {"q": "Apakah akunmu di-ban atau suspended?", "yes": "Ikuti SOP K-2\nCek email → Submit appeal → Aktifkan platform backup", "no": "Lanjut ke pertanyaan 3"}, {"q": "Apakah ada brigading/harassment massal saat live?", "yes": "Ikuti SOP K-3\nSlow mode → Sub-only → Jangan engage → End jika perlu", "no": "Lanjut ke pertanyaan 4"}, {"q": "Apakah kamu sedang dalam kondisi mental yang tidak baik?", "yes": "Ikuti SOP M-1\nEnd stream → Hubungi orang trusted → Tunggu 24 jam", "no": "Lanjut ke pertanyaan 5"}, {"q": "Apakah ada masalah teknis besar saat live sekarang?", "yes": "Ikuti SOP P-2\nAnnounce → Troubleshoot 5 mnt → Mobile/End stream", "no": "Situasimu mungkin tidak darurat.\nBuka Contingency Matrix untuk cari skenario yang relevan."}], "workload": [{"peran": "🎤 Streamer", "aktivitas": "Go live, buat konten, interaksi chat", "frekuensi": "Sesuai jadwal", "otomasi": "❌ Tidak", "prioritas": "KRITIS"}, {"peran": "🛡️ Moderator", "aktivitas": "Ban/timeout spam, filter chat, tanggapi brigading", "frekuensi": "Saat live", "otomasi": "⚡ Sebagian (bot)", "prioritas": "KRITIS"}, {"peran": "📹 Editor", "aktivitas": "Edit VOD, strip metadata, upload, thumbnail", "frekuensi": "Pasca stream", "otomasi": "⚡ Sebagian (template)", "prioritas": "PENTING"}, {"peran": "📊 Analis", "aktivitas": "Review analitik, cek performa konten", "frekuensi": "1x/minggu", "otomasi": "❌ Tidak", "prioritas": "RUTIN"}, {"peran": "💼 Bisnis/Sponsor", "aktivitas": "Verifikasi brand, review kontrak, negosiasi", "frekuensi": "Per project", "otomasi": "❌ Tidak", "prioritas": "MENDESAK*"}, {"peran": "💰 Keuangan", "aktivitas": "Catat pemasukan, rekonsiliasi, laporan pajak", "frekuensi": "Bulanan", "otomasi": "⚡ Sebagian (spreadsheet)", "prioritas": "PENTING"}, {"peran": "🤝 Community Manager", "aktivitas": "Discord maintenance, respon DM, kelola mod", "frekuensi": "Harian (15–30 mnt)", "otomasi": "⚡ Sebagian (bot + rules)", "prioritas": "PENTING"}, {"peran": "🔒 Security Officer", "aktivitas": "Audit OPSEC, cek metadata, update password", "frekuensi": "Bulanan", "otomasi": "⚡ Sebagian (alert)", "prioritas": "PENTING"}, {"peran": "📣 PR / Sosmed", "aktivitas": "Post update, jadwal konten, respon komunitas", "frekuensi": "3–4x/minggu", "otomasi": "⚡ Sebagian (Buffer/Hootsuite)", "prioritas": "RUTIN"}, {"peran": "⚖️ Legal", "aktivitas": "Review kontrak, konsultasi, dokumentasi", "frekuensi": "Per kebutuhan", "otomasi": "❌ Tidak (outsource ke LBH)", "prioritas": "MENDESAK*"}], "members": [{"id": "soren", "name": "SOREN", "strength": ["CHARM: Natural curious dengan orang lain", "Kemampuan absorb dan belajar cepat", "Otentik & long term fanbase (attach & loyal)", "Sense of responsibility, struktural, profesional"], "weakness": ["Kapasitas energi terbatas", "Identity bisa gampang goyah", "Bisa overgive dan kehilangan boundaries", "Butuh environment supportif"], "opportunities": ["Prime window untuk nurturing (bukan perform, tapi recovery & self improvement)", "Waktu untuk merenung self-branding yang seperti apa (brandingnya kuat)", "Fanbase quality > quantity, kecil tapi invested", "Wealth datang dari konsisten jangka panjang"], "threats": ["Overgiving", "Circle audit — ada yang draining", "Kehilangan diri sendiri", "Environment sensitive"]}, {"id": "noah", "name": "NOAH", "strength": ["Sense of self yang solid, stable talent", "Competitive resilience", "Jago kolaborasi & networking", "Kemampuan belajar dan adaptasi"], "weakness": ["Ekspresi diri tidak spontan (susah improvisasi, butuh struktur)", "Kurang drive kompetitif", "Banyak tahu tapi susah nunjukin ke orang lain", "Pressure dari eksternal atau fanbase, overthinking"], "opportunities": ["Prime window untuk skill upgrade (need mentorship, kolaborasi edukatif)", "Collab dengan talent Rui & Soren unlock sisi Noah yang audience belum lihat", "Tahun ini ada mentor atau support", "Reputasi dan kredibilitas naik kalau dichannel dengan baik"], "threats": ["Double pressure, mengakumulasikan burnout", "Fans toxic atau teman yang draining", "Market yang ramai, Noah perlu branding dan positioning", "Tanpa output yang jelas, stuck atau procrastination"]}, {"id": "rui", "name": "RUI", "strength": ["CHARM: naturally expressive and entertaining", "Naturally bikin orang merasa included", "Otentik dan konsisten, siapa Rui di stream = siapa Rui di RL", "Kreatif dan ide mengalir selama brainstorming"], "weakness": ["Kapasitas energinya paling sedikit", "Tidak ada switch-off button", "Struktur dan konsistensi lemah, susah disiplin", "Environment sensitive"], "opportunities": ["Prime window untuk development", "Tahun ini ada momen yang memorable", "Fanbase yang loyal with healthy boundaries, retention rate tinggi", "Potensi monetisasi"], "threats": ["Pasti burnout, bukan mungkin", "Kompetisi, persaingan yang draining — perlu shield", "Collab intens dengan Anne/Soren/Arda bisa draining", "Creative block"]}, {"id": "anne", "name": "ANNE", "strength": ["Stamina dan longevity terkuat (hampir tidak akan hiatus)", "Resiliensi, tidak goyah tekanan, kritik, drama", "Otentik & long term fanbase (attach & loyal)", "Periode paling subur untuk kreatif output"], "weakness": ["Perfeksionis", "Susah spontan, improvisasi — perlu struktur", "Kompetitif kontan", "Butuh terus di-educate untuk aware"], "opportunities": ["Prime window untuk breakthrough (keluar dari zona nyaman)", "Tahun ini agresif untuk publish, create, dan show up", "Tahun untuk define Anne itu apa dan siapa", "Bisa handle workload yang demanding"], "threats": ["Action or avoidance", "Overthinking dan overpreparation parah", "Momentum drain", "Pacenya overwhelming bagi Rui dan Soren"]}, {"id": "arda", "name": "ARDA", "strength": ["Streetwise dan mampu adaptasi", "Resiliensinya dari pengalaman", "Ambisi, struktur, kreatif, intuisi paling kaya — tapi butuh unlock", "Ekspresi dan playfulness natural"], "weakness": ["Environment yang terlalu demanding", "Lingkungan Arda secara default berisik, drama, kompetitif", "Terbiasa tidak dapat support, belajar cara terima support", "Pressure dan struggle icebergnya"], "opportunities": ["Prime window untuk recovery (akhirnya dapat dukungan)", "Tahun ini apapun yang dipelajari dan develop akan sangat sticky", "Pressure veteran journey — struggle, survive bisa sangat otentik", "Kalau mau fight, Arda bisa dapat itu"], "threats": ["Drained", "Kalau ada konflik, Arda bisa kembali ke survival mode", "Terlalu underestimated", "Potensi terkubur paling dalam"]}, {"id": "igni", "name": "IGNI", "strength": ["Skillful dan craft-nya paling differentiator", "Konten Igni punya standar yang tinggi", "Ada sisi playful dan kreatif yang tersimpan", "Sense of structure dan profesional"], "weakness": ["Need support", "Fondasi identitas bisa rapuh", "Environment draining, kompetitif dan pressure", "Butuh effort untuk show up atau planning"], "opportunities": ["Window untuk wealth + pressure", "Banyak hidden talent", "Struktural dan konsisten adalah differentiator", "Potensi finansial, hidden"], "threats": ["Tidak banyak support system", "Orang sekitar draining", "Internalize pressure", "Banyak potensi tapi susah akses"]}]};
+
+/* ===================== THEME ===================== */
+(function(){
+  var m = document.cookie.match(/(?:^|;\s*)trace-theme=([^;]+)/);
+  var theme = m ? m[1] : 'light';
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+function applyThemeIcon(){
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var icon = document.getElementById('themeIcon');
+  if(icon){
+    icon.classList.remove('sf-sun-1-o','sf-moon-1-o');
+    icon.classList.add(isDark ? 'sf-sun-1-o' : 'sf-moon-1-o');
+  }
+}
+function toggleTheme(){
+  var cur = document.documentElement.getAttribute('data-theme');
+  var next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  var exp = new Date(); exp.setFullYear(exp.getFullYear()+1);
+  document.cookie = 'trace-theme='+next+'; expires='+exp.toUTCString()+'; path=/; SameSite=Lax';
+  applyThemeIcon();
+}
+document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+applyThemeIcon();
+// re-apply setelah font Saturn Icons selesai load (icon bisa blank kalau font belum ready)
+if(document.fonts && document.fonts.ready){
+  document.fonts.ready.then(function(){ applyThemeIcon(); });
+}
+// fallback retry karena icon font eksternal kadang load telat
+var _iconRetry = 0;
+var _iconTimer = setInterval(function(){
+  applyThemeIcon();
+  _iconRetry++;
+  if(_iconRetry >= 5) clearInterval(_iconTimer);
+}, 300);
+document.addEventListener('visibilitychange', function(){
+  if(!document.hidden) applyThemeIcon();
+});
+
+/* ===================== MOBILE SIDEBAR ===================== */
+var burgerBtn = document.getElementById('burgerBtn');
+var sidebar = document.getElementById('sidebar');
+burgerBtn.addEventListener('click', function(){ sidebar.classList.toggle('open'); });
+document.addEventListener('click', function(e){
+  if(window.innerWidth<=900 && sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target!==burgerBtn && !burgerBtn.contains(e.target)){
+    sidebar.classList.remove('open');
+  }
+});
+
+/* ===================== NAV-LINKS MOBILE DRAWER (samain index.html) ===================== */
+var navBurger = document.getElementById('navBurger');
+var navMobileDrawer = document.getElementById('navMobileDrawer');
+navBurger.addEventListener('click', function(){
+  var open = navMobileDrawer.classList.toggle('open');
+  navBurger.classList.toggle('open', open);
+});
+function toggleNavMSub(e){
+  e.preventDefault();
+  document.getElementById('navMSubGl').classList.toggle('open');
+}
+document.addEventListener('click', function(e){
+  if(window.innerWidth<=900 && navMobileDrawer.classList.contains('open') && !navMobileDrawer.contains(e.target) && e.target!==navBurger && !navBurger.contains(e.target)){
+    navMobileDrawer.classList.remove('open');
+    navBurger.classList.remove('open');
+  }
+});
+
+/* ===================== HELPERS ===================== */
+function esc(s){ return (s===null||s===undefined) ? '' : String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+function levelClass(level){
+  if(!level) return '';
+  return 'lv-' + level.replace(/\s+/g,'.');
+}
+function levelColorVar(level){
+  if(level==='Rendah') return 'var(--lv-low)';
+  if(level==='Sedang') return 'var(--lv-med)';
+  if(level==='Tinggi') return 'var(--lv-high)';
+  return 'var(--lv-vhigh)';
+}
+
+/* ===================== VIEW: DASHBOARD ===================== */
+function renderDashboard(){
+  var reg = DATA.register;
+  var total = reg.length;
+  var byLevel = {Rendah:0,Sedang:0,Tinggi:0,'Sangat Tinggi':0};
+  reg.forEach(function(r){ byLevel[r.level] = (byLevel[r.level]||0)+1; });
+  var avgScore = (reg.reduce(function(a,r){return a+r.skor;},0)/total).toFixed(1);
+
+  var kpis = ''
+    + kpiCard('Total Bahaya Teridentifikasi', total, '6 fase kegiatan · TRACE v2.0')
+    + kpiCard('Risiko Sangat Tinggi', byLevel['Sangat Tinggi'], 'Skor 16–25 · butuh aksi segera')
+    + kpiCard('Risiko Tinggi', byLevel['Tinggi'], 'Skor 10–15 · PIC + deadline 7 hari')
+    + kpiCard('Skor Rata-rata', avgScore, 'dari skala maksimum 25');
+
+  var phaseRows = DATA.dashboard.phase_summary.map(function(p){
+    return '<tr>'
+      + '<td><strong>'+esc(p.fase)+'</strong></td>'
+      + '<td>'+p.jml+'</td>'
+      + '<td>'+p.rendah+'</td>'
+      + '<td>'+p.sedang+'</td>'
+      + '<td>'+p.tinggi+'</td>'
+      + '<td>'+p.sgttinggi+'</td>'
+      + '<td>'+esc(p.utama)+'</td>'
+      + '<td>'+esc(p.tindakan)+'</td>'
+      + '</tr>';
+  }).join('');
+
+  var top5Rows = DATA.dashboard.top5.map(function(t){
+    return '<tr>'
+      + '<td>'+esc(t.fase)+'</td>'
+      + '<td>'+esc(t.bahaya)+'</td>'
+      + '<td><span class="score-pill" style="color:var(--lv-vhigh)">'+t.skor+'</span></td>'
+      + '<td>'+esc(t.kendali)+'</td>'
+      + '</tr>';
+  }).join('');
+
+  document.getElementById('view-dashboard').innerHTML = `
+    <div class="page-head">
+      <div class="page-eyebrow">// 01 — Overview</div>
+      <h1>Dashboard Risiko</h1>
+      <p class="page-sub">Ringkasan TRACE v2.0 untuk operasional Wargantara sebagai solo operator (talent = staff). Gunakan dashboard ini sebagai titik awal sebelum membuka register atau contingency plan secara detail.</p>
+    </div>
+    <div class="grid grid-4">${kpis}</div>
+
+    <div class="section-title">Ringkasan per Fase</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Fase</th><th>Jml</th><th>Rendah</th><th>Sedang</th><th>Tinggi</th><th>Sgt Tinggi</th><th>Bahaya Utama</th><th>Tindakan Prioritas</th></tr></thead>
+        <tbody>${phaseRows}</tbody>
+      </table>
+    </div>
+
+    <div class="section-title">Top 5 Risiko Tertinggi</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Fase</th><th>Bahaya</th><th>Skor</th><th>Pengendalian Utama</th></tr></thead>
+        <tbody>${top5Rows}</tbody>
+      </table>
+    </div>
+  `;
+}
+function kpiCard(label,value,foot){
+  return `<div class="card accent"><div class="kpi-label">${esc(label)}</div><div class="kpi-value">${value}</div><div class="kpi-foot">${esc(foot)}</div></div>`;
+}
+
+/* ===================== VIEW: REGISTER ===================== */
+var registerState = { search:'', fase:'all', level:'all' };
+function renderRegister(){
+  var reg = DATA.register;
+  var fases = Array.from(new Set(reg.map(function(r){return r.fase;})));
+  var faseOpts = '<option value="all">Semua Fase</option>' + fases.map(function(f){return `<option value="${esc(f)}">${esc(f)}</option>`;}).join('');
+  var levels = ['Rendah','Sedang','Tinggi','Sangat Tinggi'];
+  var levelOpts = '<option value="all">Semua Level</option>' + levels.map(function(l){return `<option value="${esc(l)}">${esc(l)}</option>`;}).join('');
+
+  document.getElementById('view-register').innerHTML = `
+    <div class="page-head">
+      <div class="page-eyebrow">// 02 — Hazard Register</div>
+      <h1>TRACE Register</h1>
+    </div>
+    <div class="filterbar">
+      <input type="text" id="regSearch" placeholder="Cari bahaya, kategori, atau pengendalian...">
+      <select id="regFase">${faseOpts}</select>
+      <select id="regLevel">${levelOpts}</select>
+      <span class="count" id="regCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>No</th><th>Fase</th><th>Kategori</th><th>Bahaya</th><th>Situasi / Penyebab</th>
+          <th>K</th><th>P</th><th>Skor</th><th>Level</th><th>Pengendalian</th><th>PIC</th>
+        </tr></thead>
+        <tbody id="regBody"></tbody>
+      </table>
+    </div>
+  `;
+  document.getElementById('regSearch').addEventListener('input', function(e){ registerState.search = e.target.value.toLowerCase(); renderRegisterRows(); });
+  document.getElementById('regFase').addEventListener('change', function(e){ registerState.fase = e.target.value; renderRegisterRows(); });
+  document.getElementById('regLevel').addEventListener('change', function(e){ registerState.level = e.target.value; renderRegisterRows(); });
+  renderRegisterRows();
+}
+function renderRegisterRows(){
+  var reg = DATA.register.filter(function(r){
+    if(registerState.fase!=='all' && r.fase!==registerState.fase) return false;
+    if(registerState.level!=='all' && r.level!==registerState.level) return false;
+    if(registerState.search){
+      var hay = (r.bahaya+' '+r.kategori+' '+r.situasi+' '+r.pengendalian).toLowerCase();
+      if(hay.indexOf(registerState.search)===-1) return false;
+    }
+    return true;
+  }).sort(function(a,b){ return b.skor - a.skor; });
+
+  document.getElementById('regCount').textContent = reg.length + ' / ' + DATA.register.length + ' bahaya';
+  document.getElementById('regBody').innerHTML = reg.map(function(r){
+    return `<tr>
+      <td>${r.no}</td>
+      <td>${esc(r.fase)}</td>
+      <td>${esc(r.kategori)}</td>
+      <td><strong>${esc(r.bahaya)}</strong></td>
+      <td style="max-width:260px">${esc(r.situasi)}</td>
+      <td>${r.kemungkinan}</td>
+      <td>${r.keparahan}</td>
+      <td><span class="score-pill" style="color:${levelColorVar(r.level)}">${r.skor}</span></td>
+      <td><span class="badge ${levelClass(r.level)}">${esc(r.level)}</span></td>
+      <td style="max-width:320px">${esc(r.pengendalian)}</td>
+      <td>${esc(r.pic)}</td>
+    </tr>`;
+  }).join('');
+}
+
+/* ===================== VIEW: MATRIX ===================== */
+function renderMatrix(){
+  var sevLabels = ['1\nTdk Signifikan','2\nMinor','3\nModerat','4\nMayor','5\nBencana'];
+  var likLabels = ['5 - Hampir Pasti','4 - Mungkin','3 - Sedang','2 - Jarang','1 - Sgt Jarang'];
+  var likVals = [5,4,3,2,1];
+
+  function scoreColor(score){
+    if(score<=4) return 'var(--lv-low)';
+    if(score<=9) return 'var(--lv-med)';
+    if(score<=15) return 'var(--lv-high)';
+    return 'var(--lv-vhigh)';
+  }
+
+  var rowsHtml = likVals.map(function(lk, ri){
+    var cells = [1,2,3,4,5].map(function(sv){
+      var score = lk*sv;
+      var count = DATA.register.filter(function(r){ return r.kemungkinan===lk && r.keparahan===sv; }).length;
+      return `<div class="hm-cell" style="background:${scoreColor(score)}" title="Kemungkinan ${lk} × Keparahan ${sv} = ${score} (${count} bahaya)">${score}${count?'<span style="position:absolute;bottom:3px;right:5px;font-size:.6rem;opacity:.8">×${count}</span>'.replace('${count}',count):''}</div>`;
+    }).join('');
+    return `<div class="hm-axis">${esc(likLabels[ri])}</div>${cells}`;
+  }).join('');
+
+  var headCells = sevLabels.map(function(s){ return `<div class="hm-head">${esc(s)}</div>`; }).join('');
+
+  document.getElementById('view-matrix').innerHTML = `
+    <div class="page-head">
+      <div class="page-eyebrow">// 03 — Risk Heatmap</div>
+      <h1>Matriks Risiko</h1>
+      <p class="page-sub">Kemungkinan × Keparahan. Angka kecil di pojok sel menunjukkan berapa bahaya dari TRACE Register yang berada di kombinasi tersebut.</p>
+    </div>
+    <div class="matrix-wrap">
+      <div class="heatmap">
+        <div class="hm-corner"></div>${headCells}
+        ${rowsHtml}
+      </div>
+      <div class="legend-box">
+        <div class="kpi-label" style="margin-bottom:.8rem">Level Risiko &amp; Tindakan</div>
+        <div class="legend-row"><div class="legend-sw" style="background:var(--lv-low)"></div><div><strong>Rendah (1–4)</strong><br>Monitor berkala. Tidak diperlukan tindakan segera. Review setiap 3 bulan.</div></div>
+        <div class="legend-row"><div class="legend-sw" style="background:var(--lv-med)"></div><div><strong>Sedang (5–9)</strong><br>Tindakan perbaikan dijadwalkan dalam 30 hari. Tetapkan penanggungjawab.</div></div>
+        <div class="legend-row"><div class="legend-sw" style="background:var(--lv-high)"></div><div><strong>Tinggi (10–15)</strong><br>Tindakan segera diperlukan. Tetapkan PIC dan deadline dalam 7 hari.</div></div>
+        <div class="legend-row"><div class="legend-sw" style="background:var(--lv-vhigh)"></div><div><strong>Sangat Tinggi (16–25)</strong><br>Hentikan aktivitas berisiko. Kendalikan terlebih dahulu sebelum melanjutkan streaming.</div></div>
+      </div>
+    </div>
+  `;
+}
+
+/* ===================== VIEW: CONTINGENCY ===================== */
+function renderContingency(){
+  var items = DATA.contingency;
+  var pri = {KRITIS:'var(--lv-vhigh)',MENDESAK:'var(--lv-high)',PENTING:'var(--lv-med)',PREVENTIF:'var(--lv-low)'};
+  var accordions = items.map(function(it, idx){
+    return `<div class="acc" id="cont-${idx}">
+      <div class="acc-head" onclick="toggleAcc('cont-${idx}')">
+        <div class="acc-title">${it.emoji} <span style="font-family:var(--mono);color:var(--muted);font-size:.78rem">${esc(it.no)}</span> ${esc(it.skenario)}</div>
+        <div style="display:flex;align-items:center;gap:.8rem">
+          <span class="pri-pill" style="color:${pri[it.prioritas]||'var(--ink)'}">${esc(it.prioritas)}</span>
+          <span class="acc-arrow">›</span>
+        </div>
+      </div>
+      <div class="acc-body">
+        <div class="acc-grid">
+          <div class="acc-block">
+            <div class="acc-block-label">Langkah Respons (Solo Operator)</div>
+            <pre>${esc(it.langkah)}</pre>
+          </div>
+          <div class="acc-block">
+            <div class="acc-block-label">Yang TIDAK Perlu Dilakukan</div>
+            <pre>${esc(it.tidak)}</pre>
+          </div>
+        </div>
+        <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:1.5rem;font-size:.82rem;color:var(--ink2);border-top:1px solid var(--border);padding-top:.8rem">
+          <div><strong>Alat / Resource:</strong> ${esc(it.alat)}</div>
+          <div><strong>Estimasi Waktu:</strong> ${esc(it.waktu)}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  var workloadRows = DATA.workload.map(function(w){
+    return `<tr><td>${esc(w.peran)}</td><td>${esc(w.aktivitas)}</td><td>${esc(w.frekuensi)}</td><td>${esc(w.otomasi)}</td><td><span class="pri-pill" style="color:${w.prioritas.indexOf('KRITIS')>-1?'var(--lv-vhigh)':w.prioritas.indexOf('PENTING')>-1?'var(--lv-high)':w.prioritas.indexOf('MENDESAK')>-1?'var(--lv-med)':'var(--lv-low)'}">${esc(w.prioritas)}</span></td></tr>`;
+  }).join('');
+
+  document.getElementById('view-contingency').innerHTML = `
+    <div class="page-head">
+      <div class="page-eyebrow">// 04 — Emergency Response</div>
+      <h1>Contingency Matrix</h1>
+      <p class="page-sub">Rencana respons per skenario darurat. Dirancang untuk solo operator (talent = staff) — tidak ada asumsi ada tim yang bisa langsung dipanggil. Prioritas: (1) Keselamatanmu, (2) Akun &amp; aset, (3) Komunitas, (4) Konten.</p>
+    </div>
+    ${accordions}
+
+    <div class="section-title">Solo Operator Workload Map</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Peran / Tugas</th><th>Aktivitas Spesifik</th><th>Frekuensi</th><th>Bisa Diotomasi?</th><th>Prioritas</th></tr></thead>
+        <tbody>${workloadRows}</tbody>
+      </table>
+    </div>
+    <p style="margin-top:1rem;font-size:.82rem;color:var(--ink2);border-left:2px solid var(--gold);padding-left:.8rem">
+      <strong>Catatan Wargantara Terbatas:</strong> Semua peran di atas adalah kamu sendirian. Fokus pada Streamer dan Moderator (otomasi dengan bot) terlebih dahulu. Peran Bisnis dan Legal: outsource ke LBH (gratis) atau konsultan pajak saat dibutuhkan. Peran Editor: cari 1 orang part-time dari komunitas jika memungkinkan.
+    </p>
+  `;
+}
+function toggleAcc(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+/* ===================== VIEW: TRIAGE ===================== */
+function renderTriage(){
+  var rows = DATA.triage.map(function(t, i){
+    return `<div class="tree-q">
+      <div class="qn">Pertanyaan ${i+1}</div>
+      <div class="qtext">${esc(t.q)}</div>
+      <div class="tree-branches">
+        <div class="branch yes"><b>→ Ya</b><pre>${esc(t.yes)}</pre></div>
+        <div class="branch no"><b>→ Tidak</b><pre>${esc(t.no)}</pre></div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('view-triage').innerHTML = `
+    <div class="page-head">
+      <div class="page-eyebrow">// 05 — Decision Tree</div>
+      <h1>Triage Decision Tree</h1>
+      <p class="page-sub">Gunakan ini saat panik dan tidak tahu harus mulai dari mana. Baca dari atas ke bawah, ikuti jawaban "Ya" pertama yang relevan dengan situasimu.</p>
+    </div>
+    ${rows}
+  `;
+}
+
+/* ===================== VIEW: SOP ===================== */
+function renderSop(){
+  var sections = DATA.sop.map(function(s, idx){
+    var stepsHtml = s.steps.map(function(st){
+      return `<div style="display:flex;gap:.8rem;padding:.6rem 0;border-bottom:1px dashed var(--border)">
+        <div style="font-family:var(--mono);color:var(--red);min-width:140px;font-size:.82rem">${esc(st.step)}</div>
+        <div style="font-size:.86rem;color:var(--ink2)">${esc(st.desc)}</div>
+      </div>`;
+    }).join('');
+    return `<div class="acc" id="sop-${idx}">
+      <div class="acc-head" onclick="toggleAcc('sop-${idx}')">
+        <div class="acc-title">${esc(s.title)}</div>
+        <span class="acc-arrow">›</span>
+      </div>
+      <div class="acc-body">${stepsHtml}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('view-sop').innerHTML = `
+    <div class="page-head">
+      <div class="page-eyebrow">// 06 — Response Protocol</div>
+      <h1>SOP Darurat</h1>
+      <p class="page-sub">TRACE Response Protocol — VTuber Indie Edition. Prosedur tetap untuk skenario yang paling sering terjadi.</p>
+    </div>
+    ${sections}
+  `;
+}
+
+/* ===================== VIEW: TOOLKIT ===================== */
+function renderToolkit(){
+  var cards = DATA.toolkit.map(function(t, idx){
+    return `<div class="tk-card">
+      <div class="tk-head">
+        <div class="tk-title">${esc(t.title)}</div>
+        <button class="copy-btn" onclick="copyToolkit(this, ${idx})">Copy</button>
+      </div>
+      <div class="tk-body" id="tk-body-${idx}">${esc(t.content)}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('view-toolkit').innerHTML = `
+    <div class="page-head">
+      <div class="page-eyebrow">// 07 — Ready to Use</div>
+      <h1>Toolkit &amp; Templates</h1>
+      <p class="page-sub">Copy-paste templates dan checklist. Sesuaikan nama karakter sebelum digunakan.</p>
+    </div>
+    ${cards}
+  `;
+}
+function copyToolkit(btn, idx){
+  var text = DATA.toolkit[idx].content;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent='Copy'; btn.classList.remove('copied'); }, 1600);
+  }).catch(function(){
+    btn.textContent = 'Failed';
+    setTimeout(function(){ btn.textContent='Copy'; }, 1600);
+  });
+}
+
+/* ===================== VIEW: SWOT ===================== */
+function renderSwot(){
+  document.getElementById('view-swot').innerHTML = `
+    <div class="page-head">
+      <div class="page-eyebrow">// 09 — Synthesis</div>
+      <h1>SWOT Wargantara</h1>
+      <p class="page-sub">Sintesis level organisasi dari TRACE Register, Contingency Plan, dan pola lintas-member (SWOT per talent). Bukan sheet asli sumber data — disusun untuk membantu keputusan strategis Wargantara sebagai entitas.</p>
+    </div>
+    <div class="swot-grid">
+      <div class="swot-cell s">
+        <h3>Strengths <span style="font-family:var(--mono);font-size:.8rem;color:var(--lv-low)">Internal</span></h3>
+        <ul>
+          <li>Kontrol penuh atas semua keputusan — tidak ada birokrasi tim/agensi besar</li>
+          <li>Sudah punya kerangka TRACE v2.0 + Contingency Plan terdokumentasi (47 bahaya teridentifikasi)</li>
+          <li>SOP triage &amp; decision tree memungkinkan respons cepat tanpa menunggu approval</li>
+          <li>Roster talent dengan karakter saling melengkapi: ada yang stabil (Soren, Anne), ada yang ekspresif (Rui, Arda), ada yang skillful/craft (Igni, Noah)</li>
+          <li>Fanbase lintas-talent cenderung otentik dan loyal jangka panjang, bukan sekadar hype sesaat</li>
+        </ul>
+      </div>
+      <div class="swot-cell w">
+        <h3>Weaknesses <span style="font-family:var(--mono);font-size:.8rem;color:var(--gold)">Internal</span></h3>
+        <ul>
+          <li>Talent = staff: tidak ada redundansi peran (streamer, mod, editor, akuntan sekaligus)</li>
+          <li>Tidak ada diversifikasi sumber pendapatan (skor risiko tertinggi di TRACE Register: 20/25)</li>
+          <li>Pola lintas-member: kapasitas energi terbatas &amp; rentan overgiving (Soren, Rui), perfeksionisme yang memperlambat output (Anne), butuh support system yang belum tersedia (Arda, Igni)</li>
+          <li>Peran Bisnis &amp; Legal tidak punya kapasitas internal — wajib outsource</li>
+        </ul>
+      </div>
+      <div class="swot-cell o">
+        <h3>Opportunities <span style="font-family:var(--mono);font-size:.8rem;color:#4a7fc0">Eksternal</span></h3>
+        <ul>
+          <li>Otomasi sebagian peran (moderasi bot, template editing, scheduling) untuk kurangi beban solo operator per talent</li>
+          <li>Bangun 3+ sumber income per talent: donasi Tako, merchandise, sponsor, AdSense, membership</li>
+          <li>Window mentorship/development serentak di banyak talent tahun ini (Noah butuh mentor, Soren &amp; Rui butuh recovery, Anne &amp; Arda di prime window breakthrough)</li>
+          <li>Kolaborasi antar-talent internal (Noah×Rui×Soren, dst.) bisa unlock sisi baru tanpa risiko eksternal besar — asal pacing dijaga</li>
+        </ul>
+      </div>
+      <div class="swot-cell t">
+        <h3>Threats <span style="font-family:var(--mono);font-size:.8rem;color:var(--red)">Eksternal</span></h3>
+        <ul>
+          <li>Doxxing / kebocoran identitas asli — risiko KRITIS tertinggi pada keselamatan personal</li>
+          <li>Akun di-ban/suspended mendadak tanpa platform cadangan terverifikasi</li>
+          <li>Burnout sistemik: hampir semua talent punya indikator burnout di SWOT masing-masing (Rui "pasti burnout", Noah "double pressure", Arda "drained") — ini risiko organisasi, bukan cuma individu</li>
+          <li>Brand scam / kontrak sponsor manipulatif yang mengikat tanpa perlindungan hukum</li>
+          <li>Environment/circle yang draining bisa menyebar antar-talent kalau tidak di-shield dengan baik</li>
+        </ul>
+      </div>
+    </div>
+    <p class="swot-note">Disusun dari: TRACE Register (47 bahaya, 6 fase) · Dashboard Ringkasan Risiko · Solo Operator Workload Map · SWOT per Member.</p>
+  `;
+}
+
+/* ===================== VIEW: COVER ===================== */
+function renderCover(){
+  var totalHazard = DATA.register.length;
+  var totalScenario = DATA.contingency.length - 1; // dedupe
+  var totalMember = DATA.members.length;
+  document.getElementById('view-cover').innerHTML = `
+    <div class="cover">
+      <div class="cover-eyebrow">// TRACE v2.0 — Internal Risk &amp; Talent Console</div>
+      <h1>WARGANTARA<br><span>RISK ADMIN</span></h1>
+      <div class="cover-meta">
+        <div>Bahaya Teridentifikasi<strong>${totalHazard}</strong></div>
+        <div>Skenario Darurat<strong>${totalScenario}+</strong></div>
+        <div>Talent Aktif<strong>${totalMember}</strong></div>
+        <div>Fase Kegiatan<strong>6</strong></div>
+      </div>
+      <div class="cover-cta">
+        <button class="cover-btn primary" onclick="showView('dashboard')">Buka Dashboard →</button>
+        <button class="cover-btn" onclick="showView('triage')">Lihat Triage Tree</button>
+        <button class="cover-btn" onclick="showView('swotmember')">SWOT Member</button>
+      </div>
+    </div>
+  `;
+}
+
+/* ===================== VIEW: CONDUCT (CARA JADI STREAMER) ===================== */
+function renderConduct(){
+  document.getElementById('view-conduct').innerHTML = `
+    <div class="page-head">
+      <div class="page-eyebrow">// 07 — Communication &amp; Conduct</div>
+      <h1>Cara Jadi Streamer yang Baik</h1>
+      <p class="page-sub">Panduan komunikasi dan perilaku profesional bagi streamer Wargantara — dalam interaksi dengan penonton, fans, sesama talent, hingga pihak brand. Tujuannya adalah menciptakan lingkungan yang aman dan nyaman bagi semua pihak, sekaligus menjaga kesehatan mental streamer.</p>
+    </div>
+
+    <div class="principle-card">
+      <h4>1. Dengar dulu, baru respon</h4>
+      <p>Sebelum react ke chat/DM, baca ulang sekali lagi. Banyak salah paham di live streaming terjadi karena respon kepancing duluan sebelum paham maksud orangnya. Kalau ragu, tanya balik dengan santai: "maksudnya gimana nih?" daripada langsung asumsi negatif.</p>
+      <div class="do-dont">
+        <div class="do-col"><span class="lbl">Lakukan</span><ul><li>Paraphrase ulang pertanyaan penonton sebelum jawab</li><li>Akui kalau kamu nggak tau jawabannya — "wah aku cek dulu ya"</li></ul></div>
+        <div class="dont-col"><span class="lbl">Hindari</span><ul><li>Langsung defensif ke komentar yang ambigu</li><li>Menjawab sambil emosi walau bercanda</li></ul></div>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <h4>2. Konsisten antara persona dan batasan pribadi</h4>
+      <p>Karakter boleh punya gimmick, tapi nilai dasar — sopan, jujur soal kapasitas, nggak gampang baper di depan publik — itu harus sama antara "kamu di stream" dan "kamu aslinya". Penonton lama biasanya bisa rasakan kalau ada yang dipaksakan.</p>
+      <div class="script-box">Contoh nolak collab/permintaan dengan sopan tapi tegas:
+"Makasih banget udah mikirin aku buat ini, tapi untuk sekarang aku belum bisa komit. Mungkin lain kali ya!"</div>
+    </div>
+
+    <div class="principle-card">
+      <h4>3. Boundary itu bukan kejutan — komunikasikan dari awal</h4>
+      <p>Topik yang nggak mau dibahas, jenis donasi/TTS yang nggak akan dibaca, jam berapa kamu bisa dihubungi di luar stream — semua ini sehat untuk disampaikan eksplisit ke komunitas dan ke partner collab, bukan dipendam sampai akhirnya meledak jadi konflik.</p>
+      <div class="do-dont">
+        <div class="do-col"><span class="lbl">Lakukan</span><ul><li>Sounding batasan secara santai, bukan kaku kayak peraturan kantor</li><li>Konsisten menegakkan batasan yang sudah diumumkan</li></ul></div>
+        <div class="dont-col"><span class="lbl">Hindari</span><ul><li>Diam aja sampai numpuk lalu meledak ke publik</li><li>Bikin pengecualian diam-diam untuk orang tertentu</li></ul></div>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <h4>4. Hadapi kritik dan hate dengan tenang, bukan diam total</h4>
+      <p>Beda antara kritik yang membangun dan hate yang cuma nyari reaksi. Kritik yang valid boleh direspon singkat dan dewasa. Hate yang jelas niatnya cuma memancing, nggak usah dibales sama sekali — energi kamu lebih berharga dari itu.</p>
+      <div class="script-box">Kalau kena kritik yang valid di live:
+"Noted, makasih masukannya — aku coba perbaiki ke depannya."
+Kalau kena troll/hate:
+Diem, lanjut konten, atau end stream kalau eskalasi (lihat SOP Darurat).</div>
+    </div>
+
+    <div class="principle-card">
+      <h4>5. Transparan soal kapasitas, jangan overpromise</h4>
+      <p>Kalau lagi capek, nggak fit, atau jadwal padat — bilang dari awal ke komunitas dan ke partner collab. Lebih baik kabarin "stream dipindah" daripada maksa live dalam kondisi nggak siap, yang ujungnya kualitas drop dan kamu makin burnout.</p>
+    </div>
+
+    <div class="principle-card">
+      <h4>6. Komunikasi ke sesama talent &amp; tim</h4>
+      <p>Internal Wargantara cuma jalan kalau komunikasi antar talent dan dengan tim jelas. Kasih update kalau ada perubahan rencana, jangan asumsi orang lain udah tau. Kalau ada gesekan dengan talent lain, selesaikan secara privat dulu sebelum melibatkan publik atau fanbase masing-masing.</p>
+      <div class="do-dont">
+        <div class="do-col"><span class="lbl">Lakukan</span><ul><li>Konfirmasi ulang jadwal collab H-1</li><li>Selesaikan gesekan lewat DM/voice call dulu</li></ul></div>
+        <div class="dont-col"><span class="lbl">Hindari</span><ul><li>Sindir-sindiran lewat sosmed/stream</li><li>Melibatkan fanbase untuk "membela" satu pihak</li></ul></div>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <h4>7. Profesional ke brand &amp; pihak luar</h4>
+      <p>Saat ngomong sama sponsor atau partner bisnis, tetap pakai nada sopan dan jelas walau kontraknya nggak sesuai ekspektasi. Negosiasi dan penolakan bisa dilakukan tanpa drama — baca juga skenario M-4 di Contingency Plan kalau ketemu kontrak yang mencurigakan.</p>
+    </div>
+  `;
+}
+
+/* ===================== VIEW: SWOT MEMBER ===================== */
+function memberInitialColor(id){
+  var colors = {igni:'#d9621a',anneliese:'#b89a3e',arda:'#3ca050',rui:'#7a1410',soren:'#7ec4e8',noah:'#1a3a6b'};
+  return colors[id] || 'var(--red)';
+}
+function renderSwotMember(){
+  var cards = DATA.members.map(function(m){
+    var folderId = m.id === 'anne' ? 'anneliese' : m.id;
+    var imgPath = 'assets\\members\\'+folderId+'\\'+folderId+'-portrait.png';
+    var initColor = memberInitialColor(folderId);
+    return `<div class="member-card">
+      <div class="member-header">
+        <img class="member-portrait" src="${imgPath}" alt="${esc(m.name)}"
+             onerror="this.style.display='none';var d=document.createElement('div');d.className='member-initial';d.style.color='${initColor}';d.style.borderColor='${initColor}';d.textContent='${m.name.charAt(0)}';this.parentNode.insertBefore(d,this);">
+        <div>
+          <div class="member-name">${esc(m.name)}</div>
+        </div>
+      </div>
+      <div class="member-body">
+        <div class="swot-grid">
+          <div class="swot-cell s"><h3>Strength</h3><ul>${m.strength.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')}</ul></div>
+          <div class="swot-cell w"><h3>Weakness</h3><ul>${m.weakness.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')}</ul></div>
+          <div class="swot-cell o"><h3>Opportunities</h3><ul>${m.opportunities.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')}</ul></div>
+          <div class="swot-cell t"><h3>Threats</h3><ul>${m.threats.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')}</ul></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('view-swotmember').innerHTML = `
+    <div class="page-head">
+      <div class="page-eyebrow">// 08 — Talent Profile</div>
+      <h1>SWOT per Member</h1>
+    </div>
+    ${cards}
+  `;
+}
+
+
+var views = ['cover','dashboard','register','matrix','contingency','triage','sop','conduct','swotmember','swot'];
+var renderers = {
+  cover: renderCover, dashboard: renderDashboard, register: renderRegister, matrix: renderMatrix,
+  contingency: renderContingency, triage: renderTriage, sop: renderSop,
+  conduct: renderConduct, swotmember: renderSwotMember, swot: renderSwot
+};
+var rendered = {};
+
+function buildShell(){
+  var main = document.getElementById('main');
+  main.innerHTML = views.map(function(v){ return `<div class="view" id="view-${v}"></div>`; }).join('');
+}
+function showView(name){
+  views.forEach(function(v){
+    document.getElementById('view-'+v).classList.toggle('active', v===name);
+  });
+  document.querySelectorAll('.side-nav a').forEach(function(a){
+    a.classList.toggle('active', a.dataset.view===name);
+  });
+  if(!rendered[name]){ renderers[name](); rendered[name] = true; }
+  if(window.innerWidth<=900) sidebar.classList.remove('open');
+  window.scrollTo({top:0, behavior:'smooth'});
+  history.replaceState(null,'','#'+name);
+}
+
+buildShell();
+document.querySelectorAll('.side-nav a').forEach(function(a){
+  a.addEventListener('click', function(){ showView(a.dataset.view); });
+});
+
+var initial = location.hash.replace('#','');
+showView(views.indexOf(initial)>-1 ? initial : 'cover');
+
+</script>
+</body>
+</html>
