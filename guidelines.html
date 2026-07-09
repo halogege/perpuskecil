@@ -789,6 +789,14 @@ a.sf-social-pill:hover {
         --gold2: #d4b050;
       }
 
+      /* TALLY FORM — invert font/box colors saat night mode (iframe cross-origin, jadi styling harus lewat filter) */
+      #tally-form-iframe {
+        transition: filter .3s;
+      }
+      [data-theme="dark"] #tally-form-iframe {
+        filter: invert(1) hue-rotate(180deg);
+      }
+
 /* ---- BURGER ---- */
       .burger-btn {
         display: none;
@@ -2177,6 +2185,7 @@ a.sf-social-pill:hover {
       <div class="page-header-pre">// Panduan Komunitas & Lore //</div>
       <h1>GUIDE<br>LINES</h1>
       <p>Panduan resmi untuk berpartisipasi dalam lore sandbox dan komunitas Wargantara.</p>
+      <p style="font-size:.72rem;letter-spacing:.08em;opacity:.55;margin-top:.6rem;text-transform:uppercase">// Terakhir diperbarui: <span id="gl-last-updated">9 Juli 2026</span> — dokumen dapat berubah seiring debut talent baru atau penambahan aturan</p>
       <div class="page-header-bg">G</div>
     </div>
 
@@ -2245,13 +2254,13 @@ a.sf-social-pill:hover {
             <div class="gl-callout-title">// IC &amp; OOC di Twitter/X</div>
             <p><strong>Default suatu postingan/tweet dari akun VTuber adalah <em>in-character</em> (IC)</strong>—yaitu suara dari karakter/persona-nya, bukan orang di balik layar (pilot). Ini berlaku <strong>meskipun tidak ada bracket, tanda kurung, atau penanda apapun</strong> yang menyertai tweet tersebut. Absennya penanda bukan berarti itu bicara polos sebagai pribadi—justru sebaliknya, itu kondisi default-nya (IC).</p>
             <p>Konvensi OOC di Wargantara: seluruh isi tweet <strong>diapit tanda kurung <code>( )</code></strong>, biasanya juga menyebut identitas pilot secara langsung. Contoh: <code>(Halo, ini dengan pilot Soren.)</code>. Tweet dengan format seperti ini berarti yang bicara adalah pilot/orang di baliknya secara pribadi, bukan karakternya. Di luar format itu—termasuk tweet biasa tanpa tanda kurung—tetap dianggap IC.</p>
-            <p style="margin-top:.75rem;font-size:.9rem;opacity:.8">Prinsip ini konsisten dengan ketentuan pada <em>Absolute Prohibitions</em> soal "seluruh komunikasi dipahami sebagai bagian dari persona, kecuali dinyatakan sebaliknya"—lihat bagian 05.</p>
+            <p style="margin-top:.75rem;font-size:.9rem;opacity:.8">Prinsip ini konsisten dengan ketentuan pada <em>Absolute Prohibitions</em> soal "seluruh komunikasi dipahami sebagai bagian dari persona, kecuali dinyatakan sebaliknya"—lihat <a href="#" onclick="showGl('prohibited',null);return false" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">bagian 05—Absolute Prohibitions</a>.</p>
             <p style="margin-top:.75rem;font-size:.9rem;opacity:.8">Istilah <strong>pilot</strong> yang dipakai di dokumen ini setara dengan istilah <em>nakanohito</em> (中の人, harfiah "orang di dalam") yang lazim dipakai di komunitas VTuber Jepang, maupun sebutan lain seperti <em>voice actor</em>—semuanya merujuk pada orang yang menggerakkan karakter, di luar persona yang ditampilkan.</p>
           </div>
 
           <div class="gl-callout">
             <div class="gl-callout-title">// Kenapa Sistemnya Seperti Roleplay?</div>
-            <p>Wargantara sengaja dibangun di atas kerangka <strong>collaborative fiction universe</strong> (lihat FAQ), sehingga setiap talent pada dasarnya sedang <em>live</em> memerankan sebuah karakter dengan lore, kepribadian, dan "dunia" sendiri—persis seperti roleplay/tabletop RPG yang butuh batas jelas antara "dalam cerita" dan "di luar cerita". Beberapa alasannya:</p>
+            <p>Wargantara sengaja dibangun di atas kerangka <strong>collaborative fiction universe</strong> (lihat <a href="#" onclick="showGl('faq',null);return false" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">FAQ</a>), sehingga setiap talent pada dasarnya sedang <em>live</em> memerankan sebuah karakter dengan lore, kepribadian, dan "dunia" sendiri—persis seperti roleplay/tabletop RPG yang butuh batas jelas antara "dalam cerita" dan "di luar cerita". Beberapa alasannya:</p>
             <ul class="gl-list" style="margin-top:.5rem">
               <li><span><strong>Menjaga privasi &amp; keamanan pilot</strong>—tanpa sistem IC/OOC, setiap ucapan otomatis dianggap fakta pribadi si pilot, yang berisiko membocorkan hal-hal yang seharusnya tidak terkait publik.</span></li>
               <li><span><strong>Menjaga konsistensi karakter</strong>—penonton butuh tahu mana yang merupakan bagian dari lore/kepribadian karakter (kanon) dan mana yang sekadar opini pribadi sesaat, supaya persona tetap terasa utuh dan konsisten.</span></li>
@@ -2303,7 +2312,7 @@ a.sf-social-pill:hover {
           <div class="gl-section-title">Aset VTuber & Thumbnail</div>
           <p>Aset VTuber adalah salah satu bentuk konten turunan yang mencakup berbagai elemen visual dalam ekosistem konten kreator—termasuk namun tidak terbatas pada <strong>thumbnail, overlay, panel, emote, dan elemen grafis lainnya</strong>. Penggunaan karya artist sebagai aset, khususnya <strong>thumbnail</strong>, mensyaratkan <em>consent</em> yang dinyatakan secara aktif oleh artist bersangkutan.</p>
 
-          <p class="gl-note">Karya yang ingin diajukan untuk dijadikan aset ditandai dengan hashtag khusus <code>#AssetWarga</code>, yang <strong>selalu dibarengi</strong> hashtag fanart talent yang bersangkutan—bukan berdiri sendiri (misal <code>#SketsaSoren #AssetWarga</code>). Alur lengkap pengajuannya ada di bagian <strong>Sistem Pengajuan & Consent</strong> di bawah ini—untuk penjelasan kombinasi hashtag secara umum, cek juga <em>Guidelines → Fan Works → Hashtag Guidelines</em>.</p>
+          <p class="gl-note">Karya yang ingin diajukan untuk dijadikan aset ditandai dengan hashtag khusus <code>#AssetWarga</code> (format dan contohnya ada di <a href="#" onclick="showGl('fanworks',null);return false" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">Fan Works → Hashtag Guidelines</a>). Alur lengkap pengajuan dan jenis consent-nya dijelaskan di bagian <strong>Sistem Pengajuan & Consent</strong> di bawah ini.</p>
 
           <div class="gl-section-title">Sistem Pengajuan & Consent</div>
           <p>Artist yang bersedia karyanya dijadikan aset VTuber dapat mengajukan persetujuan melalui alur berikut:</p>
@@ -2453,7 +2462,7 @@ a.sf-social-pill:hover {
 
           <div class="gl-callout" style="margin-top:1.25rem">
             <div class="gl-callout-title">// Dalam Seluruh Bentuk Shipping:</div>
-            <p><strong>Tidak diperkenankan</strong> menyajikan hubungan sebagai fakta atau representasi resmi (canon), dan <strong>tidak digunakan</strong> untuk memicu konflik antar komunitas atau individu. Batasan Shipping dan Yume dapat dilihat pada bagian <strong>Boundaries Guidelines</strong>.</p>
+            <p><strong>Tidak diperkenankan</strong> menyajikan hubungan sebagai fakta atau representasi resmi (canon), dan <strong>tidak digunakan</strong> untuk memicu konflik antar komunitas atau individu. Batasan Shipping dan Yume per talent dapat dilihat pada <a href="#" onclick="showGl('boundaries',null);return false" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">bagian 04—Boundaries Guidelines</a>.</p>
           </div>
         </div>
 
@@ -2466,7 +2475,17 @@ a.sf-social-pill:hover {
 
           <p>Bagian ini mengatur preferensi dan batasan spesifik yang ditetapkan oleh masing-masing VTuber terkait <strong>interpretasi fanworks</strong> (shipping, yume, self-insert) serta <strong>interaksi langsung</strong> di ruang publik maupun live streaming. Seluruh bentuk fanworks dan interaksi <strong>wajib menghormati batasan</strong> yang ditetapkan—Wargafana <strong>tidak diperkenankan memaksakan</strong> bentuk interaksi yang tidak diinginkan.</p>
 
-          <p class="gl-note"><strong>Shipping</strong> = interpretasi hubungan romantis dalam fanworks. <strong>Yume (termasuk Self-insert)</strong> = fanworks yang melibatkan VTuber dengan OC atau representasi penggemar—tidak secara inheren romantis, bisa platonic, emosional, maupun romantis tergantung konteks karya.</p>
+          <p class="gl-note"><strong>Shipping</strong> = interpretasi hubungan romantis dalam fanworks. <strong>Yume (termasuk Self-insert)</strong> = fanworks yang melibatkan VTuber dengan OC atau representasi penggemar—tidak secara inheren romantis, bisa platonic, emosional, maupun romantis tergantung konteks karya. <strong>Minor</strong> = individu berusia <strong>di bawah 18 tahun</strong>. Istilah "bukan minor" yang dipakai berulang di bagian ini merujuk pada definisi tersebut.</p>
+
+          <div class="gl-callout" style="margin-top:1.25rem">
+            <div class="gl-callout-title">// Baseline Interaksi (Berlaku untuk Seluruh Talent)</div>
+            <p>Kecuali dinyatakan berbeda pada card masing-masing talent di bawah, dua ketentuan berikut berlaku sebagai <strong>default</strong>:</p>
+            <ul class="gl-list" style="margin:.5rem 0 0">
+              <li><span><strong>Godaan/Flirting &amp; Komentar Romantis/Sugestif</strong>—diperbolehkan tapi tidak selalu dibalas, dan dilarang saat collab atau topik serius/sensitif.</span></li>
+              <li><span><strong>Backseating</strong>—dilarang, kecuali diminta secara langsung oleh talent yang bersangkutan.</span></li>
+            </ul>
+            <p style="margin-top:.65rem;font-size:.9rem;opacity:.8">Kalau ketentuan seorang talent <strong>sama</strong> dengan baseline di atas, card-nya cukup menandai "mengikuti baseline umum" tanpa mengulang penjelasan penuh. Penjelasan lengkap hanya ditulis ulang kalau ketentuannya <strong>berbeda</strong> dari baseline.</p>
+          </div>
 
           <!-- MEMBER CARDS -->
           <div style="margin-top:2rem">
@@ -2567,12 +2586,12 @@ a.sf-social-pill:hover {
                 <span class="gl-member-label">Godaan / Flirting</span>
                 <span class="gl-badge limited">DIBATASI</span>
               </div>
-              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-note">Mengikuti baseline umum di atas.</div>
               <div class="gl-member-row" style="margin-top:.6rem">
                 <span class="gl-member-label">Komentar Romantis / Sugestif</span>
                 <span class="gl-badge limited">DIBATASI</span>
               </div>
-              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-note">Mengikuti baseline umum di atas.</div>
               <div class="gl-member-row" style="margin-top:.6rem">
                 <span class="gl-member-label">Panggilan</span>
                 <span class="gl-badge limited">DIBATASI</span>
@@ -2629,7 +2648,7 @@ a.sf-social-pill:hover {
                 <span class="gl-member-label">Godaan / Flirting</span>
                 <span class="gl-badge limited">DIBATASI</span>
               </div>
-              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-note">Mengikuti baseline umum di atas.</div>
               <div class="gl-member-row" style="margin-top:.6rem">
                 <span class="gl-member-label">Panggilan</span>
                 <span class="gl-badge limited">DIBATASI</span>
@@ -2639,7 +2658,7 @@ a.sf-social-pill:hover {
                 <span class="gl-member-label">Backseating</span>
                 <span class="gl-badge prohibited">DILARANG</span>
               </div>
-              <div class="gl-member-note">Dilarang kecuali <strong>diminta secara langsung</strong>.</div>
+              <div class="gl-member-note">Mengikuti baseline umum di atas.</div>
             </div>
           </div>
         </div>
@@ -2690,7 +2709,7 @@ a.sf-social-pill:hover {
                 <span class="gl-member-label">Godaan / Flirting</span>
                 <span class="gl-badge limited">DIBATASI</span>
               </div>
-              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-note">Mengikuti baseline umum di atas.</div>
               <div class="gl-member-row" style="margin-top:.6rem">
                 <span class="gl-member-label">Panggilan</span>
                 <span class="gl-badge limited">DIBATASI</span>
@@ -2700,7 +2719,7 @@ a.sf-social-pill:hover {
                 <span class="gl-member-label">Backseating</span>
                 <span class="gl-badge prohibited">DILARANG</span>
               </div>
-              <div class="gl-member-note">Dilarang kecuali <strong>diminta secara langsung</strong>.</div>
+              <div class="gl-member-note">Mengikuti baseline umum di atas.</div>
             </div>
           </div>
         </div>
@@ -2748,12 +2767,12 @@ a.sf-social-pill:hover {
                 <span class="gl-member-label">Godaan / Flirting</span>
                 <span class="gl-badge limited">DIBATASI</span>
               </div>
-              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-note">Mengikuti baseline umum di atas.</div>
               <div class="gl-member-row" style="margin-top:.6rem">
                 <span class="gl-member-label">Komentar Romantis / Sugestif</span>
                 <span class="gl-badge limited">DIBATASI</span>
               </div>
-              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-note">Mengikuti baseline umum di atas.</div>
               <div class="gl-member-row" style="margin-top:.6rem">
                 <span class="gl-member-label">Panggilan</span>
                 <span class="gl-badge prohibited">DIBATASI</span>
@@ -2763,7 +2782,7 @@ a.sf-social-pill:hover {
                 <span class="gl-member-label">Backseating</span>
                 <span class="gl-badge prohibited">DILARANG</span>
               </div>
-              <div class="gl-member-note">Dilarang kecuali <strong>diminta secara langsung</strong>.</div>
+              <div class="gl-member-note">Mengikuti baseline umum di atas.</div>
             </div>
           </div>
         </div>
@@ -2811,12 +2830,12 @@ a.sf-social-pill:hover {
                 <span class="gl-member-label">Godaan / Flirting</span>
                 <span class="gl-badge limited">DIBATASI</span>
               </div>
-              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-note">Mengikuti baseline umum di atas.</div>
               <div class="gl-member-row" style="margin-top:.6rem">
                 <span class="gl-member-label">Komentar Romantis / Sugestif</span>
                 <span class="gl-badge limited">DIBATASI</span>
               </div>
-              <div class="gl-member-note">Diperbolehkan tetapi <strong>tidak selalu dibalas</strong>. <strong>Dilarang</strong> saat collab atau topik serius/sensitif.</div>
+              <div class="gl-member-note">Mengikuti baseline umum di atas.</div>
               <div class="gl-member-row" style="margin-top:.6rem">
                 <span class="gl-member-label">Panggilan</span>
                 <span class="gl-badge prohibited">DIBATASI</span>
@@ -2826,7 +2845,7 @@ a.sf-social-pill:hover {
                 <span class="gl-member-label">Backseating</span>
                 <span class="gl-badge prohibited">DILARANG</span>
               </div>
-              <div class="gl-member-note">Dilarang kecuali <strong>diminta secara langsung</strong>.</div>
+              <div class="gl-member-note">Mengikuti baseline umum di atas.</div>
             </div>
           </div>
         </div>
@@ -2895,7 +2914,7 @@ a.sf-social-pill:hover {
             <span class="gl-type-badge lore">Lore</span>
           </div>
           <div class="gl-rule"></div>
-          <p>Pertanyaan-pertanyaan yang sering muncul—dikumpulkan supaya tidak perlu dijawab satu per satu terus. Kalau pertanyaanmu belum terjawab di sini, cek halaman <em>Boundaries</em> atau <em>Lore Archive → Panduan OC</em> dulu sebelum menghubungi tim.</p>
+          <p>Pertanyaan-pertanyaan yang sering muncul—dikumpulkan supaya tidak perlu dijawab satu per satu terus. Kalau pertanyaanmu belum terjawab di sini, cek <a href="#" onclick="showGl('boundaries',null);return false" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">bagian 04—Boundaries</a> atau <a href="lore.html#panduan-oc" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">Lore Archive → Panduan OC</a> dulu sebelum menghubungi tim.</p>
 
           <!-- TAB BUTTONS -->
           <div class="faq-tabs" style="margin-top:2rem">
@@ -2951,13 +2970,13 @@ a.sf-social-pill:hover {
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">VTuber-nya cerita soal (insert info pribadi)—itu gak termasuk doxxing? Gimana cara bedain kapan VTuber lagi in-character dan kapan mereka bicara sebagai diri sendiri (orang di belakang avatarnya)?</button>
               <div class="faq-a">
-                <div class="faq-a-inner">Semua yang disampaikan oleh talent Wargantara sudah dirancang sebagai bagian dari kehidupan mereka sebagai karakter—sebagai makhluk yang kalian temukan eksis di dunia maya ini. Informasi apapun yang keluar dari mereka dipahami sebagai bagian dari persona itu, bukan sebagai bocoran tentang orang di balik layar.<br><br>Cara bedainnya: <strong>default tweet/postingan adalah in-character (IC)</strong>, meskipun tanpa bracket atau penanda apapun. Kalau talent sedang bicara out-of-character (OOC)—yaitu sebagai pilot/orang di baliknya (disebut juga <em>nakanohito</em> atau <em>voice actor</em>)—seluruh isi tweetnya akan <strong>diapit tanda kurung <code>( )</code></strong>, biasanya juga menyebut identitas pilot langsung, misalnya <code>(Halo, ini dengan pilot Soren.)</code>. Selengkapnya ada di bagian <strong>01—Sikap &amp; Komunitas</strong>.<br><br>Maka dari itu, dimohon untuk tidak asal kutip begitu saja sebagai self-doxxing jika format tanda kurung ini belum muncul sebelum disampaikannya informasi.</div>
+                <div class="faq-a-inner">Tidak—selama belum ditandai OOC. Semua yang disampaikan talent dipahami sebagai bagian dari persona/karakter mereka, bukan bocoran soal orang di baliknya. Cara bedainnya singkat: <strong>default tweet/postingan adalah in-character (IC)</strong> meskipun tanpa tanda kurung sekalipun; hanya tweet yang <strong>diapit tanda kurung <code>( )</code></strong> yang dianggap out-of-character (OOC).<br><br>Penjelasan lengkap konvensi ini—termasuk contoh dan alasan di baliknya—ada di bagian <strong>01—Sikap &amp; Komunitas → IC &amp; OOC di Twitter/X</strong>. Jangan asal kutip sebagai self-doxxing kalau format tanda kurung itu belum muncul.</div>
               </div>
             </div>
 
             <div class="gl-callout" style="margin-top:2.5rem">
               <div class="gl-callout-title">// Pertanyaan Soal OC & Lore?</div>
-              <p style="margin:0;font-size:.9rem;opacity:.8">Pertanyaan seputar OC, sistem AR-CID, SC Level, dan mekanisme lore ada di tab <strong>Lore &amp; OC</strong> di atas. Cek juga <em>Lore Archive → Panduan OC</em> untuk referensi lengkapnya.</p>
+              <p style="margin:0;font-size:.9rem;opacity:.8">Pertanyaan seputar OC, sistem AR-CID, SC Level, dan mekanisme lore ada di tab <strong>Lore &amp; OC</strong> di atas. Cek juga <a href="lore.html#panduan-oc" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">Lore Archive → Panduan OC</a> untuk referensi lengkapnya.</p>
             </div>
           </div>
 
@@ -2969,7 +2988,7 @@ a.sf-social-pill:hover {
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">Ras apa saja yang boleh dipakai untuk OC?</button>
               <div class="faq-a">
-                <div class="faq-a-inner">Semua kategori ras terbuka—dari manusia biasa, jin, arwah, makhluk mitologi, sampai entitas primordial. Yang tidak boleh adalah klaim identitas canon (tokoh-tokoh yang secara nyata sudah ada di dunia manusia, seperti tokoh politik, tokoh spiritual realm dan sebagainya): tidak boleh main sebagai figur yang sudah punya nama dan cerita sendiri di luar universe ini.<br><br>Untuk detail lengkapnya, cek <em>Sandbox Guide → Ras &amp; Karakter</em>.</div>
+                <div class="faq-a-inner">Semua kategori ras terbuka—dari manusia biasa, jin, arwah, makhluk mitologi, sampai entitas primordial. Yang tidak boleh adalah klaim identitas canon (tokoh-tokoh yang secara nyata sudah ada di dunia manusia, seperti tokoh politik, tokoh spiritual realm dan sebagainya): tidak boleh main sebagai figur yang sudah punya nama dan cerita sendiri di luar universe ini.<br><br>Untuk detail lengkapnya, cek <a href="lore.html#ras" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">Sandbox Guide → Ras &amp; Karakter</a>.</div>
               </div>
             </div>
             <div class="faq-item">
@@ -2981,13 +3000,13 @@ a.sf-social-pill:hover {
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">Boleh gak OC saya jadi Wargantara?</button>
               <div class="faq-a">
-                <div class="faq-a-inner">Tidak. Status Wargantara—makhluk astral yang hadir di dunia manusia secara penuh dan permanen—hanya untuk talent Wargantara. Secara lore, status ini tidak bisa diraih sembarangan dan reserved untuk mereka yang sudah verified di sistem.<br><br>OC fan sangat boleh menjadi makhluk astral yang melakukan <strong>semi-permanent crossing</strong>—hadir di dunia manusia dengan batasan waktu dan manifestasi. Bukan Wargantara, tapi tetap punya ruang cerita yang sangat kaya. Detail ada di <em>Panduan OC → Status Keberadaan</em> dan/atau <em>Batas Antara → The Cost</em>.</div>
+                <div class="faq-a-inner">Tidak. Status Wargantara—makhluk astral yang hadir di dunia manusia secara penuh dan permanen—hanya untuk talent Wargantara. Secara lore, status ini tidak bisa diraih sembarangan dan reserved untuk mereka yang sudah verified di sistem.<br><br>OC fan sangat boleh menjadi makhluk astral yang melakukan <strong>semi-permanent crossing</strong>—hadir di dunia manusia dengan batasan waktu dan manifestasi. Bukan Wargantara, tapi tetap punya ruang cerita yang sangat kaya. Detail ada di <a href="lore.html#panduan-oc" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">Panduan OC → Status Keberadaan</a> dan/atau <a href="lore.html#batas-antara" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">Batas Antara → The Cost</a>.</div>
               </div>
             </div>
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">The Cost itu harus seberapa besar?</button>
               <div class="faq-a">
-                <div class="faq-a-inner">Tidak ada ukuran pasti—tapi harus terasa nyata dalam cerita. The Cost punya dua dimensi:<br><br><strong>Waktu</strong>—semakin lama di dunia manusia, semakin besar drain-nya.<br><strong>Manifestasi</strong>—semakin nyata kehadiran karaktermu (semakin banyak yang bisa melihat, mendengar, atau berinteraksi), semakin mahal harganya.<br><br>Tradeoff itulah yang membuat pilihan untuk tetap hadir jadi bermakna. Untuk mekanisme lengkapnya, baca <em>Batas Antara → The Cost</em>.</div>
+                <div class="faq-a-inner">Tidak ada ukuran pasti—tapi harus terasa nyata dalam cerita. The Cost punya dua dimensi:<br><br><strong>Waktu</strong>—semakin lama di dunia manusia, semakin besar drain-nya.<br><strong>Manifestasi</strong>—semakin nyata kehadiran karaktermu (semakin banyak yang bisa melihat, mendengar, atau berinteraksi), semakin mahal harganya.<br><br>Tradeoff itulah yang membuat pilihan untuk tetap hadir jadi bermakna. Untuk mekanisme lengkapnya, baca <a href="lore.html#batas-antara" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">Batas Antara → The Cost</a>.</div>
               </div>
             </div>
             <div class="faq-item">
@@ -3011,7 +3030,7 @@ a.sf-social-pill:hover {
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFaq(this)">Boleh gak punya arc cerita yang berskala besar?</button>
               <div class="faq-a">
-                <div class="faq-a-inner">Boleh—dengan catatan. Konflik antar kerajaan, krisis di satu kawasan astral, peristiwa yang mempengaruhi satu komunitas—semua itu valid dan bisa jadi arc yang kuat.<br><br>Yang perlu dihindari adalah skala yang terlalu general untuk satu karakter OC: kiamat besar seluruh dunia, kejadian yang secara lore harusnya melibatkan semua pihak, atau plot yang menuntut karakter lain bereaksi seolah dunia mereka bergantung padanya. Kalau arc-mu butuh seluruh universe untuk tunduk, kemungkinan besar perlu diskalakan ulang.</div>
+                <div class="faq-a-inner">Boleh—dengan catatan. Yang perlu dihindari adalah skala yang terlalu general untuk satu karakter OC (misal: kiamat seluruh dunia, atau plot yang menuntut karakter lain tunduk seolah dunia mereka bergantung padanya).<br><br>Penjelasan lengkap plus contoh skala yang valid ada di <a href="lore.html#sandbox" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">Lore Archive → Pengantar Sandbox → Skala Arc Cerita</a>.</div>
               </div>
             </div>
 
@@ -3050,7 +3069,7 @@ a.sf-social-pill:hover {
 
             <div class="gl-callout" style="margin-top:2.5rem;border-left-color:var(--gold);background:rgba(154,126,42,.04)">
               <div class="gl-callout-title" style="color:var(--gold)">// Referensi Lore Lengkap</div>
-              <p style="margin:0;font-size:.9rem;opacity:.8">Untuk informasi lebih detail soal mekanisme OC, AR-CID, SC Level, The Cost, dan sistem lore lainnya—cek <em>Lore Archive → Panduan OC</em>. Kemungkinan besar jawabannya sudah ada di sana.</p>
+              <p style="margin:0;font-size:.9rem;opacity:.8">Untuk informasi lebih detail soal mekanisme OC, AR-CID, SC Level, The Cost, dan sistem lore lainnya—cek <a href="lore.html#panduan-oc" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em">Lore Archive → Panduan OC</a>. Kemungkinan besar jawabannya sudah ada di sana.</p>
             </div>
           </div>
 
@@ -3063,10 +3082,10 @@ a.sf-social-pill:hover {
           <span class="gl-type-badge general">General</span>
           <div class="gl-rule"></div>
 
-          <p>Ada pertanyaan, laporan pelanggaran, atau hal lain yang perlu disampaikan langsung ke tim? Gunakan salah satu kanal di bawah. Semua pengaduan akan ditangani sesuai dengan ketentuan yang berlaku.</p>
+          <p>Ada pertanyaan, laporan pelanggaran, atau hal lain yang perlu disampaikan langsung ke tim? Gunakan salah satu kanal di bawah—semua pengaduan akan ditangani sesuai ketentuan yang berlaku.</p>
 
           <div class="gl-section-title">Kanal Pengaduan</div>
-          <p>Hubungi kami langsung lewat salah satu kanal berikut. Semua pengaduan akan ditangani sesuai ketentuan yang berlaku.</p>
+          <p>Hubungi kami langsung lewat salah satu kanal berikut.</p>
 
           <div class="gl-contact-channels">
             <a class="gl-channel-card" href="https://x.com/wgtr_help" target="_blank" rel="noopener noreferrer">
@@ -3124,7 +3143,7 @@ a.sf-social-pill:hover {
           <p>Atau isi form di bawah ini—kami akan menindaklanjuti sesuai ketentuan yang berlaku.</p>
 
           <div style="margin-top:1.5rem">
-            <iframe data-tally-src="https://tally.so/embed/aQzvkq?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="758" frameborder="0" marginheight="0" marginwidth="0" title="Contact Us · Wargantara"></iframe>
+            <iframe id="tally-form-iframe" data-tally-src="https://tally.so/embed/aQzvkq?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="758" frameborder="0" marginheight="0" marginwidth="0" title="Contact Us · Wargantara"></iframe>
             <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
           </div>
         </div>
