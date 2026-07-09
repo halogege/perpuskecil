@@ -3324,6 +3324,7 @@
       // Relation map
       (function() {
         const svg = document.getElementById('rel-svg');
+        if (!svg) return; // elemen #rel-svg belum/tidak ada di halaman ini — jangan sampai nge-crash script setelahnya (mis. theme toggle)
         const nodeLabel = m => m.profileUrl ? m.name : '???';
         const nodes = [{
           x: 350,
