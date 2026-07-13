@@ -3514,13 +3514,18 @@
       // ===== SPLASH =====
       var denyTimer = null;
       // hide splash (and pre-splash) for returning visitors (cek cookie wg-visited)
+      // TAPI pre-splash/countdown cuma boleh di-skip kalau target date-nya emang udah lewat —
+      // kalau belum, returning visitor tetep harus liat countdown yang baru
       (function() {
+        var WG_TARGET = new Date('2026-07-16T04:11:00Z'); // 16 Juli 2026, 11:11 WIB — samain sama TARGET di script pre-splash di bawah kalau tanggal ini diubah lagi
+        var countdownDone = new Date() >= WG_TARGET;
         if (document.cookie.match(/(?:^|;\s*)wg-visited=1/)) {
           var s = document.getElementById('splash-main');
           if (s) s.classList.add('hidden');
-          // skip pre-splash for returning visitors too
-          var ps = document.getElementById('pre-splash');
-          if (ps) ps.classList.add('hidden');
+          if (countdownDone) {
+            var ps = document.getElementById('pre-splash');
+            if (ps) ps.classList.add('hidden');
+          }
         }
       })();
 
