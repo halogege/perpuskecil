@@ -1,0 +1,2612 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)/members.html -->
+<html lang="id" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <script>
+      (function() {
+        var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
+        if (m) document.documentElement.setAttribute('data-theme', m[1] === 'dark' ? 'dark' : 'light');
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WARGANTARA—Member Database</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <style>
+      @import url('https://solrainha.github.io/saturnicons/saturnicons.css');
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap&font-display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+      }
+
+      :root {
+        --bg: #ffffff;
+        --surface: #f5f5f5;
+        --surface2: #ebebeb;
+        --border: #e0e0e0;
+        --border2: #cccccc;
+        --ink: #111111;
+        --ink2: #333333;
+        --muted: #888888;
+        --red: #c0251a;
+        --red2: #e02a1e;
+        --gold: #9a7e2a;
+        --gold2: #b89a3e;
+        --mono: 'Space Mono', monospace;
+        --display: 'Bebas Neue', sans-serif;
+        --serif: 'Noto Serif Display', serif;
+        --nav-h: 56px;
+      }
+
+      [data-theme="dark"] {
+        --bg: #111111;
+        --surface: #1c1c1c;
+        --surface2: #242424;
+        --border: #2a2a2a;
+        --border2: #383838;
+        --ink: #f0ece3;
+        --ink2: #c8c2b4;
+        --muted: #555555;
+        --red: #c0251a;
+        --gold: #b89a3e;
+        --gold2: #d4b050;
+      }
+
+      html,
+      body {
+        width: 100%;
+        overflow-x: clip
+      }
+
+      html {
+        scrollbar-gutter: stable
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: 'Inter', sans-serif;
+        min-height: 100vh;
+        font-size: 16px;
+        line-height: 1.6;
+        transition: background .3s, color .3s
+      }
+
+      /* ---- NAV ---- */
+      nav {
+        background: var(--bg);
+        border-bottom: 2px solid var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.5rem;
+        height: var(--nav-h);
+        flex-shrink: 0;
+        transition: background .3s;
+        position: sticky;
+        top: 0;
+        z-index: 200
+      }
+
+      .nav-logo {
+        font-family: var(--display);
+        font-size: 2rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        cursor: pointer;
+        transition: color .3s;
+        text-decoration: none
+      }
+
+      .nav-logo-img {
+        display: block;
+        height: 32px;
+        width: auto
+      }
+
+      /* Logo theme switching via CSS — no JS src swap needed */
+      .wgtr-logo-light { display: block }
+      .wgtr-logo-dark  { display: none  !important }
+      [data-theme="dark"] .wgtr-logo-light { display: none  !important }
+      [data-theme="dark"] .wgtr-logo-dark  { display: block !important }
+
+      .sf-col-title-img {
+        display: block;
+        height: 60px;
+        width: auto;
+        margin-bottom: .75rem
+      }
+
+      .sf-logo-img {
+        display: block;
+        height: 26px;
+        width: auto;
+        opacity: .3
+      }
+
+
+      .nav-logo span {
+        color: var(--red)
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 0;
+        list-style: none
+      }
+
+      .nav-links li a {
+        display: block;
+        padding: 0 1rem;
+        height: var(--nav-h);
+        line-height: var(--nav-h);
+        font-size: .78rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--ink);
+        opacity: .6;
+        border-left: 1px solid var(--border);
+        transition: all .15s;
+        cursor: pointer
+      }
+
+      .nav-links li a:hover,
+      .nav-links li a.active {
+        opacity: 1;
+        background: var(--red);
+        color: #fff
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: .75rem
+      }
+
+      .theme-btn {
+        background: none;
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        cursor: pointer;
+        transition: all .2s;
+        height: 32px;
+        width: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        padding: 0
+      }
+
+      .theme-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold)
+      }
+
+      /* BURGER—mobile */
+      .burger-btn {
+        display: none;
+        background: none;
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px;
+        transition: border-color .2s
+      }
+
+      .burger-btn span {
+        display: block;
+        width: 18px;
+        height: 1.5px;
+        background: currentColor;
+        transition: all .25s
+      }
+
+      .burger-btn.open span:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg)
+      }
+
+      .burger-btn.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0)
+      }
+
+      .burger-btn.open span:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg)
+      }
+
+      /* MOBILE DRAWER */
+      .mobile-drawer {
+        display: none;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--bg);
+        z-index: 190;
+        border-top: 1px solid var(--border);
+        flex-direction: column;
+        overflow-y: auto
+      }
+
+      .mobile-drawer.open {
+        display: flex
+      }
+
+      .mobile-drawer ul {
+        list-style: none;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .mobile-drawer ul li a {
+        display: flex;
+        align-items: center;
+        padding: 1.1rem 1.5rem;
+        font-size: .9rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--ink);
+        opacity: .65;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        transition: all .15s;
+        min-height: 48px;
+        text-decoration: none;
+      }
+
+      .mobile-drawer ul li a:hover,
+      .mobile-drawer ul li a.active {
+        opacity: 1;
+        background: var(--red);
+        color: #fff
+      }
+
+      .mobile-drawer-bottom {
+        padding: 1rem 1.5rem
+      }
+
+      /* ---- PAGE HEADER ---- */
+      .page-header {
+        padding: 3.5rem 3rem 2.5rem;
+        border-bottom: 2px solid var(--red);
+        position: relative;
+        overflow: hidden
+      }
+
+      .page-header-pre {
+        font-size: .7rem;
+        letter-spacing: .28em;
+        color: var(--red);
+        text-transform: uppercase;
+        margin-bottom: .75rem
+      }
+
+      .page-header h1 {
+        font-family: var(--display);
+        font-size: clamp(3.5rem, 7vw, 6rem);
+        line-height: .9;
+        color: var(--ink);
+        transition: color .3s
+      }
+
+      .page-header p {
+        max-width: 560px;
+        font-size: .95rem;
+        line-height: 1.85;
+        opacity: .75;
+        margin-top: 1.2rem;
+        text-align: justify;
+        hyphens: auto
+      }
+
+      .page-header-meta {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 1.8rem;
+        flex-wrap: wrap
+      }
+
+      .page-header-stat {
+        display: flex;
+        flex-direction: column;
+        gap: .15rem
+      }
+
+      .page-header-stat-val {
+        font-family: var(--display);
+        font-size: 2rem;
+        letter-spacing: .04em;
+        color: var(--ink);
+        line-height: 1
+      }
+
+      .page-header-stat-label {
+        font-size: .64rem;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        opacity: .5
+      }
+
+      .page-header-divider {
+        width: 1px;
+        height: 2.5rem;
+        background: var(--border2);
+        opacity: .5
+      }
+
+      .page-header-bg {
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--display);
+        font-size: 10rem;
+        color: var(--red);
+        opacity: .04;
+        pointer-events: none;
+        letter-spacing: -.02em
+      }
+
+      /* ---- FILTER BAR ---- */
+      .filter-bar {
+        padding: .85rem 3rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+        flex-wrap: wrap;
+        background: var(--surface)
+      }
+
+      .filter-label {
+        font-size: .65rem;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        opacity: .5;
+        flex-shrink: 0
+      }
+
+      .filter-btn {
+        font-family: var(--mono);
+        font-size: .68rem;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        padding: .38rem .8rem;
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        background: none;
+        cursor: pointer;
+        transition: all .15s;
+        opacity: .65;
+        min-height: 36px
+      }
+
+      .filter-btn:hover {
+        opacity: .85;
+        border-color: var(--gold);
+        color: var(--gold)
+      }
+
+      .filter-btn.active {
+        opacity: 1;
+        border-color: var(--red);
+        color: var(--red);
+        background: rgba(192, 37, 26, .08)
+      }
+
+      .filter-sep {
+        width: 1px;
+        height: 16px;
+        background: var(--border2);
+        margin: 0 .3rem
+      }
+
+      .search-wrap {
+        margin-left: auto;
+        position: relative;
+        display: flex;
+        align-items: center
+      }
+
+      .search-wrap input {
+        background: var(--bg);
+        border: 1px solid var(--border2);
+        color: var(--ink);
+        font-family: var(--mono);
+        font-size: .78rem;
+        letter-spacing: .05em;
+        padding: .4rem .7rem .4rem 2rem;
+        width: 200px;
+        outline: none;
+        transition: border-color .2s
+      }
+
+      .search-wrap input:focus {
+        border-color: var(--gold)
+      }
+
+      .search-wrap input::placeholder {
+        opacity: .3
+      }
+
+      .search-icon {
+        position: absolute;
+        left: .55rem;
+        opacity: .3;
+        pointer-events: none
+      }
+
+      /* ---- MAIN GRID ---- */
+      .db-grid-wrap {
+        padding: 2.5rem 3rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        background: var(--bg)
+      }
+
+      /* ---- MEMBER CARD ---- */
+      .mc {
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all .2s;
+        border: 1px solid var(--border)
+      }
+
+      .mc:hover {
+        border-color: var(--red)
+      }
+
+      .mc-portrait {
+        position: relative;
+        aspect-ratio: 3/4;
+        background: var(--surface2);
+        overflow: hidden;
+        flex-shrink: 0
+      }
+
+      .mc-portrait-img {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transition: transform .4s cubic-bezier(.25, .46, .45, .94)
+      }
+
+      .mc:hover .mc-portrait-img {
+        transform: scale(1.04)
+      }
+
+      .mc-portrait-initial {
+        font-family: var(--display);
+        font-size: 7rem;
+        color: var(--red);
+        opacity: .18;
+        user-select: none;
+        transition: opacity .3s
+      }
+
+      .mc:hover .mc-portrait-initial {
+        opacity: .08
+      }
+
+      .mc-portrait-initial.hidden {
+        display: none
+      }
+
+      .mc-portrait-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent 45%, rgba(0, 0, 0, .5) 65%, rgba(0, 0, 0, .88) 82%, rgba(0, 0, 0, .97) 100%);
+        pointer-events: none
+      }
+
+      [data-theme="light"] .mc-portrait-overlay {
+        background: linear-gradient(to bottom, transparent 45%, rgba(0, 0, 0, .45) 65%, rgba(0, 0, 0, .85) 82%, rgba(0, 0, 0, .95) 100%)
+      }
+
+      .mc-portrait-id {
+        position: absolute;
+        top: .75rem;
+        left: .75rem;
+        font-family: var(--display);
+        font-size: 3.5rem;
+        color: var(--red);
+        opacity: .08;
+        line-height: 1;
+        pointer-events: none
+      }
+
+      .mc-portrait-sc {
+        position: absolute;
+        top: .75rem;
+        right: .75rem;
+        font-size: .6rem;
+        letter-spacing: .11em;
+        text-transform: uppercase;
+        padding: .28rem .6rem;
+        border: 1px solid;
+        transition: all .3s
+      }
+
+      .mc-portrait-sc.l5 {
+        border-color: rgba(192, 37, 26, .5);
+        color: var(--red);
+        background: rgba(192, 37, 26, .08)
+      }
+
+      .mc-portrait-sc.l4 {
+        border-color: rgba(184, 154, 62, .5);
+        color: var(--gold);
+        background: rgba(184, 154, 62, .08)
+      }
+
+      .mc-portrait-sc.l3 {
+        border-color: rgba(240, 236, 227, .25);
+        color: var(--ink2);
+        background: rgba(240, 236, 227, .05)
+      }
+
+      .mc-portrait-sc.l1,
+      .mc-portrait-sc.l2 {
+        border-color: rgba(240, 236, 227, .12);
+        color: var(--muted);
+        background: transparent
+      }
+
+      .mc-portrait-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1.2rem 1.25rem .9rem
+      }
+
+      .mc-portrait-name {
+        font-family: var(--display);
+        font-size: 2.6rem;
+        letter-spacing: .04em;
+        line-height: .92;
+        color: #fff
+      }
+
+      .mc-portrait-role {
+        font-size: .76rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-top: .3rem;
+        opacity: .95
+      }
+
+      .mc-portrait-race {
+        font-size: .72rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        opacity: .7;
+        margin-top: .18rem;
+        color: #fff
+      }
+
+      /* scan line effect on hover */
+      .mc-portrait::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(192, 37, 26, .02) 2px, rgba(192, 37, 26, .02) 4px);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity .3s
+      }
+
+      .mc:hover .mc-portrait::after {
+        opacity: 1
+      }
+
+      /* ---- GLITCH POPUP ---- */
+      #glitch-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0);
+        align-items: center;
+        justify-content: center;
+        cursor: pointer
+      }
+
+      #glitch-overlay.open {
+        display: flex;
+        animation: glitch-bg-in .12s ease forwards
+      }
+
+      @keyframes glitch-bg-in {
+        to {
+          background: rgba(0, 0, 0, .82)
+        }
+      }
+
+      .glitch-box {
+        position: relative;
+        width: min(460px, 90vw);
+        background: var(--bg);
+        border: 1px solid var(--red);
+        overflow: hidden;
+        animation: glitch-box-in .18s cubic-bezier(.2, .8, .3, 1) both
+      }
+
+      @keyframes glitch-box-in {
+        0% {
+          transform: scaleX(1.04) scaleY(.92);
+          opacity: 0;
+          filter: blur(2px)
+        }
+
+        60% {
+          transform: scaleX(.99) scaleY(1.01);
+          opacity: 1;
+          filter: none
+        }
+
+        100% {
+          transform: none;
+          opacity: 1
+        }
+      }
+
+      /* red top bar */
+      .glitch-topbar {
+        background: var(--red);
+        padding: .55rem 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between
+      }
+
+      .glitch-topbar-label {
+        font-family: var(--display);
+        font-size: .9rem;
+        letter-spacing: .22em;
+        color: #fff
+      }
+
+      .glitch-topbar-code {
+        font-size: .55rem;
+        letter-spacing: .2em;
+        color: rgba(255, 255, 255, .55);
+        font-family: var(--mono)
+      }
+
+      /* scanline overlay inside box */
+      .glitch-box::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(192, 37, 26, .035) 3px, rgba(192, 37, 26, .035) 6px);
+        pointer-events: none;
+        z-index: 10;
+        animation: scanline-drift 4s linear infinite
+      }
+
+      @keyframes scanline-drift {
+        0% {
+          background-position-y: 0
+        }
+
+        100% {
+          background-position-y: 24px
+        }
+      }
+
+      .glitch-body {
+        padding: 1.8rem 1.75rem 2rem;
+        position: relative
+      }
+
+      .glitch-icon {
+        font-family: var(--display);
+        font-size: 4.5rem;
+        color: var(--red);
+        opacity: .08;
+        position: absolute;
+        right: 1.5rem;
+        top: 1.2rem;
+        line-height: 1;
+        pointer-events: none;
+        user-select: none
+      }
+
+      /* noise flicker on the id number */
+      .glitch-id {
+        font-family: var(--display);
+        font-size: 5rem;
+        letter-spacing: .02em;
+        line-height: 1;
+        color: var(--red);
+        opacity: .12;
+        margin-bottom: -.5rem;
+        animation: id-flicker 3.5s step-end infinite
+      }
+
+      @keyframes id-flicker {
+
+        0%,
+        90%,
+        100% {
+          opacity: .12
+        }
+
+        92% {
+          opacity: .04
+        }
+
+        94% {
+          opacity: .18
+        }
+
+        96% {
+          opacity: .06
+        }
+      }
+
+      .glitch-title {
+        font-family: var(--display);
+        font-size: 2.2rem;
+        letter-spacing: .06em;
+        color: var(--ink);
+        line-height: .95;
+        margin-bottom: .6rem;
+        position: relative;
+        animation: text-glitch 4s step-end infinite
+      }
+
+      @keyframes text-glitch {
+
+        0%,
+        85%,
+        100% {
+          clip-path: none;
+          transform: none
+        }
+
+        87% {
+          clip-path: polygon(0 30%, 100% 30%, 100% 55%, 0 55%);
+          transform: translateX(-3px)
+        }
+
+        89% {
+          clip-path: none;
+          transform: translateX(2px)
+        }
+
+        91% {
+          clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+          transform: translateX(-1px)
+        }
+
+        93% {
+          clip-path: none;
+          transform: none
+        }
+      }
+
+      .glitch-sub {
+        font-size: .68rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--red);
+        opacity: .7;
+        margin-bottom: 1.4rem
+      }
+
+      .glitch-desc {
+        font-size: .85rem;
+        line-height: 1.85;
+        opacity: .65;
+        margin-bottom: 1.5rem;
+        text-align: justify;
+        hyphens: auto
+      }
+
+      /* corrupted data lines */
+      .glitch-data {
+        border-top: 1px solid var(--border);
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        margin-bottom: 1.5rem
+      }
+
+      .glitch-data-row {
+        display: flex;
+        gap: .75rem;
+        align-items: baseline
+      }
+
+      .glitch-data-key {
+        font-size: .6rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        opacity: .45;
+        flex-shrink: 0;
+        width: 80px
+      }
+
+      .glitch-data-val {
+        font-size: .78rem;
+        letter-spacing: .06em;
+        opacity: .55;
+        font-family: var(--mono)
+      }
+
+      .glitch-data-val.corrupt {
+        color: var(--red);
+        opacity: .6;
+        animation: corrupt-flicker 2.5s step-end infinite
+      }
+
+      @keyframes corrupt-flicker {
+
+        0%,
+        70%,
+        100% {
+          opacity: .6
+        }
+
+        72% {
+          opacity: .15
+        }
+
+        74% {
+          opacity: .8
+        }
+
+        76% {
+          opacity: .3
+        }
+      }
+
+      /* close button */
+      .glitch-close {
+        display: block;
+        width: 100%;
+        padding: .65rem;
+        font-family: var(--mono);
+        font-size: .65rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        border: 1px solid var(--border2);
+        background: none;
+        color: var(--ink);
+        cursor: pointer;
+        opacity: .4;
+        transition: all .2s
+      }
+
+      .glitch-close:hover {
+        opacity: 1;
+        border-color: var(--red);
+        color: var(--red)
+      }
+
+      /* horizontal glitch bar that occasionally fires */
+      .glitch-stripe {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--red);
+        opacity: 0;
+        pointer-events: none;
+        animation: stripe-fire 5s step-end infinite
+      }
+
+      @keyframes stripe-fire {
+
+        0%,
+        88%,
+        100% {
+          opacity: 0;
+          top: 40%
+        }
+
+        89% {
+          opacity: .5;
+          top: 38%
+        }
+
+        90% {
+          opacity: 0;
+          top: 55%
+        }
+
+        91% {
+          opacity: .3;
+          top: 55%
+        }
+
+        92% {
+          opacity: 0
+        }
+      }
+
+      /* ---- EMPTY STATE ---- */
+      .db-empty {
+        grid-column: 1/-1;
+        padding: 5rem 2rem;
+        text-align: center;
+        opacity: .25
+      }
+
+      .db-empty-icon {
+        font-family: var(--display);
+        font-size: 5rem;
+        color: var(--red);
+        margin-bottom: 1rem;
+        line-height: 1
+      }
+
+      .db-empty-text {
+        font-size: .8rem;
+        letter-spacing: .12em;
+        text-transform: uppercase
+      }
+
+      /* ---- STATUS BAR ---- */
+      .db-statusbar {
+        padding: .6rem 3rem;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        background: var(--surface)
+      }
+
+      .db-status-item {
+        font-size: .65rem;
+        letter-spacing: .11em;
+        text-transform: uppercase;
+        opacity: .45;
+        display: flex;
+        align-items: center;
+        gap: .4rem
+      }
+
+      .db-status-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%
+      }
+
+      .db-status-dot.red {
+        background: var(--red)
+      }
+
+      .db-status-dot.gold {
+        background: var(--gold)
+      }
+
+      .db-status-dot.grey {
+        background: var(--muted)
+      }
+
+      .db-count {
+        margin-left: auto;
+        font-size: .65rem;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+        opacity: .42
+      }
+
+      /* ---- FOOTER ---- */
+      .site-footer {
+        background: var(--surface);
+        border-top: 2px solid var(--red);
+        padding: 2.5rem 3rem;
+        margin-top: auto
+      }
+
+      .site-footer-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem
+      }
+
+      .sf-col-title {
+        font-family: var(--display);
+        font-size: 1.1rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        margin-bottom: .75rem;
+        transition: color .3s
+      }
+
+      .sf-col p,
+      .sf-col a {
+        font-size: .84rem;
+        line-height: 1.85;
+        opacity: .65;
+        display: block;
+        color: var(--ink);
+        text-decoration: none;
+        transition: opacity .15s
+      }
+
+      .sf-col a:hover {
+        opacity: 1;
+        color: var(--red)
+      }
+
+      .sf-bottom {
+        border-top: 1px solid var(--border);
+        padding-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap
+      }
+
+      .sf-copy {
+        font-size: .68rem;
+        letter-spacing: .12em;
+        opacity: .25;
+        text-transform: uppercase
+      }
+
+      .sf-logo {
+        font-family: var(--display);
+        font-size: 1.6rem;
+        letter-spacing: .08em;
+        color: var(--ink);
+        opacity: .3
+      }
+
+      .sf-logo span {
+        color: var(--red)
+      }
+
+      /* ---- MOBILE ---- */
+      @media(max-width:768px) {
+        .nav-links {
+          display: none
+        }
+
+        .nav-right {
+          display: flex
+        }
+
+        .burger-btn {
+          display: flex
+        }
+
+        .page-header {
+          padding: 2rem 1.25rem 1.5rem
+        }
+
+        .filter-bar {
+          padding: .75rem 1.25rem
+        }
+
+        .search-wrap {
+          margin-left: 0;
+          width: 100%
+        }
+
+        .search-wrap input {
+          width: 100%
+        }
+
+        .db-grid-wrap {
+          grid-template-columns: 1fr 1fr;
+          padding: 1.25rem;
+          gap: 1rem;
+          background: var(--bg)
+        }
+
+        .mc-portrait-name {
+          font-size: 2rem
+        }
+
+        .mc-portrait-role {
+          font-size: .72rem
+        }
+
+        .mc-portrait-race {
+          font-size: .68rem;
+          opacity: .6
+        }
+
+        .mc-body {
+          padding: .85rem 1rem 1rem
+        }
+
+        .mc-fields {
+          grid-template-columns: 1fr
+        }
+
+        .db-statusbar {
+          padding: .6rem 1.25rem;
+          flex-wrap: wrap;
+          gap: .75rem
+        }
+
+        .detail-layout {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto 1fr
+        }
+
+        .detail-portrait-col {
+          border-right: none;
+          border-bottom: 1px solid var(--border)
+        }
+
+        .detail-portrait {
+          aspect-ratio: 1/1
+        }
+
+        .detail-portrait-initial {
+          font-size: 7rem
+        }
+
+        .detail-right {}
+
+        .detail-top-bar {
+          padding: 1.25rem
+        }
+
+        .detail-cid {
+          padding: 1.25rem
+        }
+
+        .detail-desc {
+          padding: 1.25rem
+        }
+
+        .detail-status {
+          padding: 1rem 1.25rem
+        }
+
+        .cid-grid {
+          grid-template-columns: 1fr
+        }
+
+        .cid-f.full {
+          grid-column: 1
+        }
+
+        .site-footer {
+          padding: 2rem 1.25rem
+        }
+
+        .site-footer-inner {
+          grid-template-columns: 1fr;
+          gap: 1.5rem
+        }
+
+        .sf-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: .75rem;
+          justify-content: flex-start
+        }
+      }
+
+      @media(max-width:480px) {
+        .db-grid-wrap {
+          grid-template-columns: 1fr 1fr;
+          gap: .75rem;
+          padding: 1rem
+        }
+
+        .mc-portrait {
+          aspect-ratio: 2/3
+        }
+
+        .mc-portrait-name {
+          font-size: 1.4rem
+        }
+
+        .mc-portrait-role {
+          font-size: .62rem
+        }
+
+        .mc-portrait-race {
+          display: none
+        }
+
+        .mc-portrait-bottom {
+          padding: .75rem .85rem .65rem
+        }
+      }
+
+      /* ── WARGANTARA SPLASH (shared) ── */
+      .wg-splash {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        opacity: 1;
+        transition: opacity .6s ease
+      }
+
+      .wg-splash.hiding {
+        opacity: 0;
+        pointer-events: none
+      }
+
+      .wg-splash.hidden {
+        display: none
+      }
+
+      @keyframes glitch-swap {
+        0% {
+          opacity: 1;
+          transform: skewX(0)
+        }
+
+        10% {
+          opacity: 0;
+          transform: skewX(-4deg) translateX(4px)
+        }
+
+        15% {
+          opacity: 1;
+          transform: skewX(3deg) translateX(-3px)
+        }
+
+        20% {
+          opacity: 0;
+          transform: skewX(0)
+        }
+
+        25% {
+          opacity: 1;
+          transform: skewX(-2deg)
+        }
+
+        30% {
+          opacity: 0
+        }
+
+        35%,
+        100% {
+          opacity: 1;
+          transform: skewX(0)
+        }
+      }
+
+      .splash-box.glitching {
+        animation: glitch-swap .35s steps(1) both
+      }
+
+      .splash-box {
+        max-width: 560px;
+        width: 100%;
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--red);
+        padding: 3rem 2.5rem 2.5rem;
+        position: relative;
+        background: var(--bg);
+        overflow: hidden
+      }
+
+      .splash-pre {
+        font-family: 'Space Mono', monospace;
+        font-size: .6rem;
+        letter-spacing: .28em;
+        color: var(--red);
+        text-transform: uppercase;
+        margin-bottom: 1.5rem
+      }
+
+      .splash-quote {
+        font-family: 'Noto Serif Display', serif;
+        font-style: italic;
+        font-size: clamp(.9rem, 2.5vw, 1.15rem);
+        line-height: 1.75;
+        color: var(--ink);
+        margin-bottom: .65rem
+      }
+
+      .splash-attr {
+        font-family: 'Space Mono', monospace;
+        font-size: .62rem;
+        letter-spacing: .1em;
+        color: var(--muted);
+        margin-bottom: 2rem
+      }
+
+      .splash-rule {
+        width: 2rem;
+        height: 1px;
+        background: var(--border);
+        margin-bottom: 2rem
+      }
+
+      .splash-disclaimer {
+        font-family: 'Inter', sans-serif;
+        font-size: .78rem;
+        line-height: 1.9;
+        color: var(--ink2);
+        opacity: .75;
+        margin-bottom: 2rem
+      }
+
+      .splash-disclaimer strong {
+        color: var(--gold);
+        font-weight: 400
+      }
+
+      .splash-actions {
+        display: flex;
+        gap: .75rem;
+        align-items: center;
+        flex-wrap: wrap
+      }
+
+      .splash-btn-enter {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .7rem 1.5rem;
+        background: var(--red);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background .15s;
+        min-height: 40px
+      }
+
+      .splash-btn-enter:hover {
+        background: var(--red2)
+      }
+
+      .splash-btn-deny {
+        font-family: 'Space Mono', monospace;
+        font-size: .68rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        background: none;
+        border: 1px solid var(--border);
+        cursor: pointer;
+        padding: .6rem 1rem;
+        transition: color .15s, border-color .15s;
+        min-height: 40px
+      }
+
+      .splash-btn-deny:hover {
+        color: var(--ink);
+        border-color: var(--muted)
+      }
+
+      .splash-privacy {
+        font-family: 'Space Mono', monospace;
+        font-size: .58rem;
+        letter-spacing: .06em;
+        color: var(--border2);
+        margin-top: 1.25rem;
+        line-height: 1.7
+      }
+
+      .splash-corner {
+        position: absolute;
+        bottom: 1rem;
+        right: 1.5rem;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 4.5rem;
+        color: var(--red);
+        opacity: .04;
+        line-height: 1;
+        pointer-events: none
+      }
+
+      .splash-step {
+        transition: opacity .35s ease;
+      }
+
+      .splash-step.fading {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .splash-theme-step {
+        display: none;
+        opacity: 0;
+        transition: opacity .35s ease;
+      }
+
+      .splash-theme-step.active {
+        display: block;
+      }
+
+      .splash-theme-step.visible {
+        opacity: 1;
+      }
+
+      .splash-theme-choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .75rem;
+        margin-bottom: 1.5rem
+      }
+
+      .splash-theme-btn {
+        font-family: 'Space Mono', monospace;
+        font-size: .7rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        padding: 1.1rem 1rem;
+        border: 1px solid #2a2a2a;
+        background: none;
+        color: #888;
+        cursor: pointer;
+        transition: all .15s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .6rem
+      }
+
+      .splash-theme-btn .t-icon {
+        font-size: 1.4rem;
+        opacity: .5;
+        transition: opacity .15s
+      }
+
+      .splash-theme-btn:hover {
+        border-color: #b89a3e;
+        color: #f0ece3
+      }
+
+      .splash-theme-btn:hover .t-icon {
+        opacity: 1
+      }
+
+      .splash-theme-btn.selected {
+        border-color: #c0251a;
+        color: #f0ece3;
+        background: rgba(192, 37, 26, .08)
+      }
+
+      .splash-theme-btn.selected .t-icon {
+        opacity: 1
+      }
+
+      [data-theme="light"] .splash-theme-btn {
+        color: var(--ink2)
+      }
+      [data-theme="light"] .splash-theme-btn .t-icon {
+        opacity: .7
+      }
+
+      .splash-theme-confirm {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: .7rem 1.5rem;
+        background: #c0251a;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background .15s, opacity .15s;
+        width: 100%;
+        min-height: 40px;
+        opacity: .35;
+        pointer-events: none
+      }
+
+      .splash-theme-confirm.ready {
+        opacity: 1;
+        pointer-events: auto
+      }
+
+      .splash-theme-confirm.ready:hover {
+        background: #e02a1e
+      }
+
+      .deny-countdown {
+        font-family: 'Space Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .1em;
+        color: #3a3a3a;
+        margin-top: 1.5rem;
+        transition: color .3s
+      }
+
+      .deny-countdown.urgent {
+        color: #7a3030
+      }
+
+      @media(max-width:600px) {
+        .splash-box {
+          padding: 2rem 1.5rem
+        }
+      }
+    
+      /* NAV DROPDOWN */
+      .nav-links li.has-drop {
+        position: relative
+      }
+      .nav-links li.has-drop > a {
+        display: flex !important;
+        align-items: center;
+        gap: .35rem
+      }
+      .nav-links li.has-drop > a::after {
+        content: '';
+        width: 5px;
+        height: 5px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: rotate(45deg) translateY(-1px);
+        opacity: .6;
+        transition: transform .15s
+      }
+      .nav-links li.has-drop:hover > a::after {
+        transform: rotate(-135deg) translateY(-2px)
+      }
+      .nav-drop {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 180px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-top: 2px solid var(--red);
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 9999;
+        box-shadow: 0 4px 16px rgba(0,0,0,.18);
+        transition: opacity .15s, visibility .15s
+      }
+      .nav-links li.has-drop:hover .nav-drop {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto
+      }
+      .nav-drop a {
+        display: block !important;
+        padding: .65rem 1rem !important;
+        height: auto !important;
+        line-height: 1.4 !important;
+        font-size: .75rem !important;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--ink) !important;
+        opacity: .65 !important;
+        border-bottom: 1px solid var(--border) !important;
+        border-left: none !important;
+        transition: all .12s !important;
+        white-space: nowrap
+      }
+      .nav-drop a:last-child {
+        border-bottom: none !important
+      }
+      .nav-drop a:hover, .nav-drop a.active {
+        opacity: 1 !important;
+        background: var(--red) !important;
+        color: #fff !important
+      }
+
+      /* MOBILE DRAWER SUB */
+      .mobile-drawer ul li.has-msub > a {
+        justify-content: space-between
+      }
+      .mobile-drawer ul li.has-msub > a::after {
+        content: '›';
+        font-size: 1.1rem;
+        opacity: .4
+      }
+      .mobile-sub {
+        display: none;
+        border-top: 1px solid var(--border)
+      }
+      .mobile-sub.open {
+        display: block
+      }
+      .mobile-sub a {
+        padding-left: 2.75rem !important;
+        background: var(--surface) !important;
+        font-size: .82rem !important;
+        opacity: .55 !important
+      }
+      .mobile-sub a:hover, .mobile-sub a.active {
+        opacity: 1 !important;
+        background: var(--red) !important;
+        color: #fff !important
+      }
+
+    
+      /* contact box */
+      .sf-contact-box {
+        margin-top: .65rem;
+        border: 1px solid var(--border2);
+        border-top: 2px solid var(--red);
+        padding: 1rem 1rem .85rem
+      }
+      .sf-contact-box-label {
+        font-size: .6rem;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--red);
+        margin-bottom: .5rem;
+        opacity: 1
+      }
+      .sf-contact-box-body {
+        font-size: .8rem;
+        line-height: 1.75;
+        opacity: .65;
+        margin-bottom: .85rem
+      }
+      .sf-contact-cta {
+        display: block;
+        width: 100%;
+        padding: .55rem 1rem;
+        font-family: var(--mono);
+        font-size: .7rem;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+        text-align: center;
+        background: var(--red);
+        color: #fff !important;
+        opacity: 1 !important;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: background .15s
+      }
+      .sf-contact-cta:hover {
+        background: #a01e14
+      }
+
+    
+      /* ── SOCIAL PILLS ── */
+      .sf-socials {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: .5rem;
+        margin-top: .85rem
+      }
+      .sf-social-pill {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 52px !important;
+        height: 52px !important;
+        border: 1px solid var(--border2);
+        color: var(--ink) !important;
+        opacity: .45 !important;
+        text-decoration: none;
+        transition: all .15s;
+        cursor: pointer;
+        flex-shrink: 0 !important
+      }
+      .sf-social-pill i {
+        font-size: 1.7rem
+      }
+      a.sf-social-pill:hover {
+        border-color: var(--ink);
+        opacity: 1 !important
+      }
+      .sf-social-pill--disabled {
+        opacity: .18 !important;
+        cursor: not-allowed !important;
+        border-style: dashed
+      }
+
+    </style>
+
+    <meta name="description" content="Wargantara adalah grup VTuber Indonesia bertemakan entitas astral dan sandbox lore universe.">
+    <meta property="og:title" content="WARGANTARA">
+    <meta property="og:description" content="Wargantara—grup VTuber Indonesia bertemakan entitas astral. Karena cara terbaik menyimpan rahasia adalah menjadikannya fiksi—dan fiksi ini terbuka untuk semua yang ingin ikut membangunnya.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wargantara.xyz">
+    <meta property="og:image" content="https://wargantara.xyz/assets/og/default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://wargantara.xyz/assets/og/default.png">
+
+    <script>
+      if (document.cookie.match(/(?:^|;\s*)wg-visited=1/)) {
+        document.write('<style>.wg-splash{display:none!important}</style>');
+      }
+    </script>
+  <script>
+    /* ── Anti-DevTools Protection ── */
+    (function() {
+      "use strict";
+      var _blocked = false;
+
+      function _block() {
+        if (_blocked) return;
+        _blocked = true;
+        document.open();
+        document.write('<style>@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Serif+Display:ital,wght@0,300;1,600&display=swap");*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;display:flex;align-items:center;justify-content:center;height:100vh;overflow:hidden}.wg-devblock{max-width:480px;width:90%;border:1px solid #2a2a2a;border-top:2px solid #c0251a;padding:2.5rem 2rem 2rem;background:#111;position:relative;overflow:hidden;animation:glitch-in .35s steps(1) both}@keyframes glitch-in{0%{opacity:1;transform:skewX(0deg)}10%{opacity:0;transform:skewX(-4deg) translateX(4px)}15%{opacity:1;transform:skewX(3deg) translateX(-3px)}20%{opacity:0;transform:skewX(0deg)}25%{opacity:1;transform:skewX(-2deg)}30%{opacity:0}35%{opacity:1;transform:skewX(0deg)}100%{opacity:1;transform:skewX(0deg)}}.wg-pre{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.28em;color:#c0251a;text-transform:uppercase;margin-bottom:1.5rem}.wg-quote{font-family:"Noto Serif Display",serif;font-style:italic;font-size:clamp(1rem,3vw,1.25rem);line-height:1.75;color:#f0ece3;margin-bottom:.65rem}.wg-attr{font-family:"Space Mono",monospace;font-size:.62rem;letter-spacing:.1em;color:#555;margin-bottom:1.75rem}.wg-rule{width:2rem;height:1px;background:#2a2a2a;margin-bottom:1.75rem}.wg-msg{font-family:"Space Mono",monospace;font-size:.75rem;line-height:1.9;color:#c8c2b4;opacity:.75}.wg-msg strong{color:#b89a3e;font-weight:400}.wg-corner{position:absolute;bottom:.75rem;right:1.25rem;font-family:"Bebas Neue",sans-serif;font-size:4rem;color:#c0251a;opacity:.04;line-height:1;pointer-events:none}</style><div class="wg-devblock"><div class="wg-pre">// Wargantara &middot; Akses Ditolak</div><div class="wg-quote">&ldquo;Beberapa hal memang tidak dimaksudkan untuk dilihat.&rdquo;</div><div class="wg-attr">— Arsip Wargantara, Dokumen Tak Bernomor</div><div class="wg-rule"></div><div class="wg-msg">Aktivitas <strong>inspect / devtools</strong> terdeteksi.<br>Halaman ini tidak dapat diakses lebih lanjut.</div><div class="wg-corner">WG</div></div>');
+        document.close();
+      }
+      // 1. Disable right-click (kecuali gambar)
+      document.addEventListener("contextmenu", function(e) {
+        if (e.target.tagName === "IMG") return;
+        e.preventDefault();
+      });
+      // 2. Block keyboard shortcuts
+      document.addEventListener("keydown", function(e) {
+        var k = e.key;
+        if (k === "F12") {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+        if (e.ctrlKey && e.shiftKey && ["I", "J", "C", "K"].indexOf(k.toUpperCase()) !== -1) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+        if (e.ctrlKey && ["U", "S", "A", "P"].indexOf(k.toUpperCase()) !== -1) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      }, true);
+      // 3. Block drag
+      document.addEventListener("dragstart", function(e) {
+        if (e.target.tagName !== "IMG") e.preventDefault();
+      });
+      // 5. console object trap
+      var _el = document.createElement("div");
+      Object.defineProperty(_el, "id", {
+        get: function() {
+          _block();
+        }
+      });
+      setInterval(function() {
+        console.log(_el);
+        console.clear();
+      }, 1000);
+      // 6. Disable text selection
+      var _style = document.createElement("style");
+      _style.textContent = "img { pointer-events:auto!important; }";
+      document.head.appendChild(_style);
+    })();
+  </script><style>img { pointer-events:auto!important; }</style>    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  </head>
+
+  
+  
+
+  <body style="">
+
+    <!-- SPLASH SCREEN -->
+    <div class="wg-splash" id="splash-main">
+      <div class="splash-box">
+
+        <!-- STEP 1: Disclaimer -->
+        <div id="splash-step1" class="splash-step">
+          <div class="splash-pre">// Wargantara &middot; Peringatan Masuk</div>
+          <div class="splash-quote">&ldquo;Cara menyimpan sebuah rahasia terbaik adalah dengan menjadikannya sebuah kisah-kisah fiksi untuk dipercaya.&rdquo;</div>
+          <div class="splash-attr">— Arsip Wargantara, Dokumen Tak Bernomor</div>
+          <div class="splash-rule"></div>
+          <div class="splash-disclaimer">
+            Seluruh konten dalam website ini adalah karya fiksi. Nama, karakter, kejadian, dan entitas yang ada di dalamnya bersifat fiktif semata.<br><br>
+            <strong>// Dengan memasuki website ini</strong>, kamu menyatakan memahami bahwa semua yang kamu temukan di sini adalah bagian dari sebuah semesta fiksi yang dibangun dengan penuh kesengajaan—dan tidak ada kaitannya dengan kenyataan di luar batas dunia ini.
+          </div>
+          <div class="splash-actions">
+            <button class="splash-btn-enter" onclick="splashStep2()">// Saya Mengerti—Lanjut</button>
+            <button class="splash-btn-deny" onclick="splashDeny()">Tidak Setuju</button>
+          </div>
+          <div class="splash-privacy">// Website ini menyimpan preferensi tema secara lokal di browser kamu. Tidak ada data pribadi yang dikumpulkan.</div>
+        </div>
+
+        <!-- STEP 2: Pilih Tema -->
+        <div id="splash-step2" class="splash-theme-step">
+          <div class="splash-pre">// Wargantara &middot; Preferensi Tampilan</div>
+          <div class="splash-quote" style="font-size:clamp(.95rem,2.5vw,1.15rem);margin-bottom:1.5rem">Pilih tampilan yang kamu inginkan.<br><span style="opacity:.4;font-size:.85em">Preferensi ini akan disimpan untuk kunjungan berikutnya.</span></div>
+          <div class="splash-rule"></div>
+          <div class="splash-theme-choices">
+            <button class="splash-theme-btn" id="btn-day" onclick="splashSelectTheme('light')">
+              <span class="t-icon sf sf-sun-1-o"></span>
+              Day Mode
+            </button>
+            <button class="splash-theme-btn" id="btn-night" onclick="splashSelectTheme('dark')">
+              <span class="t-icon sf sf-moon-1-o"></span>
+              Night Mode
+            </button>
+          </div>
+          <button class="splash-theme-confirm" id="splash-confirm" onclick="splashEnter()">// Masuk</button>
+        </div>
+
+        <div class="deny-countdown" id="deny-countdown" style="display:none">Halaman akan ditutup dalam <span id="deny-secs">5</span> detik...</div>
+        <div class="splash-corner">W</div>
+      </div>
+    </div>
+
+    <div class="pt-label" id="pt-label"></div>
+    
+
+    <!-- NAV -->
+    <nav>
+      <a class="nav-logo" href="index.html">
+  <img class="nav-logo-img wgtr-logo-light" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+  <img class="nav-logo-img wgtr-logo-dark"  src="assets/og/wgtr-small-dark.png"  alt="WARGANTARA"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="members.html">Members</a></li>
+        <li><a href="lore.html">Lore</a></li>
+        <li class="has-drop">
+          <a href="guidelines.html">Guidelines</a>
+          <div class="nav-drop">
+            <a href="guidelines.html">General Guidelines</a>
+            <a href="collab.html">Collab with Us</a>
+          </div>
+        </li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-btn" id="theme-btn-desktop" onclick="toggleTheme()" aria-label="Toggle theme"><span id="theme-icon" class="sf"></span></button>
+        <button class="burger-btn" id="burger" onclick="toggleMobile()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="members.html">Members</a></li>
+        <li><a href="lore.html">Lore</a></li>
+        <li class="has-msub">
+          <a href="guidelines.html" onclick="toggleMSub(event,'msub-gl')">Guidelines</a>
+          <div class="mobile-sub" id="msub-gl">
+            <a href="guidelines.html">General Guidelines</a>
+            <a href="collab.html">Collab with Us</a>
+          </div>
+        </li>
+        <li><a href="arcid.html">AR-CID Editor</a></li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+      <div style="padding:.75rem 1.5rem;border-top:1px solid var(--border)">
+        <a onclick="toggleTheme();closeMobile()" id="mnav-theme" style="display:flex;align-items:center;gap:.75rem;cursor:pointer;padding:.7rem 0;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);opacity:.75;text-decoration:none">
+          <span id="theme-icon-m" class="sf" style="font-size:1.15rem"></span>
+          <span id="theme-label-m">Night Mode</span>
+        </a>
+      </div>
+    </div>
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="page-header-pre">// Astral Realm Authority—Citizen Registry //</div>
+      <h1>MEMBER<br>DATABASE</h1>
+      <p>Registered Entities—Lintas Batas</p>
+      <div class="page-header-meta">
+        <div class="page-header-stat">
+          <div class="page-header-stat-val" id="stat-total">???</div>
+          <div class="page-header-stat-label">Total Entities</div>
+        </div>
+        <div class="page-header-divider"></div>
+        <div class="page-header-stat">
+          <div class="page-header-stat-val" id="stat-active">1</div>
+          <div class="page-header-stat-label">Confirmed Active</div>
+        </div>
+        <div class="page-header-divider"></div>
+        <div class="page-header-stat">
+          <div class="page-header-stat-val" id="stat-pending">5</div>
+          <div class="page-header-stat-label">Pending Reveal</div>
+        </div>
+        <div class="page-header-divider"></div>
+        <div class="page-header-stat">
+          <div class="page-header-stat-val" style="color:var(--red)">L5</div>
+          <div class="page-header-stat-label">Highest Clearance</div>
+        </div>
+      </div>
+      <div class="page-header-bg">DB</div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterBy(&#39;all&#39;,this)">All</button>
+      <button class="filter-btn" onclick="filterBy(&#39;active&#39;,this)">Active</button>
+      <button class="filter-btn" onclick="filterBy(&#39;placeholder&#39;,this)">Pending</button>
+      <div class="filter-sep"></div>
+      <button class="filter-btn" onclick="filterBy(&#39;l5&#39;,this)">Clearance L5</button>
+      <button class="filter-btn" onclick="filterBy(&#39;l4&#39;,this)">Clearance L4</button>
+      <div class="search-wrap">
+        <svg class="search-icon" width="11" height="11" viewBox="0 0 16 16" fill="none">
+          <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"></circle>
+          <path d="M10 10L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+        </svg>
+        <input type="text" id="search-input" placeholder="Cari nama, ras, jabatan..." oninput="searchMembers(this.value)">
+      </div>
+    </div>
+
+    <!-- MEMBER GRID -->
+    <div class="db-grid-wrap" id="member-grid"><div class="mc" data-id="01" data-sc="l5" onclick="location.href=&#39;members/soren&#39;">
+    <div class="mc-portrait">
+      <div class="mc-portrait-img" style="background:linear-gradient(135deg,#1a1410 0%,#261810 100%)">
+        <img src="/assets/members/soren/soren-portrait.png" alt="TAKAHI SOREN" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; position: absolute; inset: 0px; display: none;" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.classList.remove(&#39;hidden&#39;)">
+        <div class="mc-portrait-initial">TS</div>
+      </div>
+      <div class="mc-portrait-overlay"></div>
+      <div class="mc-portrait-id">01</div>
+      <div class="mc-portrait-sc l5">L5</div>
+      
+      <div class="mc-portrait-bottom" style="color:#fff">
+        <div class="mc-portrait-name" style="color:#fff">TAKAHI SOREN</div>
+        <div class="mc-portrait-role" style="color:#d4a84b;opacity:1">SERAPH OF HIGH END ORDERS</div>
+        <div class="mc-portrait-race" style="color:rgba(255,255,255,.7);opacity:1">ANGEL (SERAPHIM)</div>
+      </div>
+    </div>
+  </div><div class="mc" data-id="02" data-sc="l4" onclick="openGlitch(&#39;02&#39;)">
+    <div class="mc-portrait">
+      <div class="mc-portrait-img" style="background:linear-gradient(135deg,#0b0f1a 0%,#0f1520 100%)">
+        <img src="/assets/members/rui/rui-portrait.png" alt="RUI" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; position: absolute; inset: 0px; display: none;" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.classList.remove(&#39;hidden&#39;)">
+        <div class="mc-portrait-initial">R</div>
+      </div>
+      <div class="mc-portrait-overlay"></div>
+      <div class="mc-portrait-id">02</div>
+      <div class="mc-portrait-sc l4">L4</div>
+      <div style="position:absolute;top:.75rem;left:.75rem;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid rgba(128,128,128,.25);color:var(--muted)">PENDING</div>
+      <div class="mc-portrait-bottom" style="color:#fff">
+        <div class="mc-portrait-name" style="color:#fff;user-select:none;-webkit-user-select:none;cursor:default"><span style="display:inline-block;background:currentColor;color:transparent;border-radius:1px;opacity:.55;user-select:none;-webkit-user-select:none">RUI</span></div>
+        <div class="mc-portrait-role" style="color:#d4a84b;opacity:1">Pending Classification</div>
+        <div class="mc-portrait-race" style="color:rgba(255,255,255,.7);opacity:1">Race: UNCLASSIFIED</div>
+      </div>
+    </div>
+  </div><div class="mc" data-id="03" data-sc="l4" onclick="openGlitch(&#39;03&#39;)">
+    <div class="mc-portrait">
+      <div class="mc-portrait-img" style="background:linear-gradient(135deg,#0a1209 0%,#0e1a0c 100%)">
+        <img src="/assets/members/anneliese/anneliese-portrait.png" alt="ANNELIESE DYVA" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; position: absolute; inset: 0px; display: none;" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.classList.remove(&#39;hidden&#39;)">
+        <div class="mc-portrait-initial">AD</div>
+      </div>
+      <div class="mc-portrait-overlay"></div>
+      <div class="mc-portrait-id">03</div>
+      <div class="mc-portrait-sc l4">L4</div>
+      <div style="position:absolute;top:.75rem;left:.75rem;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid rgba(128,128,128,.25);color:var(--muted)">PENDING</div>
+      <div class="mc-portrait-bottom" style="color:#fff">
+        <div class="mc-portrait-name" style="color:#fff;user-select:none;-webkit-user-select:none;cursor:default"><span style="display:inline-block;background:currentColor;color:transparent;border-radius:1px;opacity:.55;user-select:none;-webkit-user-select:none">ANNELIESE DYVA</span></div>
+        <div class="mc-portrait-role" style="color:#d4a84b;opacity:1">Pending Classification</div>
+        <div class="mc-portrait-race" style="color:rgba(255,255,255,.7);opacity:1">Race: UNCLASSIFIED</div>
+      </div>
+    </div>
+  </div><div class="mc" data-id="04" data-sc="l4" onclick="openGlitch(&#39;04&#39;)">
+    <div class="mc-portrait">
+      <div class="mc-portrait-img" style="background:linear-gradient(135deg,#100b1a 0%,#170f22 100%)">
+        <img src="/assets/members/noah/noah-portrait.png" alt="NOAH CHANTELUNE" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; position: absolute; inset: 0px; display: none;" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.classList.remove(&#39;hidden&#39;)">
+        <div class="mc-portrait-initial">NC</div>
+      </div>
+      <div class="mc-portrait-overlay"></div>
+      <div class="mc-portrait-id">04</div>
+      <div class="mc-portrait-sc l4">L4</div>
+      <div style="position:absolute;top:.75rem;left:.75rem;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid rgba(128,128,128,.25);color:var(--muted)">PENDING</div>
+      <div class="mc-portrait-bottom" style="color:#fff">
+        <div class="mc-portrait-name" style="color:#fff;user-select:none;-webkit-user-select:none;cursor:default"><span style="display:inline-block;background:currentColor;color:transparent;border-radius:1px;opacity:.55;user-select:none;-webkit-user-select:none">NOAH CHANTELUNE</span></div>
+        <div class="mc-portrait-role" style="color:#d4a84b;opacity:1">Pending Classification</div>
+        <div class="mc-portrait-race" style="color:rgba(255,255,255,.7);opacity:1">Race: UNCLASSIFIED</div>
+      </div>
+    </div>
+  </div><div class="mc" data-id="05" data-sc="l4" onclick="openGlitch(&#39;05&#39;)">
+    <div class="mc-portrait">
+      <div class="mc-portrait-img" style="background:linear-gradient(135deg,#1a1005 0%,#211608 100%)">
+        <img src="/assets/members/igni/igni-portrait.png" alt="IGNI VASHTI" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; position: absolute; inset: 0px; display: none;" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.classList.remove(&#39;hidden&#39;)">
+        <div class="mc-portrait-initial">IV</div>
+      </div>
+      <div class="mc-portrait-overlay"></div>
+      <div class="mc-portrait-id">05</div>
+      <div class="mc-portrait-sc l4">L4</div>
+      <div style="position:absolute;top:.75rem;left:.75rem;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid rgba(128,128,128,.25);color:var(--muted)">PENDING</div>
+      <div class="mc-portrait-bottom" style="color:#fff">
+        <div class="mc-portrait-name" style="color:#fff;user-select:none;-webkit-user-select:none;cursor:default"><span style="display:inline-block;background:currentColor;color:transparent;border-radius:1px;opacity:.55;user-select:none;-webkit-user-select:none">IGNI VASHTI</span></div>
+        <div class="mc-portrait-role" style="color:#d4a84b;opacity:1">Pending Classification</div>
+        <div class="mc-portrait-race" style="color:rgba(255,255,255,.7);opacity:1">Race: UNCLASSIFIED</div>
+      </div>
+    </div>
+  </div><div class="mc" data-id="06" data-sc="l4" onclick="openGlitch(&#39;06&#39;)">
+    <div class="mc-portrait">
+      <div class="mc-portrait-img" style="background:linear-gradient(135deg,#0d1215 0%,#111a1e 100%)">
+        <img src="/assets/members/arda/arda-portrait.png" alt="ARDAMEVIA" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; position: absolute; inset: 0px; display: none;" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.classList.remove(&#39;hidden&#39;)">
+        <div class="mc-portrait-initial">A</div>
+      </div>
+      <div class="mc-portrait-overlay"></div>
+      <div class="mc-portrait-id">06</div>
+      <div class="mc-portrait-sc l4">L4</div>
+      <div style="position:absolute;top:.75rem;left:.75rem;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid rgba(128,128,128,.25);color:var(--muted)">PENDING</div>
+      <div class="mc-portrait-bottom" style="color:#fff">
+        <div class="mc-portrait-name" style="color:#fff;user-select:none;-webkit-user-select:none;cursor:default"><span style="display:inline-block;background:currentColor;color:transparent;border-radius:1px;opacity:.55;user-select:none;-webkit-user-select:none">ARDAMEVIA</span></div>
+        <div class="mc-portrait-role" style="color:#d4a84b;opacity:1">Pending Classification</div>
+        <div class="mc-portrait-race" style="color:rgba(255,255,255,.7);opacity:1">Race: UNCLASSIFIED</div>
+      </div>
+    </div>
+  </div></div>
+
+    <!-- GLITCH POPUP -->
+    <div id="glitch-overlay" onclick="closeGlitch(event)" class="">
+      <div class="glitch-box" onclick="event.stopPropagation()">
+        <div class="glitch-stripe"></div>
+        <div class="glitch-topbar">
+          <span class="glitch-topbar-label">ACCESS DENIED</span>
+          <span class="glitch-topbar-code" id="glitch-err-code">ERR::ENTITY_UNVERIFIED</span>
+        </div>
+        <div class="glitch-body">
+          <div class="glitch-icon">!</div>
+          <div class="glitch-id" id="glitch-member-id">02</div>
+          <div class="glitch-title" id="glitch-member-name"><span style="display:inline-block;background:currentColor;color:transparent;border-radius:1px;opacity:.55;user-select:none;-webkit-user-select:none">RUI</span></div>
+          <div class="glitch-sub">// Profil Belum Dapat Diakses //</div>
+          <p class="glitch-desc">Entitas ini belum diverifikasi oleh Astral Realm Authority. Data profil masih dalam status <strong style="color:var(--red);opacity:.8">TERKUNCI</strong> hingga proses identifikasi selesai.</p>
+          <div class="glitch-data">
+            <div class="glitch-data-row">
+              <span class="glitch-data-key">Status</span>
+              <span class="glitch-data-val corrupt">PENDING VERIFICATION</span>
+            </div>
+            <div class="glitch-data-row">
+              <span class="glitch-data-key">AIN</span>
+              <span class="glitch-data-val" id="glitch-ain">AR-????-????-????</span>
+            </div>
+            <div class="glitch-data-row">
+              <span class="glitch-data-key">Access</span>
+              <span class="glitch-data-val corrupt" id="glitch-access">UNAUTHORIZED · SC L0</span>
+            </div>
+          </div>
+          <button class="glitch-close" onclick="closeGlitch()">// Tutup—Kembali ke Registry //</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATUS BAR -->
+    <div class="db-statusbar">
+      <div class="db-status-item">
+        <div class="db-status-dot red"></div>Confirmed Entity
+      </div>
+      <div class="db-status-item">
+        <div class="db-status-dot gold"></div>High Clearance
+      </div>
+      <div class="db-status-item">
+        <div class="db-status-dot grey"></div>Pending Reveal
+      </div>
+      <div class="db-count" id="showing-count">Showing 6 of 6 entries</div>
+    </div>
+
+    <script>
+      // ============================
+      // DATA—edit sesuai kebutuhan
+      // ============================
+      // ============================
+      // REVEAL SWITCHES—ubah true/false di sini untuk buka/tutup profil
+      // ============================
+      const REVEALED = {
+        '01': true, // TAKAHI SOREN
+        '02': false, // RUI
+        '03': false, // ANNELIESE DYVA
+        '04': true, // NOAH CHANTELUNE
+        '05': false, // IGNI VASHTI
+        '06': false, // ARDAMEVIA
+      };
+      const MEMBERS = [{
+          id: '01',
+          name: 'TAKAHI SOREN',
+          initial: 'TS',
+          bg: 'linear-gradient(135deg,#1a1410 0%,#261810 100%)',
+          accentBg: '#1a1410',
+          isActive: true,
+          displayName: 'TAKAHI SOREN',
+          legalName: 'MUZAKIEL',
+          dateOfOrigin: 'UNKNOWN / MARCH 17',
+          gender: 'UNIDENTIFIED',
+          race: 'ANGEL (SERAPHIM)',
+          occupation: 'SERAPH OF HIGH END ORDERS / ANGEL OF DEATH DIVISION (RETIRED)',
+          ain: 'AR-25XD-64NA-065T',
+          scLevel: 'L5',
+          scCode: 'SC-03',
+          desc: 'Mantan Angel of Death No.9 yang kini menjabat sebagai Seraph. Menyimpan banyak rahasia tentang struktur lapisan astral. Kehadirannya selalu membawa tensi tinggi di antara hierarki angelic.',
+          twitter: '#',
+          youtube: '#',
+          instagram: '#',
+          tiktok: '#',
+          profileUrl: 'members/soren',
+          portrait: 'assets/members/soren/soren-portrait.png'
+        },
+        {
+          id: '02',
+          name: 'RUI',
+          initial: 'R',
+          bg: 'linear-gradient(135deg,#0b0f1a 0%,#0f1520 100%)',
+          accentBg: '#0b0f1a',
+          isActive: false,
+          displayName: 'N/A',
+          legalName: 'N/A',
+          dateOfOrigin: 'N/A',
+          gender: 'UNIDENTIFIED',
+          race: 'N/A',
+          occupation: 'N/A',
+          ain: 'AR-????-????-????',
+          scLevel: 'L4',
+          scCode: 'SC-02',
+          desc: 'Data tidak tersedia. Entitas ini masih dalam proses verifikasi oleh Astral Realm Authority.',
+          twitter: '#',
+          youtube: '#',
+          instagram: '#',
+          tiktok: '#',
+          profileUrl: 'members/rui',
+          portrait: 'assets/members/rui/rui-portrait.png'
+        },
+        {
+          id: '03',
+          name: 'ANNELIESE DYVA',
+          initial: 'AD',
+          bg: 'linear-gradient(135deg,#0a1209 0%,#0e1a0c 100%)',
+          accentBg: '#0a1209',
+          isActive: false,
+          displayName: 'N/A',
+          legalName: 'N/A',
+          dateOfOrigin: 'N/A',
+          gender: 'UNIDENTIFIED',
+          race: 'N/A',
+          occupation: 'N/A',
+          ain: 'AR-????-????-????',
+          scLevel: 'L4',
+          scCode: 'SC-03',
+          desc: 'Data tidak tersedia. Entitas ini masih dalam proses verifikasi oleh Astral Realm Authority.',
+          twitter: '#',
+          youtube: '#',
+          instagram: '#',
+          tiktok: '#',
+          profileUrl: 'members/anneliese',
+          portrait: 'assets/members/anneliese/anneliese-portrait.png'
+        },
+        {
+          id: '04',
+          name: 'NOAH CHANTELUNE',
+          initial: 'NC',
+          bg: 'linear-gradient(135deg,#100b1a 0%,#170f22 100%)',
+          accentBg: '#100b1a',
+          isActive: true,
+          displayName: 'NOAH CHANTELUNE',
+          legalName: 'NOMU',
+          dateOfOrigin: 'PRIMORDIAL / 7 JANUARI (DISPLAY)',
+          gender: 'UNIDENTIFIED',
+          race: 'PRIMORDIAL DRAGON',
+          occupation: 'SPECIAL AGENT / ASTRAL INVESTIGATOR / CONTENT CREATOR · CHEF AT SUKMARASA',
+          ain: 'AR-17NC-77NM-228F',
+          scLevel: 'L4',
+          scCode: 'SC-04',
+          desc: 'Special Agent pada divisi investigasi astral—ditugaskan untuk menangani kasus-kasus yang berada di luar jangkauan penanganan manusia biasa: distorsi dimensi, aktivitas entitas berbahaya, corruption, hingga fenomena yang tidak memiliki nama dalam literatur manapun. Sensitivitas astral dan insting primordialnya menjadikannya aset lapangan yang sulit digantikan—sekaligus entitas yang tetap berada di bawah pengawasan ketat organisasi. Di luar tugas, ia bekerja sebagai chef di SukmaRasa, bar dan safe space lintas dunia yang menjadi tempat beristirahat bagi siapapun yang membutuhkan.',
+          twitter: '#',
+          youtube: 'https://www.youtube.com/@nochante',
+          instagram: 'https://x.com/nochantelune',
+          tiktok: 'https://www.tiktok.com/@nochante',
+          profileUrl: 'members/noah',
+          portrait: 'assets/members/noah/noah-portrait.png'
+        },
+        {
+          id: '05',
+          name: 'IGNI VASHTI',
+          initial: 'IV',
+          bg: 'linear-gradient(135deg,#1a1005 0%,#211608 100%)',
+          accentBg: '#1a1005',
+          isActive: false,
+          displayName: 'N/A',
+          legalName: 'N/A',
+          dateOfOrigin: 'N/A',
+          gender: 'UNIDENTIFIED',
+          race: 'N/A',
+          occupation: 'N/A',
+          ain: 'AR-????-????-????',
+          scLevel: 'L4',
+          scCode: 'SC-03',
+          desc: 'Data tidak tersedia. Entitas ini masih dalam proses verifikasi oleh Astral Realm Authority.',
+          twitter: '#',
+          youtube: '#',
+          instagram: '#',
+          tiktok: '#',
+          profileUrl: 'members/igni',
+          portrait: 'assets/members/igni/igni-portrait.png'
+        },
+        {
+          id: '06',
+          name: 'ARDAMEVIA',
+          initial: 'A',
+          bg: 'linear-gradient(135deg,#0d1215 0%,#111a1e 100%)',
+          accentBg: '#0d1215',
+          isActive: false,
+          displayName: 'N/A',
+          legalName: 'N/A',
+          dateOfOrigin: 'N/A',
+          gender: 'UNIDENTIFIED',
+          race: 'N/A',
+          occupation: 'N/A',
+          ain: 'AR-????-????-????',
+          scLevel: 'L4',
+          scCode: 'SC-04',
+          desc: 'Data tidak tersedia. Entitas ini masih dalam proses verifikasi oleh Astral Realm Authority.',
+          twitter: '#',
+          youtube: '#',
+          instagram: '#',
+          tiktok: '#',
+          profileUrl: 'members/arda',
+          portrait: 'assets/members/arda/arda-portrait.png'
+        },
+      ];
+      // ============================
+      // STATE
+      // ============================
+      let activeFilter = 'all';
+      let searchQuery = '';
+      let filteredMembers = [...MEMBERS];
+      // ============================
+      // RENDER HELPERS
+      // ============================
+      function scClass(level) {
+        const l = level.toLowerCase();
+        if (l === 'l5') return 'l5';
+        if (l === 'l4') return 'l4';
+        if (l === 'l3') return 'l3';
+        if (l === 'l2') return 'l2';
+        return 'l1';
+      }
+
+      function naVal(v) {
+        return (!v || v === 'N/A');
+      }
+
+      function fv(label, val, full) {
+        const na = naVal(val);
+        return `<div class="cid-f${full?' full':''}">
+    <div class="cid-f-label">${label}</div>
+    <div class="cid-f-val${na?' na':''}">${na?'—':val}</div>
+  </div>`;
+      }
+
+      function socialIcon(type) {
+        const icons = {
+          twitter: `<svg class="detail-social-icon" viewBox="0 0 16 16" fill="none"><path d="M13 2L9 7.5 13.5 14H10.5L8 10.5 5 14H1.5L6 8 1.5 2H4.5L7 5.5 10 2H13Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>`,
+          youtube: `<svg class="detail-social-icon" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M6.5 6L10 8L6.5 10V6Z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/></svg>`,
+          instagram: `<svg class="detail-social-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="3.5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.8" stroke="currentColor" stroke-width="1.2"/><circle cx="11.2" cy="4.8" r=".8" fill="currentColor"/></svg>`,
+          tiktok: `<svg class="detail-social-icon" viewBox="0 0 16 16" fill="none"><path d="M10 2c.3 2 1.5 2.5 3 2.5v2.5c-1.2 0-2.2-.4-3-1V11a4 4 0 1 1-2-3.5V10a1.5 1.5 0 1 0 2 1.4V2h0z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>`
+        };
+        return icons[type] || '';
+      }
+      // ============================
+      // RENDER MEMBER CARD
+      // ============================
+      function renderCard(m) {
+        const sc = scClass(m.scLevel);
+        // Cek REVEALED switch—kalau false, selalu glitch popup meski profileUrl ada
+        const revealed = !!REVEALED[m.id];
+        const hasProfile = revealed && !!m.profileUrl;
+        const clickFn = hasProfile ?
+          `onclick="location.href='${m.profileUrl}'"` :
+          `onclick="openGlitch('${m.id}')"`;
+        return `<div class="mc" data-id="${m.id}" data-sc="${sc}" ${clickFn}>
+    <div class="mc-portrait">
+      <div class="mc-portrait-img" style="background:${m.bg}">
+        ${m.portrait?`<img src="${m.portrait}" alt="${m.name}" style="width:100%;height:100%;object-fit:cover;object-position:top center;position:absolute;inset:0;display:block" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')">`:''}
+        <div class="mc-portrait-initial${m.portrait?' hidden':''}">${m.initial}</div>
+      </div>
+      <div class="mc-portrait-overlay"></div>
+      <div class="mc-portrait-id">${m.id}</div>
+      <div class="mc-portrait-sc ${sc}">${m.scLevel}</div>
+      ${!hasProfile ? `<div style="position:absolute;top:.75rem;left:.75rem;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid rgba(128,128,128,.25);color:var(--muted)">PENDING</div>` : ''}
+      <div class="mc-portrait-bottom" style="${m.portrait?'color:#fff':''}">
+        <div class="mc-portrait-name" style="${m.portrait?'color:#fff':''}${!hasProfile?';user-select:none;-webkit-user-select:none;cursor:default':''}">${!hasProfile?`<span style="display:inline-block;background:currentColor;color:transparent;border-radius:1px;opacity:.55;user-select:none;-webkit-user-select:none">${m.name}</span>`:m.name}</div>
+        <div class="mc-portrait-role" style="${m.portrait?'color:#d4a84b;opacity:1':''}">${naVal(m.occupation)?'Pending Classification':m.occupation.split('/')[0].trim()}</div>
+        <div class="mc-portrait-race" style="${m.portrait?'color:rgba(255,255,255,.7);opacity:1':''}">${naVal(m.race)?'Race: UNCLASSIFIED':m.race}</div>
+      </div>
+    </div>
+  </div>`;
+      }
+      // ============================
+      // GLITCH POPUP
+      // ============================
+      function openGlitch(id) {
+        const m = MEMBERS.find(x => x.id === id);
+        if (!m) return;
+        document.getElementById('glitch-member-id').textContent = m.id;
+        const nameEl = document.getElementById('glitch-member-name');
+        nameEl.innerHTML = `<span style="display:inline-block;background:currentColor;color:transparent;border-radius:1px;opacity:.55;user-select:none;-webkit-user-select:none">${m.name}</span>`;
+        document.getElementById('glitch-ain').textContent = 'AR-????-????-????';
+        document.getElementById('glitch-access').textContent = 'UNAUTHORIZED · ' + m.scLevel + ' / ' + (m.scCode !== 'N/A' ? m.scCode : '??');
+        // randomise error code slightly for flavor
+        const codes = ['ERR::PROFILE_UNREACHABLE', 'ERR::DATA_CORRUPTED', 'ERR::ACCESS_FORBIDDEN', 'ERR::ENTITY_UNVERIFIED'];
+        document.getElementById('glitch-err-code').textContent = codes[Math.floor(Math.random() * codes.length)];
+        document.getElementById('glitch-overlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeGlitch(e) {
+        document.getElementById('glitch-overlay').classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeGlitch();
+      });
+      // ============================
+      // FILTER & SEARCH
+      // ============================
+      function applyFilters() {
+        let result = MEMBERS.filter(m => {
+          if (activeFilter === 'active') return m.isActive;
+          if (activeFilter === 'placeholder') return !m.isActive;
+          if (activeFilter === 'l5') return m.scLevel.toLowerCase() === 'l5';
+          if (activeFilter === 'l4') return m.scLevel.toLowerCase() === 'l4';
+          return true;
+        });
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          result = result.filter(m =>
+            m.name.toLowerCase().includes(q) ||
+            m.race.toLowerCase().includes(q) ||
+            m.occupation.toLowerCase().includes(q) ||
+            m.legalName.toLowerCase().includes(q) ||
+            m.displayName.toLowerCase().includes(q)
+          );
+        }
+        filteredMembers = result;
+        renderGrid();
+      }
+
+      function filterBy(type, btn) {
+        activeFilter = type;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilters();
+      }
+
+      function searchMembers(val) {
+        searchQuery = val.trim();
+        applyFilters();
+      }
+
+      function renderGrid() {
+        const grid = document.getElementById('member-grid');
+        if (filteredMembers.length === 0) {
+          grid.innerHTML = `<div class="db-empty"><div class="db-empty-icon">?</div><div class="db-empty-text">No entities found</div></div>`;
+        } else {
+          grid.innerHTML = filteredMembers.map(renderCard).join('');
+        }
+        document.getElementById('showing-count').textContent = `Showing ${filteredMembers.length} of ${MEMBERS.length} entries`;
+        // update stats
+        const active = MEMBERS.filter(m => m.isActive).length;
+        const pending = MEMBERS.filter(m => !m.isActive).length;
+        // stat-total is scrambled—don't set it here
+        document.getElementById('stat-active').textContent = active;
+        document.getElementById('stat-pending').textContent = pending;
+      }
+      // ============================
+      // THEME
+      // ============================
+      // THEME—saturn icons (sf = base class always present, icon class toggled)
+      var isDark = (function() {
+        var m = document.cookie.match(/(?:^|;\s*)wg-theme=([^;]+)/);
+        return m ? m[1] === 'dark' : false;
+      })();
+
+      function applyTheme() {
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        var di = document.getElementById('theme-icon');
+        if (di) {
+          di.classList.remove('sf-sun-1-o', 'sf-moon-1-o');
+          di.classList.add(isDark ? 'sf-sun-1-o' : 'sf-moon-1-o');
+        }
+        var mi = document.getElementById('theme-icon-m');
+        if (mi) {
+          mi.classList.remove('sf-sun-1-o', 'sf-moon-1-o');
+          mi.classList.add(isDark ? 'sf-sun-1-o' : 'sf-moon-1-o');
+        }
+        var ml = document.getElementById('theme-label-m');
+        if (ml) {
+          ml.textContent = isDark ? 'Day Mode' : 'Night Mode';
+        }
+        // swap logo WARGANTARA sesuai tema
+        // logo swap kini via CSS [data-theme] → .wgtr-logo-light/.wgtr-logo-dark, tanpa JS src swap
+      }
+
+      function toggleTheme() {
+        isDark = !isDark;
+        var exp = new Date();
+        exp.setFullYear(exp.getFullYear() + 1);
+        document.cookie = 'wg-theme=' + (isDark ? 'dark' : 'light') + '; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        applyTheme();
+      }
+      applyTheme();
+      // re-apply setelah font Saturn Icons selesai load (icon bisa blank kalau font belum ready)
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function() { applyTheme(); });
+      }
+      // re-apply icon saat tab aktif kembali
+      document.addEventListener("visibilitychange", function() {
+        if (!document.hidden) applyTheme();
+      });
+      // ── SPLASH ──
+      (function() {
+        if (document.cookie.match(/(?:^|;\s*)wg-visited=1/)) {
+          var s = document.getElementById('splash-main');
+          if (s) s.classList.add('hidden');
+        }
+      })();
+      var _pendingTheme = null,
+        _denyTimer = null;
+
+      function splashStep2() {
+        var s1 = document.getElementById('splash-step1');
+        var s2 = document.getElementById('splash-step2');
+        s1.classList.add('fading');
+        setTimeout(function() {
+          s1.style.display = 'none';
+          s2.classList.add('active');
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              s2.classList.add('visible');
+            });
+          });
+        }, 350);
+      }
+
+      function splashSelectTheme(theme) {
+        _pendingTheme = theme;
+        document.getElementById('btn-day').classList.toggle('selected', theme === 'light');
+        document.getElementById('btn-night').classList.toggle('selected', theme === 'dark');
+        document.getElementById('splash-confirm').classList.add('ready');
+        isDark = (theme === 'dark');
+        applyTheme();
+      }
+
+      function splashEnter() {
+        if (!_pendingTheme) return;
+        var exp = new Date();
+        exp.setFullYear(exp.getFullYear() + 1);
+        document.cookie = 'wg-theme=' + _pendingTheme + '; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        document.cookie = 'wg-visited=1; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax';
+        isDark = (_pendingTheme === 'dark');
+        applyTheme();
+        var s = document.getElementById('splash-main');
+        s.classList.add('hiding');
+        setTimeout(function() {
+          s.classList.add('hidden');
+        }, 620);
+      }
+
+      function splashDeny() {
+        var box = document.querySelector('#splash-main .splash-box');
+        box.classList.add('glitching');
+        setTimeout(function() {
+          box.innerHTML = '<div class="splash-pre">// Wargantara &middot; Akses Ditolak</div>' +
+            '<div class="splash-quote" style="font-size:clamp(1.05rem,3vw,1.35rem)">&ldquo;... I see.&rdquo;</div>' +
+            '<div class="splash-attr" style="margin-bottom:2rem">—</div>' +
+            '<div class="splash-disclaimer" style="opacity:.6">Tidak ada yang bisa kami lakukan untuk melanjutkan.<br><br>Dunia ini bukan untukmu—dan itu tidak apa-apa.</div>' +
+            '<div class="deny-countdown" id="deny-countdown">Halaman akan ditutup dalam <span id="deny-secs">5</span> detik...</div>' +
+            '<div class="splash-corner">W</div>';
+          box.classList.remove('glitching');
+          var secs = 5,
+            el = document.getElementById('deny-secs'),
+            wrap = document.getElementById('deny-countdown');
+          _denyTimer = setInterval(function() {
+            secs--;
+            if (el) el.textContent = secs;
+            if (secs <= 2 && wrap) wrap.classList.add('urgent');
+            if (secs <= 0) {
+              clearInterval(_denyTimer);
+              try {
+                window.open('', '_self').close();
+              } catch (e) {}
+              window.close();
+              setTimeout(function() {
+                document.body.innerHTML = '';
+              }, 300);
+            }
+          }, 1000);
+        }, 180);
+      }
+
+      function toggleMobile() {
+        const d = document.getElementById('mobile-drawer');
+        const b = document.getElementById('burger');
+        if (!d || !b) return;
+        const open = d.classList.toggle('open');
+        b.classList.toggle('open', open);
+      }
+      // ============================
+      // INIT
+      // ============================
+      renderGrid();
+      // COUNT UP—races to 999 then settles at ???
+      (function() {
+        const el = document.getElementById('stat-total');
+        if (!el) return;
+        let n = 0;
+        const MAX = 999;
+
+        function step() {
+          n++;
+          el.textContent = String(n).padStart(n < 10 ? 1 : n < 100 ? 2 : 3, '0');
+          if (n >= MAX) {
+            let flickers = 0;
+
+            function flicker() {
+              el.textContent = flickers % 2 === 0 ? '???' : String(Math.floor(Math.random() * 999) + 1);
+              flickers++;
+              if (flickers < 8) setTimeout(flicker, 50);
+              else el.textContent = '???';
+            }
+            flicker();
+            return;
+          }
+          const delay = n < 100 ? 3 : 1;
+          setTimeout(step, delay);
+        }
+        setTimeout(step, 100);
+      })();
+    </script>
+
+            <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="sf-col">
+          <img class="sf-col-title-img wgtr-logo-light" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+          <img class="sf-col-title-img wgtr-logo-dark"  src="assets/og/wgtr-small-dark.png"  alt="WARGANTARA">
+          <p>Para entitas yang hidup di ambang—tidak sepenuhnya milik dunia manusia, tidak juga milik dunia astral.</p>
+          <p style="margin-top:.6rem">Status Lore: <span style="color:var(--gold);opacity:1">Open Sandbox</span></p>
+        </div>
+        <div class="sf-col">
+          <div class="sf-col-title">NAVIGASI</div>
+          <a href="index.html">Home</a>
+          <a href="members.html">Members</a>
+          <a href="lore.html">Lore Archive</a>
+          <a href="guidelines.html">General Guidelines</a>
+          <a href="collab.html">Collab with Us</a>
+          <a href="arcid.html">AR-CID Editor</a>
+          <a href="credits.html">Credits &amp; Attributions</a>
+        </div>
+        <div class="sf-col">
+          <div class="sf-col-title">KONTAK</div>
+          <p style="font-size:.84rem;line-height:1.85;opacity:.65">Ikuti kami di media sosial untuk update terbaru seputar Wargantara.</p>
+          <div class="sf-socials">
+            <a class="sf-social-pill" href="https://x.com/wgtr_id" target="_blank" rel="noopener" title="Twitter / X">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a class="sf-social-pill" href="https://youtube.com/wgtr_id" target="_blank" rel="noopener" title="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <span class="sf-social-pill sf-social-pill--disabled" title="Discord—Coming Soon">
+              <i class="fa-brands fa-discord"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="sf-bottom">
+        <img class="sf-logo-img wgtr-logo-light" src="assets/og/wgtr-small-light.png" alt="WARGANTARA">
+        <img class="sf-logo-img wgtr-logo-dark"  src="assets/og/wgtr-small-dark.png"  alt="WARGANTARA">
+        <span class="sf-copy">© Wargantara VTuber Group · Est. ???? · All lore is fiction</span>
+        <span class="sf-copy">Lintas Batas</span>
+      </div>
+    </footer>
+  
+
+</body></html>
