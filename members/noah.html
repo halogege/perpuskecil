@@ -3037,7 +3037,7 @@
         </div>
         <div class="portrait-overlay"></div>
         <div class="social-badges">
-          <a class="social-badge" href="https://x.com/nouchante" target="_blank" aria-label="Twitter / X">
+          <a class="social-badge" href="#" target="_blank" aria-label="Twitter / X">
             <i class="fa-brands fa-x-twitter"></i>
           </a>
           <a class="social-badge" href="https://www.youtube.com/@nochante" target="_blank" aria-label="YouTube">
@@ -3400,6 +3400,22 @@
       </div>
     </div>
 
+    <!-- CLASSIFIED WARNING MODAL -->
+    <div class="cl-modal-overlay" id="cl-modal-overlay">
+      <div class="cl-modal">
+        <div class="cl-modal-pre">// Wargantara · Peringatan Akses</div>
+        <div class="cl-modal-title">CLASSIFIED FRAGMENT</div>
+        <div class="cl-modal-body">
+          Bagian ini mengandung informasi yang diarsipkan di bawah <strong>otorisasi khusus</strong>—dan kemungkinan besar mengandung <strong>spoiler lore</strong> yang belum tentu sudah terungkap dalam narasi publik.<br><br>
+          Dengan melanjutkan, kamu menyatakan siap menemukan informasi yang mungkin mengubah cara kamu membaca karakter ini—dan itu tidak bisa di-<em>undo</em>.
+        </div>
+        <div class="cl-modal-actions">
+          <button class="cl-modal-confirm" onclick="classifiedConfirm()">// Lanjutkan</button>
+          <button class="cl-modal-cancel" onclick="classifiedCancel()">Kembali</button>
+        </div>
+      </div>
+    </div>
+
     <script>
       /* ---- CHARACTER DATA ---- */
       const CHAR = {
@@ -3563,14 +3579,35 @@
           });
         });
       })();
-      /* ---- SPOILER ---- */
+      /* ---- SPOILER / CLASSIFIED ---- */
+      var _classifiedPending = false;
       function toggleSpoiler(id) {
         const el = document.getElementById(id);
-        const tog = document.getElementById('spoiler-toggle-' + id.replace('spoiler-', ''));
-        el.classList.toggle('open');
-        tog.textContent = el.classList.contains('open') ?
-          'HIDE CLASSIFIED FRAGMENT' :
-          'SHOW CLASSIFIED FRAGMENT [SC L5 REQUIRED]';
+        if (!el.classList.contains('open')) {
+          // Not yet open — show warning modal first
+          _classifiedPending = id;
+          document.getElementById('cl-modal-overlay').classList.add('open');
+        } else {
+          // Already open — just close it
+          el.classList.remove('open');
+          const tog = document.getElementById('spoiler-toggle-' + id.replace('spoiler-', ''));
+          tog.textContent = 'SHOW CLASSIFIED FRAGMENT [OTORISASI KHUSUS DIPERLUKAN]';
+        }
+      }
+      function classifiedConfirm() {
+        document.getElementById('cl-modal-overlay').classList.remove('open');
+        if (_classifiedPending) {
+          const id = _classifiedPending;
+          const el = document.getElementById(id);
+          el.classList.add('open');
+          const tog = document.getElementById('spoiler-toggle-' + id.replace('spoiler-', ''));
+          tog.textContent = 'HIDE CLASSIFIED FRAGMENT';
+          _classifiedPending = false;
+        }
+      }
+      function classifiedCancel() {
+        document.getElementById('cl-modal-overlay').classList.remove('open');
+        _classifiedPending = false;
       }
       /* ---- TAB SWITCHING ---- */
       var TAB_HASH = {
