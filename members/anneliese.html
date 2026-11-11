@@ -3014,7 +3014,7 @@
         <div class="hero-eyebrow">// Wargantara No.03—AR-CID Verified //</div>
         <div class="hero-num">ENTITY 03 OF 06</div>
         <div class="hero-name">ANNELIESE<br>DYVA</div>
-        <div class="hero-name-alt">a.k.a. Anya Divya Einnelis</div>
+        <div class="hero-name-alt">a.k.a. <span class="glitch-redact" data-glitch="████ █████ ████████">████ █████ ████████</span></div>
         <div class="hero-rule"></div>
         <div class="hero-tags">
           <span class="hero-tag red">Confirmed Active</span>
@@ -3139,7 +3139,7 @@
                   <span class="alias-badge muted">Display</span>
                 </div>
                 <div class="alias-item primary">
-                  <div class="alias-name">Anya Divya Einnelis</div>
+                  <div class="alias-name"><span class="glitch-redact" data-glitch="████ █████ ████████">████ █████ ████████</span></div>
                   <div class="alias-desc">Nama resmi tercatat dalam arsip Astral Realm Authority.</div>
                   <span class="alias-badge red">Legal · Redacted</span>
                 </div>
@@ -3268,8 +3268,8 @@
               <div class="lore-spoiler-content">
                 <div class="lore-infobox" style="border-left-color:var(--red)">
                   <h4 style="color:var(--red)">// CLASSIFIED—WARGANTARA INTERNAL</h4>
-                  <p>Kondisi Anne pada saat pertemuan itu terjadi <span class="glitch-redact" data-glitch="████████████████████████████████████████████████">tidak sepenuhnya dapat dideskripsikan dalam arsip standar</span>. Yang tercatat: ia berada dalam kondisi <span class="glitch-redact" data-glitch="████████████████████████████████████████">yang mendekati titik akhir secara sukarela</span>—bukan karena ancaman dari luar, melainkan dari dalam. Entitas <span class="glitch-redact" data-glitch="████████████████████████████████">yang menawarkan kontrak</span> muncul di titik tersebut, dengan satu pertanyaan.</p>
-                  <p style="margin-top:.75rem">Klausul yang menjadi dasar kontrak Wargantara Anne <span class="glitch-redact" data-glitch="████████████████████████████████████████████████████">menyangkut akses lintas dimensi untuk tujuan yang bersifat personal</span>—tercatat dengan referensi ke satu nama yang <span class="glitch-redact" data-glitch="████████████████████████████████████████">diredaksi atas permintaan pihak yang bersangkutan</span>. Anne menerima. Apa yang ia <span class="glitch-redact" data-glitch="████████████████████████████████████████████████████">serahkan sebagai bagian dari kesepakatan</span> tidak tersedia pada level akses ini. Setelah jabat tangan, <span class="glitch-redact" data-glitch="██████████████████████████████████████████████████████">ingatan Anne tentang pertemuan dan kontrak tersebut tidak dapat diakses</span>—ia hanya ingat bahwa ada seseorang yang memperkenalkannya kepada Soren sebagai wargantara senior yang bisa ia andalkan, dan bahwa tiba-tiba ada tujuan yang cukup konkret untuk dilanjutkan. <span class="glitch-redact" data-glitch="████████████████████████████████████████████████████████████████">Bagian ini dalam proses redaksi lebih lanjut oleh ARA.</span></p>
+                  <p>Kondisi Anne pada saat pertemuan itu terjadi <span class="glitch-redact" data-glitch="████████████████████████████████████████████████">█████ ██████████ █████ ██████████████ █████ █████ ███████</span>. Yang tercatat: ia berada dalam kondisi <span class="glitch-redact" data-glitch="████████████████████████████████████████">████ █████████ █████ █████ ██████ ████████</span>—bukan karena ancaman dari luar, melainkan dari dalam. Entitas <span class="glitch-redact" data-glitch="████████████████████████████████">████ ██████████ ███████</span> muncul di titik tersebut, dengan satu pertanyaan.</p>
+                  <p style="margin-top:.75rem">Klausul yang menjadi dasar kontrak Wargantara Anne <span class="glitch-redact" data-glitch="████████████████████████████████████████████████████">██████████ █████ ██████ ███████ █████ ██████ ████ ████████ ████████</span>—tercatat dengan referensi ke satu nama yang <span class="glitch-redact" data-glitch="████████████████████████████████████████">█████████ ████ ██████████ █████ ████ ████████████</span>. Anne menerima. Apa yang ia <span class="glitch-redact" data-glitch="████████████████████████████████████████████████████">████████ ███████ ██████ ████ ███████████</span> tidak tersedia pada level akses ini. Setelah jabat tangan, <span class="glitch-redact" data-glitch="██████████████████████████████████████████████████████">███████ ████ ███████ █████████ ███ ███████ ████████ █████ █████ ███████</span>—ia hanya ingat bahwa ada seseorang yang memperkenalkannya kepada Soren sebagai wargantara senior yang bisa ia andalkan, dan bahwa tiba-tiba ada tujuan yang cukup konkret untuk dilanjutkan. <span class="glitch-redact" data-glitch="████████████████████████████████████████████████████████████████">██████ ███ █████ ██████ ███████ █████ ██████ ████ ████</span></p>
                 </div>
               </div>
             </div>
@@ -3414,146 +3414,9 @@
     </div>
 
     <script>
-      /* ---- CHARACTER DATA ---- */
-      const CHAR = {
-        legalName: 'ANYA DIVYA EINNELIS',
-      };
-      /* ---- GLITCH CENSOR ENGINE ---- */
+      /* ---- GLITCH CENSOR (visual only; sensitive text is masked in the HTML itself) ---- */
       (function() {
-        // Words to censor with glitch effect (case-insensitive)
-        const glitchTerms = [
-          {
-            re: /(Malakul Al-Maut|Malakul Maut|Malakul)/gi,
-            label: '██████████████'
-          },
-          {
-            re: /(Malaikat Mikail A\.S\.|Malaikat Mikail|Mikail A\.S\.|Mikail)/gi,
-            label: '██████████████'
-          },
-          {
-            re: /(Malik Al-Maut|Malik A\.S\.|Malik)/gi,
-            label: '█████'
-          },
-          {
-            re: /(Mysteries|Mystery)/gi,
-            label: '█████████'
-          },
-          {
-            re: /(Raziel)/gi,
-            label: '██████'
-          },
-          {
-            re: /(Azrael)/gi,
-            label: '██████'
-          },
-          {
-            re: /(rahasia)/gi,
-            label: '███████'
-          },
-        ];
-
-        function makeGlitch(matchedText, label) {
-          const glitchLabel = label || matchedText.replace(/./g, '█');
-          const words = matchedText.split(/(\s+)/);
-          const glitchWords = glitchLabel.split(/(\s+)/);
-          const wrapper = document.createElement('span');
-          wrapper.className = 'glitch-redact';
-          words.forEach(function(word, i) {
-            if (/^\s+$/.test(word) || word === '') {
-              wrapper.appendChild(document.createTextNode(word));
-            } else {
-              const ws = document.createElement('span');
-              ws.className = 'glitch-word';
-              ws.setAttribute('data-glitch', glitchWords[i] || word.replace(/./g, '█'));
-              ws.textContent = word;
-              wrapper.appendChild(ws);
-            }
-          });
-          return wrapper;
-        }
-
-        function applyGlitch(node) {
-          if (node.nodeType === 3) {
-            const text = node.textContent;
-            let matched = false;
-            for (const term of glitchTerms) {
-              term.re.lastIndex = 0;
-              if (term.re.test(text)) {
-                matched = true;
-                break;
-              }
-            }
-            if (!matched) return;
-            // Build replacement using all patterns
-            const combined = glitchTerms.map(t => t.re.source).join('|');
-            const combinedRe = new RegExp(combined, 'gi');
-            const frag = document.createDocumentFragment();
-            let last = 0,
-              m;
-            while ((m = combinedRe.exec(text)) !== null) {
-              if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
-              // find which term matched
-              let label = m[0].replace(/./g, '█');
-              for (const term of glitchTerms) {
-                const r = new RegExp('^(?:' + term.re.source + ')$', 'i');
-                if (r.test(m[0])) {
-                  label = term.label;
-                  break;
-                }
-              }
-              frag.appendChild(makeGlitch(m[0], label));
-              last = combinedRe.lastIndex;
-            }
-            if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
-            node.parentNode.replaceChild(frag, node);
-          } else if (node.nodeType === 1 && !['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(node.tagName) && !node.classList.contains('glitch-redact') && !node.classList.contains('redacted')) {
-            if (node.id === 'splash-main') return;
-            if (node.classList.contains('site-footer')) return;
-            Array.from(node.childNodes).forEach(applyGlitch);
-          }
-        }
-        /* ---- AUTO-CENSOR LEGAL NAME (plain redact) ---- */
-        const legalName = CHAR.legalName;
-
-        function censorLegalName(node) {
-          if (!legalName || legalName === 'N/A') return;
-          const re = new RegExp(legalName, 'gi');
-          if (node.nodeType === 3) {
-            if (!re.test(node.textContent)) return;
-            re.lastIndex = 0;
-            const frag = document.createDocumentFragment();
-            let last = 0,
-              m;
-            while ((m = re.exec(node.textContent)) !== null) {
-              if (m.index > last) frag.appendChild(document.createTextNode(node.textContent.slice(last, m.index)));
-              const words = m[0].split(/(\s+)/);
-              const glitchWords = m[0].replace(/./g, '█').split(/(\s+)/);
-              const wrapper = document.createElement('span');
-              wrapper.className = 'glitch-redact';
-              words.forEach(function(word, i) {
-                if (/^\s+$/.test(word) || word === '') {
-                  wrapper.appendChild(document.createTextNode(word));
-                } else {
-                  const ws = document.createElement('span');
-                  ws.className = 'glitch-word';
-                  ws.setAttribute('data-glitch', glitchWords[i] || word.replace(/./g, '█'));
-                  ws.textContent = word;
-                  wrapper.appendChild(ws);
-                }
-              });
-              frag.appendChild(wrapper);
-              last = re.lastIndex;
-            }
-            if (last < node.textContent.length) frag.appendChild(document.createTextNode(node.textContent.slice(last)));
-            node.parentNode.replaceChild(frag, node);
-          } else if (node.nodeType === 1 && !['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(node.tagName) && !node.classList.contains('redacted') && !node.classList.contains('glitch-redact')) {
-            if (node.id === 'splash-main') return;
-            Array.from(node.childNodes).forEach(censorLegalName);
-          }
-        }
         document.addEventListener('DOMContentLoaded', function() {
-          applyGlitch(document.body);
-          censorLegalName(document.body);
           // Wrap text inside pre-existing hardcoded glitch-redact spans into glitch-words
           document.querySelectorAll('.glitch-redact').forEach(function(span) {
             if (span.querySelector('.glitch-word')) return; // already processed
